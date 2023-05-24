@@ -6,4 +6,4 @@
 
 // redirection vers la homepage par défaut / à compléter par après:
 
-require_once "../view/homepage.php";
+require_once "../view/publicView/homepage.php";
