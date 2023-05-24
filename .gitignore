@@ -1,10 +1,12 @@
+
 ## dossier pour les fichiers perso
 docs
 
-## on y met les DB on veut qu'ils soient dispo:
-data
-
+## fichier de configuration
 config.php
 
-## c'est le dossier qui heberge composer 
+## c'est le dossier qui heberge les bibliothèques externes via composer
 vendor
+
+## IDE PHPStorm
+.idea
