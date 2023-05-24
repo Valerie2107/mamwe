@@ -1,0 +1,15 @@
+/* 
+CSS générale pour tout ce qui sera commun à chaque page (ex: couleur, background, typo...) 
+On fera des CSS spécifique pour les éléments spécifiques (formaulaire et autre)
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* test pour voire si le CSS est bien lié */
+    background-color: red;
+}
