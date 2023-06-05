@@ -8,6 +8,11 @@ require_once "../model/model.php";  // A compléter/préciser
 
 // require_once "../vendor/autoload.php"; -> Appel des dépendances qui gèrent les mails
 
+// Autoload des classes (/model/) :
+spl_autoload_register(function ($class) {
+    $class = str_replace('\\', '/', $class);
+    require_once PATH_ROOT. '/' .$class . '.php';
+});
 
 // Connexion à la DB :
 try {
