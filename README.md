@@ -13,8 +13,28 @@ L'`autoload` ajouté dans `index.php` (pas celui qui serait géré par composer,
 ```PHP
 spl_autoload_register(function ($class) {
     $class = str_replace('\\', '/', $class);
-    require_once PATH_ROOT. '/' .$class . '.php';
+    require_once '../' .$class . '.php';
 });
 ```
 
 ! Il a besoin du PATH_ROOT, qui est défini dans `config.php` et `config.php.bak`.
+
+Exemple de classe qui étend `MappingAbstract` :
+
+#### model/model.php
+
+```PHP
+<?php
+namespace model;
+
+use model\abstractClass\MappingAbstract;
+
+class model extends MappingAbstract
+{
+    public function __toString(): string
+    {
+        return "class model.php enfants de MappingAbstract.php";
+    }
+}
+```
+

@@ -16,7 +16,7 @@ abstract class MappingAbstract
     {
         // tant qu'on a des éléments dans le tableau
         foreach ($assoc as $clef => $valeur) {
-            // création du nom de la méthode
+            // création du nom de la méthode de type setter
             $methodeName = "set" . str_replace("_", "", ucfirst($clef));
             // si la méthode existe
             if (method_exists($this, $methodeName)) {
