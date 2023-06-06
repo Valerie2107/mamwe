@@ -17,7 +17,6 @@ spl_autoload_register(function ($class) {
 });
 ```
 
-! Il a besoin du PATH_ROOT, qui est défini dans `config.php` et `config.php.bak`.
 
 Exemple de classe qui étend `MappingAbstract` :
 
