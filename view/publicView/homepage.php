@@ -11,7 +11,9 @@ include_once "../view/include/header.php";
 <!-- HTML -->
 <h1><?= $title ?></h1>
 
-
+<?php
+echo $test;
+?>
 <!-- FOOTER -->
 <?php
 

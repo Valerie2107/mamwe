@@ -4,9 +4,15 @@
 session_start();
 
 require_once "../config.php";
-require_once "../model/model.php";  // A compléter/préciser 
+//require_once "../model/model.php";  // A compléter/préciser
 
 // require_once "../vendor/autoload.php"; -> Appel des dépendances qui gèrent les mails
+
+// Autoload des classes (/model/) :
+spl_autoload_register(function ($class) {
+    $class = str_replace('\\', '/', $class);
+    require '../' .$class . '.php';
+});
 
 
 // Connexion à la DB :
@@ -17,8 +23,9 @@ try {
 
 }catch(Exception $e){
 
-    die($e->getMessage());
-
+    //die($e->getMessage());
+    echo $e->getMessage();
+    echo "<br>";
 }
 
 
