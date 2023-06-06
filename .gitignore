@@ -1,0 +1,12 @@
+
+## dossier pour les fichiers perso
+docs
+
+## fichier de configuration
+config.php
+
+## c'est le dossier qui heberge les bibliothèques externes via composer
+vendor
+
+## IDE PHPStorm
+.idea
