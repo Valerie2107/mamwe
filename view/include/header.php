@@ -15,30 +15,31 @@
 
 
 <!-- NAVBAR -->  
-<?php
-// Condition pour vérifier si l'utilisateur est connecté en tant qu'administrateur
-if (empty($_SESSION)) :?>
-    <!-- Affichage de la barre de navigation pour le public -->
-    <nav>
-        <div class="public-nav">
-            <a href="?p=home">Accueil</a>
 
-            <!-- lien pour les category : -->
-            <?php
-            foreach($articleMenu as $item) : 
+<!-- Affichage de la barre de navigation pour le public -->
+<nav>
+    <div class="public-nav">
+        <a href="?p=home">Accueil</a>
+        
+        <!-- lien pour les category : -->
+        <?php
+        foreach($articleMenu as $item) : 
             ?>
-            <!-- VERIFIER DB pour les noms -->
-            <a class="menu" href="?sectionId=<?=$item['section_id']?>"><?=$item['name_section']?></a>
-            <?php
-            endforeach;
-            ?>
+        <!-- VERIFIER DB pour les noms -->
+        <a class="menu" href="?sectionId=<?=$item['section_id']?>"><?=$item['name_section']?></a>
+        <?php
+        endforeach;
+        ?>
 
-            <a href="?p=contact">Contact</a>
-            <a href="?p=ressources">Ressources</a>
-            <a href="?p=livreDor">Livre D'or</a>
-        </div>
+        <a href="?p=contact">Contact</a>
+        <a href="?p=ressources">Ressources</a>
+        <a href="?p=livreDor">Livre D'or</a>
+</div>
 
-<?php else :?>
+
+<!-- Condition pour vérifier si l'utilisateur est connecté en tant qu'administrateur -->
+<?php if (!empty($_SESSION)) :?>
+    
         <div>
             <!-- Affichage de la barre de navigation pour l'administrateur -->
             <a href="?p=admin">Admin</a>
