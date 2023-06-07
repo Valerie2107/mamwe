@@ -102,18 +102,43 @@ if(isset($_SESSION['uniqueId'])&&$_SESSION['uniqueId']==session_id()){
 
 else if($_GET['p']){
 
+    // navigation :
+    if($_GET['p'] === "home"){
+        include_once "../view/publicView/homepage.php";
+    }
+
     if($_GET['p'] === "contact"){
-        include "../view/publicView/contactView.php";
+        include_once "../view/publicView/contactView.php";
     }
 
     if($_GET['p'] === "ressources"){
-        include "../view/publicView/ressourcesView.php";
+        include_once "../view/publicView/ressourcesView.php";
     }
 
     if($_GET['p'] === "livreDor"){
-        include "../view/publicView/livreDorView.php";
-    }
+        // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
 
+
+        // appel de la vue:
+        include_once "../view/publicView/livreDorView.php";
+    }
+    
+}
+
+else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
+    include_once "../view/publicView/section";
+}
+
+else if(isset($_GET['ressourcesId']) && ctype_digit($_GET['ressourcesId'])){
+    include_once "../view/publicView/ressourcesView.php";
+}
+
+else if(isset($_POST['nameLO'], $_POST['mailLO'], $_POST['messageLO'])){
+    // insertion dans le livre d'or
+}
+
+else if(isset($_POST['nameContact'], $_POST['mailContact'], $_POST['messageContact'])){
+    // envois message / mailer
 }
 
 
