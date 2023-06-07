@@ -14,4 +14,41 @@
 <!-- HEADER -->
 
 
-<!-- NAVBAR -->    
+<!-- NAVBAR -->  
+<?php
+// Condition pour vérifier si l'utilisateur est connecté en tant qu'administrateur
+if (empty($_SESSION)) :?>
+    <!-- Affichage de la barre de navigation pour le public -->
+    <nav>
+        <div class="public-nav">
+            <a href="?p=home">Accueil</a>
+
+            <!-- lien pour les category : -->
+            <?php
+            foreach($articleMenu as $item) : 
+            ?>
+            <!-- VERIFIER DB pour les noms -->
+            <a class="menu" href="?sectionId=<?=$item['section_id']?>"><?=$item['name_section']?></a>
+            <?php
+            endforeach;
+            ?>
+
+            <a href="?p=contact">Contact</a>
+            <a href="?p=ressources">Ressources</a>
+            <a href="?p=livreDor">Livre D'or</a>
+        </div>
+
+<?php else :?>
+        <div>
+            <!-- Affichage de la barre de navigation pour l'administrateur -->
+            <a href="?p=admin">Admin</a>
+            <a href="?p=formPwd">Changer le mot de passe</a>
+            <a href="?p=addRessource">Ajouter une ressource</a>
+            <a href="?p=addArticle">Ajouter un article</a>
+            <button class="btn"><a href="?deconnect">deconnection</a></button>
+        </div>
+    </nav>
+<?php 
+    endif;
+?>
+
