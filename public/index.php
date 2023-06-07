@@ -1,6 +1,9 @@
 <?php 
 
 // démarrage $_SESSION : 
+
+use model\model;
+
 session_start();
 
 require_once "../config.php";
@@ -17,16 +20,19 @@ spl_autoload_register(function ($class) {
 
 // Connexion à la DB :
 try {
-
+    
     $db = new PDO(DB_TYPE.':host='.DB_HOST.';port='.DB_PORT.';dbname='.DB_NAME.';charset='.DB_CHARSET,DB_LOGIN,DB_PWD);
     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
+    
 }catch(Exception $e){
-
+    
     //die($e->getMessage());
     echo $e->getMessage();
     echo "<br>";
 }
+
+$managerSection = new model\interfaceClass\manager\managerSection;
+echo $managerSection->getAll();
 
 
 // redirection vers le controlleur (surement à changer/sécuriser par après) :

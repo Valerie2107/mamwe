@@ -4,9 +4,11 @@
 2- comme ça la madame peut naviguer son site en étant connectée sans que ça nous file des mots de tête -->
 */
 use model\model;
-
+use model\Section;
 // redirection vers la homepage par défaut / à compléter par après:
 $test = new model(["test" => "test"]);
+
+var_dump($sections);
 
 
 // quand on deconnect :
@@ -87,7 +89,7 @@ if(isset($_SESSION['uniqueId'])&&$_SESSION['uniqueId']==session_id()){
 }
 
 
-else if($_GET['p']){
+else if(isset($_GET['p'])){
 
     // navigation publique :
     if($_GET['p'] === "home"){
