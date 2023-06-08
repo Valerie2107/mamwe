@@ -11,14 +11,7 @@ include_once "../view/include/header.php";
 <!-- HTML -->
 <h1><?= $title ?></h1>
 
-<?php
-// echo $test;
 
-// $managerSection = new model\interfaceClass\manager\managerSection;
-// echo $managerSection->getAll();
-
-
-?>
 <!-- FOOTER -->
 <?php
 
