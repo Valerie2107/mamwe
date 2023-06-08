@@ -4,13 +4,16 @@
 2- comme ça la madame peut naviguer son site en étant connectée sans que ça nous file des mots de tête -->
 */
 
+// on récup le manager des section
 use model\managerClass\ManagerSection;
 
+// on stock l'object dans la variable
 $sectionManager = new ManagerSection($db); 
 
+// applique la méthode qui contient la requete SQL qui récupére toutes les section
 $sections = $sectionManager -> getAll();
 
-
+// on fait une boucle dans laquelle on met le get qui récup tout les titres de section
 foreach($sections as $section){
     echo $section -> getMwTitleSect();
 }
