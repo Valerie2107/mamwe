@@ -11,15 +11,24 @@
 </head>
 <body>
 
+
 <!-- HEADER -->
+
 
 
 <!-- NAVBAR -->  
 
+
 <!-- Affichage de la barre de navigation pour le public -->
 <nav>
+
+    
     <div class="public-nav">
+    
+    
+   
         <a href="?p=home">Accueil</a>
+
         
         <!-- lien pour les category : -->
         <?php
@@ -35,6 +44,7 @@
         <a href="?p=contact">Contact</a>
         <a href="?p=ressources">Ressources</a>
         <a href="?p=livreDor">Livre D'or</a>
+       
 </div>
 
 
