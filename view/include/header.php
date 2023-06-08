@@ -23,10 +23,11 @@
         
         <!-- lien pour les category : -->
         <?php
-        foreach($articleMenu as $item) : 
-            ?>
+        $sections = $sectionManager -> getAll();
+        foreach($sections as $section) :  
+        ?>
         <!-- VERIFIER DB pour les noms -->
-        <a class="menu" href="?sectionId=<?=$item['section_id']?>"><?=$item['name_section']?></a>
+        <a class="menu" href="?sectionId=<?= $section -> getMwIdSection() ?>"><?= $section -> getMwTitleSect() ;?></a>
         <?php
         endforeach;
         ?>
