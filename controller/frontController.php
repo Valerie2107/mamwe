@@ -6,15 +6,17 @@
 
 use model\managerClass\ManagerSection;
 
-$sections = new ManagerSection($db); 
+$sectionManager = new ManagerSection($db); 
 
-$section = $sections -> getAll();
+$sections = $sectionManager -> getAll();
 
 
-foreach($section as $item){
-    echo $item -> getMwTitleSect();
+foreach($sections as $section){
+    echo $section -> getMwTitleSect();
 }
 
+
+// echo $section -> getMwIdSection();
 
 // quand on deconnect :
 if(isset($_GET['deconnect'])){

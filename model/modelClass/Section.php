@@ -15,10 +15,6 @@ class Section extends MappingAbstract
         parent::__construct($tab);
     }
 
-    public function __toString(): string
-    {
-        return "les sections";
-    }
 
     /**
      * Get the value of mwIdSection

@@ -42,8 +42,5 @@ class ManagerSection extends MappingAbstract implements ManagerInterface
         return $sections;
         }
     }  
-     
-    public function __toString(){
-        echo "boubou";
-    } 
+
 }
