@@ -39,11 +39,8 @@ class ManagerSection extends MappingAbstract implements ManagerInterface
         $sections[] = new Section($row);           
     
         // on retourne le tableau
-        return $sections;
         }
+    return $sections;
     }  
-     
-    public function __toString(){
-        echo "boubou";
-    } 
+
 }
