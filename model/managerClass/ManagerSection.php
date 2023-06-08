@@ -10,7 +10,7 @@ use PDO;
 
 // use ManagerInterface:
 
-class ManagerSection extends MappingAbstract implements ManagerInterface
+class ManagerSection implements ManagerInterface
 {
     private PDO $db;
 
