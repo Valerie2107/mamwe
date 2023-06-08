@@ -1,8 +1,4 @@
 <?php
-/* Je pensais mettre juste un controlleur
-1- y'a pas une admin trop complexe
-2- comme ça la madame peut naviguer son site en étant connectée sans que ça nous file des mots de tête -->
-*/
 
 // on récup le manager des section
 use model\managerClass\ManagerSection;
@@ -12,12 +8,6 @@ $sectionManager = new ManagerSection($db);
 
 // applique la méthode qui contient la requete SQL qui récupére toutes les section
 $sections = $sectionManager -> getAll();
-
-// on fait une boucle dans laquelle on met le get qui récup tout les titres de section
-foreach($sections as $section){
-    echo $section -> getMwTitleSect();
-}
-
 
 // echo $section -> getMwIdSection();
 
@@ -146,7 +136,7 @@ else if(isset($_GET['p'])){
 }
 
 else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
-    include_once "../view/publicView/section";
+    include_once "../view/publicView/sectionView.php";
 }
 
 else if(isset($_GET['ressourcesId']) && ctype_digit($_GET['ressourcesId'])){
