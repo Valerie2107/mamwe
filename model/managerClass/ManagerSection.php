@@ -1,7 +1,8 @@
 <?php
 
-namespace model\managerClass; 
+namespace model\managerClass;
 
+use model\abstractClass\MappingAbstract;
 use model\modelClass\Section;
 use model\interfaceClass\ManagerInterface;
 use PDO;
@@ -9,7 +10,7 @@ use PDO;
 
 // use ManagerInterface:
 
-class ManagerSection extends ManagerInterface
+class ManagerSection extends MappingAbstract implements ManagerInterface
 {
     private PDO $db;
 
@@ -40,7 +41,8 @@ class ManagerSection extends ManagerInterface
         // on retourne le tableau
         return $sections;
         }
-    }   
+    }  
+     
     public function __toString(){
         echo "boubou";
     } 

@@ -7,7 +7,13 @@
 use model\managerClass\ManagerSection;
 
 $sections = new ManagerSection($db); 
-var_dump($sections);
+
+$section = $sections -> getAll();
+
+
+foreach($section as $item){
+    echo $item -> getMwTitleSect();
+}
 
 
 // quand on deconnect :
