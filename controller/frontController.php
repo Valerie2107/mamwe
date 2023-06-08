@@ -4,17 +4,22 @@
 2- comme ça la madame peut naviguer son site en étant connectée sans que ça nous file des mots de tête -->
 */
 
+// on récup le manager des section
 use model\managerClass\ManagerSection;
 
-$sections = new ManagerSection($db); 
+// on stock l'object dans la variable
+$sectionManager = new ManagerSection($db); 
 
-$section = $sections -> getAll();
+// applique la méthode qui contient la requete SQL qui récupére toutes les section
+$sections = $sectionManager -> getAll();
 
-
-foreach($section as $item){
-    echo $item -> getMwTitleSect();
+// on fait une boucle dans laquelle on met le get qui récup tout les titres de section
+foreach($sections as $section){
+    echo $section -> getMwTitleSect();
 }
 
+
+// echo $section -> getMwIdSection();
 
 // quand on deconnect :
 if(isset($_GET['deconnect'])){
