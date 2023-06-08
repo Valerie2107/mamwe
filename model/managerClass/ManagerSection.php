@@ -1,13 +1,15 @@
 <?php
 
-namespace model\interfaceClass; 
-use model\Section;
+namespace model\managerClass; 
+
+use model\modelClass\Section;
+use model\interfaceClass\ManagerInterface;
 use PDO;
 
 
 // use ManagerInterface:
 
-class ManagerArticle extends ManagerInterface
+class ManagerSection extends ManagerInterface
 {
     private PDO $db;
 
@@ -17,7 +19,7 @@ class ManagerArticle extends ManagerInterface
     }
 
     public function getOneById($id){
-        // requête sql + prepare + bindValue + execute + etc
+        
     }
 
     public function getAll(){
@@ -33,11 +35,13 @@ class ManagerArticle extends ManagerInterface
         // on parcourt le résultat
         foreach ($result as $row){
         // on crée un objet Theuser que l'on ajoute dans le tableau
-        $sections[] = new Section($row);
-        var_dump($sections);
-            
-        }
+        $sections[] = new Section($row);           
+    
         // on retourne le tableau
         return $sections;
-    }
+        }
+    }   
+    public function __toString(){
+        echo "boubou";
+    } 
 }

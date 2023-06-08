@@ -12,7 +12,12 @@ include_once "../view/include/header.php";
 <h1><?= $title ?></h1>
 
 <?php
-echo $test;
+// echo $test;
+
+// $managerSection = new model\interfaceClass\manager\managerSection;
+// echo $managerSection->getAll();
+
+
 ?>
 <!-- FOOTER -->
 <?php

@@ -3,11 +3,10 @@
 1- y'a pas une admin trop complexe
 2- comme ça la madame peut naviguer son site en étant connectée sans que ça nous file des mots de tête -->
 */
-use model\model;
-use model\Section;
-// redirection vers la homepage par défaut / à compléter par après:
-$test = new model(["test" => "test"]);
 
+use model\managerClass\ManagerSection;
+
+$sections = new ManagerSection($db); 
 var_dump($sections);
 
 
@@ -16,7 +15,7 @@ if(isset($_GET['deconnect'])){
     // if(deconnect()){
         //     header("location: ./");
         // }       
-    }
+}
     
 //check varaible $POST pour connexion :
 if(isset($_POST['login'],$_POST['pwd'])){

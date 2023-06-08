@@ -1,6 +1,6 @@
 <?php
 
-namespace model;
+namespace model\modelClass;
 
 use model\abstractClass\MappingAbstract;
 

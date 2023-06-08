@@ -2,14 +2,14 @@
 
 // démarrage $_SESSION : 
 
-use model\model;
-
 session_start();
 
+// require de la config:
 require_once "../config.php";
-//require_once "../model/model.php";  // A compléter/préciser
+
 
 // require_once "../vendor/autoload.php"; -> Appel des dépendances qui gèrent les mails
+
 
 // Autoload des classes (/model/) :
 spl_autoload_register(function ($class) {
@@ -30,9 +30,6 @@ try {
     echo $e->getMessage();
     echo "<br>";
 }
-
-$managerSection = new model\interfaceClass\manager\managerSection;
-echo $managerSection->getAll();
 
 
 // redirection vers le controlleur (surement à changer/sécuriser par après) :
