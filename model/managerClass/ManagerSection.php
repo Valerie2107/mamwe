@@ -4,7 +4,7 @@ namespace model\managerClass;
 
 use Exception;
 use model\abstractClass\MappingAbstract;
-use model\modelClass\Section;
+use model\mappingClass\mappingSection;
 use model\interfaceClass\ManagerInterface;
 use PDO;
 
@@ -27,7 +27,7 @@ class ManagerSection extends MappingAbstract implements ManagerInterface
         $prepare -> execute();
         $result = $prepare -> fetch();
         if($result){
-            return new Section($result);
+            return new MappingSection($result);
         }else{
             throw new Exception("cette section $id n'existe pas" );
         }
@@ -47,7 +47,7 @@ class ManagerSection extends MappingAbstract implements ManagerInterface
         // on parcourt le résultat
         foreach ($result as $row){
         // on crée un objet Theuser que l'on ajoute dans le tableau
-        $sections[] = new Section($row);           
+        $sections[] = new MappingSection($row);           
     
         // on retourne le tableau
         }
