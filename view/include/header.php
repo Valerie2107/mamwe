@@ -30,16 +30,17 @@
         <a href="?p=home">Accueil</a>
 
         
-        <!-- lien pour les category : -->
+        <!-- lien pour les category :
         <?php
         $sections = $sectionManager -> getAll();
+        var_dump($sections);
         foreach($sections as $section) :  
         ?>
         <!-- VERIFIER DB pour les noms -->
-        <a class="menu" href="?sectionId=<?= $section -> getMwIdSection() ?>"><?= $section -> getMwTitleSect() ;?></a>
+        <a class="menu" href="?sectionId=<?= $section -> getMwIdSect() ?>"><?= $section -> getMwTitleSect() ;?></a>
         <?php
         endforeach;
-        ?>
+        ?> 
 
         <a href="?p=contact">Contact</a>
         <a href="?p=ressources">Ressources</a>

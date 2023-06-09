@@ -136,6 +136,8 @@ else if(isset($_GET['p'])){
 }
 
 else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
+    $idSect = (int) $_GET['sectionId'];
+    $sectionById = $sectionManager -> getOneById($idSect);
     include_once "../view/publicView/sectionView.php";
 }
 

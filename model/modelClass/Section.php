@@ -7,38 +7,43 @@ use model\abstractClass\MappingAbstract;
 class Section extends MappingAbstract
 {
     
-    private int $mwIdSection;
+    private int $mwIdSect;
     private string $mwTitleSect;
+    private string $mwContentSect;
+    private string $mwVisible;
+    private int $mwPictureMwIdPicture;
+
 
     public function __construct(array $tab)
     {
         parent::__construct($tab);
     }
-
-
+    
+    
     /**
-     * Get the value of mwIdSection
+     * Get the value of mwIdSect
      *
      * @return int
      */
-    public function getMwIdSection(): int
+    public function getMwIdSect(): int
     {
-        return $this->mwIdSection;
+        return $this->mwIdSect;
     }
 
     /**
-     * Set the value of mwIdSection
+     * Set the value of mwIdSect
      *
-     * @param int $mwIdSection
+     * @param int $mwIdSect
      *
      * @return self
      */
-    public function setMwIdSection(int $mwIdSection): self
+    public function setMwIdSect(int $mwIdSect): self
     {
-        $this->mwIdSection = $mwIdSection;
+        $this->mwIdSect = $mwIdSect;
 
         return $this;
     }
+
 
     /**
      * Get the value of mwTitleSect
@@ -60,6 +65,81 @@ class Section extends MappingAbstract
     public function setMwTitleSect(string $mwTitleSect): self
     {
         $this->mwTitleSect = $mwTitleSect;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of mwContentSect
+     *
+     * @return string
+     */
+    public function getMwContentSect(): string
+    {
+        return $this->mwContentSect;
+    }
+
+    /**
+     * Set the value of mwContentSect
+     *
+     * @param string $mwContentSect
+     *
+     * @return self
+     */
+    public function setMwContentSect(string $mwContentSect): self
+    {
+        $this->mwContentSect = $mwContentSect;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of mwVisible
+     *
+     * @return string
+     */
+    public function getMwVisible(): string
+    {
+        return $this->mwVisible;
+    }
+
+    /**
+     * Set the value of mwVisible
+     *
+     * @param string $mwVisible
+     *
+     * @return self
+     */
+    public function setMwVisible(string $mwVisible): self
+    {
+        $this->mwVisible = $mwVisible;
+
+        return $this;
+    }
+
+    
+
+    /**
+     * Get the value of mwPictureMwIdPicture
+     *
+     * @return int
+     */
+    public function getMwPictureMwIdPicture(): int
+    {
+        return $this->mwPictureMwIdPicture;
+    }
+
+    /**
+     * Set the value of mwPictureMwIdPicture
+     *
+     * @param int $mwPictureMwIdPicture
+     *
+     * @return self
+     */
+    public function setMwPictureMwIdPicture(int $mwPictureMwIdPicture): self
+    {
+        $this->mwPictureMwIdPicture = $mwPictureMwIdPicture;
 
         return $this;
     }

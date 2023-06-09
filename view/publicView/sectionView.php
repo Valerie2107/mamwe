@@ -1,7 +1,7 @@
 <?php
 
 // on peut mettre les titres des rubriques dans la variables $title qu'on utilise dans la balise <title>
-$title = "Section";
+$title = $sectionById-> getMwTitleSect();
 
 // HEAD + HEADER + NAVBAR
 include_once "../view/include/header.php";
