@@ -30,10 +30,10 @@
         <a href="?p=home">Accueil</a>
 
         
-        <!-- lien pour les category :
+        <!-- lien pour les category :-->
         <?php
         $sections = $sectionManager -> getAll();
-        var_dump($sections);
+        
         foreach($sections as $section) :  
         ?>
         <!-- VERIFIER DB pour les noms -->
