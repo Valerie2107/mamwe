@@ -9,6 +9,10 @@ class Section extends MappingAbstract
     
     private int $mwIdSect;
     private string $mwTitleSect;
+    private string $mwContentSect;
+    private string $mwVisible;
+    private int $mwPictureMwIdPicture;
+
 
     public function __construct(array $tab)
     {
@@ -65,4 +69,78 @@ class Section extends MappingAbstract
         return $this;
     }
 
+
+    /**
+     * Get the value of mwContentSect
+     *
+     * @return string
+     */
+    public function getMwContentSect(): string
+    {
+        return $this->mwContentSect;
+    }
+
+    /**
+     * Set the value of mwContentSect
+     *
+     * @param string $mwContentSect
+     *
+     * @return self
+     */
+    public function setMwContentSect(string $mwContentSect): self
+    {
+        $this->mwContentSect = $mwContentSect;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of mwVisible
+     *
+     * @return string
+     */
+    public function getMwVisible(): string
+    {
+        return $this->mwVisible;
+    }
+
+    /**
+     * Set the value of mwVisible
+     *
+     * @param string $mwVisible
+     *
+     * @return self
+     */
+    public function setMwVisible(string $mwVisible): self
+    {
+        $this->mwVisible = $mwVisible;
+
+        return $this;
+    }
+
+    
+
+    /**
+     * Get the value of mwPictureMwIdPicture
+     *
+     * @return int
+     */
+    public function getMwPictureMwIdPicture(): int
+    {
+        return $this->mwPictureMwIdPicture;
+    }
+
+    /**
+     * Set the value of mwPictureMwIdPicture
+     *
+     * @param int $mwPictureMwIdPicture
+     *
+     * @return self
+     */
+    public function setMwPictureMwIdPicture(int $mwPictureMwIdPicture): self
+    {
+        $this->mwPictureMwIdPicture = $mwPictureMwIdPicture;
+
+        return $this;
+    }
 }
