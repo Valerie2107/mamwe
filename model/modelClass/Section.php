@@ -7,38 +7,39 @@ use model\abstractClass\MappingAbstract;
 class Section extends MappingAbstract
 {
     
-    private int $mwIdSection;
+    private int $mwIdSect;
     private string $mwTitleSect;
 
     public function __construct(array $tab)
     {
         parent::__construct($tab);
     }
-
-
+    
+    
     /**
-     * Get the value of mwIdSection
+     * Get the value of mwIdSect
      *
      * @return int
      */
-    public function getMwIdSection(): int
+    public function getMwIdSect(): int
     {
-        return $this->mwIdSection;
+        return $this->mwIdSect;
     }
 
     /**
-     * Set the value of mwIdSection
+     * Set the value of mwIdSect
      *
-     * @param int $mwIdSection
+     * @param int $mwIdSect
      *
      * @return self
      */
-    public function setMwIdSection(int $mwIdSection): self
+    public function setMwIdSect(int $mwIdSect): self
     {
-        $this->mwIdSection = $mwIdSection;
+        $this->mwIdSect = $mwIdSect;
 
         return $this;
     }
+
 
     /**
      * Get the value of mwTitleSect
@@ -63,4 +64,5 @@ class Section extends MappingAbstract
 
         return $this;
     }
+
 }
