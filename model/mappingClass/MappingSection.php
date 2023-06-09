@@ -1,10 +1,10 @@
 <?php
 
-namespace model\modelClass;
+namespace model\mappingClass;
 
 use model\abstractClass\MappingAbstract;
 
-class Section extends MappingAbstract
+class MappingSection extends MappingAbstract
 {
     
     private int $mwIdSect;
