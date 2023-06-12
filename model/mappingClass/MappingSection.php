@@ -3,7 +3,7 @@
 namespace model\mappingClass;
 
 use model\abstractClass\MappingAbstract;
-
+use Exception;
 class MappingSection extends MappingAbstract
 {
     
@@ -11,7 +11,7 @@ class MappingSection extends MappingAbstract
     private string $mwTitleSect;
     private string $mwContentSect;
     private string $mwVisible;
-    private int $mwPictureMwIdPicture;
+    private ?int $mwPictureMwIdPicture;
 
 
     public function __construct(array $tab)
@@ -64,7 +64,11 @@ class MappingSection extends MappingAbstract
      */
     public function setMwTitleSect(string $mwTitleSect): self
     {
-        $this->mwTitleSect = $mwTitleSect;
+        if(strlen($mwTitleSect)>100){
+            throw new Exception("Texte trop long");
+        }else {
+            $this->mwTitleSect = $mwTitleSect;
+        }
 
         return $this;
     }
@@ -125,7 +129,7 @@ class MappingSection extends MappingAbstract
      *
      * @return int
      */
-    public function getMwPictureMwIdPicture(): int
+    public function getMwPictureMwIdPicture(): ?int
     {
         return $this->mwPictureMwIdPicture;
     }
@@ -137,7 +141,7 @@ class MappingSection extends MappingAbstract
      *
      * @return self
      */
-    public function setMwPictureMwIdPicture(int $mwPictureMwIdPicture): self
+    public function setMwPictureMwIdPicture(?int $mwPictureMwIdPicture): self
     {
         $this->mwPictureMwIdPicture = $mwPictureMwIdPicture;
 
