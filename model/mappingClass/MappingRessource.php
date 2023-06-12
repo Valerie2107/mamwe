@@ -4,7 +4,7 @@ namespace model\mappingClass;
 
 use model\abstractClass\MappingAbstract;
 use Exception;
-use DateTime;
+
 
 class MappingRessource extends MappingAbstract {
 
@@ -15,8 +15,7 @@ class MappingRessource extends MappingAbstract {
     private ?int $mwPictureMwIdPicture;
     private ?int $mwCategoryRessourceMwCategoryId;
 
-    
-    
+    use \model\traitClass\DateTrait; 
 
     /**
      * Get the value of mwIdRessource
@@ -118,17 +117,15 @@ class MappingRessource extends MappingAbstract {
      */
     public function setMwDateRessource(string $mwDateRessource): self
     {
-        function validateDate($date, $format = 'd/m/Y'){
-            
-            $d = DateTime::createFromFormat($format, $date);
-            return $d && $d->format($format) == $date;
-        }
 
-        if(validateDate($mwDateRessource)){
+        if($this->dateTrait($mwDateRessource)){
 
             $this->mwDateRessource = $mwDateRessource;
+
         }else{
+
             throw new Exception("Date non valide");
+            
         }
 
 
