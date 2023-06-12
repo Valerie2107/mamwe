@@ -3,7 +3,7 @@
 namespace model\mappingClass;
 
 use model\abstractClass\MappingAbstract;
-
+use Exception;
 class MappingSection extends MappingAbstract
 {
     
@@ -64,7 +64,11 @@ class MappingSection extends MappingAbstract
      */
     public function setMwTitleSect(string $mwTitleSect): self
     {
-        $this->mwTitleSect = $mwTitleSect;
+        if(strlen($mwTitleSect)>100){
+            throw new Exception("Texte trop long");
+        }else {
+            $this->mwTitleSect = $mwTitleSect;
+        }
 
         return $this;
     }
