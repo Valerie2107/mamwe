@@ -27,7 +27,7 @@
     
     
    
-        <a href="?p=home">Accueil</a>
+        <a href="./">Accueil</a>
 
         
         <!-- lien pour les category :-->
