@@ -6,14 +6,14 @@ use DateTime;
 use model\abstractClass\MappingAbstract;
 use Exception;
 
-class Article extends MappingAbstract
+class MappingArticle extends MappingAbstract
 {
     private int $mwIdArticle;
     private string $mwTitleArt;
     private string $mwContentArt;
     private string $mwDateArt;
-    private int $mwIdSection;
     protected int $mwVisibleArt;
+    private int $mwSectionMwIdSection;
 
     public function __construct(array $tab)
     {
@@ -156,7 +156,7 @@ class Article extends MappingAbstract
         // Crée un nouvel objet DateTime pour l'heure actuelle
         $now = new DateTime();
 
-        // Met à jour mwDateArt avec la date et l'heure actuelles, formatées en tant que chaîne
+        // Met à jour mwDateArt avec la date et l'heure actuelles, au format Y-m-d H:i
         $this->mwDateArt = 'modifié le : ' . $now->format('Y-m-d H:i');
 
         return $this;
@@ -167,31 +167,31 @@ class Article extends MappingAbstract
      */
     public function getMwSectionMwIdSection(): int
     {
-        return $this->mwIdSection;
+        return $this->mwSectionMwIdSection;
     }
 
     /**
-     * @param int $mwIdSection
+     * @param int $mwSectionMwIdSection
      *
      * @return self
      */
 
-    public function setMwSectionMwIdSection(int $mwIdSection): self
+    public function setMwSectionMwIdSection(int $mwSectionMwIdSection): self
     {
         // Vérifier que l'id de la section est bien un entier
-        if(!is_int($mwIdSection)){
+        if(!is_int($mwSectionMwIdSection)){
             throw new Exception("L'id de la section doit être un entier");
         }
         // Vérifier que l'id de la section est bien supérieur à 0
-        if($mwIdSection <= 0){
+        if($mwSectionMwIdSection <= 0){
             throw new Exception("L'id de la section doit être supérieur à 0");
         }
         // Vérifier que l'id de la section est compris entre 1 et 3
-        if($mwIdSection < 1 || $mwIdSection > 3){
+        if($mwSectionMwIdSection < 1 || $mwSectionMwIdSection > 3){
             throw new Exception("L'id de la section doit être compris entre 1 et 3");
         }
 
-        $this->mwIdSection = $mwIdSection;
+        $this->mwSectionMwIdSection = $mwSectionMwIdSection;
 
         return $this;
     }
