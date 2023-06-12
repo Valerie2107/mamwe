@@ -2,8 +2,9 @@
 
 namespace model\managerClass;
 
+use Exception;
 use model\abstractClass\MappingAbstract;
-use model\modelClass\Section;
+use model\mappingClass\mappingSection;
 use model\interfaceClass\ManagerInterface;
 use PDO;
 
@@ -20,23 +21,33 @@ class ManagerSection implements ManagerInterface
     }
 
     public function getOneById($id){
-        
+        $sql = "SELECT * FROM mw_section WHERE mw_id_sect = :id";
+        $prepare = $this -> db -> prepare($sql);
+        $prepare->bindParam(':id', $id,PDO::PARAM_INT);
+        $prepare -> execute();
+        $result = $prepare -> fetch();
+        if($result){
+            return new MappingSection($result);
+        }else{
+            throw new Exception("cette section $id n'existe pas" );
+        }
+
     }
 
     public function getAll(){
         // préparation de la requête
         $sql = "SELECT * FROM mw_section";
-        $stmt = $this->db->prepare($sql);
+        $prepare = $this->db->prepare($sql);
         // exécution de la requête
-        $stmt->execute();
+        $prepare->execute();
         // récupération du résultat
-        $result = $stmt->fetchAll();
+        $result = $prepare->fetchAll();
         // on crée un tableau vide
         $sections = [];
         // on parcourt le résultat
         foreach ($result as $row){
         // on crée un objet Theuser que l'on ajoute dans le tableau
-        $sections[] = new Section($row);           
+        $sections[] = new MappingSection($row);           
     
         // on retourne le tableau
         }
