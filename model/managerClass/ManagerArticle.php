@@ -39,5 +39,14 @@ class ManagerArticle  implements ManagerInterface
 
     public function getAll(){
         // requête sql + prepare + bindValue + execute + etc
+        $sql = "SELECT * FROM mw_article";
+        $prepare = $this->db->prepare($sql);
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $articles = [];
+        foreach ($result as $row){
+            $articles[] = new MappingArticle($row);
+        }
+        return $articles;
     }
 }

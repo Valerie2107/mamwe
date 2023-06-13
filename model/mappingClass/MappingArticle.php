@@ -4,10 +4,13 @@ namespace model\mappingClass;
 
 use DateTime;
 use model\abstractClass\MappingAbstract;
+use model\traitClass\DateTrait;
 use Exception;
 
 class MappingArticle extends MappingAbstract
 {
+    use DateTrait;
+
     private int $mwIdArticle;
     private string $mwTitleArt;
     private string $mwContentArt;
@@ -92,6 +95,7 @@ class MappingArticle extends MappingAbstract
      * @param string $mwContentArt
      *
      * @return self
+     * @throws Exception
      */
 
     public function setMwContentArt(string $mwContentArt): self
@@ -102,7 +106,7 @@ class MappingArticle extends MappingAbstract
             $this->mwContentArt = $mwContentArt;
         }
 
-        $this->setMwDateArt(date('Y-m-d H:i'));
+        $this->setMwDateArt(date('d/m/Y'));
 
         return $this;
     }
@@ -149,14 +153,19 @@ class MappingArticle extends MappingAbstract
 
     public function setMwDateArt(string $mwDateArt): self
     {
+        if (!$this->dateTrait($mwDateArt, 'd/m/Y')) {
+            throw new Exception('Date incorrecte, format attendu : d/m/Y');
+        }
+
         // Crée un nouvel objet DateTime pour l'heure actuelle
         $now = new DateTime();
 
-        // Met à jour mwDateArt avec la date et l'heure actuelles, au format Y-m-d H:i
-        $this->mwDateArt = 'modifié le : ' . $now->format('Y-m-d H:i');
+        // Met à jour mwDateArt avec la date et l'heure actuelles, au format d/m/Y
+        $this->mwDateArt = 'modifié le : ' . $now->format('d/m/Y');
 
         return $this;
     }
+
 
     /**
      * @return int
