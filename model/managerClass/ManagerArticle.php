@@ -6,8 +6,7 @@ use model\interfaceClass\ManagerInterface;
 use model\modelClass\Article;
 use model\abstractClass\MappingAbstract;
 use Exception;
-
-
+use model\mappingClass\MappingArticle;
 
 // use ManagerInterface:
 
@@ -30,7 +29,7 @@ class ManagerArticle  implements ManagerInterface
         $prepare->execute();
             $result = $prepare->fetch();
             if ($result) {
-                return new Article($result);
+                return new MappingArticle($result);
             } else {
                 throw new Exception("L'article $id n'existe pas");
             }
