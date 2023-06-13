@@ -23,7 +23,7 @@ $test1 = new MappingArticle([
     "mwTitleArt" => "test",
     "mwContentArt" => "test",
     "mwVisibleArt" => "1",
-    "mwSectionMwIdSection" => 1
+    "mwSectionMwIdSection" => 0
 ]);
 
 try{

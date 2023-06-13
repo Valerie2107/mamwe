@@ -39,6 +39,7 @@ class MappingLivreDor extends MappingAbstract
      */
     public function setMwIdLivreDor(int $mwIdLivreDor): self
     {
+        if ($mwIdLivreDor < 0) throw new Exception("L'id du livre d'or ne peut pas être négatif");
         $this->mwIdLivreDor = $mwIdLivreDor;
 
         return $this;
@@ -63,6 +64,8 @@ class MappingLivreDor extends MappingAbstract
      */
     public function setMwNameLivreDor(string $mwNameLivreDor): self
     {
+        if (strlen($mwNameLivreDor) > 100) throw new Exception("Le nom est trop long");
+        if (strlen($mwNameLivreDor) < 2) throw new Exception("Le nom est trop court");
         $this->mwNameLivreDor = $mwNameLivreDor;
 
         return $this;
@@ -87,6 +90,8 @@ class MappingLivreDor extends MappingAbstract
      */
     public function setMwMailLivreDor(string $mwMailLivreDor): self
     {
+        if (!filter_var($mwMailLivreDor, FILTER_VALIDATE_EMAIL)) throw new Exception("L'email n'est pas valide");
+        if (strlen($mwMailLivreDor) > 100) throw new Exception("L'email est trop long");
         $this->mwMailLivreDor = $mwMailLivreDor;
 
         return $this;
@@ -111,6 +116,8 @@ class MappingLivreDor extends MappingAbstract
      */
     public function setMwMessageLivreDor(string $mwMessageLivreDor): self
     {
+        if (strlen($mwMessageLivreDor) > 500) throw new Exception("Le message est trop long");
+        if (strlen($mwMessageLivreDor) < 25) throw new Exception("Le message est trop court");
         $this->mwMessageLivreDor = $mwMessageLivreDor;
 
         return $this;

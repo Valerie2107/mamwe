@@ -39,6 +39,9 @@ class MappingArticle extends MappingAbstract
      */
     public function setMwIdArticle(int $mwIdArticle): self
     {
+        if ($mwIdArticle <= 0) {
+            throw new Exception('ID de l\'article doit être un entier positif');
+        }
         $this->mwIdArticle = $mwIdArticle;
 
         return $this;
@@ -123,16 +126,9 @@ class MappingArticle extends MappingAbstract
     {
         if($mwVisibleArt != 0 && $mwVisibleArt != 1){
             throw new Exception("Valeur de visibilité incorrecte 0 ou 1 uniquement");
-        }/**  elseif ($mwVisibleArt == 0){
-            $mwVisibleArt = 1;
-            $this->mwVisibleArt = $mwVisibleArt;
-        }elseif ($mwVisibleArt == 1) {
-            $mwVisibleArt = 0;
-            $this->mwVisibleArt = $mwVisibleArt;
         }
-     * */
-        // Inverse la valeur de mwVisibleArt (0 devient 1 et 1 devient 0)
-        $this->mwVisibleArt = $mwVisibleArt ^ 1;
+
+        $this->mwVisibleArt = $mwVisibleArt;
 
         return $this;
     }
@@ -186,10 +182,11 @@ class MappingArticle extends MappingAbstract
         if($mwSectionMwIdSection <= 0){
             throw new Exception("L'id de la section doit être supérieur à 0");
         }
-        // Vérifier que l'id de la section est compris entre 1 et 3
-        if($mwSectionMwIdSection < 1 || $mwSectionMwIdSection > 3){
+        // Vérifier que l'id de la section est un entier positif
+        /* if($mwSectionMwIdSection < 1 || $mwSectionMwIdSection > 3){
             throw new Exception("L'id de la section doit être compris entre 1 et 3");
         }
+        */
 
         $this->mwSectionMwIdSection = $mwSectionMwIdSection;
 
