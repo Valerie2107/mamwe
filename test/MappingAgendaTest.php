@@ -1,6 +1,6 @@
 <?php
 
-use model\mappingClass\MappingSection;
+use model\mappingClass\MappingAgenda;
 
 
 // require de la config:
@@ -16,21 +16,24 @@ spl_autoload_register(function ($class) {
     require '../' . $class . '.php';
 });
 
-
-
-$test1 = new MappingSection([
-    "mwIdSect" => 1,
-    "mwTitleSect" => "test",
-    "mwContentSect" => "test",
-    "mwVisible" => "test",
+try{
+$test1 = new MappingAgenda([
+    "mwIdAgenda" => 1,
+    "mwDateAgenda" => "test",
+    "mwContentAgenda" => "test",
+    "mwTitleAgenda" => "test",
     "mwPictureMwIdPicture" => 1
 ]);
+}catch(Exception $e ){
+    $e->getMessage();
+}
+
+
 
 try{
-    $test2 = new MappingSection([
-        "mwTitleSect" => "pipi",
+    $test2 = new MappingAgenda([
+        "mwTitleSect" => "test ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgte",
     ]);
-
 }catch (Exception $e){
     echo $e;
 }
