@@ -10,8 +10,8 @@ class MappingPicture extends MappingAbstract{
     private int $mwIdPicture;
     private string $mwTitlePicture;
     private string $mwUrlPicture;
-    private int $mwTaillePicture;
-    private ?int $mwPosotionPicture;    //nom à changer en Position
+    private int $mwSizePicture;
+    private ?int $mwPositionPicture;    //nom à changer en Position
     private ?int $mwArticleMwIdArticle;
 
 
@@ -59,28 +59,28 @@ class MappingPicture extends MappingAbstract{
     }
 
     //  get-set mwTaillePicture
-    public function getMwTaillePicture(){
+    public function getMwSizePicture(){
 
-        $this->mwTaillePicture;
+        $this->mwSizePicture;
 
     }
 
-    public function setMwTaillePicture(int $mwTaillePicture):self
+    public function setMwSizePicture(int $mwSizePicture):self
     {
-        $this->mwTaillePicture = $mwTaillePicture;
+        $this->mwSizePicture = $mwSizePicture;
 
         return $this;
     }
 
     //  get-set mwPosotionPicture;    //nom à changer en Position
-    public function getMwPosotionPicture(){
+    public function getMwPositionPicture(){
 
-        $this->mwPosotionPicture; 
+        $this->mwPositionPicture; 
     }
 
-    public function setMwPosotionPicture(int $mwPosotionPicture):self
+    public function setMwPositionPicture(int $mwPositionPicture):self
     {
-        $this->mwPosotionPicture = $mwPosotionPicture;
+        $this->mwPositionPicture = $mwPositionPicture;
 
         return $this;
     }
