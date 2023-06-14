@@ -11,12 +11,21 @@ class MappingArticle extends MappingAbstract
 {
     use DateTrait;
 
+    //Table mw_article
     private int $mwIdArticle;
     private string $mwTitleArt;
     private string $mwContentArt;
     private string $mwDateArt;
     protected int $mwVisibleArt;
     private int $mwSectionMwIdSection;
+
+    //Table mw_picture
+    private int $mwIdPicture;
+    private string $mwTitlePicture;
+    private string $mwUrlPicture;
+    private int $mwTaillePicture;
+    private int $mwPositionPicture;
+    private int $mwArticleMwIdArticle;
 
     public function __construct(array $tab)
     {
@@ -43,7 +52,7 @@ class MappingArticle extends MappingAbstract
     public function setMwIdArticle(int $mwIdArticle): self
     {
         if ($mwIdArticle <= 0) {
-            throw new Exception('ID de l\'article doit être un entier positif');
+            throw new Exception("L'id de l'article doit être un entier positif");
         }
         $this->mwIdArticle = $mwIdArticle;
 
@@ -106,7 +115,6 @@ class MappingArticle extends MappingAbstract
             $this->mwContentArt = $mwContentArt;
         }
 
-        $this->setMwDateArt(date('d/m/Y'));
 
         return $this;
     }
@@ -149,19 +157,20 @@ class MappingArticle extends MappingAbstract
      * @param string $mwDateArt
      *
      * @return self
+     * @throws Exception
      */
 
     public function setMwDateArt(string $mwDateArt): self
     {
-        if (!$this->dateTrait($mwDateArt, 'd/m/Y')) {
-            throw new Exception('Date incorrecte, format attendu : d/m/Y');
+        if (!$this->dateTrait($mwDateArt, 'Y-m-d')) {
+            throw new Exception('Date incorrecte, format attendu : Y/m/d');
         }
 
         // Crée un nouvel objet DateTime pour l'heure actuelle
         $now = new DateTime();
 
-        // Met à jour mwDateArt avec la date et l'heure actuelles, au format d/m/Y
-        $this->mwDateArt = 'modifié le : ' . $now->format('d/m/Y');
+        // Met à jour mwDateArt avec la date et l'heure actuelles, au format Y-m-d
+        $this->mwDateArt = 'modifié le : ' . $now->format('Y-m-d');
 
         return $this;
     }
@@ -201,4 +210,165 @@ class MappingArticle extends MappingAbstract
 
         return $this;
     }
+
+    /**
+     * Get the value of mwIdPicture
+     *
+     * @return int
+     */
+    public function getMwIdPicture(): int
+    {
+        return $this->mwIdPicture;
+    }
+
+    /**
+     * Set the value of mwIdPicture
+     *
+     * @param int $mwIdPicture
+     *
+     * @return self
+     */
+    public function setMwIdPicture(int $mwIdPicture): self
+    {
+        if ($mwIdPicture <= 0) {
+            throw new Exception("L'id de l'image doit être un entier positif");
+        }
+        $this->mwIdPicture = $mwIdPicture;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of mwTitlePicture
+     *
+     * @return string
+     */
+    public function getMwTitlePicture(): string
+    {
+        return $this->mwTitlePicture;
+    }
+
+    /**
+     * Set the value of mwTitlePicture
+     *
+     * @param string $mwTitlePicture
+     *
+     * @return self
+     */
+    public function setMwTitlePicture(string $mwTitlePicture): self
+    {
+        if(strlen($mwTitlePicture)>100){
+            throw new Exception("Titre trop long 100 caractères maximum");
+        }else {
+            $this->mwTitlePicture = $mwTitlePicture;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of mwUrlPicture
+     *
+     * @return string
+     */
+    public function getMwUrlPicture(): string
+    {
+        return $this->mwUrlPicture;
+    }
+
+    /**
+     * Set the value of mwAltPicture
+     *
+     * @param string $mwAltPicture
+     *
+     * @return self
+     */
+    public function setMwUrlPicture(string $mwUrlPicture): self
+    {
+        if(strlen($mwUrlPicture)>100){
+            throw new Exception("Titre trop long 100 caractères maximum");
+        }else {
+            $this->mwUrlPicture = $mwUrlPicture;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of mwTaillePicture
+     *
+     * @return int
+     */
+    public function getMwTaillePicture(): int
+    {
+        return $this->mwTaillePicture;
+    }
+
+    /**
+     * Set the value of mwTaillePicture
+     *
+     * @param int $mwTaillePicture
+     *
+     * @return self
+     */
+    public function setMwTaillePicture(int $mwTaillePicture): self
+    {
+        if ($mwTaillePicture <= 0) {
+            throw new Exception("La taille de l'image doit être un entier positif");
+        }
+        $this->mwTaillePicture = $mwTaillePicture;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of mwPositionPicture
+     *
+     * @return int
+     */
+    public function getMwPositionPicture(): int
+    {
+        return $this->mwPositionPicture;
+    }
+
+    /**
+     * Set the value of mwPositionPicture
+     *
+     * @param int $mwPositionPicture
+     *
+     * @return self
+     */
+    public function setMwPositionPicture(int $mwPositionPicture): self
+    {
+        if ($mwPositionPicture <= 0) {
+            throw new Exception("La position de l'image doit être un entier positif");
+        }
+        $this->mwPositionPicture = $mwPositionPicture;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMwArticleMwIdArticle(): int
+    {
+        return $this->mwArticleMwIdArticle;
+    }
+
+    /**
+     * @param int $mwArticleMwIdArticle
+     *
+     * @return self
+     */
+    public function setMwArticleMwIdArticle(int $mwArticleMwIdArticle): self
+    {
+        if ($mwArticleMwIdArticle <= 0) {
+            throw new Exception("L'id de l'article doit être un entier positif");
+        }
+        $this->mwArticleMwIdArticle = $mwArticleMwIdArticle;
+
+        return $this;
+    }
+
 }
