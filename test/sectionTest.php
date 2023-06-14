@@ -46,25 +46,34 @@ try{
     echo $e;
 }
 
-var_dump($test1);
+// var_dump($test1);
 
 
 
 $sectionTest = new ManagerSection($db);
 $sectionTestRequete = $sectionTest -> getAll();
+// var_dump($sectionTestRequete);
 
 foreach($sectionTestRequete as $item){
     echo $item -> getMwIdSect();
     echo $item -> getMwTitleSect();
-    $picture = $item -> getPicture();
-    $pic = explode("|||", $picture);
-    echo $pic[0];
-    ?>
-    <br>
-    <img src='<?= $pic[1]?>' width='200px'>
-    <?php
-    echo "<br>";
+
+    if(is_null($item->getPicture())){
+
+        echo "yapa photos";
+
+    }else{
+        $picture = $item -> getPicture();
+        $pic = explode("|||", $picture);
+        echo $pic[0];
+        ?>
+        <br>
+        <img src='<?= $pic[1]?>' width='200px'>
+        <?php
+        echo "<br>";
+    }
 }
 
-// var_dump($sectionTestRequete);
+$sectionInsert4 = $sectionTest-> insertSection("photo1", "https://cdn-s-www.lalsace.fr/images/ED82BE29-CBAC-40EC-B71C-285CD717A43C/NW_raw/la-voiture-noire-de-bugatti-modele-unique-photo-dr-1608828241.jpg", 1, 1, "après après", "petit text", 1);
 
+var_dump($sectionInsert4);
