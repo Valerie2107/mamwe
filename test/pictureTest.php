@@ -21,8 +21,8 @@ $test1 = new MappingPicture([
     "mwIdPicture" => 1,
     "mwTitlePicture" => "test",
     "mwUrlPicture" => "test",
-    "mwTaillePicture" => 1,
-    "mwPosotionPicture" => 1,
+    "mwSizePicture" => 1,
+    "mwPositionPicture" => 1,
     "mwArticleMwIdArticle" => 1
 ]);
 }catch(Exception $e ){

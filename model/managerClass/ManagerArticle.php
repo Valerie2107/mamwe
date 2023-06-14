@@ -49,4 +49,47 @@ class ManagerArticle  implements ManagerInterface
         }
         return $articles;
     }
+
+    public function getArticleById($db, $id){
+        $sql = "SELECT a.mw_id_article, a.mw_title_art, a.mw_content_art, a.mw_visible_art, a.mw_date_art, a.mw_section_mw_id_section, GROUP_CONCAT(s.mw_title_sect) as mw_title_sect, GROUP_CONCAT(s.mw_id_sect) as mw_id_sect FROM mw_article a JOIN mw_section s ON a.mw_section_mw_id_section = s.mw_id_sect WHERE a.mw_id_article = :id";
+        $prepare = $this->db->prepare($sql);
+        $prepare->bindValue(':id', $id, PDO::PARAM_INT);
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $articles = [];
+        foreach ($result as $row){
+            $articles[] = new MappingArticle($row);
+        }
+        return $articles;
+    }
+
+    public function getPictureByArticleId($db, $id){
+        $sql = "SELECT p.mw_id_picture, p.mw_url_picture, p.mw_article_mw_id_article, a.mw_id_article FROM mw_picture p JOIN mw_article a ON p.mw_article_mw_id_article = a.mw_id_article WHERE p.mw_article_mw_id_article = :id";
+        $prepare = $this->db->prepare($sql);
+        $prepare->bindValue(':id', $id, PDO::PARAM_INT);
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $pictures = [];
+        foreach ($result as $row){
+            $pictures[] = new MappingArticle($row);
+        }
+        return $pictures;
+    }
+
+    public function insert($article)
+    {
+        // requête sql + prepare + bindValue + execute + etc
+        $sql = "INSERT INTO mw_article (mw_title_art, mw_content_art, mw_visible_art, mw_section_mw_id_section) VALUES (:mw_title_art, :mw_content_art,  :mw_visible_art, :mw_section_mw_id_section)";
+        $prepare = $this->db->prepare($sql);
+        $prepare->bindValue(':mw_title_art', $article->getMwTitleArt(), PDO::PARAM_STR);
+        $prepare->bindValue(':mw_content_art', $article->getMwContentArt(), PDO::PARAM_STR);
+        $prepare->bindValue(':mw_visible_art', $article->getMwVisibleArt(), PDO::PARAM_INT);
+        $prepare->bindValue(':mw_section_mw_id_section', $article->getMwSectionMwIdSection(), PDO::PARAM_INT);
+        $prepare->execute();
+
+        $article->setMwIdArticle($this->db->lastInsertId());
+        return $article;
+
+    }
+
 }

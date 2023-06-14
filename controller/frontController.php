@@ -2,6 +2,7 @@
 
 // on récup le manager des section
 use model\managerClass\ManagerSection;
+use model\managerClass\ManagerArticle;
 
 // on stock l'object dans la variable
 $sectionManager = new ManagerSection($db); 
@@ -24,10 +25,11 @@ if(isset($_POST['login'],$_POST['pwd'])){
 }  
 
 if(isset($_SESSION['uniqueId'])&&$_SESSION['uniqueId']==session_id()){    
-    
+    require_once "../view/privateView/privateView.php";
     if(isset($_POST['insertArticle'])){
-        if( false /* verification des champs du formulaire ajout de sous section */ ){
+        if( false /* verification des champs du formulaire ajout de sous section */){
             // $insertSS = insertSS($db);
+
         }
     }    
 
