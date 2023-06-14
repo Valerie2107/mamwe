@@ -3,7 +3,6 @@
 namespace model\managerClass;
 
 use Exception;
-use model\abstractClass\MappingAbstract;
 use model\mappingClass\mappingSection;
 use model\interfaceClass\ManagerInterface;
 use PDO;
@@ -35,8 +34,12 @@ class ManagerSection implements ManagerInterface
     }
 
     public function getAll(){
-        // préparation de la requête
-        $sql = "SELECT * FROM mw_section";
+
+        $sql = "SELECT s.* , GROUP_CONCAT(p.mw_id_picture, '|||' , p.mw_url_picture SEPARATOR '---') AS picture 
+        FROM mw_section s
+        JOIN mw_picture p ON p.mw_id_picture = s.mw_picture_mw_id_picture
+        GROUP BY s.mw_id_sect";
+        
         $prepare = $this->db->prepare($sql);
         // exécution de la requête
         $prepare->execute();
@@ -46,12 +49,12 @@ class ManagerSection implements ManagerInterface
         $sections = [];
         // on parcourt le résultat
         foreach ($result as $row){
-        // on crée un objet Theuser que l'on ajoute dans le tableau
-        $sections[] = new MappingSection($row);           
+            // on crée un objet Theuser que l'on ajoute dans le tableau
+            $sections[] = new MappingSection($row);           
     
-        // on retourne le tableau
+            // on retourne le tableau
         }
-    return $sections;
+        return $sections;
     }  
 
 }

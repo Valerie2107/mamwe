@@ -12,7 +12,7 @@ class MappingSection extends MappingAbstract
     private string $mwContentSect;
     private string $mwVisible;
     private ?int $mwPictureMwIdPicture;
-
+    private string $picture;
 
     public function __construct(array $tab)
     {
@@ -144,6 +144,31 @@ class MappingSection extends MappingAbstract
     public function setMwPictureMwIdPicture(?int $mwPictureMwIdPicture): self
     {
         $this->mwPictureMwIdPicture = $mwPictureMwIdPicture;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of picture
+     *
+     * @return string
+     */
+    public function getPicture(): string
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set the value of picture
+     *
+     * @param string $picture
+     *
+     * @return self
+     */
+    public function setPicture(string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }
