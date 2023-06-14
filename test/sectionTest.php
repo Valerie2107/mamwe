@@ -29,22 +29,24 @@ try {
     echo "<br>";
 }
 
-// $test1 = new MappingSection([
-//     "mwIdSect" => 1,
-//     "mwTitleSect" => "test",
-//     "mwContentSect" => "test",
-//     "mwVisible" => "test",
-//     "mwPictureMwIdPicture" => 1
-// ]);
+$test1 = new MappingSection([
+    "mwIdSect" => 1,
+    "mwTitleSect" => "test",
+    "mwContentSect" => "test",
+    "mwVisible" => "test",
+    "mwPictureMwIdPicture" => 1
+]);
 
-// try{
-//     $test2 = new MappingSection([
-//         "mwTitleSect" => "pipi",
-//     ]);
+try{
+    $test2 = new MappingSection([
+        "mwTitleSect" => "pipi",
+    ]);
 
-// }catch (Exception $e){
-//     echo $e;
-// }
+}catch (Exception $e){
+    echo $e;
+}
+
+var_dump($test1);
 
 
 
