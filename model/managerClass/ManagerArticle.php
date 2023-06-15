@@ -1,10 +1,11 @@
 <?php
 
 namespace model\managerClass;
-use PDO;
+
 use model\interfaceClass\ManagerInterface;
-use Exception;
 use model\mappingClass\MappingArticle;
+use Exception;
+use PDO;
 
 // use ManagerInterface:
 

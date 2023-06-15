@@ -1,5 +1,6 @@
 <?php
 
+use model\managerClass\ManagerPatient;
 use model\mappingClass\MappingPatient;
 
 
@@ -15,6 +16,19 @@ spl_autoload_register(function ($class) {
     $class = str_replace('\\', '/', $class);
     require '../' . $class . '.php';
 });
+
+
+try {
+    
+    $db = new PDO(DB_TYPE.':host='.DB_HOST.';port='.DB_PORT.';dbname='.DB_NAME.';charset='.DB_CHARSET,DB_LOGIN,DB_PWD);
+    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    
+}catch(Exception $e){
+    
+    //die($e->getMessage());
+    echo $e->getMessage();
+    echo "<br>";
+}
 
 try{
 $test1 = new MappingPatient([
@@ -41,5 +55,25 @@ try{
 
 echo "<pre>";
 var_dump($test1,$test2);
-echo "</pre>";
+echo "<hr></pre>";
 
+$managerPatient = new ManagerPatient($db);
+
+$getAll = $managerPatient -> getAll();
+var_dump($getAll);
+
+echo "<hr>";
+
+$patient1 = $managerPatient -> getOneById(1);
+var_dump($patient1);
+
+echo "<hr>";
+
+$insertPatient = $managerPatient -> insertPatient("jean", "deaux", "1983-10-20", "jean@mail.com", 48811223);
+var_dump($insertPatient);
+
+// $delete = $managerPatient -> deletePatient(2);
+// var_dump($delete);
+
+// $update = $managerPatient -> updatePatient("momo", "lolo", "1983-06-10", "momo@mail.com", 123456, 1);
+// var_dump($update);
