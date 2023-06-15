@@ -1,5 +1,6 @@
 <?php
 
+use model\managerClass\ManagerPicture;
 use model\mappingClass\MappingPicture;
 
 
@@ -15,6 +16,18 @@ spl_autoload_register(function ($class) {
     $class = str_replace('\\', '/', $class);
     require '../' . $class . '.php';
 });
+
+try {
+    
+    $db = new PDO(DB_TYPE.':host='.DB_HOST.';port='.DB_PORT.';dbname='.DB_NAME.';charset='.DB_CHARSET,DB_LOGIN,DB_PWD);
+    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+    
+}catch(Exception $e){
+    
+    //die($e->getMessage());
+    echo $e->getMessage();
+    echo "<br>";
+}
 
 try{
 $test1 = new MappingPicture([
@@ -40,6 +53,18 @@ try{
 }
 
 echo "<pre>";
-var_dump($test1,$test2);
+// var_dump($test1,$test2);
 echo "</pre>";
 
+$testManagerPic = new ManagerPicture($db);
+
+var_dump($testManagerPic);
+
+$getAllPic = $testManagerPic -> getAll();
+$getPicById = $testManagerPic -> getOneById(2);
+// $insertPic = $testManagerPic -> insertPicture("insert test", "vérite", 1, 1);
+// $deletePic = $testManagerPic -> deletePicture(87);
+$updatePic = $testManagerPic -> updatePicture("test update", "on a essayé", 1, 1, 128);
+
+
+var_dump($updatePic);

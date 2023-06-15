@@ -78,7 +78,7 @@ class MappingPicture extends MappingAbstract{
         $this->mwPositionPicture; 
     }
 
-    public function setMwPositionPicture(int $mwPositionPicture):self
+    public function setMwPositionPicture(?int $mwPositionPicture):self
     {
         $this->mwPositionPicture = $mwPositionPicture;
 
@@ -87,15 +87,14 @@ class MappingPicture extends MappingAbstract{
 
     //  get-set mwArticleMwIdArticle
 
-    public function getMwArticleMwIdArticle(){
-
+    public function getMwArticleMwIdArticle() 
+    {
         $this->mwArticleMwIdArticle;
     }
 
-    public function setMwArticleMwIdArticle(int $mwArticleMwIdArticle):self
+    public function setMwArticleMwIdArticle(?int $mwArticleMwIdArticle):self
     {
         $this->mwArticleMwIdArticle = $mwArticleMwIdArticle;
-
         return $this;
     }
 
