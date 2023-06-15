@@ -279,7 +279,7 @@ class MappingArticle extends MappingAbstract
     /**
      * Set the value of mwAltPicture
      *
-     * @param string $mwAltPicture
+     * @param string $mwUrlPicture
      *
      * @return self
      */
