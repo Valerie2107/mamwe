@@ -71,14 +71,13 @@ foreach($sectionTestRequete as $item){
         ?>
         <img src="<?= $pic[1] ?>" width="300px"><br>
         <hr>
-        <?php
-                
+        <?php  
 
     }
 }
 
 // $sectionInsert4 = $sectionTest-> insertSection("photo1", "https://cdn-s-www.lalsace.fr/images/ED82BE29-CBAC-40EC-B71C-285CD717A43C/NW_raw/la-voiture-noire-de-bugatti-modele-unique-photo-dr-1608828241.jpg", 1, 1, "après après", "petit text", 1);
-$sectionUpdate = $sectionTest -> updateSection("poupou", "https://leblogdemonsieur.com/wp-content/uploads/2022/09/picture-occasion-voiture-peugeot-choisir.jpg", 1, 1, 2, 
+$sectionUpdate = $sectionTest -> updateSectionWithPic("poupou", "https://leblogdemonsieur.com/wp-content/uploads/2022/09/picture-occasion-voiture-peugeot-choisir.jpg", 1, 1, 2, 
 "poupou", "le poupou des doudous", 1, 1);
 
 

@@ -19,6 +19,7 @@ class ManagerSection implements ManagerInterface
         $this -> db = $db;
     }
 
+
     public function getOneById($id){
         $sql = "SELECT * FROM mw_section WHERE mw_id_sect = :id";
         $prepare = $this -> db -> prepare($sql);
@@ -32,6 +33,7 @@ class ManagerSection implements ManagerInterface
         }
 
     }
+
 
     public function getAll(){
 
@@ -57,7 +59,8 @@ class ManagerSection implements ManagerInterface
         return $sections;
     }  
 
-    public function insertSection(string $titlePic, string $urlPic, int $sizePic, int $positionPic, string $titleSect, string $contentSect, int $visibleSect){
+
+    public function insertSectionWithPic(string $titlePic, string $urlPic, int $sizePic, int $positionPic, string $titleSect, string $contentSect, int $visibleSect){
 
         $this->db->beginTransaction();
         
@@ -92,6 +95,7 @@ class ManagerSection implements ManagerInterface
         }
     }
 
+
     public function deleteSection(int $id){
         $sql = "DELETE FROM mw_section WHERE mw_id_sect = :id";
         $prepare = $this -> db -> prepare($sql);
@@ -106,7 +110,8 @@ class ManagerSection implements ManagerInterface
         
     }
 
-    public function updateSection(string $titlePic, string $urlPic, int $sizePic, int $positionPic, int $idPic, 
+
+    public function updateSectionWithPic(string $titlePic, string $urlPic, int $sizePic, int $positionPic, int $idPic, 
         string $titleSect, string $contentSect, int $visibleSect, int $idSect){ 
 
         $this->db->beginTransaction();
@@ -143,9 +148,7 @@ class ManagerSection implements ManagerInterface
         }catch(Exception $e){
             $this->db->rollBack();
             $e -> getMessage();
-        }
-
-       
+        } 
 
     }
 
