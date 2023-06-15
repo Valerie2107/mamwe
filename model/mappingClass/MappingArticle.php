@@ -285,7 +285,7 @@ class MappingArticle extends MappingAbstract
      */
     public function setMwUrlPicture(string $mwUrlPicture): self
     {
-        if(strlen($mwUrlPicture)>100){
+        if(strlen($mwUrlPicture)>1000){
             throw new Exception("Titre trop long 100 caractères maximum");
         }else {
             $this->mwUrlPicture = $mwUrlPicture;
@@ -369,6 +369,14 @@ class MappingArticle extends MappingAbstract
         $this->mwArticleMwIdArticle = $mwArticleMwIdArticle;
 
         return $this;
+    }
+
+    public function getPictures() {
+        return $this->pictures;
+    }
+
+    public function setPicture($picture) {
+        $this->pictures[] = $picture;
     }
 
 }
