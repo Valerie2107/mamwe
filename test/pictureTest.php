@@ -2,6 +2,7 @@
 
 use model\managerClass\ManagerPicture;
 use model\mappingClass\MappingPicture;
+use model\managerClass\ManagerArticle;
 
 
 // require de la config:
@@ -66,5 +67,11 @@ $getPicById = $testManagerPic -> getOneById(2);
 // $deletePic = $testManagerPic -> deletePicture(87);
 $updatePic = $testManagerPic -> updatePicture("test update", "on a essayé", 1, 1, 128);
 
+$articlePic = new ManagerArticle($db);
+$art1 = $articlePic -> getAllArticlesWithPictures($db);
 
-var_dump($updatePic);
+foreach($art1 as $art){
+    echo $art -> getMwTitleArt();
+}
+
+var_dump($updatePic, $articlePic, $art1);
