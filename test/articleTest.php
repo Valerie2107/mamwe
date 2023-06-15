@@ -17,25 +17,6 @@ spl_autoload_register(function ($class) {
     require '../' . $class . '.php';
 });
 
-
-
-$test1 = new MappingArticle([
-    "mwIdArticle" => 1,
-    "mwTitleArt" => "test",
-    "mwContentArt" => "test",
-    "mwDateArt" => "1995-10-10",
-    "mwVisibleArt" => "1",
-    "mwSectionMwIdSection" => 1
-]);
-
-try{
-    $test2 = new MappingArticle([
-        "mwTitleArt" => "test",
-    ]);
-}catch (Exception $e){
-    echo $e;
-}
-
 echo "<pre>";
 //var_dump($test1,$test2);
 echo "</pre>";
@@ -91,42 +72,55 @@ echo "</pre>";
 ?>
 
 <?php
-
 try {
     $db = new PDO(DB_TYPE.':host='.DB_HOST.';port='.DB_PORT.';dbname='.DB_NAME.';charset='.DB_CHARSET,DB_LOGIN,DB_PWD);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $managerArt = new ManagerArticle($db);
+    $articles = $managerArt->getAllArticlesWithPictures($db);
 
-    $id = 4; // l'ID de l'article que vous souhaitez tester.
-    $result = $managerArt->getArticleById($db, $id);
+    foreach($articles as $item) {
+        echo "article id : " . $item['id'] . "<br>";
+        echo $item['title'] . "<br>";
+        echo $item['content'] . "<br>";
 
-    // Afficher les informations de l'article.
-    foreach ($result as $article) {
-        echo 'ID: ' . $article->getMwIdArticle() . PHP_EOL;
-        echo 'Titre: ' . $article->getMwTitleArt() . PHP_EOL;
-        echo 'Contenu: ' . $article->getMwContentArt() . PHP_EOL;
-        echo 'Date: ' . $article->getMwDateArt() . PHP_EOL;
-        echo 'Visible: ' . $article->getMwVisibleArt() . PHP_EOL;
-        echo 'Section: ' . $article->getMwSectionMwIdSection() . PHP_EOL;
+        if(empty($item['pictures'])){
+            echo "yapa photos";
+        } else {
+            foreach($item['pictures'] as $picture) {
+                echo "pic id : " . $picture['id'];
+                ?>
+                <br>
+                <img src='<?= $picture['url']?>' width='200px'>
+                <?php
+                echo "<br>";
+            }
+        }
+    }
+}
+catch (PDOException $e) {
+    echo 'Erreur de connexion : ' . $e->getMessage();
+}
 
+/*
+    foreach ($articles as $article) {
+        echo 'ID: ' . $article['id'] . '<br>';
+        echo 'Title: ' . $article['title'] . '<br>';
+        echo 'Content: ' . $article['content'] . '<br>';
+        echo 'Date: ' . $article['date'] . '<br>';
+        echo 'Visible: ' . $article['visible'] . '<br>';
+        echo 'Section: ' . $article['section'] . '<br>';
+        echo 'Pictures:<br>';
+        foreach ($article['pictures'] as $picture) {
+            echo '<img src="' . $picture['url'] . '" alt="Picture ID: ' . $picture['id'] . '" width="200" height="200"><br>';
+            var_dump($picture);
+        }
+        echo '<hr>';  // ligne de séparation pour chaque article
     }
 } catch (PDOException $e) {
     echo 'Erreur de connexion : ' . $e->getMessage();
 }
-
-    $pictures = $managerArt->getPictureByArticleId($db, $id);
-
-    // Afficher les informations des images.
-    foreach ($pictures as $picture) {
-        echo 'ID: ' . $picture->getMwIdPicture() . PHP_EOL;
-        echo $picture->getMwUrlPicture();
-        echo 'ID de l\'article: ' . $picture->getMwIdArticle() . PHP_EOL;
-        ?>
-        <img src="<?= $picture->getMwUrlPicture() ?>" alt="image" width="200" height="200">
-<?php
-    }
+*/
 ?>
-
 </body>
 </html>

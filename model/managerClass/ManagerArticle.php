@@ -49,7 +49,7 @@ class ManagerArticle  implements ManagerInterface
         }
         return $articles;
     }
-
+/*
     public function getArticleById($db, $id){
         $sql = "SELECT a.mw_id_article, a.mw_title_art, a.mw_content_art, a.mw_visible_art, a.mw_date_art, a.mw_section_mw_id_section, GROUP_CONCAT(s.mw_title_sect) as mw_title_sect, GROUP_CONCAT(s.mw_id_sect) as mw_id_sect FROM mw_article a JOIN mw_section s ON a.mw_section_mw_id_section = s.mw_id_sect WHERE a.mw_id_article = :id";
         $prepare = $this->db->prepare($sql);
@@ -74,6 +74,46 @@ class ManagerArticle  implements ManagerInterface
             $pictures[] = new MappingArticle($row);
         }
         return $pictures;
+    }
+*/
+    public function getAllArticlesWithPictures($db) {
+        $sql = "SELECT a.*, GROUP_CONCAT(p.mw_id_picture, '|||' , p.mw_url_picture SEPARATOR '---') AS picture
+        FROM mw_article a 
+        LEFT JOIN mw_picture p ON p.mw_article_mw_id_article = a.mw_id_article
+        GROUP BY a.mw_id_article";
+        $prepare = $db->prepare($sql);
+        $prepare->execute();
+        $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
+        $articles = [];
+        foreach ($result as $row) {
+            $id = $row['mw_id_article'];
+            $articles[$id] = [
+                'id' => $id,
+                'title' => $row['mw_title_art'],
+                'content' => $row['mw_content_art'],
+                'date' => $row['mw_date_art'],
+                'visible' => $row['mw_visible_art'],
+                'section' => $row['mw_section_mw_id_section'],
+                'pictures' => []
+            ];
+
+            if($row['picture']) {
+                // Récupérer les images
+                $pictures = explode('---', $row['picture']);
+
+                // Ajouter les images dans le tableau
+                foreach ($pictures as $picture) {
+                    if(strpos($picture, '|||') !== false) {
+                        list($picture_id, $picture_url) = explode('|||', $picture);
+                        $articles[$id]['pictures'][] = [
+                            'id' => $picture_id,
+                            'url' => $picture_url
+                        ];
+                    }
+                }
+            }
+        }
+        return $articles;
     }
 
     public function insert($article)
