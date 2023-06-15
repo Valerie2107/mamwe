@@ -57,9 +57,14 @@ echo "<pre>";
 echo "</pre>";
 
 $testManagerPic = new ManagerPicture($db);
+
+var_dump($testManagerPic);
+
 $getAllPic = $testManagerPic -> getAll();
 $getPicById = $testManagerPic -> getOneById(2);
-$insertPic = $testManagerPic -> insertPicture("photo4", "prout", 1, 1);
+// $insertPic = $testManagerPic -> insertPicture("insert test", "vérite", 1, 1);
+// $deletePic = $testManagerPic -> deletePicture(87);
+$updatePic = $testManagerPic -> updatePicture("test update", "on a essayé", 1, 1, 128);
 
 
-var_dump($insertPic);
+var_dump($updatePic);

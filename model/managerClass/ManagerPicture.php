@@ -38,52 +38,73 @@ class ManagerPicture implements ManagerInterface
 
 
     public function getAll(){
-
         $sql = "SELECT * FROM mw_picture";
-        
         $prepare = $this->db->prepare($sql);
         $prepare->execute();
         $result = $prepare->fetchAll();
         $sections = [];
         foreach ($result as $row){
             $sections[] = new MappingPicture($row);           
-    
+
         }
         return $sections;
     } 
 
 
-    public function insertPicture(string $titlePic, string $urlPic, int $sizePic, int $positionPic, int $articleId = null){
-        $sqlPic = "INSERT INTO `mw_picture`(`mw_title_picture`, `mw_url_picture`, `mw_size_picture`, `mw_position_picture`, `mw_article_mw_id_article`) 
-                    VALUES (:titlePic, :urlPic, :sizePic, :positionPic, :articleId)";      
-        $preparePic = $this->db->prepare($sqlPic);
-        $preparePic->bindParam(':titlePic', $titlePic, PDO::PARAM_STR);
-        $preparePic->bindParam(':urlPic', $urlPic, PDO::PARAM_STR);
-        $preparePic->bindParam(':sizePic', $sizePic, PDO::PARAM_INT);
-        $preparePic->bindParam(':positionPic', $positionPic, PDO::PARAM_INT);
-        $preparePic->bindParam(':articleId', $articleId, PDO::PARAM_INT);
+    public function insertPicture(string $title, string $url, int $size, int $position, int $articleId = null){
+        $sql = "INSERT INTO `mw_picture`(`mw_title_picture`, `mw_url_picture`, `mw_size_picture`, `mw_position_picture`, `mw_article_mw_id_article`) 
+                    VALUES (:title, :url, :size, :position, :articleId)";      
+        $prepare = $this->db->prepare($sql);
+        $prepare->bindParam(':title', $title, PDO::PARAM_STR);
+        $prepare->bindParam(':url', $url, PDO::PARAM_STR);
+        $prepare->bindParam(':size', $size, PDO::PARAM_INT);
+        $prepare->bindParam(':position', $position, PDO::PARAM_INT);
+        $prepare->bindParam(':articleId', $articleId, PDO::PARAM_INT);
 
         try {
-            $result = $preparePic->execute(); 
+            $prepare->execute(); 
+            return true;
         }catch(Exception $e){
             $e -> getMessage();
-            die;
+
         }
 
-        if($result){
+    }
+
+
+    public function updatePicture(string $title, string $url, int $size, int $position, int $id, $articleId = null){
+        $sql = "UPDATE `mw_picture` 
+                SET `mw_title_picture`= :title, `mw_url_picture`= :url, `mw_size_picture`= :size, `mw_position_picture`= :position, `mw_article_mw_id_article`= :articleId 
+                WHERE `mw_id_picture`=:id";      
+        $prepare = $this->db->prepare($sql);
+        $prepare->bindParam(':title', $title,PDO::PARAM_STR);
+        $prepare->bindParam(':url', $url,PDO::PARAM_STR);
+        $prepare->bindParam(':size', $size, PDO::PARAM_INT);
+        $prepare->bindParam(':position',$position, PDO::PARAM_INT);
+        $prepare->bindParam(':articleId',$articleId, PDO::PARAM_INT);
+        $prepare->bindParam(':id',$id, PDO::PARAM_INT);
+
+        try {
+            $prepare->execute();
             return true;
-        }else{
-            "y'a des problèmes";
+        }catch(Exception $e){
+            $e -> getMessage();
         }
+        
     }
 
 
-    public function updatePicture(){
+    public function deletePicture(int $id){
+        $sql = "DELETE FROM `mw_picture` WHERE `mw_id_picture` = :id";
+        $prepare = $this -> db -> prepare($sql);
+        $prepare->bindParam(':id', $id, PDO::PARAM_INT);
 
-    }
-
-
-    public function deletePicture(){
+        try{
+            $prepare -> execute();    
+            return true;   
+        }catch(Exception $e){
+            $e->getMessage();
+        }
 
     }
 
