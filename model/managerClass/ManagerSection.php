@@ -19,6 +19,7 @@ class ManagerSection implements ManagerInterface
         $this -> db = $db;
     }
 
+
     public function getOneById($id){
         $sql = "SELECT * FROM mw_section WHERE mw_id_sect = :id";
         $prepare = $this -> db -> prepare($sql);
@@ -33,9 +34,10 @@ class ManagerSection implements ManagerInterface
 
     }
 
+
     public function getAll(){
 
-        $sql = "SELECT s.* , GROUP_CONCAT(p.mw_id_picture, '|||' , p.mw_url_picture SEPARATOR '---') AS picture 
+        $sql = "SELECT s.* , GROUP_CONCAT(p.mw_id_picture, '|||' , p.mw_url_picture , '|||', p.mw_title_picture SEPARATOR '---') AS picture 
         FROM mw_section s
         LEFT JOIN mw_picture p ON p.mw_id_picture = s.mw_picture_mw_id_picture
         GROUP BY s.mw_id_sect";
@@ -57,7 +59,8 @@ class ManagerSection implements ManagerInterface
         return $sections;
     }  
 
-    public function insertSection(string $titlePic, string $urlPic, int $sizePic, int $positionPic, string $titleSect, string $contentSect, int $visibleSect){
+
+    public function insertSectionWithPic(string $titlePic, string $urlPic, int $sizePic, int $positionPic, string $titleSect, string $contentSect, int $visibleSect){
 
         $this->db->beginTransaction();
         
@@ -92,12 +95,62 @@ class ManagerSection implements ManagerInterface
         }
     }
 
-    public function update(){ 
+
+    public function deleteSection(int $id){
+        $sql = "DELETE FROM mw_section WHERE mw_id_sect = :id";
+        $prepare = $this -> db -> prepare($sql);
+        $prepare->bindParam(':id', $id,PDO::PARAM_INT);
+
+        try{
+            $prepare -> execute();    
+            return true;   
+        }catch(Exception $e){
+            $e->getMessage();
+        }
+        
+    }
+
+
+    public function updateSectionWithPic(string $titlePic, string $urlPic, int $sizePic, int $positionPic, int $idPic, 
+        string $titleSect, string $contentSect, int $visibleSect, int $idSect){ 
+
+        $this->db->beginTransaction();
+        
+        $sqlPic = "UPDATE `mw_picture` 
+                    SET `mw_title_picture`= :titlePic ,`mw_url_picture`= :urlPic, `mw_size_picture`= :sizePic, `mw_position_picture`= :positionPic 
+                    WHERE `mw_id_picture`= :idPic";      
+        $preparePic = $this->db->prepare($sqlPic);
+        $preparePic->bindParam(':titlePic', $titlePic,PDO::PARAM_STR);
+        $preparePic->bindParam(':urlPic', $urlPic,PDO::PARAM_STR);
+        $preparePic->bindParam(':sizePic', $sizePic, PDO::PARAM_INT);
+        $preparePic->bindParam(':positionPic',$positionPic, PDO::PARAM_INT);
+        $preparePic->bindParam(':idPic',$idPic, PDO::PARAM_INT);
+
+        $preparePic->execute();
+
+
+        $sqlSect = "UPDATE `mw_section` 
+                    SET `mw_title_sect`= :titleSect, `mw_content_sect`= :contentSect, `mw_visible_sect`= :visibleSect  ,`mw_picture_mw_id_picture`= :idPic 
+                    WHERE `mw_id_sect` = :idSect";      
+        $prepareSect = $this->db->prepare($sqlSect);
+        $prepareSect->bindParam(':titleSect', $titleSect,PDO::PARAM_STR);
+        $prepareSect->bindParam(':contentSect', $contentSect, PDO::PARAM_STR);
+        $prepareSect->bindParam(':visibleSect', $visibleSect, PDO::PARAM_INT);
+        $prepareSect->bindParam(':idPic', $idPic, PDO::PARAM_INT);
+        $prepareSect->bindParam(':idSect', $idSect, PDO::PARAM_INT);
+
+        
+        $prepareSect->execute();
+       
+        try{
+            $this->db->commit();
+            return true;
+        }catch(Exception $e){
+            $this->db->rollBack();
+            $e -> getMessage();
+        } 
 
     }
 
-    public function delete(){
-
-    }
 
 }
