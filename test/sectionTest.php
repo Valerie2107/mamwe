@@ -55,7 +55,7 @@ $sectionTestRequete = $sectionTest -> getAll();
 // var_dump($sectionTestRequete);
 
 foreach($sectionTestRequete as $item){
-    echo "article id : " . $item -> getMwIdSect() . "<br>";
+    echo "article id : " . $item['id'];
     echo "article titre : " . $item -> getMwTitleSect(). "<br>";
     echo "article content : " . $item -> getMwContentSect(). "<br>";
 
