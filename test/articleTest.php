@@ -73,30 +73,31 @@ echo "</pre>";
 
 <?php
 try {
-    $db = new PDO(DB_TYPE.':host='.DB_HOST.';port='.DB_PORT.';dbname='.DB_NAME.';charset='.DB_CHARSET,DB_LOGIN,DB_PWD);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db = new PDO(DB_TYPE.':host='.DB_HOST.';port='.DB_PORT.';dbname='.DB_NAME.';charset='.DB_CHARSET,DB_LOGIN,DB_PWD);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $managerArt = new ManagerArticle($db);
-    $articles = $managerArt->getAllArticlesWithPictures($db);
+$managerArt = new ManagerArticle($db);
 
-    foreach($articles as $item) {
-        echo "article id : " . $item['id'] . "<br>";
-        echo $item['title'] . "<br>";
-        echo $item['content'] . "<br>";
+$articles = $managerArt->getAllArticlesWithPictures($db);
 
-        if(empty($item['pictures'])){
-            echo "yapa photos";
-        } else {
-            foreach($item['pictures'] as $picture) {
-                echo "pic id : " . $picture['id'];
-                ?>
-                <br>
-                <img src='<?= $picture['url']?>' width='200px'>
-                <?php
-                echo "<br>";
-            }
-        }
-    }
+foreach($articles as $article) {
+echo "article id : " . $article->getMwIdArticle() . "<br>";
+echo $article->getMwTitleArt() . "<br>";
+echo $article->getMwContentArt() . "<br>";
+
+if(empty($article->pictures)){
+    echo "yapa photos";
+}else{
+foreach($article->pictures as $picture) {
+echo "pic id : " . $picture->getMwIdPicture();
+?>
+<br>
+<img src='<?= $picture->getMwUrlPicture()?>' width='200px'>
+<?php
+echo "<br>";
+}
+}
+}
 }
 catch (PDOException $e) {
     echo 'Erreur de connexion : ' . $e->getMessage();
