@@ -3,8 +3,6 @@
 namespace model\managerClass;
 use PDO;
 use model\interfaceClass\ManagerInterface;
-use model\modelClass\Article;
-use model\abstractClass\MappingAbstract;
 use Exception;
 use model\mappingClass\MappingArticle;
 
@@ -21,7 +19,7 @@ class ManagerArticle  implements ManagerInterface
 
     public function getOneById(int $id)
     {
-        // requête sql + prepare + bindValue + execute + jointure table mw_picture ¨SOOON"+ etc
+        // requête sql + prepare + bindValue + execute + etc
         $prepare = $this->db->prepare("SELECT * FROM mw_article WHERE mw_id_article = :id");
         $prepare->bindValue(':id', $id, PDO::PARAM_INT);
 
@@ -126,6 +124,32 @@ class ManagerArticle  implements ManagerInterface
         $prepare->bindValue(':mw_content_art', $article->getMwContentArt(), PDO::PARAM_STR);
         $prepare->bindValue(':mw_visible_art', $article->getMwVisibleArt(), PDO::PARAM_INT);
         $prepare->bindValue(':mw_section_mw_id_section', $article->getMwSectionMwIdSection(), PDO::PARAM_INT);
+        $prepare->execute();
+
+        $article->setMwIdArticle($this->db->lastInsertId());
+        return $article;
+
+    }
+
+    public function deleteEx($article, $id){
+        $sql = "DELETE FROM mw_article WHERE mw_id_article = :id";
+        $prepare = $this->db->prepare($sql);
+        $prepare->bindValue(':id', $id, PDO::PARAM_INT);
+        $prepare->execute();
+
+        $article->setMwIdArticle($this->db->lastInsertId());
+        return $article;
+    }
+
+
+    public function updateEx($article, $id){
+        $sql = "UPDATE mw_article SET mw_title_art = :mw_title_art, mw_content_art = :mw_content_art, mw_visible_art = :mw_visible_art, mw_section_mw_id_section = :mw_section_mw_id_section WHERE mw_id_article = :id";
+        $prepare = $this->db->prepare($sql);
+        $prepare->bindValue(':mw_title_art', $article->getMwTitleArt(), PDO::PARAM_STR);
+        $prepare->bindValue(':mw_content_art', $article->getMwContentArt(), PDO::PARAM_STR);
+        $prepare->bindValue(':mw_visible_art', $article->getMwVisibleArt(), PDO::PARAM_INT);
+        $prepare->bindValue(':mw_section_mw_id_section', $article->getMwSectionMwIdSection(), PDO::PARAM_INT);
+        $prepare->bindValue(':id', $article->getMwIdArticle(), PDO::PARAM_INT);
         $prepare->execute();
 
         $article->setMwIdArticle($this->db->lastInsertId());

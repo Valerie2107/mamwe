@@ -286,7 +286,7 @@ class MappingArticle extends MappingAbstract
     public function setMwUrlPicture(string $mwUrlPicture): self
     {
         if(strlen($mwUrlPicture)>1000){
-            throw new Exception("Titre trop long 100 caractères maximum");
+            throw new Exception("Titre trop long 1000 caractères maximum");
         }else {
             $this->mwUrlPicture = $mwUrlPicture;
         }

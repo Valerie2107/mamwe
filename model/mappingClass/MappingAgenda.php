@@ -28,12 +28,12 @@ class MappingAgenda extends MappingAbstract{
     }
 
     //  get-set mwDateAgenda
-    public function getmwDateAgenda(){
+    public function getMwDateAgenda(){
 
         $this->mwDateAgenda;
     }
 
-    public function setmwDateAgenda(string $mwDateAgenda):self
+    public function setMwDateAgenda(string $mwDateAgenda):self
     {   
         $this->mwDateAgenda = $mwDateAgenda;
 
