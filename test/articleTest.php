@@ -18,55 +18,36 @@ spl_autoload_register(function ($class) {
 });
 
 try {
-$db = new PDO(DB_TYPE.':host='.DB_HOST.';port='.DB_PORT.';dbname='.DB_NAME.';charset='.DB_CHARSET,DB_LOGIN,DB_PWD);
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $db = new PDO(DB_TYPE.':host='.DB_HOST.';port='.DB_PORT.';dbname='.DB_NAME.';charset='.DB_CHARSET,DB_LOGIN,DB_PWD);
+    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
 $managerArt = new ManagerArticle($db);
-
 $articles = $managerArt->getAllArticlesWithPictures($db);
 
-foreach($articles as $article) {
-echo "article id : " . $article->getMwIdArticle() . "<br>";
-echo $article->getMwTitleArt() . "<br>";
-echo $article->getMwContentArt() . "<br>";
+foreach($articles as $item) {
+    echo "article id : " . $item->getMwIdArticle() . "<br>";
+    echo $item->getMwTitleArt() . "<br>";
+    echo $item->getMwContentArt() . "<br>";
 
-if(empty($article->pictures)){
-    echo "yapa photos";
+if(is_null($item->getPicture())){
+
+    echo "yapa photos <br>";
+
 }else{
-foreach($article->pictures as $picture) {
-echo "pic id : " . $picture->getMwIdPicture();
-?>
-<br>
-<img src='<?= $picture->getMwUrlPicture()?>' width='200px'>
-<?php
-echo "<br>";
+    $picture = $item -> getPicture();
+    $pic = explode("|||", $picture);
+    echo "photo id : " . $pic[0] . "<br>";
+    ?>
+    <img src="<?= $pic[1] ?>" width="300px"><br>
+    <hr>
+    <?php
 }
 }
-}
-}
-catch (PDOException $e) {
-    echo 'Erreur de connexion : ' . $e->getMessage();
-}
+}catch(Exception $e){
 
-/*
-    foreach ($articles as $article) {
-        echo 'ID: ' . $article['id'] . '<br>';
-        echo 'Title: ' . $article['title'] . '<br>';
-        echo 'Content: ' . $article['content'] . '<br>';
-        echo 'Date: ' . $article['date'] . '<br>';
-        echo 'Visible: ' . $article['visible'] . '<br>';
-        echo 'Section: ' . $article['section'] . '<br>';
-        echo 'Pictures:<br>';
-        foreach ($article['pictures'] as $picture) {
-            echo '<img src="' . $picture['url'] . '" alt="Picture ID: ' . $picture['id'] . '" width="200" height="200"><br>';
-            var_dump($picture);
-        }
-        echo '<hr>';  // ligne de séparation pour chaque article
-    }
-} catch (PDOException $e) {
-    echo 'Erreur de connexion : ' . $e->getMessage();
+    //die($e->getMessage());
+    echo $e->getMessage();
+    echo "<br>";
 }
-*/
 ?>
-</body>
-</html>
