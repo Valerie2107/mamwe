@@ -48,14 +48,14 @@ class ManagerUser implements ManagerInterface
         }        
     }
     
-    public function updateUser(int $id, string $login, string $mail, string $pwd){
+    public function updateUser(MappingUser $data){
         $sql = "UPDATE `mw_user` SET `mw_login_user`= :login, `mw_mail_user`= :mail, `mw_pwd_user`= :pwd 
                 WHERE `mw_id_user`= :id";
         $prepare = $this -> db -> prepare($sql);
-        $prepare->bindParam(':login', $login, PDO::PARAM_STR);
-        $prepare->bindParam(':mail', $mail, PDO::PARAM_STR);
-        $prepare->bindParam(':pwd', $pwd, PDO::PARAM_STR);
-        $prepare->bindParam(':id', $id, PDO::PARAM_INT);
+        $prepare->bindValue(':login', $data->getMwLoginUser(), PDO::PARAM_STR);
+        $prepare->bindValue(':mail', $data->getMwMailUser(), PDO::PARAM_STR);
+        $prepare->bindValue(':pwd', $this -> hashPwd($data -> getMwPwdUser()) , PDO::PARAM_STR);
+        $prepare->bindValue(':id', $data -> getMwIdUser(), PDO::PARAM_INT);
         
         try {
             $prepare -> execute();
