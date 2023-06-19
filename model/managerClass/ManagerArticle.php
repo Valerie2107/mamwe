@@ -84,36 +84,10 @@ class ManagerArticle  implements ManagerInterface
     $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
     $articles = [];
     foreach ($result as $row) {
-        $article = new MappingArticle([
-            'mwIdArticle' => $row['mw_id_article'],
-            'mwTitleArt' => $row['mw_title_art'],
-            'mwContentArt' => $row['mw_content_art'],
-            'mwDateArt' => $row['mw_date_art'],
-            'mwVisibleArt' => $row['mw_visible_art'],
-            'mwSectionMwIdSection' => $row['mw_section_mw_id_section']
-        ]);
-
-        if($row['picture']) {
-            // Récupérer les images
-            $pictures = explode('---', $row['picture']);
-
-            // Ajouter les images dans le tableau
-            foreach ($pictures as $picture) {
-                if(strpos($picture, '|||') !== false) {
-                    list($picture_id, $picture_url) = explode('|||', $picture);
-                    $articlePicture = new MappingArticle([
-                        'mwIdPicture' => $picture_id,
-                        'mwUrlPicture' => $picture_url
-                    ]);
-                    $article->pictures[] = $articlePicture;
-                }
-            }
-        }
-
-        $articles[] = $article;
+        $articles[] = new MappingArticle($row);
     }
     return $articles;
-}
+    }
 
 
     public function insert($article)

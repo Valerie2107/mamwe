@@ -18,14 +18,8 @@ class MappingArticle extends MappingAbstract
     private string $mwDateArt;
     protected int $mwVisibleArt;
     private int $mwSectionMwIdSection;
+    private ?string $picture;
 
-    //Table mw_picture
-    private int $mwIdPicture;
-    private string $mwTitlePicture;
-    private string $mwUrlPicture;
-    private int $mwTaillePicture;
-    private int $mwPositionPicture;
-    private int $mwArticleMwIdArticle;
 
     public function __construct(array $tab)
     {
@@ -212,171 +206,27 @@ class MappingArticle extends MappingAbstract
     }
 
     /**
-     * Get the value of mwIdPicture
-     *
-     * @return int
-     */
-    public function getMwIdPicture(): int
-    {
-        return $this->mwIdPicture;
-    }
-
-    /**
-     * Set the value of mwIdPicture
-     *
-     * @param int $mwIdPicture
-     *
-     * @return self
-     */
-    public function setMwIdPicture(int $mwIdPicture): self
-    {
-        if ($mwIdPicture <= 0) {
-            throw new Exception("L'id de l'image doit être un entier positif");
-        }
-        $this->mwIdPicture = $mwIdPicture;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of mwTitlePicture
+     * Get the value of picture
      *
      * @return string
      */
-    public function getMwTitlePicture(): string
+    public function getPicture(): ?string
     {
-        return $this->mwTitlePicture;
+        return $this->picture;
     }
 
     /**
-     * Set the value of mwTitlePicture
+     * Set the value of picture
      *
-     * @param string $mwTitlePicture
+     * @param string $picture
      *
      * @return self
      */
-    public function setMwTitlePicture(string $mwTitlePicture): self
+    public function setPicture(?string $picture): self
     {
-        if(strlen($mwTitlePicture)>100){
-            throw new Exception("Titre trop long 100 caractères maximum");
-        }else {
-            $this->mwTitlePicture = $mwTitlePicture;
-        }
+        $this->picture = $picture;
 
         return $this;
-    }
-
-    /**
-     * Get the value of mwUrlPicture
-     *
-     * @return string
-     */
-    public function getMwUrlPicture(): string
-    {
-        return $this->mwUrlPicture;
-    }
-
-    /**
-     * Set the value of mwAltPicture
-     *
-     * @param string $mwUrlPicture
-     *
-     * @return self
-     */
-    public function setMwUrlPicture(string $mwUrlPicture): self
-    {
-        if(strlen($mwUrlPicture)>1000){
-            throw new Exception("Titre trop long 1000 caractères maximum");
-        }else {
-            $this->mwUrlPicture = $mwUrlPicture;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get the value of mwTaillePicture
-     *
-     * @return int
-     */
-    public function getMwTaillePicture(): int
-    {
-        return $this->mwTaillePicture;
-    }
-
-    /**
-     * Set the value of mwTaillePicture
-     *
-     * @param int $mwTaillePicture
-     *
-     * @return self
-     */
-    public function setMwTaillePicture(int $mwTaillePicture): self
-    {
-        if ($mwTaillePicture <= 0) {
-            throw new Exception("La taille de l'image doit être un entier positif");
-        }
-        $this->mwTaillePicture = $mwTaillePicture;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of mwPositionPicture
-     *
-     * @return int
-     */
-    public function getMwPositionPicture(): int
-    {
-        return $this->mwPositionPicture;
-    }
-
-    /**
-     * Set the value of mwPositionPicture
-     *
-     * @param int $mwPositionPicture
-     *
-     * @return self
-     */
-    public function setMwPositionPicture(int $mwPositionPicture): self
-    {
-        if ($mwPositionPicture <= 0) {
-            throw new Exception("La position de l'image doit être un entier positif");
-        }
-        $this->mwPositionPicture = $mwPositionPicture;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMwArticleMwIdArticle(): int
-    {
-        return $this->mwArticleMwIdArticle;
-    }
-
-    /**
-     * @param int $mwArticleMwIdArticle
-     *
-     * @return self
-     */
-    public function setMwArticleMwIdArticle(int $mwArticleMwIdArticle): self
-    {
-        if ($mwArticleMwIdArticle <= 0) {
-            throw new Exception("L'id de l'article doit être un entier positif");
-        }
-        $this->mwArticleMwIdArticle = $mwArticleMwIdArticle;
-
-        return $this;
-    }
-
-    public function getPictures() {
-        return $this->pictures;
-    }
-
-    public function setPicture($picture) {
-        $this->pictures[] = $picture;
     }
 
 }
