@@ -30,50 +30,78 @@ try {
     echo "<br>";
 }
 
-try{
-$test1 = new MappingPatient([
-    "mwIdPatient" => 1,
-    "mwNamePatient" => "test",
-    "mwSurnamePatient" => "test",
-    "mwBirthdatePatient" => "yolo",
-    "mwMailPatient" => "test@hotmail.com",
-    "mwPhonePatient"=> 1
-]);
-}catch(Exception $e ){
-    $e->getMessage();
-}
+// try{
+// $test1 = new MappingPatient([
+//     "mwIdPatient" => 5,
+//     "mwNamePatient" => "pipou",
+//     "mwSurnamePatient" => "testtest",
+//     "mwBirthdatePatient" => "1986-02-02",
+//     "mwMailPatient" => "test@hotmail.com",
+//     "mwPhonePatient"=> 1234
+// ]);
+// }catch(Exception $e ){
+//     $e->getMessage();
+// }
+
+// try{
+// $test2 = new MappingPatient([
+//     "mwNamePatient" => "lolo",
+//     "mwSurnamePatient" => "lololo",
+//     "mwBirthdatePatient" => "1986-02-02",
+//     "mwMailPatient" => "test@hotmail.com",
+//     "mwPhonePatient"=> 121212
+// ]);
+// }catch(Exception $e ){
+//     $e->getMessage();
+// }
 
 
+// var_dump($test1, $test2);
 
-try{
-    $test2 = new MappingPatient([
-        "mwTitleSect" => "test ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgte",
+// $manaPat = new ManagerPatient($db);
+// var_dump($manaPat);
+
+// $updatePat = $manaPat -> updatePatient($test1);
+// insertPat =  $manaPat -> insertPatient($test1);
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>test Patient</h1>
+    <form action="" method="POST"> 
+        <input type="text" name="name" placeholder="Nom"><br>
+        <input type="text" name="surname" placeholder="Prenom"><br>
+        <input type="text" name="birthdate" placeholder="Date de Naissance"><br>
+        <input type="text" name="mail" placeholder="Mail"><br>
+        <input type="text" name="phone" placeholder="telephone"><br>
+        <input type="submit">
+    </form>
+</body>
+</html>
+
+<?php
+
+var_dump($_POST);
+
+$testInsertData = new MappingPatient([
+
+        "mwNamePatient" => $_POST['name'],
+        "mwSurnamePatient" => $_POST['surname'],
+        "mwBirthdatePatient" => $_POST['birthdate'],
+        "mwMailPatient" => $_POST['mail'],
+        "mwPhonePatient"=> $_POST['phone'],
     ]);
-}catch (Exception $e){
-    $e->getMessage();
-}
 
-echo "<pre>";
-var_dump($test1,$test2);
-echo "<hr></pre>";
+var_dump($testInsertData);
 
-$managerPatient = new ManagerPatient($db);
+$manager = new ManagerPatient($db);
+$insert = $manager -> insertPatient($testInsertData);
 
-$getAll = $managerPatient -> getAll();
-var_dump($getAll);
-
-echo "<hr>";
-
-$patient1 = $managerPatient -> getOneById(1);
-var_dump($patient1);
-
-echo "<hr>";
-
-$insertPatient = $managerPatient -> insertPatient("jean", "deaux", "1983-10-20", "jean@mail.com", 48811223);
-var_dump($insertPatient);
-
-// $delete = $managerPatient -> deletePatient(2);
-// var_dump($delete);
-
-// $update = $managerPatient -> updatePatient("momo", "lolo", "1983-06-10", "momo@mail.com", 123456, 1);
-// var_dump($update);
+var_dump($insert);
