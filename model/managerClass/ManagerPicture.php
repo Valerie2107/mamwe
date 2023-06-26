@@ -51,22 +51,23 @@ class ManagerPicture implements ManagerInterface
     } 
 
 
-    public function insertPicture(string $title, string $url, int $size, int $position, int $articleId = null){
+    public function insertPicture(MappingPicture $data){
         $sql = "INSERT INTO `mw_picture`(`mw_title_picture`, `mw_url_picture`, `mw_size_picture`, `mw_position_picture`, `mw_article_mw_id_article`) 
                     VALUES (:title, :url, :size, :position, :articleId)";      
         $prepare = $this->db->prepare($sql);
-        $prepare->bindParam(':title', $title, PDO::PARAM_STR);
-        $prepare->bindParam(':url', $url, PDO::PARAM_STR);
-        $prepare->bindParam(':size', $size, PDO::PARAM_INT);
-        $prepare->bindParam(':position', $position, PDO::PARAM_INT);
-        $prepare->bindParam(':articleId', $articleId, PDO::PARAM_INT);
+        $prepare->bindValue(':title', $data->getMwTitlePicture(), PDO::PARAM_STR);
+        $prepare->bindValue(':url', $data->getMwUrlPicture(), PDO::PARAM_STR);
+        $prepare->bindValue(':size', $data->getMwSizePicture(), PDO::PARAM_INT);
+        $prepare->bindValue(':position', $data->getMwPositionPicture(), PDO::PARAM_INT);
+        $prepare->bindValue(':articleId', $data->getMwArticleMwIdArticle(), PDO::PARAM_INT);
 
+        
         try {
             $prepare->execute(); 
             return true;
         }catch(Exception $e){
             $e -> getMessage();
-
+            
         }
 
     }
