@@ -2,10 +2,10 @@
 
 namespace model\managerClass;
 
+use PDO;
 use Exception;
 use model\mappingClass\MappingPatient;
 use model\interfaceClass\ManagerInterface;
-use PDO;
 
 
 // use ManagerInterface:
@@ -49,15 +49,17 @@ class ManagerPatient implements ManagerInterface
     }  
 
 
-    public function insertPatient($name, $surname, $birthdate, $mail, $phone){
+    public function insertPatient(MappingPatient $data){
+
         $sql = "INSERT INTO `mw_patient`(`mw_name_patient`, `mw_surname_patient`, `mw_birthdate_patient`, `mw_mail_patient`, `mw_phone_patient`) 
-        VALUES (:name, :surname, :birthdate, :mail, :phone)";      
+        VALUES (:name, :surname, :birthdate, :mail, :phone)";  
+
         $prepare = $this->db->prepare($sql);
-        $prepare->bindParam(':name', $name,PDO::PARAM_STR);
-        $prepare->bindParam(':surname', $surname, PDO::PARAM_STR);
-        $prepare->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
-        $prepare->bindParam(':mail', $mail, PDO::PARAM_STR);
-        $prepare->bindParam(':phone', $phone, PDO::PARAM_INT);
+        $prepare->bindValue(':name', $data->getMwNamePatient(), PDO::PARAM_STR);
+        $prepare->bindValue(':surname', $data->getMwSurnamePatient(), PDO::PARAM_STR);
+        $prepare->bindValue(':birthdate', $data->getMwBirthdatePatient(), PDO::PARAM_STR);
+        $prepare->bindValue(':mail', $data->getMwMailPatient(), PDO::PARAM_STR);
+        $prepare->bindValue(':phone', $data->getMwPhonePatient(), PDO::PARAM_INT);
         
         try{
             $prepare->execute();
@@ -82,17 +84,17 @@ class ManagerPatient implements ManagerInterface
     }
 
 
-    public function updatePatient($name, $surname, $birthdate, $mail, $phone, $id){
+    public function updatePatient(MappingPatient $data){
         $sql = "UPDATE `mw_patient` 
                 SET `mw_name_patient`= :name, `mw_surname_patient`= :surname, `mw_birthdate_patient`= :birthdate, `mw_mail_patient`= :mail,`mw_phone_patient`= :phone 
                 WHERE `mw_id_patient`= :id";      
         $prepare = $this->db->prepare($sql);
-        $prepare->bindParam(':name', $name,PDO::PARAM_STR);
-        $prepare->bindParam(':surname', $surname, PDO::PARAM_STR);
-        $prepare->bindParam(':birthdate', $birthdate, PDO::PARAM_STR);
-        $prepare->bindParam(':mail', $mail, PDO::PARAM_STR);
-        $prepare->bindParam(':phone', $phone, PDO::PARAM_STR);
-        $prepare->bindParam(':id', $id, PDO::PARAM_STR);
+        $prepare->bindValue(':name', $data -> getMwNamePatient(), PDO::PARAM_STR);
+        $prepare->bindValue(':surname', $data -> getMwSurnamePatient(), PDO::PARAM_STR);
+        $prepare->bindValue(':birthdate', $data -> getMwBirthdatePatient(), PDO::PARAM_STR);
+        $prepare->bindValue(':mail', $data -> getMwMailPatient(), PDO::PARAM_STR);
+        $prepare->bindValue(':phone', $data -> getMwPhonePatient(), PDO::PARAM_STR);
+        $prepare->bindValue(':id', $data -> getMwIdPatient(), PDO::PARAM_STR);
 
         $prepare->execute();
 
