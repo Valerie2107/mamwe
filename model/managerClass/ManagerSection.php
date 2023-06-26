@@ -5,6 +5,7 @@ namespace model\managerClass;
 use Exception;
 use model\mappingClass\mappingSection;
 use model\interfaceClass\ManagerInterface;
+use model\mappingClass\MappingPicture;
 use PDO;
 
 
@@ -60,29 +61,30 @@ class ManagerSection implements ManagerInterface
     }  
 
 
-    public function insertSectionWithPic(string $titlePic, string $urlPic, int $sizePic, int $positionPic, string $titleSect, string $contentSect, int $visibleSect){
+    public function insertSectionWithPic(MappingPicture $dataP, MappingSection $dataS){
 
         $this->db->beginTransaction();
         
         $sqlPic = "INSERT INTO `mw_picture`(`mw_title_picture`, `mw_url_picture`, `mw_size_picture`, `mw_position_picture`) VALUES (:titlePic,:urlPic,:sizePic,:positionPic)";      
         $preparePic = $this->db->prepare($sqlPic);
-        $preparePic->bindParam(':titlePic', $titlePic,PDO::PARAM_STR);
-        $preparePic->bindParam(':urlPic', $urlPic,PDO::PARAM_STR);
-        $preparePic->bindParam(':sizePic', $sizePic, PDO::PARAM_INT);
-        $preparePic->bindParam(':positionPic',$positionPic, PDO::PARAM_INT);
+        $preparePic->bindValue(':titlePic', $dataP->getMwTitlePicture(),PDO::PARAM_STR);
+        $preparePic->bindValue(':urlPic', $dataP->getMwUrlPicture(),PDO::PARAM_STR);
+        $preparePic->bindValue(':sizePic', 29, PDO::PARAM_INT);
+        $preparePic->bindValue(':positionPic',$dataP->getMwPositionPicture(), PDO::PARAM_INT);
 
+        
         $preparePic->execute();
-         
+        
 
         $lastId = $this->db->lastInsertId();
 
 
         $sqlSect = "INSERT INTO `mw_section`(`mw_title_sect`, `mw_content_sect`, `mw_visible_sect`, `mw_picture_mw_id_picture`) VALUES (:titleSect,:contentSect,:visibleSect, :pictureSect)";      
         $prepareSect = $this->db->prepare($sqlSect);
-        $prepareSect->bindParam(':titleSect', $titleSect,PDO::PARAM_STR);
-        $prepareSect->bindParam(':contentSect', $contentSect, PDO::PARAM_STR);
-        $prepareSect->bindParam(':visibleSect', $visibleSect, PDO::PARAM_INT);
-        $prepareSect->bindParam(':pictureSect', $lastId, PDO::PARAM_INT);
+        $prepareSect->bindValue(':titleSect', $dataS->getMwTitleSect(),PDO::PARAM_STR);
+        $prepareSect->bindValue(':contentSect', $dataS->getMwContentSect(), PDO::PARAM_STR);
+        $prepareSect->bindValue(':visibleSect', $dataS->getMwVisible(), PDO::PARAM_INT);
+        $prepareSect->bindValue(':pictureSect', $lastId, PDO::PARAM_INT);
         
         $prepareSect->execute();
        

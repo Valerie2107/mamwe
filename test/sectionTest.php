@@ -1,5 +1,7 @@
 <?php
 
+use model\managerClass\ManagerPicture;
+use model\mappingClass\MappingPicture;
 use model\mappingClass\MappingSection;
 use model\managerClass\ManagerSection;
 
@@ -29,22 +31,22 @@ try {
     echo "<br>";
 }
 
-$test1 = new MappingSection([
-    "mwIdSect" => 1,
-    "mwTitleSect" => "test",
-    "mwContentSect" => "test",
-    "mwVisible" => "test",
-    "mwPictureMwIdPicture" => 1
-]);
+// $test1 = new MappingSection([
+//     "mwIdSect" => 1,
+//     "mwTitleSect" => "test",
+//     "mwContentSect" => "test",
+//     "mwVisible" => "test",
+//     "mwPictureMwIdPicture" => 1
+// ]);
 
-try{
-    $test2 = new MappingSection([
-        "mwTitleSect" => "pipi",
-    ]);
+// try{
+//     $test2 = new MappingSection([
+//         "mwTitleSect" => "pipi",
+//     ]);
 
-}catch (Exception $e){
-    echo $e;
-}
+// }catch (Exception $e){
+//     echo $e;
+// }
 
 // var_dump($test1);
 
@@ -69,16 +71,34 @@ foreach($sectionTestRequete as $item){
         echo "photo id : " . $pic[0] . "<br>";  
         echo "photo titre : " . $pic[2] . "<br>";   
         ?>
-        <img src="<?= $pic[1] ?>" width="300px"><br>
-        <hr>
-        <?php  
+         <img src="<?= $pic[1] ?>" width="300px"><br>
+         <hr>
+         <?php  
 
     }
 }
 
-// $sectionInsert4 = $sectionTest-> insertSection("photo1", "https://cdn-s-www.lalsace.fr/images/ED82BE29-CBAC-40EC-B71C-285CD717A43C/NW_raw/la-voiture-noire-de-bugatti-modele-unique-photo-dr-1608828241.jpg", 1, 1, "après après", "petit text", 1);
-$sectionUpdate = $sectionTest -> updateSectionWithPic("poupou", "https://leblogdemonsieur.com/wp-content/uploads/2022/09/picture-occasion-voiture-peugeot-choisir.jpg", 1, 1, 2, 
-"poupou", "le poupou des doudous", 1, 1);
+$insertPic = new MappingPicture([
+    "mwIdPicture" => 100, 
+    "mwTitlePicture" => "photo1000",
+    "mwUrlPicture" => "https://cdn-s-www.lalsace.fr/images/ED82BE29-CBAC-40EC-B71C-285CD717A43C/NW_raw/la-voiture-noire-de-bugatti-modele-unique-photo-dr-1608828241.jpg",
+    "mwSizePicture" => 1,
+    "mwPositionPicture" => 1,
+    "mwArticleMwIdArticle" => null,
+]);
+
+$insertSection = new MappingSection([
+    "mwIdSect" => 12,
+    "mwTitleSect" => "testtesttest",
+    "mwContentSect" => "lalalala lal alal lal lal alal lal alal llala lal ",
+    "mwVisible" => 1,
+]);
+
+var_dump($insertPic, $insertSection);
+
+$sectionInsert4 = $sectionTest-> insertSectionWithPic($insertPic, $insertSection);
+// $sectionUpdate = $sectionTest -> updateSectionWithPic("poupou", "https://leblogdemonsieur.com/wp-content/uploads/2022/09/picture-occasion-voiture-peugeot-choisir.jpg", 1, 1, 29, 
+// "poupou", "le poupou des doudous", 29, 1);
 
 
-var_dump($sectionUpdate);
+// var_dump($sectionUpdate);
