@@ -61,7 +61,7 @@ class MappingPicture extends MappingAbstract{
     //  get-set mwTaillePicture
     public function getMwSizePicture(){
 
-        $this->mwSizePicture;
+        return $this->mwSizePicture;
 
     }
 
@@ -75,7 +75,7 @@ class MappingPicture extends MappingAbstract{
     //  get-set mwPosotionPicture;    //nom à changer en Position
     public function getMwPositionPicture(){
 
-        $this->mwPositionPicture; 
+        return $this->mwPositionPicture;
     }
 
     public function setMwPositionPicture(?int $mwPositionPicture):self
@@ -89,7 +89,7 @@ class MappingPicture extends MappingAbstract{
 
     public function getMwArticleMwIdArticle() 
     {
-        $this->mwArticleMwIdArticle;
+        return $this->mwArticleMwIdArticle;
     }
 
     public function setMwArticleMwIdArticle(?int $mwArticleMwIdArticle):self
