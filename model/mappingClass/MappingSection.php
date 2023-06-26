@@ -10,7 +10,7 @@ class MappingSection extends MappingAbstract
     private int $mwIdSect;
     private string $mwTitleSect;
     private string $mwContentSect;
-    private string $mwVisible;
+    private int $mwVisible;
     private ?int $mwPictureMwIdPicture;
     private ?string $picture;
 
@@ -103,7 +103,7 @@ class MappingSection extends MappingAbstract
      *
      * @return string
      */
-    public function getMwVisible(): string
+    public function getMwVisible(): int
     {
         return $this->mwVisible;
     }
@@ -115,7 +115,7 @@ class MappingSection extends MappingAbstract
      *
      * @return self
      */
-    public function setMwVisible(string $mwVisible): self
+    public function setMwVisible(int $mwVisible): self
     {
         $this->mwVisible = $mwVisible;
 

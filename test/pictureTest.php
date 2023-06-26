@@ -32,46 +32,44 @@ try {
 
 try{
 $test1 = new MappingPicture([
-    "mwIdPicture" => 1,
     "mwTitlePicture" => "test",
     "mwUrlPicture" => "test",
     "mwSizePicture" => 1,
     "mwPositionPicture" => 1,
-    "mwArticleMwIdArticle" => 1
+    "mwArticleMwIdArticle" => null,
 ]);
 }catch(Exception $e ){
     $e->getMessage();
 }
 
+var_dump($test1);
 
 
-try{
-    $test2 = new MappingPicture([
-        "mwTitlePicture" => "test ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret  ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfzertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgt",
-    ]);
-}catch (Exception $e){
-    echo $e;
-}
-
-echo "<pre>";
-// var_dump($test1,$test2);
-echo "</pre>";
 
 $testManagerPic = new ManagerPicture($db);
 
 var_dump($testManagerPic);
-
 $getAllPic = $testManagerPic -> getAll();
-$getPicById = $testManagerPic -> getOneById(2);
-// $insertPic = $testManagerPic -> insertPicture("insert test", "vérite", 1, 1);
-// $deletePic = $testManagerPic -> deletePicture(87);
-$updatePic = $testManagerPic -> updatePicture("test update", "on a essayé", 1, 1, 128);
+// var_dump($getAllPic);
 
-$articlePic = new ManagerArticle($db);
-$art1 = $articlePic -> getAllArticlesWithPictures($db);
+try{
 
-foreach($art1 as $art){
-    echo $art -> getMwTitleArt();
+    $insertPic = $testManagerPic -> insertPicture($test1);
+}catch(Exception $e){
+    $e->getMessage();
 }
 
-var_dump($updatePic, $articlePic, $art1);
+var_dump($insertPic);
+
+// $getPicById = $testManagerPic -> getOneById(2);
+// // $deletePic = $testManagerPic -> deletePicture(87);
+// $updatePic = $testManagerPic -> updatePicture("test update", "on a essayé", 1, 1, 128);
+
+// $articlePic = new ManagerArticle($db);
+// $art1 = $articlePic -> getAllArticlesWithPictures($db);
+
+// foreach($art1 as $art){
+//     echo $art -> getMwTitleArt();
+// }
+
+// var_dump($updatePic, $articlePic, $art1);
