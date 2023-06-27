@@ -4,10 +4,10 @@ namespace model\mappingClass;
 use model\abstractClass\MappingAbstract;
 use Exception;
 
-class MappingCategoryRessource extends MappingAbstract {
+class MappingSubCategoryRessource extends MappingAbstract {
 
-    private int $mwCategoryId;
-    private string $mwCategoryTitle;
+    private int $mwSubCategoryId;
+    private string $mwSubCategoryTitle;
 
 
     public function __construct(array $tab)
@@ -20,9 +20,9 @@ class MappingCategoryRessource extends MappingAbstract {
      *
      * @return int
      */
-    public function getMwCategoryId(): int
+    public function getMwSubCategoryId(): int
     {
-        return $this->mwCategoryId;
+        return $this->mwSubCategoryId;
     }
 
     /**
@@ -32,12 +32,12 @@ class MappingCategoryRessource extends MappingAbstract {
      *
      * @return self
      */
-    public function setMwCategoryId(int $mwCategoryId): self
+    public function setMwSubCategoryId(int $mwSubCategoryId): self
     {
-        if ($mwCategoryId <= 0) {
+        if ($mwSubCategoryId <= 0) {
             throw new Exception('ID de la catégorie doit être un entier positif');
         }
-        $this->mwCategoryId = $mwCategoryId;
+        $this->mwSubCategoryId = $mwSubCategoryId;
 
         return $this;
     }
@@ -47,9 +47,9 @@ class MappingCategoryRessource extends MappingAbstract {
      *
      * @return string
      */
-    public function getMwCategoryTitle(): string
+    public function getMwSubCategoryTitle(): string
     {
-        return $this->mwCategoryTitle;
+        return $this->mwSubCategoryTitle;
     }
 
     /**
@@ -59,12 +59,12 @@ class MappingCategoryRessource extends MappingAbstract {
      *
      * @return self
      */
-    public function setMwCategoryTitle(string $mwCategoryTitle): self
+    public function setMwSubCategoryTitle(string $mwSubCategoryTitle): self
     {
-        if (strlen($mwCategoryTitle) < 3) {
+        if (strlen($mwSubCategoryTitle) < 3) {
             throw new Exception('Le titre de la catégorie doit contenir au moins 3 caractères');
         }
-        $this->mwCategoryTitle = $mwCategoryTitle;
+        $this->mwSubCategoryTitle = $mwSubCategoryTitle;
 
         return $this;
     }

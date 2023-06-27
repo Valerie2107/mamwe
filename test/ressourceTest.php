@@ -1,6 +1,9 @@
 <?php
 
 use model\mappingClass\MappingRessource;
+use model\mappingClass\MappingCategoryRessource;
+use model\mappingClass\MappingSubCategoryRessource;
+use model\managerClass\ManagerRessource;
 
 
 // require de la config:
@@ -26,22 +29,36 @@ try {
     echo "<br>";
 }
 
+
+// mapping ressource :
 try {
-    $test1 = new MappingRessource([
+    $mapRess = new MappingRessource([
         "mwIdRessource" => 1,
         "mwTitleRessource"=> "titre",
-        "mwContentRessource" => "text blabla",
-        "mwDateRessource" => "20/10/1983",
-        "mwPictureMwIdPicture" => 1,
-        "mwCategoryRessourceMwCategoryId" => 1,
+        "mwContentRessource" => "hj ioqjdo sjqos jioqs djqiojq dojqsdioqs ioqsj sio",
+        "mwUrlRessource" => "lalalalalalalala",
+        "mwDateRessource" => "01/01/2001",
+        "mwPictureMwIdPicture" => 2,
+        "mwSubCategoryRessourceMwIdSubCategoryRessource" => 1,
     ]);
 }catch(Exception $e){
     echo $e;
 }
 
-echo "<pre>";
-var_dump($test1);
-echo "</pre>";
+// var_dump($mapRess);
 
-?>
+
+// mapping category and subCategory :
+$mapCateg = new MappingCategoryRessource([
+    "mwCategoryId" =>2,
+    "mwCategoryTitle" => "popolmlm",
+]);
+$mapSubCateg = new MappingSubCategoryRessource([
+    "mwSubCategoryId" => 2,
+    "mwSubCategoryTitle" => "popolmlm",
+]);
+
+// var_dump($mapCateg, $mapSubCateg);
+
+
 
