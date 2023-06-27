@@ -36,18 +36,43 @@ class ManagerRessource implements ManagerInterface
 
 
     public function getAll(){
-    $prepare = $this->db->prepare("SELECT * FROM mw_ressource");
-    $prepare->bindParam(':id', $id,PDO::PARAM_INT);
-    $prepare->execute();
-    $result = $prepare->fetchAll();
-    $ressources = [];
-    foreach ($result as $row) {
-
-        $ressources[] = new MappingRessource($row);
-
+        $prepare = $this->db->prepare("SELECT * FROM `mw_ressource` ORDER BY mw_id_ressource");
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $ressources = [];
+        foreach ($result as $row) {
+            $ressources[] = new MappingRessource($row);
         }
-
+            
         return $ressources;
+
+    }
+
+
+    public function getAllCateg(){
+        $prepare = $this->db->prepare("SELECT * FROM `mw_category_ressource`");
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $categories = [];
+        foreach ($result as $row) {
+            $categories[] = new MappingCategoryRessource($row);
+        }
+            
+        return $categories;
+
+    }
+
+    public function getAllSubCateg(){
+        $prepare = $this->db->prepare("SELECT * FROM `mw_sub_category_ressource`");
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $subs = [];
+        foreach ($result as $row) {
+            $subs[] = new MappingSubCategoryRessource($row);
+        }
+            
+        return $subs;
+
     }
 
 

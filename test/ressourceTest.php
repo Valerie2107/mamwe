@@ -37,7 +37,7 @@ try {
         "mwTitleRessource"=> "titre",
         "mwContentRessource" => "hj ioqjdo sjqos jioqs djqiojq dojqsdioqs ioqsj sio",
         "mwUrlRessource" => "lalalalalalalala",
-        "mwDateRessource" => "01/01/2001",
+        "mwDateRessource" => "2001-01-01",
         "mwPictureMwIdPicture" => 2,
         "mwSubCategoryRessourceMwIdSubCategoryRessource" => 1,
     ]);
@@ -61,4 +61,39 @@ $mapSubCateg = new MappingSubCategoryRessource([
 // var_dump($mapCateg, $mapSubCateg);
 
 
+// MANAGER :
+$manageRess = new ManagerRessource($db);
+// var_dump($manageRess);
 
+// $RessById = $manageRess -> getOneById(4);
+
+$allRess = $manageRess -> getAll();
+
+// foreach($allRess as $item){
+//     echo "id : " . $item -> getMwIdRessource() . "<br>";
+//     echo "titre : " . $item -> getMwTitleRessource() . "<br>";
+//     echo "contenu : " . $item -> getMwContentRessource() . "<br>";
+//     if(!empty($item->getMwUrlRessource)){
+//         echo "lien : " . $item -> getMwUrlRessource() . "<br>";
+//     }
+//     echo "date : " . $item -> getMwDateRessource() . "<br>";
+//     echo "photo : " . $item -> getMwPictureMwIdPicture(). "<br><hr>";
+// }
+
+// var_dump($allRess);
+
+$manageCateg = new ManagerRessource($db);
+
+$allCateg = $manageCateg -> getAllCateg();
+foreach($allCateg as $categ){
+    echo "category : " . $categ-> getMwCategoryTitle() . "<br>";
+}
+
+$manageSub = new ManagerRessource($db);
+
+$allSubs = $manageSub -> getAllSubCateg();
+foreach($allSubs as $sub){
+    echo "sous category : " . $sub-> getMwTitleSubCategoryRessource() . "<br>";
+
+}
+var_dump($allSubs);

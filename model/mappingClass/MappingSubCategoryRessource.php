@@ -6,8 +6,8 @@ use Exception;
 
 class MappingSubCategoryRessource extends MappingAbstract {
 
-    private int $mwSubCategoryId;
-    private string $mwSubCategoryTitle;
+    private int $mwIdSubCategoryRessource;
+    private string $mwTitleSubCategoryRessource;
 
 
     public function __construct(array $tab)
@@ -15,60 +15,55 @@ class MappingSubCategoryRessource extends MappingAbstract {
         parent::__construct($tab);
     }
 
+    
+
+
+
     /**
-     * Get the value of mwCategoryId
+     * Get the value of mwIdSubCategoryRessource
      *
      * @return int
      */
-    public function getMwSubCategoryId(): int
+    public function getMwIdSubCategoryRessource(): int
     {
-        return $this->mwSubCategoryId;
+        return $this->mwIdSubCategoryRessource;
     }
 
     /**
-     * Set the value of mwCategoryId
+     * Set the value of mwIdSubCategoryRessource
      *
-     * @param int $mwCategoryId
+     * @param int $mwIdSubCategoryRessource
      *
      * @return self
      */
-    public function setMwSubCategoryId(int $mwSubCategoryId): self
+    public function setMwIdSubCategoryRessource(int $mwIdSubCategoryRessource): self
     {
-        if ($mwSubCategoryId <= 0) {
-            throw new Exception('ID de la catégorie doit être un entier positif');
-        }
-        $this->mwSubCategoryId = $mwSubCategoryId;
+        $this->mwIdSubCategoryRessource = $mwIdSubCategoryRessource;
 
         return $this;
     }
 
     /**
-     * Get the value of mwCategoryTitle
+     * Get the value of mwTitleSubCategoryRessource
      *
      * @return string
      */
-    public function getMwSubCategoryTitle(): string
+    public function getMwTitleSubCategoryRessource(): string
     {
-        return $this->mwSubCategoryTitle;
+        return $this->mwTitleSubCategoryRessource;
     }
 
     /**
-     * Set the value of mwCategoryTitle
+     * Set the value of mwTitleSubCategoryRessource
      *
-     * @param string $mwCategoryTitle
+     * @param string $mwTitleSubCategoryRessource
      *
      * @return self
      */
-    public function setMwSubCategoryTitle(string $mwSubCategoryTitle): self
+    public function setMwTitleSubCategoryRessource(string $mwTitleSubCategoryRessource): self
     {
-        if (strlen($mwSubCategoryTitle) < 3) {
-            throw new Exception('Le titre de la catégorie doit contenir au moins 3 caractères');
-        }
-        $this->mwSubCategoryTitle = $mwSubCategoryTitle;
+        $this->mwTitleSubCategoryRessource = $mwTitleSubCategoryRessource;
 
         return $this;
     }
-
-
-
 }

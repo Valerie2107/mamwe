@@ -99,7 +99,7 @@ $insertSection = new MappingSection([
 var_dump($insertPic, $insertSection);
 
 // $sectionInsert4 = $sectionTest-> insertSectionWithPic($insertPic, $insertSection);
-$sectionUpdate = $sectionTest -> updateSectionWithPic($insertPic, $insertSection);
+// $sectionUpdate = $sectionTest -> updateSectionWithPic($insertPic, $insertSection);
 
 
 // var_dump($sectionUpdate);

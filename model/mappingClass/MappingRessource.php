@@ -11,7 +11,7 @@ class MappingRessource extends MappingAbstract {
     private int $mwIdRessource;
     private string $mwTitleRessource;
     private string $mwContentRessource;
-    private string $mwUrlRessource;
+    private ?string $mwUrlRessource;
     private string $mwDateRessource;
     private ?int $mwPictureMwIdPicture;
     private ?int $mwSubCategoryRessourceMwIdSubCategoryRessource;
@@ -101,8 +101,7 @@ class MappingRessource extends MappingAbstract {
         return $this;
     }
 
-
-        /**
+    /**
      * Get the value of mwUrlRessource
      *
      * @return string
@@ -119,12 +118,14 @@ class MappingRessource extends MappingAbstract {
      *
      * @return self
      */
-    public function setMwUrlRessource(string $mwUrlRessource): self
+    public function setMwUrlRessource(?string $mwUrlRessource): self
     {
-        if(strlen($mwUrlRessource) > 255){
-            throw new Exception("URL trop longue ! ");
-        }else{
-            $this->mwUrlRessource = $mwUrlRessource;
+        if(!empty($mwUrlRessource)){
+            if(strlen($mwUrlRessource) > 255){
+                throw new Exception("URL trop longue ! ");
+            }else{
+                $this->mwUrlRessource = $mwUrlRessource;
+            }
         }
 
         return $this;
@@ -151,7 +152,7 @@ class MappingRessource extends MappingAbstract {
     public function setMwDateRessource(string $mwDateRessource): self
     {
 
-        if($this-> dateTrait($mwDateRessource)){
+        if($this-> dateTrait($mwDateRessource, 'Y-m-d')){
 
             $this-> mwDateRessource = $mwDateRessource;
 
@@ -214,4 +215,6 @@ class MappingRessource extends MappingAbstract {
 
         return $this;
     }
+
+
 }
