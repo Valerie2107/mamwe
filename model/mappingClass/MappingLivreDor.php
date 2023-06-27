@@ -13,7 +13,7 @@ class MappingLivreDor extends MappingAbstract
     private string $mwMailLivreDor;
     private string $mwMessageLivreDor;
     private string $mwDateLivreDor;
-    protected int $mwVisibleLivreDor;
+    protected int $mwVisibilityLivreDor;
 
     public function __construct(array $tab)
     {
@@ -148,25 +148,25 @@ class MappingLivreDor extends MappingAbstract
     }
 
     /**
-     * Get the value of mwVisibleLivreDor
+     * Get the value of mwVisibilityLivreDor
      *
      * @return int
      */
-    public function getMwVisibleLivreDor(): int
+    public function getMwVisibilityLivreDor(): int
     {
-        return $this->mwVisibleLivreDor;
+        return $this->mwVisibilityLivreDor;
     }
 
     /**
-     * Set the value of mwVisibleLivreDor
+     * Set the value of mwVisibilityLivreDor
      *
-     * @param int $mwVisibleLivreDor
+     * @param int $mwVisibilityLivreDor
      *
      * @return self
      */
-    public function setMwVisibleLivreDor(int $mwVisibleLivreDor): self
+    public function setMwVisibilityLivreDor(int $mwVisibilityLivreDor): self
     {
-        $this->mwVisibleLivreDor = $mwVisibleLivreDor;
+        $this->mwVisibilityLivreDor = $mwVisibilityLivreDor;
 
         return $this;
     }
