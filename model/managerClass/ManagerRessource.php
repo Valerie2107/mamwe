@@ -41,7 +41,6 @@ class ManagerRessource implements ManagerInterface
     $ressources = [];
     foreach ($result as $row) {
         $ressources[] = new MappingRessource($row);
-
     }else{
             throw new Exception("La ressource $id n'existe pas");
         }
