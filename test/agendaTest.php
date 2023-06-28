@@ -7,17 +7,13 @@ use model\managerClass\ManagerAgenda;
 // require de la config:
 require_once "../config.php";
 
-
-// require_once "../vendor/autoload.php"; -> Appel des dépendances qui gèrent les mails
-
-
 // Autoload des classes (/model/) :
 spl_autoload_register(function ($class) {
     $class = str_replace('\\', '/', $class);
     require '../' . $class . '.php';
 });
 
-
+// Connexion à la DB :
 try {
     
     $db = new PDO(DB_TYPE.':host='.DB_HOST.';port='.DB_PORT.';dbname='.DB_NAME.';charset='.DB_CHARSET,DB_LOGIN,DB_PWD);
@@ -34,8 +30,9 @@ try {
 try{
 $test1 = new MappingAgenda([
     "mwDateAgenda" => "2001-01-01",
-    "mwContentAgenda" => "test",
-    "mwTitleAgenda" => "test",
+    "mwContentAgenda" => "test2",
+    "mwTitleAgenda" => "test2",
+    "mwPictureMwIdPicture" => null,
 ]);
 }catch(Exception $e ){
     $e->getMessage();
@@ -70,5 +67,5 @@ foreach($getAll as $event){
 
 }
 
-$insertA = $managerAgenda -> insertAgenda($test1);
+// $insertA = $managerAgenda -> insertAgenda($test1);
 var_dump($insertA);

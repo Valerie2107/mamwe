@@ -53,7 +53,7 @@ class ManagerAgenda implements ManagerInterface
     public function insertAgenda(MappingAgenda $data){
 
         $sql = "INSERT INTO `mw_agenda`(`mw_date_agenda`, `mw_content_agenda`, `mw_title_agenda`, `mw_picture_mw_id_picture`) 
-        VALUES (:date, :content, :title)";  
+        VALUES (:date, :content, :title, :picture)";  
 
         $prepare = $this->db->prepare($sql);
         $prepare->bindValue(':date', $data->getMwDateAgenda(), PDO::PARAM_STR);
