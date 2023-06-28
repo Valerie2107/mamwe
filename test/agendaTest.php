@@ -54,6 +54,8 @@ echo "<pre>";
 var_dump($test1,$test2);
 echo "</pre>";
 
+
+
 // test des manager :
 $managerAgenda = new ManagerAgenda($db);
 // var_dump($managerAgenda);

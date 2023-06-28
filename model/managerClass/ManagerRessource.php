@@ -6,6 +6,7 @@ use Exception;
 use model\mappingClass\MappingRessource;
 use model\mappingClass\MappingCategoryRessource;
 use model\mappingClass\MappingSubCategoryRessource;
+use model\mappingClass\MappingPicture;
 use model\interfaceClass\ManagerInterface;
 use PDO;
 

@@ -4,6 +4,7 @@ namespace model\managerClass;
 
 use model\mappingClass\MappingAgenda;
 use model\interfaceClass\ManagerInterface;
+use model\mappingClass\MappingPicture;
 use PDO;
 use Exception;
 
@@ -51,14 +52,15 @@ class ManagerAgenda implements ManagerInterface
 
     public function insertAgenda(MappingAgenda $data){
 
-        $sql = "INSERT INTO `mw_agenda`(`mw_date_agenda`, `mw_content_agenda`, `mw_title_agenda`) 
+        $sql = "INSERT INTO `mw_agenda`(`mw_date_agenda`, `mw_content_agenda`, `mw_title_agenda`, `mw_picture_mw_id_picture`) 
         VALUES (:date, :content, :title)";  
 
         $prepare = $this->db->prepare($sql);
         $prepare->bindValue(':date', $data->getMwDateAgenda(), PDO::PARAM_STR);
         $prepare->bindValue(':content', $data->getMwContentAgenda(), PDO::PARAM_STR);
         $prepare->bindValue(':title', $data->getMwTitleAgenda(), PDO::PARAM_STR);
-        
+        $prepare->bindValue(':picture', $data->getMwPictureMwIdPicture(), PDO::PARAM_STR);
+
         try{
             $prepare->execute();
             return true;
@@ -84,13 +86,14 @@ class ManagerAgenda implements ManagerInterface
 
     public function updateAgenda(MappingAgenda $data){
         $sql = "UPDATE `mw_agenda` 
-                SET `mw_date_agenda`= :date, `mw_content_agenda`= :content, `mw_title_agenda`= :title
+                SET `mw_date_agenda`= :date, `mw_content_agenda`= :content, `mw_title_agenda`= :title, `mw_picture_mw_id_picture`= :picture
                 WHERE `mw_id_agenda`= :id";      
         $prepare = $this->db->prepare($sql);
         $prepare->bindValue(':date', $data -> getMwDateAgenda(), PDO::PARAM_STR);
         $prepare->bindValue(':content', $data -> getMwContentAgenda(), PDO::PARAM_STR);
         $prepare->bindValue(':title', $data -> getMwTitleAgenda(), PDO::PARAM_STR);
         $prepare->bindValue(':id', $data -> getMwIdAgenda(), PDO::PARAM_STR);
+        $prepare->bindValue(':picture', $data -> getMwIdAgenda(), PDO::PARAM_STR);
 
         $prepare->execute();
 
