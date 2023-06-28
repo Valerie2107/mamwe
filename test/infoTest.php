@@ -53,18 +53,18 @@ echo "</pre>";
 
 
 // test des manager :
-$managerAgenda = new ManagerInfo($db);
-// var_dump($managerAgenda);
-$getAll = $managerAgenda -> getAll();
+$managerInfo = new ManagerInfo($db);
+var_dump($managerInfo);
+$getAll = $managerInfo -> getAll();
 
 var_dump($getAll);
 
 foreach($getAll as $event){
     echo $event -> getMwIdInfo();
-    echo $event -> getMwContentAgenda();  
-    // echo "date : " . $event -> getMwDateAgenda() . "<br>";  
+    echo $event -> getMwContentInfo();  
+ echo "date : " . $event -> getMwDateInfo() . "<br>";  
 
 }
 
 $insertI = $managerInfo -> $insertInfo($test1);
-var_dump($insertA);
+var_dump($insertI);

@@ -68,4 +68,4 @@ foreach($getAll as $event){
 }
 
 // $insertA = $managerAgenda -> insertAgenda($test1);
-var_dump($insertA);
+//var_dump($insertA);

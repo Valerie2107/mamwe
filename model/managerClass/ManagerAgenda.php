@@ -93,7 +93,7 @@ class ManagerAgenda implements ManagerInterface
         $prepare->bindValue(':content', $data -> getMwContentAgenda(), PDO::PARAM_STR);
         $prepare->bindValue(':title', $data -> getMwTitleAgenda(), PDO::PARAM_STR);
         $prepare->bindValue(':id', $data -> getMwIdAgenda(), PDO::PARAM_STR);
-        $prepare->bindValue(':picture', $data -> getMwIdAgenda(), PDO::PARAM_STR);
+        $prepare->bindValue(':picture', $data -> getMwPictureMwIdPicture(), PDO::PARAM_STR);
 
         $prepare->execute();
 
