@@ -2,10 +2,10 @@
 
 namespace model\managerClass;
 
-use PDO;
-use Exception;
 use model\mappingClass\MappingAgenda;
 use model\interfaceClass\ManagerInterface;
+use PDO;
+use Exception;
 
 
 // use ManagerInterface:
