@@ -31,69 +31,63 @@ try {
 
 
 // mapping ressource :
-try {
+try{
     $mapRess = new MappingRessource([
-        "mwIdRessource" => 1,
-        "mwTitleRessource"=> "titre",
-        "mwContentRessource" => "hj ioqjdo sjqos jioqs djqiojq dojqsdioqs ioqsj sio",
-        "mwUrlRessource" => "lalalalalalalala",
-        "mwDateRessource" => "2001-01-01",
-        "mwPictureMwIdPicture" => 2,
-        "mwSubCategoryRessourceMwIdSubCategoryRessource" => 1,
+        'mwIdRessource' => 1000,
+        'mwTitleRessource' => "titre1",
+        'mwContentRessource' => "la la la la lal al al la la la la",
+        'mwUrlRessource' => "url1",
+        'mwDateRessource' => "2001-01-01",
+        'mwCategory' => 1,
+        'mwSubCategory' => 1,
+        'mwPictureMwIdPicture' => 1,
     ]);
 }catch(Exception $e){
-    echo $e;
+    $e -> getMessage();
 }
 
 // var_dump($mapRess);
 
-
-// mapping category and subCategory :
-$mapCateg = new MappingCategoryRessource([
-    "mwCategoryId" =>2,
-    "mwCategoryTitle" => "popolmlm",
-]);
-$mapSubCateg = new MappingSubCategoryRessource([
-    "mwSubCategoryId" => 2,
-    "mwSubCategoryTitle" => "popolmlm",
-]);
-
-// var_dump($mapCateg, $mapSubCateg);
-
-
-// MANAGER :
-$manageRess = new ManagerRessource($db);
-// var_dump($manageRess);
-
-// $RessById = $manageRess -> getOneById(4);
-
-$allRess = $manageRess -> getAll();
-
-// foreach($allRess as $item){
-//     echo "id : " . $item -> getMwIdRessource() . "<br>";
-//     echo "titre : " . $item -> getMwTitleRessource() . "<br>";
-//     echo "contenu : " . $item -> getMwContentRessource() . "<br>";
-//     if(!empty($item->getMwUrlRessource)){
-//         echo "lien : " . $item -> getMwUrlRessource() . "<br>";
-//     }
-//     echo "date : " . $item -> getMwDateRessource() . "<br>";
-//     echo "photo : " . $item -> getMwPictureMwIdPicture(). "<br><hr>";
+// // mapping category et sous category:
+// try{
+//     $mapCateg = new MappingCategoryRessource([
+//         "mwIdCategory" => 1,
+//         "mwTitleCategory" => "toto",
+//     ]);
+// }catch(Exception $e){
+//     $e -> getMessage();
 // }
 
-// var_dump($allRess);
+// var_dump($mapCateg);
 
-$manageCateg = new ManagerRessource($db);
+// try{
+//     $mapSubCateg = new MappingSubCategoryRessource([
+//         "mwIdSubCategory" => 1,
+//         "mwTitleSubCategory" => "toto",
+//     ]);
+// }catch(Exception $e){
+//     $e -> getMessage();
+// }
 
-$allCateg = $manageCateg -> getAllCateg();
-foreach($allCateg as $categ){
-    echo "category : " . $categ-> getMwCategoryTitle() . "<br>";
+// var_dump($mapSubCateg);
+// TOUT EST BON!
+
+// Test Manager :
+$managerTest = new ManagerRessource($db);
+// var_dump($managerTest);
+
+$getAllRess = $managerTest -> getAll();
+$getAllCateg = $managerTest -> getAllCateg();
+$getAllSub = $managerTest -> getAllSubCateg();
+// var_dump($getAllCateg, $getAllSub);
+// var_dump($getAllByAll);
+
+foreach($getAllCateg as $categ){
+    echo "category : " . $categ->getMwTitleCategory() . "<br>";
+    $getAllByAll = $managerTest -> getAllbyAll($categ->getMwIdCategory());
+    foreach($getAllByAll as $all){
+        echo "article : " . $all -> getMwTitleRessource() . "<br>";
+        echo "sub : " . $all -> getMwSubCategory() . "<br>";
+    }
+    
 }
-
-$manageSub = new ManagerRessource($db);
-
-$allSubs = $manageSub -> getAllSubCateg();
-foreach($allSubs as $sub){
-    echo "sous category : " . $sub-> getMwTitleSubCategoryRessource() . "<br>";
-
-}
-var_dump($allSubs);

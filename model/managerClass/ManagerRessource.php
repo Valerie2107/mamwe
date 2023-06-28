@@ -37,7 +37,7 @@ class ManagerRessource implements ManagerInterface
 
 
     public function getAll(){
-        $prepare = $this->db->prepare("SELECT * FROM `mw_ressource` ORDER BY mw_id_ressource");
+        $prepare = $this->db->prepare("SELECT * FROM `mw_ressource`");
         $prepare->execute();
         $result = $prepare->fetchAll();
         $ressources = [];
@@ -74,6 +74,19 @@ class ManagerRessource implements ManagerInterface
             
         return $subs;
 
+    }
+
+    public function getAllbyAll($idCateg){
+        $prepare = $this->db->prepare("SELECT * FROM `mw_ressource` WHERE mw_category = :idCateg ORDER BY mw_sub_category");
+        $prepare->bindValue(':idCateg', $idCateg, PDO::PARAM_INT);
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $ressources = [];
+        foreach ($result as $row) {
+            $ressources[] = new MappingRessource($row);
+        }
+            
+        return $ressources;
     }
 
 
