@@ -6,6 +6,7 @@ use PDO;
 use Exception;
 use model\mappingClass\MappingLivreDor;
 use model\interfaceClass\ManagerInterface;
+use model\mappingClass\MappingPicture;
 
 
 // use ManagerInterface:

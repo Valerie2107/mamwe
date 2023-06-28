@@ -1,7 +1,7 @@
 <?php
 
 use model\mappingClass\MappingInfo;
-
+use model\managerClass\ManagerInfo;
 
 // require de la config:
 require_once "../config.php";
@@ -26,6 +26,7 @@ try {
     echo "<br>";
 }
 
+// test des mapping :
 try {
     $test1 = new MappingInfo([
         "mwIdInfo" => 1,
@@ -37,8 +38,33 @@ try {
     echo $e;
 }
 
+try{
+    $test2 = new MappingInfo([
+        "mwTitleSect" => "test ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgte",
+    ]);
+}catch (Exception $e){
+    echo $e;
+}
+
 echo "<pre>";
 var_dump($test1);
 echo "</pre>";
 
-?>
+
+
+// test des manager :
+$managerInfo = new ManagerInfo($db);
+var_dump($managerInfo);
+$getAll = $managerInfo -> getAll();
+
+var_dump($getAll);
+
+foreach($getAll as $event){
+    echo $event -> getMwIdInfo();
+    echo $event -> getMwContentInfo();  
+ echo "date : " . $event -> getMwDateInfo() . "<br>";  
+
+}
+
+$insertI = $managerInfo -> $insertInfo($test1);
+var_dump($insertI);
