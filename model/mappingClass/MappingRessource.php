@@ -11,9 +11,10 @@ class MappingRessource extends MappingAbstract {
     private int $mwIdRessource;
     private string $mwTitleRessource;
     private string $mwContentRessource;
+    private ?string $mwUrlRessource;
     private string $mwDateRessource;
     private ?int $mwPictureMwIdPicture;
-    private ?int $mwCategoryRessourceMwCategoryId;
+    private ?int $mwSubCategoryRessourceMwIdSubCategoryRessource;
 
     use \model\traitClass\DateTrait; 
 
@@ -46,6 +47,7 @@ class MappingRessource extends MappingAbstract {
         return $this;
     }
 
+
     /**
      * Get the value of mwTitleRessource
      *
@@ -74,6 +76,7 @@ class MappingRessource extends MappingAbstract {
         return $this;
     }
 
+
     /**
      * Get the value of mwContentRessource
      *
@@ -99,6 +102,37 @@ class MappingRessource extends MappingAbstract {
     }
 
     /**
+     * Get the value of mwUrlRessource
+     *
+     * @return string
+     */
+    public function getMwUrlRessource(): string
+    {
+        return $this->mwUrlRessource;
+    }
+
+    /**
+     * Set the value of mwUrlRessource
+     *
+     * @param string $mwUrlRessource
+     *
+     * @return self
+     */
+    public function setMwUrlRessource(?string $mwUrlRessource): self
+    {
+        if(!empty($mwUrlRessource)){
+            if(strlen($mwUrlRessource) > 255){
+                throw new Exception("URL trop longue ! ");
+            }else{
+                $this->mwUrlRessource = $mwUrlRessource;
+            }
+        }
+
+        return $this;
+    }
+
+
+    /**
      * Get the value of mwDateRessource
      *
      * @return string
@@ -118,9 +152,9 @@ class MappingRessource extends MappingAbstract {
     public function setMwDateRessource(string $mwDateRessource): self
     {
 
-        if($this->dateTrait($mwDateRessource)){
+        if($this-> dateTrait($mwDateRessource, 'Y-m-d')){
 
-            $this->mwDateRessource = $mwDateRessource;
+            $this-> mwDateRessource = $mwDateRessource;
 
         }else{
 
@@ -132,6 +166,7 @@ class MappingRessource extends MappingAbstract {
         return $this;
     }
 
+    
     /**
      * Get the value of mwPictureMwIdPicture
      *
@@ -156,27 +191,30 @@ class MappingRessource extends MappingAbstract {
         return $this;
     }
 
+
     /**
-     * Get the value of mwCategoryRessourceMwCategoryId
+     * Get the value of mwSubCategoryRessourceMwIdSubCategoryRessource
      *
      * @return ?int
      */
-    public function getMwCategoryRessourceMwCategoryId(): ?int
+    public function getMwSubCategoryRessourceMwIdSubCategoryRessource(): ?int
     {
-        return $this->mwCategoryRessourceMwCategoryId;
+        return $this->mwSubCategoryRessourceMwIdSubCategoryRessource;
     }
 
     /**
-     * Set the value of mwCategoryRessourceMwCategoryId
+     * Set the value of mwSubCategoryRessourceMwIdSubCategoryRessource
      *
-     * @param ?int $mwCategoryRessourceMwCategoryId
+     * @param ?int $mwSubCategoryRessourceMwIdSubCategoryRessource
      *
      * @return self
      */
-    public function setMwCategoryRessourceMwCategoryId(?int $mwCategoryRessourceMwCategoryId): self
+    public function setMwSubCategoryRessourceMwIdSubCategoryRessource(?int $mwSubCategoryRessourceMwIdSubCategoryRessource): self
     {
-        $this->mwCategoryRessourceMwCategoryId = $mwCategoryRessourceMwCategoryId;
+        $this->mwSubCategoryRessourceMwIdSubCategoryRessource = $mwSubCategoryRessourceMwIdSubCategoryRessource;
 
         return $this;
     }
+
+
 }
