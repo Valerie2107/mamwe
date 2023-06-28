@@ -77,27 +77,8 @@ $managerTest = new ManagerRessource($db);
 // var_dump($managerTest);
 
 $getAllRess = $managerTest -> getAll();
-$getAllCateg = $managerTest -> getAllCateg();
-$getAllSub = $managerTest -> getAllSubCateg();
-// var_dump($getAllCateg, $getAllSub);
-// var_dump($getAllByAll);
+$getCategById = $managerTest -> getCategById(2);
+$getSubById = $managerTest -> getSubById(2);
 
-// var_dump($getSubById);
-// $subId = $getAllSub-> getMwIDSubCategory();
+var_dump($getCategById, $getSubById);
 
-foreach($getAllCateg as $categ){
-
-    echo "<h2>category : " . $categ->getMwTitleCategory() . "</h2><br><br>";
-
-    $categId = $categ->getMwIdCategory();
-    $getAllByAll = $managerTest -> getAllbyAll($categId);    
-    
-    foreach($getAllByAll as $all){
-        $getSubById = $managerTest -> getSubById($all-> getMwSubCategory());
-        echo "sous categ : " . $getSubById -> getMwTitleSubCategory() . "<br>";
-        echo "article : " . $all -> getMwTitleRessource() . "<br>";
-        echo "sub : " . $all -> getMwSubCategory() . "<br><hr>";
-    }
-    echo "<br><br><hr>";
-    
-}
