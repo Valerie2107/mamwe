@@ -80,25 +80,26 @@ foreach($sectionTestRequete as $item){
 
 $insertPic = new MappingPicture([
     "mwIdPicture" => 100, 
-    "mwTitlePicture" => "photo1000",
+    "mwTitlePicture" => "photo666",
     "mwUrlPicture" => "https://cdn-s-www.lalsace.fr/images/ED82BE29-CBAC-40EC-B71C-285CD717A43C/NW_raw/la-voiture-noire-de-bugatti-modele-unique-photo-dr-1608828241.jpg",
-    "mwSizePicture" => 1,
+    "mwSizePicture" => 2,
     "mwPositionPicture" => 1,
     "mwArticleMwIdArticle" => null,
 ]);
 
 $insertSection = new MappingSection([
-    "mwIdSect" => 12,
-    "mwTitleSect" => "testtesttest",
-    "mwContentSect" => "lalalala lal alal lal lal alal lal alal llala lal ",
+    "mwTitleSect" => "tototototototot",
+    "mwContentSect" => "jawad suce sa soeur",
     "mwVisible" => 1,
+    "mwPictureMwIdPicture" => 100,
+    "mwIdSect" => 12,
+    "picture"=> null,
 ]);
 
 var_dump($insertPic, $insertSection);
 
-$sectionInsert4 = $sectionTest-> insertSectionWithPic($insertPic, $insertSection);
-// $sectionUpdate = $sectionTest -> updateSectionWithPic("poupou", "https://leblogdemonsieur.com/wp-content/uploads/2022/09/picture-occasion-voiture-peugeot-choisir.jpg", 1, 1, 29, 
-// "poupou", "le poupou des doudous", 29, 1);
+// $sectionInsert4 = $sectionTest-> insertSectionWithPic($insertPic, $insertSection);
+// $sectionUpdate = $sectionTest -> updateSectionWithPic($insertPic, $insertSection);
 
 
 // var_dump($sectionUpdate);

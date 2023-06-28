@@ -69,7 +69,7 @@ class ManagerSection implements ManagerInterface
         $preparePic = $this->db->prepare($sqlPic);
         $preparePic->bindValue(':titlePic', $dataP->getMwTitlePicture(),PDO::PARAM_STR);
         $preparePic->bindValue(':urlPic', $dataP->getMwUrlPicture(),PDO::PARAM_STR);
-        $preparePic->bindValue(':sizePic', 29, PDO::PARAM_INT);
+        $preparePic->bindValue(':sizePic', $dataP->getMwSizePicture(), PDO::PARAM_INT);
         $preparePic->bindValue(':positionPic',$dataP->getMwPositionPicture(), PDO::PARAM_INT);
 
         
@@ -113,8 +113,7 @@ class ManagerSection implements ManagerInterface
     }
 
 
-    public function updateSectionWithPic(string $titlePic, string $urlPic, int $sizePic, int $positionPic, int $idPic, 
-        string $titleSect, string $contentSect, int $visibleSect, int $idSect){ 
+    public function updateSectionWithPic(MappingPicture $dataP, MappingSection $dataS){ 
 
         $this->db->beginTransaction();
         
@@ -122,25 +121,25 @@ class ManagerSection implements ManagerInterface
                     SET `mw_title_picture`= :titlePic ,`mw_url_picture`= :urlPic, `mw_size_picture`= :sizePic, `mw_position_picture`= :positionPic 
                     WHERE `mw_id_picture`= :idPic";      
         $preparePic = $this->db->prepare($sqlPic);
-        $preparePic->bindParam(':titlePic', $titlePic,PDO::PARAM_STR);
-        $preparePic->bindParam(':urlPic', $urlPic,PDO::PARAM_STR);
-        $preparePic->bindParam(':sizePic', $sizePic, PDO::PARAM_INT);
-        $preparePic->bindParam(':positionPic',$positionPic, PDO::PARAM_INT);
-        $preparePic->bindParam(':idPic',$idPic, PDO::PARAM_INT);
+        $preparePic->bindValue(':titlePic', $dataP->getMwTitlePicture(),PDO::PARAM_STR);
+        $preparePic->bindValue(':urlPic', $dataP->getMwUrlPicture(),PDO::PARAM_STR);
+        $preparePic->bindValue(':sizePic', $dataP->getMwSizePicture(), PDO::PARAM_INT);
+        $preparePic->bindValue(':positionPic', $dataP->getMwPositionPicture(), PDO::PARAM_INT);
+        $preparePic->bindValue(':idPic', $dataP->getMwIdPicture(), PDO::PARAM_INT);
 
         $preparePic->execute();
 
+        $picId = $dataP->getMwIdPicture();
 
         $sqlSect = "UPDATE `mw_section` 
                     SET `mw_title_sect`= :titleSect, `mw_content_sect`= :contentSect, `mw_visible_sect`= :visibleSect  ,`mw_picture_mw_id_picture`= :idPic 
                     WHERE `mw_id_sect` = :idSect";      
         $prepareSect = $this->db->prepare($sqlSect);
-        $prepareSect->bindParam(':titleSect', $titleSect,PDO::PARAM_STR);
-        $prepareSect->bindParam(':contentSect', $contentSect, PDO::PARAM_STR);
-        $prepareSect->bindParam(':visibleSect', $visibleSect, PDO::PARAM_INT);
-        $prepareSect->bindParam(':idPic', $idPic, PDO::PARAM_INT);
-        $prepareSect->bindParam(':idSect', $idSect, PDO::PARAM_INT);
-
+        $prepareSect->bindValue(':idSect', $dataS->getMwIdSect(), PDO::PARAM_INT);
+        $prepareSect->bindValue(':titleSect', $dataS->getMwTitleSect(),PDO::PARAM_STR);
+        $prepareSect->bindValue(':contentSect', $dataS->getMwContentSect(), PDO::PARAM_STR);
+        $prepareSect->bindValue(':visibleSect', $dataS->getMwVisible(), PDO::PARAM_INT);
+        $prepareSect->bindValue(':idPic', $picId, PDO::PARAM_INT);
         
         $prepareSect->execute();
        

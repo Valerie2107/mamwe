@@ -32,11 +32,12 @@ try {
 
 try{
 $test1 = new MappingPicture([
-    "mwTitlePicture" => "test",
-    "mwUrlPicture" => "test",
-    "mwSizePicture" => 1,
-    "mwPositionPicture" => 1,
-    "mwArticleMwIdArticle" => null,
+    "mwIdPicture" => 61,
+    "mwTitlePicture" => "test2",
+    "mwUrlPicture" => "test2",
+    "mwSizePicture" => 0,
+    "mwPositionPicture" => 0,
+    "mwArticleMwIdArticle" => 2,
 ]);
 }catch(Exception $e ){
     $e->getMessage();
@@ -52,18 +53,18 @@ var_dump($testManagerPic);
 $getAllPic = $testManagerPic -> getAll();
 // var_dump($getAllPic);
 
-try{
+// try{
 
-    $insertPic = $testManagerPic -> insertPicture($test1);
-}catch(Exception $e){
-    $e->getMessage();
-}
+//     $insertPic = $testManagerPic -> insertPicture($test1);
+// }catch(Exception $e){
+//     $e->getMessage();
+// }
 
-var_dump($insertPic);
+// var_dump($insertPic);
 
 // $getPicById = $testManagerPic -> getOneById(2);
 // // $deletePic = $testManagerPic -> deletePicture(87);
-// $updatePic = $testManagerPic -> updatePicture("test update", "on a essayé", 1, 1, 128);
+$updatePic = $testManagerPic -> updatePicture($test1);
 
 // $articlePic = new ManagerArticle($db);
 // $art1 = $articlePic -> getAllArticlesWithPictures($db);

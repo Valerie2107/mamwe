@@ -8,8 +8,7 @@ class MappingCategoryRessource extends MappingAbstract {
 
     private int $mwCategoryId;
     private string $mwCategoryTitle;
-    private string $mwCategoryUrl;
-    private string $mwCategoryContent;
+
 
     public function __construct(array $tab)
     {
@@ -70,57 +69,6 @@ class MappingCategoryRessource extends MappingAbstract {
         return $this;
     }
 
-    /**
-     * Get the value of mwCategoryUrl
-     *
-     * @return string
-     */
-    public function getMwCategoryUrl(): string
-    {
-        return $this->mwCategoryUrl;
-    }
 
-    /**
-     * Set the value of mwCategoryUrl
-     *
-     * @param string $mwCategoryUrl
-     *
-     * @return self
-     */
-    public function setMwCategoryUrl(string $mwCategoryUrl): self
-    {
-        if (strlen($mwCategoryUrl) < 3) {
-            throw new Exception('L\'url de la catégorie doit contenir au moins 3 caractères');
-        }
-        $this->mwCategoryUrl = $mwCategoryUrl;
 
-        return $this;
-    }
-
-    /**
-     * Get the value of mwCategoryContent
-     *
-     * @return string
-     */
-    public function getMwCategoryContent(): string
-    {
-        return $this->mwCategoryContent;
-    }
-
-    /**
-     * Set the value of mwCategoryContent
-     *
-     * @param string $mwCategoryContent
-     *
-     * @return self
-     */
-    public function setMwCategoryContent(string $mwCategoryContent): self
-    {
-        if (strlen($mwCategoryContent) < 3) {
-            throw new Exception('Le contenu de la catégorie doit contenir au moins 3 caractères');
-        }
-        $this->mwCategoryContent = $mwCategoryContent;
-
-        return $this;
-    }
 }
