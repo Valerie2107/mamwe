@@ -76,6 +76,19 @@ class ManagerRessource implements ManagerInterface
 
     }
 
+    public function getSubById($id){
+        $prepare = $this -> db ->prepare("SELECT * FROM mw_sub_category_ressource WHERE mw_id_sub_category = :id");
+        $prepare -> bindValue(':id', $id, PDO::PARAM_INT);
+        $prepare-> execute();
+        $result = $prepare-> fetch();
+        if($result){
+            return new MappingSubCategoryRessource($result);
+        }else{
+            throw new Exception("il n'y pas de sous catégrory à l'id $id");
+        }
+    }
+
+
     public function getAllbyAll($idCateg){
         $prepare = $this->db->prepare("SELECT * FROM `mw_ressource` WHERE mw_category = :idCateg ORDER BY mw_sub_category");
         $prepare->bindValue(':idCateg', $idCateg, PDO::PARAM_INT);
