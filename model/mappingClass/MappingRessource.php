@@ -13,8 +13,9 @@ class MappingRessource extends MappingAbstract {
     private string $mwContentRessource;
     private ?string $mwUrlRessource;
     private string $mwDateRessource;
+    private int $mwCategory;
+    private int $mwSubCategory;
     private ?int $mwPictureMwIdPicture;
-    private ?int $mwSubCategoryRessourceMwIdSubCategoryRessource;
 
     use \model\traitClass\DateTrait; 
 
@@ -166,7 +167,58 @@ class MappingRessource extends MappingAbstract {
         return $this;
     }
 
+
+    /**
+     * Get the value of mwCategory
+     *
+     * @return int
+     */
+    public function getMwCategory(): int
+    {
+        return $this->mwCategory;
+    }
     
+    /**
+     * Set the value of mwCategory
+     *
+     * @param int $mwCategory
+     *
+     * @return self
+     */
+    public function setMwCategory(int $mwCategory): self
+    {
+        
+        $this->mwCategory = $mwCategory;
+        
+        return $this;
+    }
+    
+
+    /**
+     * Get the value of mwSubCategory
+     *
+     * @return int
+     */
+    public function getMwSubCategory(): int
+    {
+        return $this->mwSubCategory;
+    }
+    
+    /**
+     * Set the value of mmwSubCategory
+     *
+     * @param int $mmwSubCategory
+     *
+     * @return self
+     */
+    public function setMwSubCategory(int $mwSubCategory): self
+    {
+        $this->mwSubCategory = $mwSubCategory;
+        
+        return $this;
+    }
+
+
     /**
      * Get the value of mwPictureMwIdPicture
      *
@@ -190,31 +242,4 @@ class MappingRessource extends MappingAbstract {
 
         return $this;
     }
-
-
-    /**
-     * Get the value of mwSubCategoryRessourceMwIdSubCategoryRessource
-     *
-     * @return ?int
-     */
-    public function getMwSubCategoryRessourceMwIdSubCategoryRessource(): ?int
-    {
-        return $this->mwSubCategoryRessourceMwIdSubCategoryRessource;
-    }
-
-    /**
-     * Set the value of mwSubCategoryRessourceMwIdSubCategoryRessource
-     *
-     * @param ?int $mwSubCategoryRessourceMwIdSubCategoryRessource
-     *
-     * @return self
-     */
-    public function setMwSubCategoryRessourceMwIdSubCategoryRessource(?int $mwSubCategoryRessourceMwIdSubCategoryRessource): self
-    {
-        $this->mwSubCategoryRessourceMwIdSubCategoryRessource = $mwSubCategoryRessourceMwIdSubCategoryRessource;
-
-        return $this;
-    }
-
-
 }

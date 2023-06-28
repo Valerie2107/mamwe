@@ -6,8 +6,8 @@ use Exception;
 
 class MappingSubCategoryRessource extends MappingAbstract {
 
-    private int $mwIdSubCategoryRessource;
-    private string $mwTitleSubCategoryRessource;
+    private int $mwIdSubCategory;
+    private string $mwTitleSubCategory;
 
 
     public function __construct(array $tab)
@@ -15,54 +15,51 @@ class MappingSubCategoryRessource extends MappingAbstract {
         parent::__construct($tab);
     }
 
-    
-
-
 
     /**
-     * Get the value of mwIdSubCategoryRessource
+     * Get the value of mwIdSubCategory
      *
      * @return int
      */
-    public function getMwIdSubCategoryRessource(): int
+    public function getMwIdSubCategory(): int
     {
-        return $this->mwIdSubCategoryRessource;
+        return $this->mwIdSubCategory;
     }
 
     /**
-     * Set the value of mwIdSubCategoryRessource
+     * Set the value of mwIdSubCategory
      *
-     * @param int $mwIdSubCategoryRessource
+     * @param int $mwIdSubCategory
      *
      * @return self
      */
-    public function setMwIdSubCategoryRessource(int $mwIdSubCategoryRessource): self
+    public function setMwIdSubCategory(int $mwIdSubCategory): self
     {
-        $this->mwIdSubCategoryRessource = $mwIdSubCategoryRessource;
+        $this->mwIdSubCategory = $mwIdSubCategory;
 
         return $this;
     }
 
     /**
-     * Get the value of mwTitleSubCategoryRessource
+     * Get the value of mwTitleSubCategory
      *
      * @return string
      */
-    public function getMwTitleSubCategoryRessource(): string
+    public function getMwTitleSubCategory(): string
     {
-        return $this->mwTitleSubCategoryRessource;
+        return $this->mwTitleSubCategory;
     }
 
     /**
-     * Set the value of mwTitleSubCategoryRessource
+     * Set the value of mwTitleSubCategory
      *
-     * @param string $mwTitleSubCategoryRessource
+     * @param string $mwTitleSubCategory
      *
      * @return self
      */
-    public function setMwTitleSubCategoryRessource(string $mwTitleSubCategoryRessource): self
+    public function setMwTitleSubCategory(string $mwTitleSubCategory): self
     {
-        $this->mwTitleSubCategoryRessource = $mwTitleSubCategoryRessource;
+        $this->mwTitleSubCategory = $mwTitleSubCategory;
 
         return $this;
     }

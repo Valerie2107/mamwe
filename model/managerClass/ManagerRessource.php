@@ -38,7 +38,7 @@ class ManagerRessource implements ManagerInterface
 
 
     public function getAll(){
-        $prepare = $this->db->prepare("SELECT * FROM `mw_ressource` ORDER BY mw_id_ressource");
+        $prepare = $this->db->prepare("SELECT * FROM `mw_ressource`");
         $prepare->execute();
         $result = $prepare->fetchAll();
         $ressources = [];
@@ -77,7 +77,53 @@ class ManagerRessource implements ManagerInterface
 
     }
 
+        public function getCategById($id){
+        $prepare = $this -> db ->prepare("SELECT * FROM mw_category_ressource WHERE mw_id_category = :id");
+        $prepare -> bindValue(':id', $id, PDO::PARAM_INT);
+        $prepare-> execute();
+        $result = $prepare-> fetch();
+        if($result){
+            return new MappingCategoryRessource($result);
+        }else{
+            throw new Exception("il n'y pas de catégrory à l'id $id");
+        }
+    }
 
+    public function getSubById($id){
+        $prepare = $this -> db ->prepare("SELECT * FROM mw_sub_category_ressource WHERE mw_id_sub_category = :id");
+        $prepare -> bindValue(':id', $id, PDO::PARAM_INT);
+        $prepare-> execute();
+        $result = $prepare-> fetch();
+        if($result){
+            return new MappingSubCategoryRessource($result);
+        }else{
+            throw new Exception("il n'y pas de sous catégrory à l'id $id");
+        }
+    }
+
+
+    public function getAllbyAll($idCateg, $idSub){
+        $prepare = $this->db->prepare("SELECT * FROM `mw_ressource` 
+            WHERE mw_category = :idCateg AND mw_sub_category = :idSub
+            ORDER BY mw_sub_category; 
+        ");
+        $prepare->bindValue(':idCateg', $idCateg, PDO::PARAM_INT);
+        $prepare->bindValue(':idSub', $idSub, PDO::PARAM_INT);
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $ressources = [];
+        foreach ($result as $row) {
+            $ressources[] = new MappingRessource($row);
+        }
+            
+        return $ressources;
+    }
+
+
+
+
+
+    // caca a refaire :
     // public function insertRessource(){
     //     $sql = "INSERT INTO mw_ressource (mw_title_ressource,mw_content_ressource, mw_url_ressource, mw_picture_mw_id_picture, mw_category_ressource_mw_category_id ) VALUES (:mw_title_ressource, :mw_content_ressource, :mw_url_ressource, :mw_picture_mw_id_picture, :mw_category_ressource_mw_category_id)";
     //     $prepare = $this->db->prepare($sql);

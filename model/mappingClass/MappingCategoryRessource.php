@@ -6,8 +6,8 @@ use Exception;
 
 class MappingCategoryRessource extends MappingAbstract {
 
-    private int $mwCategoryId;
-    private string $mwCategoryTitle;
+    private int $mwIdCategory;
+    private string $mwTitleCategory;
 
 
     public function __construct(array $tab)
@@ -15,14 +15,10 @@ class MappingCategoryRessource extends MappingAbstract {
         parent::__construct($tab);
     }
 
-    /**
-     * Get the value of mwCategoryId
-     *
-     * @return int
-     */
-    public function getMwCategoryId(): int
+
+    public function getMwIdCategory(): int
     {
-        return $this->mwCategoryId;
+        return $this->mwIdCategory;
     }
 
     /**
@@ -32,24 +28,25 @@ class MappingCategoryRessource extends MappingAbstract {
      *
      * @return self
      */
-    public function setMwCategoryId(int $mwCategoryId): self
+    public function setMwIDCategory(int $mwIdCategory): self
     {
-        if ($mwCategoryId <= 0) {
+        if ($mwIdCategory <= 0) {
             throw new Exception('ID de la catégorie doit être un entier positif');
         }
-        $this->mwCategoryId = $mwCategoryId;
+        $this->mwIdCategory = $mwIdCategory;
 
         return $this;
     }
+
 
     /**
      * Get the value of mwCategoryTitle
      *
      * @return string
      */
-    public function getMwCategoryTitle(): string
+    public function getMwTitleCategory(): string
     {
-        return $this->mwCategoryTitle;
+        return $this->mwTitleCategory;
     }
 
     /**
@@ -59,12 +56,12 @@ class MappingCategoryRessource extends MappingAbstract {
      *
      * @return self
      */
-    public function setMwCategoryTitle(string $mwCategoryTitle): self
+    public function setMwTitleCategory(string $mwTitleCategory): self
     {
-        if (strlen($mwCategoryTitle) < 3) {
+        if (strlen($mwTitleCategory) < 3) {
             throw new Exception('Le titre de la catégorie doit contenir au moins 3 caractères');
         }
-        $this->mwCategoryTitle = $mwCategoryTitle;
+        $this->mwTitleCategory = $mwTitleCategory;
 
         return $this;
     }
