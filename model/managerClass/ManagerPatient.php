@@ -30,7 +30,7 @@ class ManagerPatient implements ManagerInterface
         if($result){
             return new MappingPatient($result);
         }else{
-            throw new Exception("cette patient $id n'existe pas" );
+            throw new Exception("ce patient $id n'existe pas" );
         }
     }
 

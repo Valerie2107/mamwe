@@ -35,6 +35,7 @@ class ManagerRessource implements ManagerInterface
     }
 
 
+
     public function getAll(){
         $prepare = $this->db->prepare("SELECT * FROM `mw_ressource` ORDER BY mw_id_ressource");
         $prepare->execute();

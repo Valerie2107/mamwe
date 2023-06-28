@@ -102,7 +102,4 @@ class MappingPatient extends MappingAbstract{
 
         return $this;
     }
-
-
-
 }
