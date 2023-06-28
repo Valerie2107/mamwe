@@ -49,7 +49,7 @@ class ManagerLivreDor implements ManagerInterface
     }  
 
 
-    public function insertPatient(MappingLivreDor $data){
+    public function insertLivreDor(MappingLivreDor $data){
 
         $sql = "INSERT INTO `mw_livredor`(`mw_name_livredor`, `mw_mail_livredor`, `mw_message_livredor`, `mw_date_livredor`, `mw_visible_livredor`) 
         VALUES (:name, :mail, :message, :date, :visible)";  
@@ -70,7 +70,7 @@ class ManagerLivreDor implements ManagerInterface
     }
 
 
-    public function deleteMessage($id){
+    public function deleteLivreDor($id){
         $sql = "DELETE FROM mw_livredor WHERE mw_id_livredor = :id";
         $prepare = $this -> db -> prepare($sql);
         $prepare->bindParam(':id', $id, PDO::PARAM_INT);
@@ -84,7 +84,7 @@ class ManagerLivreDor implements ManagerInterface
     }
 
 
-    public function updateMessage(MappingLivreDor $data){
+    public function updateLivreDor(MappingLivreDor $data){
         $sql = "UPDATE `mw_livredor` 
                 SET `mw_name_livredor`= :name, `mw_mail_livredor`= :mail, `mw_message_livredor`= :message, `mw_date_livredor`= :date,`mw_visible_livredor`= :visibility 
                 WHERE `mw_id_livredor`= :id";      

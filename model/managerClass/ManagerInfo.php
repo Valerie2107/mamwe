@@ -49,7 +49,7 @@ class ManagerInfo implements ManagerInterface
     }  
 
 
-    public function insertPatient(MappingInfo $data){
+    public function insertInfo(MappingInfo $data){
 
         $sql = "INSERT INTO `mw_info`(`mw_content_info`, `mw_date_info`) 
         VALUES (:content, :date)";  
@@ -67,7 +67,7 @@ class ManagerInfo implements ManagerInterface
     }
 
 
-    public function deletePatient($id){
+    public function deleteInfo($id){
         $sql = "DELETE FROM mw_info WHERE mw_id_info = :id";
         $prepare = $this -> db -> prepare($sql);
         $prepare->bindParam(':id', $id, PDO::PARAM_INT);
@@ -81,7 +81,7 @@ class ManagerInfo implements ManagerInterface
     }
 
 
-    public function updatePatient(MappingInfo $data){
+    public function updateInfo(MappingInfo $data){
         $sql = "UPDATE `mw_info` 
                 SET `mw_content_info`= :content, `mw_date_info`= :date
                 WHERE `mw_id_info`= :id";      
