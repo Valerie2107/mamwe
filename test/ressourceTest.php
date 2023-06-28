@@ -29,8 +29,10 @@ try {
     echo "<br>";
 }
 
+#########################
+#  mapping ressource    #
+#########################
 
-// mapping ressource :
 try{
     $mapRess = new MappingRessource([
         'mwIdRessource' => 1000,
@@ -72,13 +74,48 @@ try{
 // var_dump($mapSubCateg);
 // TOUT EST BON!
 
-// Test Manager :
+
+
+##################
+# Test Manager   #
+##################
+
 $managerTest = new ManagerRessource($db);
 // var_dump($managerTest);
 
-$getAllRess = $managerTest -> getAll();
-$getCategById = $managerTest -> getCategById(2);
-$getSubById = $managerTest -> getSubById(2);
+// on recupère toutes les catégories:
+$getAllCateg = $managerTest -> getAllCateg();
 
-var_dump($getCategById, $getSubById);
+// on récupère toutes les sous catégories :
+$getAllSub = $managerTest -> getAllSubCateg();
+
+
+// on boucle sur les catégories :
+foreach($getAllCateg as $categ){
+
+    // on affiche le titre de la catég :
+    echo "<h1> categ : " . $categ -> getMwTitleCategory() . "<br><br>"; 
+    // on récupère son ID :
+    $categId = $categ->getMwIdCategory();
+
+    // on boucle sur la sous categ:
+    foreach($getAllSub as $sub){
+        // on affiche:
+        echo "<h3> sous category : " . $sub-> getMwTitleSubCategory() . "</h3><br><br>";
+        // on recupère l'ID:
+        $subId = $sub -> getMwIdSubCategory();
+
+        // On recupère toutes les ressources avec les ID des categ et sous categ en même temps :
+        $getAllByAll = $managerTest -> getAllbyAll($categId, $subId);
+
+        // on boucle sur les ressources :
+        foreach($getAllByAll as $all){
+            if(!empty($all)){
+                // on affiche les ressources:
+                echo "<p>contenu : " . $all -> getMwTitleRessource() . "<p><br>"; 
+
+            }
+        }
+    }
+}
 

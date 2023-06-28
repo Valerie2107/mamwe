@@ -101,15 +101,13 @@ class ManagerRessource implements ManagerInterface
     }
 
 
-    public function getAllbyAll($idCateg){
-        $prepare = $this->db->prepare("
-            SELECT * FROM `mw_ressource` 
-            JOIN mw_sub_category_ressource 
-            ON mw_sub_category_ressource.mw_id_sub_category = mw_ressource.mw_sub_category
-            WHERE mw_category = :idCateg
-            ORDER BY mw_sub_category;
+    public function getAllbyAll($idCateg, $idSub){
+        $prepare = $this->db->prepare("SELECT * FROM `mw_ressource` 
+            WHERE mw_category = :idCateg AND mw_sub_category = :idSub
+            ORDER BY mw_sub_category; 
         ");
         $prepare->bindValue(':idCateg', $idCateg, PDO::PARAM_INT);
+        $prepare->bindValue(':idSub', $idSub, PDO::PARAM_INT);
         $prepare->execute();
         $result = $prepare->fetchAll();
         $ressources = [];
