@@ -82,7 +82,7 @@ class ManagerAgenda implements ManagerInterface
     }
 
 
-    public function updatePatient(MappingAgenda $data){
+    public function updateAgenda(MappingAgenda $data){
         $sql = "UPDATE `mw_agenda` 
                 SET `mw_date_agenda`= :date, `mw_content_agenda`= :content, `mw_title_agenda`= :title
                 WHERE `mw_id_agenda`= :id";      
