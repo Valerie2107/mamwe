@@ -78,13 +78,14 @@ class MappingInfo extends MappingAbstract
  
      // SET // 
      
-     public function setMwTitleInfo(int $mwTitleInfo ) : self
+     public function setMwTitleInfo(string $mwTitleInfo ) : self
      {
          $this->mwIdInfo = $mwTitleInfo;
          
          return $this;
      }
 
+     
        // GET de picture // 
        public function getMwPictureMwIdPicture(): ?int
        {
