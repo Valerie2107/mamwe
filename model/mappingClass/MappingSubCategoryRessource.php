@@ -35,6 +35,7 @@ class MappingSubCategoryRessource extends MappingAbstract {
      */
     public function setMwIdSubCategory(int $mwIdSubCategory): self
     {
+        if($mwIdSubCategory < 0) throw new Exception("La valeur ne peut être négative ! ");
         $this->mwIdSubCategory = $mwIdSubCategory;
 
         return $this;
