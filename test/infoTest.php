@@ -32,7 +32,6 @@ try {
     $test1 = new MappingInfo([
         "mwIdInfo" => 1,
         "mwContentInfo" => "text blabla",
-        "mwTitleInfo" => "titre quoi",
         "mwDateInfo" => "20/10/1983",
         "mwPictureMwIdPicture" => 1,
     ]);
