@@ -110,18 +110,34 @@ class ManagerAgenda implements ManagerInterface
     }
 
 
-    public function updateAgenda(MappingAgenda $data){
+    public function updateAgenda(MappingPicture $dataP, MappingAgenda $dataA){
+
+        $this->db->beginTransaction();
+        
+        $sqlPic = "UPDATE `mw_picture` 
+                    SET `mw_title_picture`= :titlePic ,`mw_url_picture`= :urlPic, `mw_size_picture`= :sizePic, `mw_position_picture`= :positionPic 
+                    WHERE `mw_id_picture`= :idPic";      
+        $preparePic = $this->db->prepare($sqlPic);
+        $preparePic->bindValue(':titlePic', $dataP->getMwTitlePicture(),PDO::PARAM_STR);
+        $preparePic->bindValue(':urlPic', $dataP->getMwUrlPicture(),PDO::PARAM_STR);
+        $preparePic->bindValue(':sizePic', $dataP->getMwSizePicture(), PDO::PARAM_INT);
+        $preparePic->bindValue(':positionPic', $dataP->getMwPositionPicture(), PDO::PARAM_INT);
+        $preparePic->bindValue(':idPic', $dataP->getMwIdPicture(), PDO::PARAM_INT);
+
+        $preparePic->execute();
+
         $sql = "UPDATE `mw_agenda` 
                 SET `mw_date_agenda`= :date, `mw_content_agenda`= :content, `mw_title_agenda`= :title, `mw_picture_mw_id_picture`= :picture
-                WHERE `mw_id_agenda`= :id";      
-        $prepare = $this->db->prepare($sql);
-        $prepare->bindValue(':date', $data -> getMwDateAgenda(), PDO::PARAM_STR);
-        $prepare->bindValue(':content', $data -> getMwContentAgenda(), PDO::PARAM_STR);
-        $prepare->bindValue(':title', $data -> getMwTitleAgenda(), PDO::PARAM_STR);
-        $prepare->bindValue(':id', $data -> getMwIdAgenda(), PDO::PARAM_STR);
-        $prepare->bindValue(':picture', $data -> getMwPictureMwIdPicture(), PDO::PARAM_STR);
+                WHERE `mw_id_agenda`= :idAgenda";    
 
-        $prepare->execute();
+        $prepareA = $this->db->prepare($sql);
+        $prepareA->bindValue(':date', $dataA -> getMwDateAgenda(), PDO::PARAM_STR);
+        $prepareA->bindValue(':content', $dataA-> getMwContentAgenda(), PDO::PARAM_STR);
+        $prepareA->bindValue(':title', $dataA -> getMwTitleAgenda(), PDO::PARAM_STR);
+        $prepareA->bindValue(':picture', $dataP -> getMwIdPicture(), PDO::PARAM_INT);
+        $prepareA->bindValue(':idAgenda', $dataA -> getMwIdAgenda(), PDO::PARAM_INT);
+
+        $prepareA->execute();
 
         try{
             $this->db->commit();

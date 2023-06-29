@@ -2,7 +2,7 @@
 
 use model\mappingClass\MappingAgenda;
 use model\managerClass\ManagerAgenda;
-
+use model\mappingClass\MappingPicture;
 
 // require de la config:
 require_once "../config.php";
@@ -48,7 +48,7 @@ try{
 }
 
 echo "<pre>";
-var_dump($test1,$test2);
+//var_dump($test1,$test2);
 echo "</pre>";
 
 
@@ -58,16 +58,35 @@ $managerAgenda = new ManagerAgenda($db);
 // var_dump($managerAgenda);
 $getAll = $managerAgenda -> getAll();
 
-var_dump($getAll);
+//var_dump($getAll);
 
-foreach($getAll as $event){
-    echo "id : " . $event -> getMwIdAgenda() ."<br>";
-    echo "contenu : " . $event -> getMwContentAgenda() . "<br>";  
-    echo "date : " . $event -> getMwDateAgenda() . "<br>";  
-    ?>
-        <img src="<?= $event->getPicture() ?>" alt="">
-    <?php
-}
+// foreach($getAll as $event){
+//     echo "id : " . $event -> getMwIdAgenda() ."<br>";
+//     echo "contenu : " . $event -> getMwContentAgenda() . "<br>";  
+//     echo "date : " . $event -> getMwDateAgenda() . "<br>";  
+//     
+
 
 // $insertA = $managerAgenda -> insertAgenda($test1);
 //var_dump($insertA);
+
+$agenda = new MappingAgenda ([
+    "mwIdAgenda" => 4,
+    "mwDateAgenda" => "2001-01-01",
+    "mwContentAgenda" => "test2",
+    "mwTitleAgenda" => "test2",
+    "mwPictureMwIdPicture" => 59,
+]);
+
+$picture = new MappingPicture([
+    "mwIdPicture" => 59,
+    "mwTitlePicture" => "testUpdate",
+    "mwUrlPicture" => "testUpdate",
+    "mwSizePicture" => 1,
+    "mwPositionPicture" => 0
+]);
+
+//$updateAgenda = $managerAgenda -> updateAgenda($picture, $agenda);
+//var_dump($updateAgenda);
+
+//$deleteAgenda = $managerAgenda  -> deleteAgenda(62);
