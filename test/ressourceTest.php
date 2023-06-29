@@ -30,7 +30,7 @@ try {
 }
 
 #########################
-#  mapping ressource    #
+#   mapping ressource   #
 #########################
 
 try{

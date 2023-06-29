@@ -37,10 +37,10 @@ class ManagerAgenda implements ManagerInterface
 
     public function getAll()
     {
-        $sql = "SELECT s.* , GROUP_CONCAT(p.mw_id_picture, '|||' , p.mw_url_picture , '|||', p.mw_title_picture SEPARATOR '---') AS picture 
-        FROM mw_agenda s
-        LEFT JOIN mw_picture p ON p.mw_id_picture = s.mw_picture_mw_id_picture
-        GROUP BY s.mw_id_agenda";
+        $sql = "SELECT a.* , mw_picture.mw_url_picture AS picture
+        FROM mw_agenda a
+        LEFT JOIN mw_picture ON mw_picture.mw_id_picture = a.mw_picture_mw_id_picture
+        GROUP BY a.mw_id_agenda";
 
         $prepare = $this->db->prepare($sql);
         // exécution de la requête
@@ -82,7 +82,7 @@ class ManagerAgenda implements ManagerInterface
         $prepareAgenda->bindValue(':date', $dataA->getMwDateAgenda(), PDO::PARAM_STR);
         $prepareAgenda->bindValue(':content', $dataA->getMwContentAgenda(), PDO::PARAM_STR);
         $prepareAgenda->bindValue(':title', $dataA->getMwTitleAgenda(), PDO::PARAM_STR);
-        $prepareAgenda->bindValue(':picture', $dataA->getMwPictureMwIdPicture(), PDO::PARAM_STR);
+        $prepareAgenda->bindValue(':picture', $lastId, PDO::PARAM_INT);
 
         $prepareAgenda->execute();
 

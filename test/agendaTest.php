@@ -61,10 +61,12 @@ $getAll = $managerAgenda -> getAll();
 var_dump($getAll);
 
 foreach($getAll as $event){
-    echo $event -> getMwIdAgenda();
-    echo $event -> getMwContentAgenda();  
-    // echo "date : " . $event -> getMwDateAgenda() . "<br>";  
-
+    echo "id : " . $event -> getMwIdAgenda() ."<br>";
+    echo "contenu : " . $event -> getMwContentAgenda() . "<br>";  
+    echo "date : " . $event -> getMwDateAgenda() . "<br>";  
+    ?>
+        <img src="<?= $event->getPicture() ?>" alt="">
+    <?php
 }
 
 // $insertA = $managerAgenda -> insertAgenda($test1);
