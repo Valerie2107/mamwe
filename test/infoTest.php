@@ -2,6 +2,7 @@
 
 use model\mappingClass\MappingInfo;
 use model\managerClass\ManagerInfo;
+use model\mappingClass\MappingPicture;
 
 // require de la config:
 require_once "../config.php";
@@ -30,8 +31,8 @@ try {
 try {
     $test1 = new MappingInfo([
         "mwIdInfo" => 1,
-        "mwContentInfo" => "text blabla",
-        "mwDateInfo" => "20/10/1983",
+        "mwContentInfo" => "text gnagnagna",
+        "mwDateInfo" => 7+5,
         "mwPictureMwIdPicture" => 1,
     ]);
 }catch(Exception $e){
@@ -66,5 +67,5 @@ foreach($getAll as $event){
 
 }
 
-$insertI = $managerInfo -> $insertInfo($test1);
+$insertInfo = $managerInfo -> $insertInfo($test1);
 var_dump($insertI);
