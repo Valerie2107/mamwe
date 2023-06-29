@@ -126,7 +126,7 @@ foreach($getAllCateg as $categ){
 
 // test insert :
 $picture7 = new MappingPicture([
-    "mwIdPicture" => 143,
+    "mwIdPicture" => 145,
     "mwTitlePicture" => "test update 2",
     "mwUrlPicture" => "test update 2",
     "mwSizePicture" => 1,
@@ -134,17 +134,17 @@ $picture7 = new MappingPicture([
 ]); 
 
 $categ7 = new MappingCategoryRessource([
-    "mwIdCategory"=> 18,
-    "mwTitleCategory" => "update ressource category 2"
+    "mwIdCategory"=> 1,
+    "mwTitleCategory" => "Allaitement"
 ]);
 
 $sub7 = new MappingSubCategoryRessource([
-    "mwIdSubCategory"=> 6,
-    "mwTitleSubCategory" => "update ressource sub categ"
+    "mwIdSubCategory"=> 1,
+    "mwTitleSubCategory" => "Livre"
 ]);
 
 $ress7 = new MappingRessource([
-    'mwIdRessource' => 97,
+    'mwIdRessource' => 98,
     'mwTitleRessource' => "update test",
     'mwContentRessource' => "update test",
     'mwUrlRessource' => "update test",
@@ -154,7 +154,10 @@ $ress7 = new MappingRessource([
     'mwSubCategory' => 0,
 ]);
 
-// var_dump($picture1, $ress1);
+// $insert7 = $managerTest -> insertRessource($picture7, $categ7, $sub7, $ress7);
+// var_dump($insert7);
 
-$deleteRess = $managerTest -> deleteRessource(97);
-var_dump($deleteRess); 
+// $update = $managerTest -> updateRessource($picture7, $categ7, $sub7, $ress7);
+
+// $deleteRess = $managerTest -> deleteRessource(97);
+// var_dump($deleteRess); 
