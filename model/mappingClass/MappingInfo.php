@@ -10,6 +10,7 @@ class MappingInfo extends MappingAbstract
     private  int $mwIdInfo;
     private  string $mwContentInfo;
     private  string $mwDateInfo;
+    private string $mwTitleInfo;
     private  ?int $mwPictureMwIdPicture;
 
     public function __construct(array $tab)
@@ -66,6 +67,23 @@ class MappingInfo extends MappingAbstract
         $this->mwDateInfo = $mwDateInfo;
     }
 
+
+     // Get de Title // 
+
+     public function getMwTitleInfo(): string
+     {
+         return $this->mwTitleInfo;
+     }
+ 
+ 
+     // SET // 
+     
+     public function setMwTitleInfo(int $mwTitleInfo ) : self
+     {
+         $this->mwIdInfo = $mwTitleInfo;
+         
+         return $this;
+     }
 
        // GET de picture // 
        public function getMwPictureMwIdPicture(): ?int
