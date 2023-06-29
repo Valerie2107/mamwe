@@ -100,20 +100,23 @@ foreach($getAllCateg as $categ){
 
     // on boucle sur la sous categ:
     foreach($getAllSub as $sub){
-        // on affiche:
-        echo "<h3> sous category : " . $sub-> getMwTitleSubCategory() . "</h3><br><br>";
         // on recupère l'ID:
         $subId = $sub -> getMwIdSubCategory();
-
+        
         // On recupère toutes les ressources avec les ID des categ et sous categ en même temps :
         $getAllByAll = $managerTest -> getAllbyAll($categId, $subId);
 
-        // on boucle sur les ressources :
-        foreach($getAllByAll as $all){
-            if(!empty($all)){
-                // on affiche les ressources:
-                echo "<p>contenu : " . $all -> getMwTitleRessource() . "<p><br>"; 
-
+        // on verifie getAllByAll est pas vide :
+        if(!empty($getAllByAll)){
+            // on affiche le titre de la sous categ, on l'a mis dans le if comme ça le titre de la sous categ ne s'affiche que s'il y a un article dedans :
+            echo "<h3> sous category : " . $sub-> getMwTitleSubCategory() . "</h3><br><br>";
+            // on boucle sur les ressources :
+            foreach($getAllByAll as $all){
+                if(!empty($all)){
+                    // on affiche les ressources:
+                    echo "<p>contenu : " . $all -> getMwTitleRessource() . "<p><br>"; 
+    
+                }
             }
         }
     }
