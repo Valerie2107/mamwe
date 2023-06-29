@@ -29,7 +29,7 @@ try {
 // test des mapping :
 try{
 $test1 = new MappingAgenda([
-    "mwDateAgenda" => "2001-01-01",
+    "mwDateAgenda" => "jolie",
     "mwContentAgenda" => "test2",
     "mwTitleAgenda" => "test2",
     "mwPictureMwIdPicture" => null,
@@ -48,7 +48,7 @@ try{
 }
 
 echo "<pre>";
-//var_dump($test1,$test2);
+var_dump($test1,$test2);
 echo "</pre>";
 
 
