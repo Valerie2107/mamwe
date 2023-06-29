@@ -100,6 +100,7 @@ var_dump($insertPic, $insertSection);
 
 // $sectionInsert4 = $sectionTest-> insertSectionWithPic($insertPic, $insertSection);
 // $sectionUpdate = $sectionTest -> updateSectionWithPic($insertPic, $insertSection);
+// $deleteSection = $sectionTest -> deleteSection(6);
 
 
 // var_dump($sectionUpdate);

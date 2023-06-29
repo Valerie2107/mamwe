@@ -21,7 +21,7 @@ class ManagerSection implements ManagerInterface
     }
 
 
-    public function getOneById($id){
+    public function getOneById(int $id){
         $sql = "SELECT * FROM mw_section WHERE mw_id_sect = :id";
         $prepare = $this -> db -> prepare($sql);
         $prepare->bindParam(':id', $id,PDO::PARAM_INT);

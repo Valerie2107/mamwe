@@ -1,5 +1,7 @@
 <?php
 
+use model\managerClass\ManagerPicture;
+use model\mappingClass\MappingPicture;
 use model\mappingClass\MappingRessource;
 use model\mappingClass\MappingCategoryRessource;
 use model\mappingClass\MappingSubCategoryRessource;
@@ -122,3 +124,40 @@ foreach($getAllCateg as $categ){
     }
 }
 
+// test insert :
+$picture7 = new MappingPicture([
+    "mwIdPicture" => 145,
+    "mwTitlePicture" => "test update 2",
+    "mwUrlPicture" => "test update 2",
+    "mwSizePicture" => 1,
+    "mwPositionPicture" => 1,
+]); 
+
+$categ7 = new MappingCategoryRessource([
+    "mwIdCategory"=> 1,
+    "mwTitleCategory" => "Allaitement"
+]);
+
+$sub7 = new MappingSubCategoryRessource([
+    "mwIdSubCategory"=> 1,
+    "mwTitleSubCategory" => "Livre"
+]);
+
+$ress7 = new MappingRessource([
+    'mwIdRessource' => 98,
+    'mwTitleRessource' => "update test",
+    'mwContentRessource' => "update test",
+    'mwUrlRessource' => "update test",
+    'mwDateRessource' => "2001-01-01",
+    // s'il y'a un insert de pic, categ ou subcateg ils prendre les valeur de leur ID et on laisse les attributs à zéro pour éviter les erreurs:
+    'mwCategory' => 0,
+    'mwSubCategory' => 0,
+]);
+
+// $insert7 = $managerTest -> insertRessource($picture7, $categ7, $sub7, $ress7);
+// var_dump($insert7);
+
+// $update = $managerTest -> updateRessource($picture7, $categ7, $sub7, $ress7);
+
+// $deleteRess = $managerTest -> deleteRessource(97);
+// var_dump($deleteRess); 
