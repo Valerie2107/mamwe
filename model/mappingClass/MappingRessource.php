@@ -187,7 +187,7 @@ class MappingRessource extends MappingAbstract {
      */
     public function setMwCategory(int $mwCategory): self
     {
-        
+        if($mwCategory < 0 ) throw new Exception("La valeur ne peut être négative ! ");
         $this->mwCategory = $mwCategory;
         
         return $this;
@@ -213,6 +213,7 @@ class MappingRessource extends MappingAbstract {
      */
     public function setMwSubCategory(int $mwSubCategory): self
     {
+        if($mwSubCategory< 0 ) throw new Exception("La valeur ne peut être négative ! ");
         $this->mwSubCategory = $mwSubCategory;
         
         return $this;
@@ -238,6 +239,7 @@ class MappingRessource extends MappingAbstract {
      */
     public function setMwPictureMwIdPicture(?int $mwPictureMwIdPicture): self
     {
+        if($mwPictureMwIdPicture < 0 ) throw new Exception("La valeur ne peut être négative ! ");
         $this->mwPictureMwIdPicture = $mwPictureMwIdPicture;
 
         return $this;

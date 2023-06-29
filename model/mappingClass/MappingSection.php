@@ -9,7 +9,7 @@ class MappingSection extends MappingAbstract
     
     private int $mwIdSect;
     private string $mwTitleSect;
-    private string $mwContentSect;
+    private ?string $mwContentSect;
     private int $mwVisible;
     private ?int $mwPictureMwIdPicture;
     private ?string $picture;
@@ -39,6 +39,7 @@ class MappingSection extends MappingAbstract
      */
     public function setMwIdSect(int $mwIdSect): self
     {
+        if($mwIdSect < 0 ) throw new Exception("La valeur ne paut pas être négative");
         $this->mwIdSect = $mwIdSect;
 
         return $this;
@@ -91,7 +92,7 @@ class MappingSection extends MappingAbstract
      *
      * @return self
      */
-    public function setMwContentSect(string $mwContentSect): self
+    public function setMwContentSect(?string $mwContentSect): self
     {
         $this->mwContentSect = $mwContentSect;
 
@@ -117,6 +118,9 @@ class MappingSection extends MappingAbstract
      */
     public function setMwVisible(int $mwVisible): self
     {
+        if($mwVisible < 0 ) throw new Exception("La valeur ne paut pas être négative");
+        if($mwVisible > 2 ) throw new Exception("La valeur est trop grande");
+
         $this->mwVisible = $mwVisible;
 
         return $this;
@@ -143,6 +147,7 @@ class MappingSection extends MappingAbstract
      */
     public function setMwPictureMwIdPicture(?int $mwPictureMwIdPicture): self
     {
+        if($mwPictureMwIdPicture < 0 ) throw new Exception("La valeur ne paut pas être négative");
         $this->mwPictureMwIdPicture = $mwPictureMwIdPicture;
 
         return $this;
