@@ -48,7 +48,7 @@ try{
 }
 
 echo "<pre>";
-var_dump($test1,$test2);
+//var_dump($test1,$test2);
 echo "</pre>";
 
 
