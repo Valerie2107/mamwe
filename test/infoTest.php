@@ -32,10 +32,11 @@ try {
     $test1 = new MappingInfo([
         "mwIdInfo" => 1,
         "mwContentInfo" => "text gnagnagna",
-        "mwDateInfo" => 7+5,
+        "mwDateInfo" => "2022-05-17",
         "mwPictureMwIdPicture" => 1,
     ]);
 }catch(Exception $e){
+    $e->getMessage();
     echo $e;
 }
 
@@ -61,11 +62,30 @@ $getAll = $managerInfo -> getAll();
 var_dump($getAll);
 
 foreach($getAll as $event){
-    echo $event -> getMwIdInfo();
-    echo $event -> getMwContentInfo();  
- echo "date : " . $event -> getMwDateInfo() . "<br>";  
-
+    echo "id : " . $event -> getMwIdInfo() ."<br>";
+    echo "contenu : " . $event -> getMwContentInfo() . "<br>";  
+    echo "date : " . $event -> getMwDateInfo() . "<br>";  
 }
 
-$insertInfo = $managerInfo -> $insertInfo($test1);
-var_dump($insertI);
+//$insertInfo = $managerInfo -> insertInfo($test1);
+//var_dump($insertInfo);
+
+$info = new MappingInfo ([
+    "mwIdInfo" => 1,
+    "mwDateInfo" => "2001-01-01",
+    "mwContentInfo" => "test2",
+    "mwPictureMwIdPicture" => 59,
+]);
+
+$picture = new MappingPicture([
+    "mwIdPicture" => 59,
+    "mwTitlePicture" => "retestUpdate",
+    "mwUrlPicture" => "retestUpdate",
+    "mwSizePicture" => 1,
+    "mwPositionPicture" => 0
+]);
+
+$updateInfo = $managerInfo -> updateInfo($picture, $info);
+var_dump($updateInfo);
+
+//$deleteInfo = $managerInfo -> deleteInfo(4);
