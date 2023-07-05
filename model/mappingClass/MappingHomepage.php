@@ -10,6 +10,7 @@ class MappingHomepage extends MappingAbstract
     private string $mwContentHomepage;
     private string $mwDateHomepage;
     private ?int $mwPictureMwIdPicture;
+    private ?string $picture;
 
     public function __construct(array $tab)
     {
@@ -84,4 +85,28 @@ class MappingHomepage extends MappingAbstract
         return $this;
     }
 
+
+    /**
+     * Get the value of picture
+     *
+     * @return ?string
+     */
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set the value of picture
+     *
+     * @param ?string $picture
+     *
+     * @return self
+     */
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
 }

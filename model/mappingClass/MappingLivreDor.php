@@ -3,10 +3,14 @@
 namespace model\mappingClass;
 
 use model\abstractClass\MappingAbstract;
+use model\traitClass\DateTrait;
+use DateTime;
 use Exception;
 
 class MappingLivreDor extends MappingAbstract
 {
+    
+    use DateTrait;
 
     private int $mwIdLivreDor;
     private string $mwNameLivreDor;
@@ -14,7 +18,7 @@ class MappingLivreDor extends MappingAbstract
     private string $mwMessageLivreDor;
     private string $mwDateLivreDor;
     protected int $mwVisibleLivreDor;
-
+    
     public function __construct(array $tab)
     {
         parent::__construct($tab);
@@ -64,7 +68,7 @@ class MappingLivreDor extends MappingAbstract
      */
     public function setMwNameLivreDor(string $mwNameLivreDor): self
     {
-        if (strlen($mwNameLivreDor) > 100) throw new Exception("Le nom est trop long");
+        if (strlen($mwNameLivreDor) > 100  ) throw new Exception("Le nom est trop long");
         if (strlen($mwNameLivreDor) < 2) throw new Exception("Le nom est trop court");
         $this->mwNameLivreDor = $mwNameLivreDor;
 
@@ -142,7 +146,15 @@ class MappingLivreDor extends MappingAbstract
      */
     public function setMwDateLivreDor(string $mwDateLivreDor): self
     {
-        $this->mwDateLivreDor = $mwDateLivreDor;
+        if (!$this->dateTrait($mwDateLivreDor, 'Y-m-d')) {
+            throw new Exception('Date incorrecte, format attendu : Y-m-d');
+        }
+
+        // Crée un nouvel objet DateTime pour l'heure actuelle
+        $now = new DateTime();
+
+        // Met à jour mwDateArt avec la date et l'heure actuelles, au format Y-m-d
+        $this -> mwDateLivreDor = $now->format('Y-m-d');
 
         return $this;
     }
@@ -166,6 +178,9 @@ class MappingLivreDor extends MappingAbstract
      */
     public function setMwVisibleLivreDor(int $mwVisibleLivreDor): self
     {
+        if($mwVisibleLivreDor > 4 ) throw new Exception("La valeur entrée est trop grande");
+        if($mwVisibleLivreDor < 0 ) throw new Exception("la valeure ne peut pas être négative");
+
         $this->mwVisibleLivreDor = $mwVisibleLivreDor;
 
         return $this;

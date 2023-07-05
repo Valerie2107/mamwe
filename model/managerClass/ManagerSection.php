@@ -21,7 +21,7 @@ class ManagerSection implements ManagerInterface
     }
 
 
-    public function getOneById($id){
+    public function getOneById(int $id){
         $sql = "SELECT * FROM mw_section WHERE mw_id_sect = :id";
         $prepare = $this -> db -> prepare($sql);
         $prepare->bindParam(':id', $id,PDO::PARAM_INT);
@@ -32,7 +32,6 @@ class ManagerSection implements ManagerInterface
         }else{
             throw new Exception("cette section $id n'existe pas" );
         }
-
     }
 
 
@@ -54,7 +53,6 @@ class ManagerSection implements ManagerInterface
         foreach ($result as $row){
             // on crée un objet Theuser que l'on ajoute dans le tableau
             $sections[] = new MappingSection($row);           
-    
             // on retourne le tableau
         }
         return $sections;
@@ -108,8 +106,7 @@ class ManagerSection implements ManagerInterface
             return true;   
         }catch(Exception $e){
             $e->getMessage();
-        }
-        
+        }     
     }
 
 
