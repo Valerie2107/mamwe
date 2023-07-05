@@ -7,7 +7,6 @@ use model\mappingClass\MappingPicture;
 // require de la config:
 require_once "../config.php";
 
-
 // Autoload des classes (/model/) :
 spl_autoload_register(function ($class) {
     $class = str_replace('\\', '/', $class);
@@ -37,8 +36,8 @@ try {
     ]);
 }catch(Exception $e){
     $e->getMessage();
-    echo $e;
 }
+
 
 try{
     $test2 = new MappingInfo([
@@ -49,43 +48,43 @@ try{
 }
 
 echo "<pre>";
-var_dump($test1);
+var_dump($test1,$test2);
 echo "</pre>";
 
 
 
 // test des manager :
 $managerInfo = new ManagerInfo($db);
-var_dump($managerInfo);
+//var_dump($managerInfo);
 $getAll = $managerInfo -> getAll();
 
-var_dump($getAll);
+//var_dump($getAll);
 
-foreach($getAll as $event){
-    echo "id : " . $event -> getMwIdInfo() ."<br>";
-    echo "contenu : " . $event -> getMwContentInfo() . "<br>";  
-    echo "date : " . $event -> getMwDateInfo() . "<br>";  
-}
+//foreach($getAll as $event){
+//    echo "id : " . $event -> getMwIdInfo() ."<br>";
+//    echo "contenu : " . $event -> getMwContentInfo() . "<br>";  
+//    echo "date : " . $event -> getMwDateInfo() . "<br>";  
+//}
 
-//$insertInfo = $managerInfo -> insertInfo($test1);
-//var_dump($insertInfo);
+$insertInfo = $managerInfo -> insertInfo($dataP, $dataI);
+var_dump($insertInfo);
 
 $info = new MappingInfo ([
     "mwIdInfo" => 1,
     "mwDateInfo" => "2001-01-01",
-    "mwContentInfo" => "test2",
-    "mwPictureMwIdPicture" => 59,
+    "mwContentInfo" => "blabla yoyoyoyo",
+    "mwPictureMwIdPicture" => 65,
 ]);
 
 $picture = new MappingPicture([
-    "mwIdPicture" => 59,
+    "mwIdPicture" => 65,
     "mwTitlePicture" => "retestUpdate",
-    "mwUrlPicture" => "retestUpdate",
+    "mwUrlPicture" => "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
     "mwSizePicture" => 1,
     "mwPositionPicture" => 0
 ]);
 
-$updateInfo = $managerInfo -> updateInfo($picture, $info);
-var_dump($updateInfo);
+//$updateInfo = $managerInfo -> updateInfo($picture, $info);
+//var_dump($updateInfo);
 
 //$deleteInfo = $managerInfo -> deleteInfo(4);
