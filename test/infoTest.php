@@ -61,7 +61,7 @@ $managerInfo = new ManagerInfo($db);
 var_dump($managerInfo);
 $getAll = $managerInfo -> getAll();
 
-var_dump($getAll);
+//var_dump($getAll);
 
 foreach($getAll as $event){
     echo "id : " . $event -> getMwIdInfo() ."<br>";
@@ -72,24 +72,27 @@ foreach($getAll as $event){
 
 
 $info = new MappingInfo ([
-    "mwIdInfo" => 1,
     "mwDateInfo" => "2001-01-01",
-    "mwContentInfo" => "blabla yoyoyoyo",
-    "mwPictureMwIdPicture" => 65,
+    "mwContentInfo" => "yipikai",
 ]);
+
 
 $picture = new MappingPicture([
-    "mwIdPicture" => 65,
-    "mwTitlePicture" => "yobladi",
+
+    "mwTitlePicture" => "yipikai",
     "mwUrlPicture" => "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
     "mwSizePicture" => 1,
-    "mwPositionPicture" => 0
+    "mwPositionPicture" => 0,
+    "mwArticleMwIdArticle"=>7
 ]);
 
-$insertInfo = $managerInfo -> insertInfo($picture, $info);
-var_dump($insertInfo);
+var_dump($picture,$info);
 
-//$updateInfo = $managerInfo -> updateInfo($picture, $info);
-//var_dump($updateInfo);
+//$insertInfo = $managerInfo -> insertInfo($picture, $info);
+//var_dump($insertInfo);
 
-//$deleteInfo = $managerInfo -> deleteInfo(4);
+
+$updateInfo = $managerInfo -> updateInfo($picture, $info);
+var_dump($updateInfo);
+
+//$deleteInfo = $managerInfo -> deleteInfo(27);

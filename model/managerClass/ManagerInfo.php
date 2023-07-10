@@ -65,8 +65,13 @@ class ManagerInfo implements ManagerInterface
         $preparePic->bindValue(':sizePic', $dataP->getMwSizePicture(), PDO::PARAM_INT);
         $preparePic->bindValue(':positionPic',$dataP->getMwPositionPicture(), PDO::PARAM_INT);
 
+        try{
+            $preparePic->execute();
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+
         
-        $preparePic->execute();
         
 
         $lastId = $this->db->lastInsertId();
@@ -80,14 +85,12 @@ class ManagerInfo implements ManagerInterface
         $prepareInfo->bindValue(':date', $dataI->getMwDateInfo(), PDO::PARAM_STR);
         $prepareInfo->bindValue(':picture', $lastId, PDO::PARAM_INT);
         
-        $prepareInfo->execute();
-
         try{
             $prepareInfo->execute();
-            return true;
+            $this->db->commit();
         }catch(Exception $e){
             $this->db->rollBack();
-            $e -> getMessage();
+            echo $e -> getMessage();
         }
     }
 
