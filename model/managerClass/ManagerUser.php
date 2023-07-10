@@ -56,7 +56,7 @@ class ManagerUser implements ManagerInterface
     {
         $query   = "SELECT mw_id_user, mw_login_user, mw_pwd_user
                     FROM mw_user 
-                    WHERE mw_user.mw_login_user = :login";
+                    WHERE mw_login_user = :login";
         $prepare = $this->db->prepare($query);
         $prepare->bindValue(":login", $user->getMwLoginUser(), PDO::PARAM_STR);
         $prepare->execute();
@@ -65,15 +65,15 @@ class ManagerUser implements ManagerInterface
         } catch (Exception $e) {
             die($e);
         }
-        return $result && $this->userLogin($result, $user->getMwPwdUser());
+        return $result && $this-> userLogin($result, $user->getMwPwdUser());
     }
 
     private function userLogin($userInfo, $pwd) : bool
     {
-        if (password_verify($pwd, $userInfo["mwPwdUser"])) {
+        if (password_verify($pwd, $userInfo["mw_pwd_user"])) {
             $_SESSION["idSession"]      = session_id();
-            $_SESSION["idUser"]         = $userInfo["mwIdUser"];
-            $_SESSION["userLogin"]      = $userInfo["mwLoginUser"];
+            $_SESSION["idUser"]         = $userInfo["mw_id_user"];
+            $_SESSION["userLogin"]      = $userInfo["mw_login_user"];
             $result                     = true;
         }
         else {

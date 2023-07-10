@@ -56,7 +56,15 @@ if(isset($_POST['login'],$_POST['pwd'])){
         "mwPwdUser" => $_POST['pwd']
     ]);
     $connectUser = $userManager->connect($userMapping);
-    header("Location: ./");         
+
+    var_dump($connectUser);
+    
+    if($connectUser){
+        echo "OUI";
+    }else{
+        echo "non";
+    }
+
 }  
 
 if(isset($_SESSION['uniqueId']) && $_SESSION['uniqueId']==session_id()){    
