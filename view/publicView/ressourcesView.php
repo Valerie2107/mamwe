@@ -26,7 +26,7 @@ foreach($getAllCateg as $categ){
         $subId = $sub -> getMwIdSubCategory();
         
         // On recupère toutes les ressources avec les ID des categ et sous categ en même temps :
-        $getAllByAll = $managerRessource -> getAllbyAll($categId, $subId);
+        $getAllByAll = $ressourceManager -> getAllbyAll($categId, $subId);
 
         // on verifie getAllByAll est pas vide :
         if(!empty($getAllByAll)){

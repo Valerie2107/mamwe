@@ -49,6 +49,18 @@ class ManagerLivreDor implements ManagerInterface
         return $livre;
     }  
 
+    public function getAllVisible()
+    {
+        $sql = "SELECT * FROM mw_livredor WHERE mw_visible_livredor = 1";
+        $prepare = $this->db->prepare($sql);
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $livre = [];
+        foreach ($result as $row){
+            $livre[] = new MappingLivreDor($row);               
+        }
+        return $livre;
+    } 
 
     public function insertLivreDor(MappingLivreDor $data){
 
