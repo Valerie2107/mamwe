@@ -1,0 +1,11 @@
+.picturehome{
+    width: 20%;
+    display : block ;
+    margin :  auto ;
+  
+}
+
+.textehome{
+    text-align: justify;
+    margin: 0 200px;
+}

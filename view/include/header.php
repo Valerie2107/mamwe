@@ -25,7 +25,7 @@
     
     <div class="public-nav">
     <div class="titre" ><img  src="asset/img/titre.png"></div>
-    <div ><img class="logo" src="asset/img/logo1.png"></div>
+    <img class="logo" src="asset/img/logo1.png">
 
     
    
