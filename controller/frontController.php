@@ -32,9 +32,15 @@ use model\managerClass\ManagerUser;
 // on stock l'object dans la variable
 $sectionManager = new ManagerSection($db); 
 // applique la méthode qui contient la requete SQL qui récupére toutes les section
-$sections = $sectionManager -> getAll();
+$allSection = $sectionManager -> getAll();
 
 ### OUI ###
+
+### on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
+// on stock le manager dans la variable:
+$homeManager = new ManagerHomepage($db);
+$allHome = $homeManager -> getAll();
+### 
 
 // quand on deconnect :
 if(isset($_GET['deconnect'])){
@@ -119,6 +125,11 @@ else if(isset($_GET['p'])){
 
     // navigation publique :
     if($_GET['p'] === "home"){
+        
+
+        // on a déjà les sections d'appeler  
+        // $allSection = $sectionManager -> getAll();
+
         include_once "../view/publicView/homepage.php";
     }
 
@@ -127,14 +138,14 @@ else if(isset($_GET['p'])){
     }
 
     else if($_GET['p'] === "ressources"){
-        $managerRessource = new ManagerRessource($db);
+        $ressourceManager = new ManagerRessource($db);
         // var_dump($managerTest);
 
         // on recupère toutes les catégories:
-        $getAllCateg = $managerRessource -> getAllCateg();
+        $getAllCateg = $ressourceManager -> getAllCateg();
 
         // on récupère toutes les sous catégories :
-        $getAllSub = $managerRessource -> getAllSubCateg();
+        $getAllSub = $ressourceManager -> getAllSubCateg();
         include_once "../view/publicView/ressourcesView.php";
     }
 
