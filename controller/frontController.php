@@ -149,24 +149,22 @@ else if(isset($_GET['p'])){
 
     else if($_GET['p'] === "livreDor"){
         
-            $livreManager = new ManagerLivreDor($db);
-            // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
-            $allLivreDor = $livreManager -> getAllVisible();
+        $livreManager = new ManagerLivreDor($db);
+        // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
+        $allLivreDor = $livreManager -> getAllVisible();
 
-            if(isset($_POST['nameLO'], $_POST['mailLO'], $_POST['messageLO'])){
-                // insertion dans le livre d'or
-                // insertion dans le livre d'or
-                $newMessageLO = new MappingLivreDor([
-                    "mwNameLivreDor" => $_POST['nameLO'],
-                    "mwMailLivreDor" => $_POST['mailLO'],
-                    "mwMessageLivreDor" => $_POST['messageLO']
-                ]);
+        if(isset($_POST['nameLO'], $_POST['mailLO'], $_POST['messageLO'])){
+            // insertion dans le livre d'or
+            // insertion dans le livre d'or
+            $newMessageLO = new MappingLivreDor([
+                "mwNameLivreDor" => $_POST['nameLO'],
+                "mwMailLivreDor" => $_POST['mailLO'],
+                "mwMessageLivreDor" => $_POST['messageLO']
+            ]);
 
-    
-
-            // appel de la vue:
-            include_once "../view/publicView/livreDorView.php";
         }
+        // appel de la vue:
+        include_once "../view/publicView/livreDorView.php";
     }
 
     // nav privé
@@ -193,9 +191,15 @@ else if(isset($_GET['p'])){
 }
 
 else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
+    // on stock l'id de la section
     $idSect = (int) $_GET['sectionId'];
+
+    // on récup la section avec l'id pour afficher le titre
     $sectionById = $sectionManager -> getOneById($idSect);
     
+    // on fait le manager des articles
+    $articleManager =  new ManagerArticle($db);
+    $articleBySection = $articleManager -> getAllArticlesWithPictures($idSect);
 
     include_once "../view/publicView/sectionView.php";
 }

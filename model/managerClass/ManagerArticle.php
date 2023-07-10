@@ -77,7 +77,7 @@ class ManagerArticle  implements ManagerInterface
             return $pictures;
         }
     */
-    public function getAllArticlesWithPictures($db, $section_id)
+    public function getAllArticlesWithPictures($section_id)
     {
         $sql = "SELECT a.*, GROUP_CONCAT(p.mw_id_picture, '|||' , p.mw_url_picture SEPARATOR '---') AS picture
             FROM mw_article a 
@@ -85,7 +85,7 @@ class ManagerArticle  implements ManagerInterface
             WHERE a.mw_section_mw_id_section = :section_id
             GROUP BY a.mw_id_article";
 
-        $prepare = $db->prepare($sql);
+        $prepare = $this->db->prepare($sql);
         $prepare->bindValue(':section_id', $section_id, PDO::PARAM_INT);
         $prepare->execute();
 
