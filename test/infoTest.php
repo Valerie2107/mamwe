@@ -7,7 +7,6 @@ use model\mappingClass\MappingPicture;
 // require de la config:
 require_once "../config.php";
 
-
 // Autoload des classes (/model/) :
 spl_autoload_register(function ($class) {
     $class = str_replace('\\', '/', $class);
@@ -32,23 +31,27 @@ try {
     $test1 = new MappingInfo([
         "mwIdInfo" => 1,
         "mwContentInfo" => "text gnagnagna",
-        "mwDateInfo" => 7+5,
+        "mwDateInfo" => "2022-05-17",
         "mwPictureMwIdPicture" => 1,
     ]);
 }catch(Exception $e){
-    echo $e;
+    $e->getMessage();
 }
+
 
 try{
     $test2 = new MappingInfo([
-        "mwTitleSect" => "test ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgte",
+        "mwIdInfo" => 1,
+        "mwContentInfo" => "test ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgte",
+        "mwDateInfo" => "2022-05-17",
+        "mwPictureMwIdPicture" => 54,
     ]);
 }catch (Exception $e){
     echo $e;
 }
 
 echo "<pre>";
-var_dump($test1);
+var_dump($test1,$test2);
 echo "</pre>";
 
 
@@ -61,11 +64,32 @@ $getAll = $managerInfo -> getAll();
 var_dump($getAll);
 
 foreach($getAll as $event){
-    echo $event -> getMwIdInfo();
-    echo $event -> getMwContentInfo();  
- echo "date : " . $event -> getMwDateInfo() . "<br>";  
-
+    echo "id : " . $event -> getMwIdInfo() ."<br>";
+    echo "contenu : " . $event -> getMwContentInfo() . "<br>";  
+    echo "date : " . $event -> getMwDateInfo() . "<br>";  
 }
 
-$insertInfo = $managerInfo -> $insertInfo($test1);
-var_dump($insertI);
+
+
+$info = new MappingInfo ([
+    "mwIdInfo" => 1,
+    "mwDateInfo" => "2001-01-01",
+    "mwContentInfo" => "blabla yoyoyoyo",
+    "mwPictureMwIdPicture" => 65,
+]);
+
+$picture = new MappingPicture([
+    "mwIdPicture" => 65,
+    "mwTitlePicture" => "yobladi",
+    "mwUrlPicture" => "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+    "mwSizePicture" => 1,
+    "mwPositionPicture" => 0
+]);
+
+$insertInfo = $managerInfo -> insertInfo($picture, $info);
+var_dump($insertInfo);
+
+//$updateInfo = $managerInfo -> updateInfo($picture, $info);
+//var_dump($updateInfo);
+
+//$deleteInfo = $managerInfo -> deleteInfo(4);
