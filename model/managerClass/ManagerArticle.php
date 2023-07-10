@@ -77,14 +77,18 @@ class ManagerArticle  implements ManagerInterface
             return $pictures;
         }
     */
-    public function getAllArticlesWithPictures($db)
+    public function getAllArticlesWithPictures($db, $section_id)
     {
         $sql = "SELECT a.*, GROUP_CONCAT(p.mw_id_picture, '|||' , p.mw_url_picture SEPARATOR '---') AS picture
-    FROM mw_article a 
-    LEFT JOIN mw_picture p ON p.mw_article_mw_id_article = a.mw_id_article
-    GROUP BY a.mw_id_article";
+            FROM mw_article a 
+            LEFT JOIN mw_picture p ON p.mw_article_mw_id_article = a.mw_id_article
+            WHERE a.mw_section_mw_id_section = :section_id
+            GROUP BY a.mw_id_article";
+
         $prepare = $db->prepare($sql);
+        $prepare->bindValue(':section_id', $section_id, PDO::PARAM_INT);
         $prepare->execute();
+
         $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
         $articles = [];
         foreach ($result as $row) {
@@ -94,14 +98,12 @@ class ManagerArticle  implements ManagerInterface
     }
 
 
-    public function insertArticle(MappingArticle $article, $pictures = null, $section_id = null)
+
+    public function insertArticle(MappingArticle $article, $pictures = null)
     {
         // requête sql + prepare + bindValue + execute + etc
-        $sql = "INSERT INTO mw_article (mw_title_art, mw_content_art, mw_visible_art, mw_section_mw_id_section) 
-        SELECT :mw_title_art, :mw_content_art, :mw_visible_art, :mw_section_mw_id_section
-        WHERE mw_section_mw_id_section = :section_id";
+        $sql = "INSERT INTO mw_article (mw_title_art, mw_content_art, mw_visible_art, mw_section_mw_id_section) VALUES (:mw_title_art, :mw_content_art,  :mw_visible_art, :mw_section_mw_id_section)";
         $prepare = $this->db->prepare($sql);
-        $prepare->bindValue(':section_id', $section_id, PDO::PARAM_INT);
         $prepare->bindValue(':mw_title_art', $article->getMwTitleArt(), PDO::PARAM_STR);
         $prepare->bindValue(':mw_content_art', $article->getMwContentArt(), PDO::PARAM_STR);
         $prepare->bindValue(':mw_visible_art', $article->getMwVisibleArt(), PDO::PARAM_INT);
@@ -114,16 +116,12 @@ class ManagerArticle  implements ManagerInterface
             $prepare->execute();
             $lastArticleId = $this->db->lastInsertId();
             $article->setMwIdArticle($lastArticleId);
-            $article_id = null;
         if($pictures != null){
             // boucle sur les images
             foreach ($pictures as $picture) {
                 // requête sql + prepare + bindValue + execute pour insert des photos
-                $picsql = "INSERT INTO mw_picture (mw_title_picture, mw_url_picture, mw_size_picture, mw_position_picture, mw_article_mw_id_article) 
-           SELECT :mw_title_picture, :mw_url_picture, :mw_size_picture, :mw_position_picture, :mw_article_mw_id_article
-           WHERE mw_article_mw_id_article = :article_id";
+                $picsql = "INSERT INTO mw_picture (mw_title_picture, mw_url_picture, mw_size_picture, mw_position_picture, mw_article_mw_id_article) VALUES (:mw_title_picture, :mw_url_picture, :mw_size_picture, :mw_position_picture, :mw_article_mw_id_article)";
                 $picPrepare = $this->db->prepare($picsql);
-                $picPrepare->bindValue(':article_id', $article_id, PDO::PARAM_INT);
                 $picPrepare->bindValue(':mw_title_picture', $picture->getMwTitlePicture(), PDO::PARAM_STR);
                 $picPrepare->bindValue(':mw_url_picture', $picture->getMwUrlPicture(), PDO::PARAM_STR);
                 $picPrepare->bindValue(':mw_size_picture', $picture->getMwSizePicture(), PDO::PARAM_INT);
