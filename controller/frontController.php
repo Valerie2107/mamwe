@@ -54,8 +54,8 @@ if(isset($_POST['login'],$_POST['pwd'])){
     header("Location: ./");         
 }  
 
-if(isset($_SESSION['uniqueId'])&&$_SESSION['uniqueId']==session_id()){    
-    require_once "../view/privateView/privateView.php";
+if(isset($_SESSION['uniqueId'])&& $_SESSION['uniqueId']==session_id()){    
+    require_once "../view/privateView/admin.php";
     if(isset($_POST['insertArticle'])){
         if( false /* verification des champs du formulaire ajout de sous section */){
             // $insertSS = insertSS($db);
@@ -148,9 +148,21 @@ else if(isset($_GET['p'])){
     }
 
     else if($_GET['p'] === "livreDor"){
+        
         $livreManager = new ManagerLivreDor($db);
         // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
         $allLivreDor = $livreManager -> getAllVisible();
+
+        if(isset($_POST['nameLO'], $_POST['mailLO'], $_POST['messageLO'])){
+            // insertion dans le livre d'or
+            // insertion dans le livre d'or
+            $newMessageLO = new MappingLivreDor([
+                "mwNameLivreDor" => $_POST['nameLO'],
+                "mwMailLivreDor" => $_POST['mailLO'],
+                "mwMessageLivreDor" => $_POST['messageLO']
+            ]);
+
+   
 
         // appel de la vue:
         include_once "../view/publicView/livreDorView.php";
@@ -187,13 +199,7 @@ else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
     include_once "../view/publicView/sectionView.php";
 }
 
-else if(isset($_GET['ressourcesId']) && ctype_digit($_GET['ressourcesId'])){
-    include_once "../view/publicView/ressourcesView.php";
-}
 
-else if(isset($_POST['nameLO'], $_POST['mailLO'], $_POST['messageLO'])){
-    // insertion dans le livre d'or
-}
 
 else if(isset($_POST['nameContact'], $_POST['mailContact'], $_POST['messageContact'])){
     // envois message / mailer
