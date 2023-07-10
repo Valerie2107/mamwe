@@ -2,10 +2,14 @@
 
 namespace model\mappingClass;
 
+use DateTime;
 use model\abstractClass\MappingAbstract;
+use model\traitClass\DateTrait;
 use Exception;
 
-class MappingAgenda extends MappingAbstract{
+class MappingAgenda extends MappingAbstract
+{
+    use DateTrait;
 
     private int $mwIdAgenda;
     private string $mwDateAgenda;
@@ -29,14 +33,30 @@ class MappingAgenda extends MappingAbstract{
     }
 
     //  get-set mwDateAgenda
-    public function getMwDateAgenda(){
+    public function getMwDateAgenda(): string 
+    {
 
         return $this->mwDateAgenda;
     }
 
+    /**
+     * @param string $mwDateAgenda
+     *
+     * @return self
+     * @throws Exception
+     */
+
+
     public function setMwDateAgenda(string $mwDateAgenda):self
     {   
-        $this->mwDateAgenda = $mwDateAgenda;
+        if (!$this->DateTrait($mwDateAgenda, 'Y-m-d')) {
+            throw new Exception('Date incorrecte, format attendu : Y/m/d');
+        }
+
+        $now = new DateTime();
+
+ 
+        $this->mwDateAgenda = 'modifié le : ' . $now->format('Y-m-d');
 
         return $this;
     }
