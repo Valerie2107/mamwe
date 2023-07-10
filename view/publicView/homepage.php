@@ -11,6 +11,9 @@ include_once "../view/include/header.php";
 <!-- HTML -->
 <h1><?= $title ?></h1>
 
+<?= $allHome -> getMwContentHomepage() ?>
+<?= $allHome -> getPicture() ?>
+<img src="<?= $allHome -> getPicture() ?>" alt="">
 
 <!-- FOOTER -->
 <?php

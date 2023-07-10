@@ -1,16 +1,46 @@
 <?php
 
-// on récup le manager des section
-use model\managerClass\ManagerSection;
+// appelle des use mapping :
+use model\mappingClass\MappingAgenda;
+use model\mappingClass\MappingArticle;
+use model\mappingClass\MappingCategoryRessource;
+use model\mappingClass\MappingHomepage;
+use model\mappingClass\MappingInfo;
+use model\mappingClass\MappingLivreDor;
+use model\mappingClass\MappingPatient;
+use model\mappingClass\MappingPicture;
+use model\mappingClass\MappingRessource;
+use model\mappingClass\MappingSection;
+use model\mappingClass\MappingSubCategoryRessource;
+use model\mappingClass\MappingUser;
+
+// appelle des use manager :
+use model\managerClass\ManagerAgenda;
 use model\managerClass\ManagerArticle;
+use model\managerClass\ManagerHomepage;
+use model\managerClass\ManagerInfo;
+use model\managerClass\ManagerLivreDor;
+use model\managerClass\ManagerPatient;
+use model\managerClass\ManagerPicture;
+use model\managerClass\ManagerRessource;
+use model\managerClass\ManagerSection;
+use model\managerClass\ManagerUser;
+
+
+### RECUP LES SECTIONS POUR LA NAVBAR : 
 
 // on stock l'object dans la variable
 $sectionManager = new ManagerSection($db); 
-
 // applique la méthode qui contient la requete SQL qui récupére toutes les section
-$sections = $sectionManager -> getAll();
+$allSection = $sectionManager -> getAll();
 
-// echo $section -> getMwIdSection();
+### OUI ###
+
+### on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
+// on stock le manager dans la variable:
+$homeManager = new ManagerHomepage($db);
+$allHome = $homeManager -> getAll();
+### 
 
 // quand on deconnect :
 if(isset($_GET['deconnect'])){
@@ -95,6 +125,11 @@ else if(isset($_GET['p'])){
 
     // navigation publique :
     if($_GET['p'] === "home"){
+        
+
+        // on a déjà les sections d'appeler  
+        // $allSection = $sectionManager -> getAll();
+
         include_once "../view/publicView/homepage.php";
     }
 
@@ -103,6 +138,14 @@ else if(isset($_GET['p'])){
     }
 
     else if($_GET['p'] === "ressources"){
+        $ressourceManager = new ManagerRessource($db);
+        // var_dump($managerTest);
+
+        // on recupère toutes les catégories:
+        $getAllCateg = $ressourceManager -> getAllCateg();
+
+        // on récupère toutes les sous catégories :
+        $getAllSub = $ressourceManager -> getAllSubCateg();
         include_once "../view/publicView/ressourcesView.php";
     }
 

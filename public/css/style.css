@@ -27,3 +27,12 @@ height: auto;
     background-repeat: no-repeat;
     text-align: center;
 }
+
+/* tour de magie pour jawad : */
+/* .paragraphe img {
+    float: left;
+}
+
+.paragraphe:nth-of-type(even) img {
+    float: right;
+} */
