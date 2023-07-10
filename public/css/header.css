@@ -1,8 +1,3 @@
-/* 
-CSS générale pour tout ce qui sera commun à chaque page (ex: couleur, background, typo...) 
-On fera des CSS spécifiques pour les éléments spécifiques (formulaires et autres)
-*/
-
 * {
     margin: 0;
     padding: 0;
@@ -11,14 +6,19 @@ On fera des CSS spécifiques pour les éléments spécifiques (formulaires et au
 }
 
 
+
+
+
 nav a {
+
     text-decoration: none;
     color: #048b9a;
     font-size: x-large;
     font-weight: bold;
-    padding: 0 4rem;
+    padding: 40px;
     position: relative;
     top: -50px;
+
 
 }
 
@@ -44,16 +44,3 @@ height: auto;
     justify-content: left;
       align-items: left;
 }
-
-
-
-
-
-/* tour de magie pour jawad : */
-/* .paragraphe img {
-    float: left;
-}
-
-.paragraphe:nth-of-type(even) img {
-    float: right;
-} */
