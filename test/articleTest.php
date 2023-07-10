@@ -143,9 +143,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $insertedArticle = $manager->insertArticle($article, $pictures);
-    // Maintenant, vous pouvez utiliser $insertedArticle...
+    $insertPic = new MappingPicture([
+            "mwIdPicture" => "1",
+        "mwTitlePicture" => "test",
+        "mwUrlPicture" => "test",
+        "mwSizePicture" => "1",
+        "mwPositionPicture" => "1",
+    ]);
+
+    $insertedArticle = new MappingArticle([
+        "mwIdArticle" => "1",
+        "mwTitleArt" => "test",
+        "mwContentArt" => "test",
+        "mwVisibleArt" => "1",
+        "mwSectionMwIdSection" => "1",
+    ]);
+
+    $articleTest = new ManagerArticle($db);
+    $pictureTest = new ManagerPicture($db);
+
+    $insertedArticle = $articleTest->insertArticle($insertedArticle, $insertPic);
+    $insertedArticle2 = $articleTest->insertArticle($insertedArticle);
+    //$articleUpdate = $articleTest -> updateArticleWithPic($insertPic, $insertedArticle);
+    // $deleteSection = $sectionTest -> deleteSection(6);
+
 }
 
+
 var_dump($insertedArticle);
+var_dump($insertedArticle2);
+//var_dump($articleUpdate);
 
