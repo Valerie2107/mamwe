@@ -12,6 +12,16 @@ include_once "../view/include/header.php";
 <h1><?= $title ?></h1>
 
 
+
+
+
+
+
+
+
+
+
+
 <!-- FOOTER -->
 <?php
 

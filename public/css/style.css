@@ -1,12 +1,20 @@
 /* 
 CSS générale pour tout ce qui sera commun à chaque page (ex: couleur, background, typo...) 
-On fera des CSS spécifique pour les éléments spécifiques (formaulaire et autre)
+On fera des CSS spécifiques pour les éléments spécifiques (formulaires et autres)
 */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html{
+	min-width: 100%;
+}
+
+body{
+	flex-grow: 1;
 }
 
 nav a {
