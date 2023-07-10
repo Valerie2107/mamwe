@@ -41,34 +41,37 @@ $homeManager = new ManagerHomepage($db);
 $allHome = $homeManager -> getAll();
 ##### 
 
-// quand on deconnect :
+### instanciation de ManagerUser pour se connecter ou pas :
 $userManager = new ManagerUser($db);
 
-
+// deconnection de l'admin
 if(isset($_GET['deconnect'])){
     $userManager->disconnect();         
+    header("Location: ./");
 }
     
-//check varaible $POST pour connexion :
+// connection à l'admin
 if(isset($_POST['login'],$_POST['pwd'])){
     $userMapping = new MappingUser([
         "mwLoginUser" => $_POST['login'],
         "mwPwdUser" => $_POST['pwd']
     ]);
     $connectUser = $userManager->connect($userMapping);
-
     var_dump($connectUser);
-    
+
     if($connectUser){
-        echo "OUI";
+        header("Location: ./");
     }else{
-        echo "non";
+        $erreur = "Nom d'utilisateur ou mot de passe incorrect ! "; 
     }
-
 }  
+#####
 
-if(isset($_SESSION['uniqueId']) && $_SESSION['uniqueId']==session_id()){    
+### Si l'admin est connecté
+if(isset($_SESSION['idSession']) && $_SESSION['idSession']==session_id()){   
+
     require_once "../view/privateView/admin.php";
+    
     if(isset($_POST['insertArticle'])){
         if( false /* verification des champs du formulaire ajout de sous section */){
             // $insertSS = insertSS($db);
@@ -166,6 +169,7 @@ else if(isset($_GET['p'])){
         // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
         $allLivreDor = $livreManager -> getAllVisible();
 
+        // insertion nouveau message dans le livre d'or :
         if(isset($_POST['nameLO'], $_POST['mailLO'], $_POST['messageLO'])){
             // insertion dans le livre d'or
             $newMessageLO = new MappingLivreDor([
@@ -175,29 +179,13 @@ else if(isset($_GET['p'])){
             ]);
 
         }
+        
         // appel de la vue:
         include_once "../view/publicView/livreDorView.php";
     }
 
     else if($_GET['p']==="connect"){
         include_once "../view/publicView/connectView.php";
-    }
-
-    // nav privé
-    else if($_GET['p'] === "formPwd"){
-        include_once "../view/privateView/formPassword.php";
-    }
-
-    else if($_GET['p'] === "addRessource"){
-        include_once "../view/privateView/ressourcesInsertView.php";
-    }
-
-    else if($_GET['p'] === "addArticle"){
-        include_once "../view/privateView/articleInsertView.php";;
-    }
-
-    else if($_GET['p'] === "admin"){
-        include_once "../view/privateView/admin.php";;
     }
 
     else{
@@ -220,15 +208,11 @@ else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
     include_once "../view/publicView/sectionView.php";
 }
 
-
-
 else if(isset($_POST['nameContact'], $_POST['mailContact'], $_POST['messageContact'])){
     // envois message / mailer
 }
 
-
 else {
-
     include_once "../view/publicView/homepage.php";
 }
 

@@ -11,6 +11,11 @@ include_once "../view/include/header.php";
 <!-- HTML -->
 <h1><?= $title ?></h1>
 
+<?php if(isset($erreur)){
+    echo $erreur;
+}
+?>
+
 <form method="POST">
     <input type="text" name="login" >
     <input type="password" name="pwd">
