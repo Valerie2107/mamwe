@@ -32,9 +32,9 @@
         
         <!-- lien pour les category :-->
         <?php
-        $sections = $sectionManager -> getAll();
+        $allSection = $sectionManager -> getAll();
         
-        foreach($sections as $section) :  
+        foreach($allSection as $section) :  
         ?>
         <!-- VERIFIER DB pour les noms -->
         <a class="menu" href="?sectionId=<?= $section -> getMwIdSect() ?>"><?= $section -> getMwTitleSect() ;?></a>
