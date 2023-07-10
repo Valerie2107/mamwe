@@ -3,7 +3,7 @@
 use model\mappingClass\MappingArticle;
 use model\managerClass\ManagerArticle;
 use model\mappingClass\MappingPicture;
-
+use model\managerClass\ManagerPicture;
 
 // require de la config:
 require_once "../config.php";
@@ -23,8 +23,10 @@ try {
     $db = new PDO(DB_TYPE.':host='.DB_HOST.';port='.DB_PORT.';dbname='.DB_NAME.';charset='.DB_CHARSET,DB_LOGIN,DB_PWD);
     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-$managerArt = new ManagerArticle($db);
-$articles = $managerArt->getAllArticlesWithPictures($db);
+    $section_id = 1;  // à remplacer plus tard part un $_GET['section_id'] ! sécurité à faire
+    $managerArt = new ManagerArticle($db);
+    $articles = $managerArt->getAllArticlesWithPictures($db, $section_id);
+
 
 foreach($articles as $item) {
     echo "article id : " . $item->getMwIdArticle() . "<br>";
