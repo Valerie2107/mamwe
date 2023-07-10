@@ -48,18 +48,23 @@ var_dump($livreDor1);
 $managerLO = new ManagerLivreDor($db);
 var_dump($managerLO);
 
-$getAll = $managerLO->getAll();
-var_dump($getAll);
+$getAll = $managerLO -> getAll();
+
+
+$getAllVisible = $managerLO->getAllVisible();
+var_dump($getAll, $getAllVisible);
 
 $getById = $managerLO->getOneById(1);
-var_dump($getById);
+// var_dump($getById);
+
+
 
 // insert fonctionne :
 // $insert = $managerLO->insertLivreDor($livreDor1);
 // var_dump($insert);
 
-$update = $managerLO -> updateLivreDor($livreDor2);
-var_dump($update);
+// $update = $managerLO -> updateLivreDor($livreDor2);
+// var_dump($update);
 
-$delete = $managerLO -> deleteLivreDor(6);
-var_dump($delete);
+// $delete = $managerLO -> deleteLivreDor(6);
+// var_dump($delete);
