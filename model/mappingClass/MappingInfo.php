@@ -80,7 +80,7 @@ class MappingInfo extends MappingAbstract
         $now = new DateTime();
 
  
-        $this->mwDateInfo = 'modifié le : ' . $now->format('Y-m-d');
+        $this->mwDateInfo = $now->format('Y-m-d');
 
         return $this;
     }

@@ -41,7 +41,10 @@ try {
 
 try{
     $test2 = new MappingInfo([
-        "mwTitleSect" => "test ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgte",
+        "mwIdInfo" => 1,
+        "mwContentInfo" => "test ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgtest ret dfg zertgte",
+        "mwDateInfo" => "2022-05-17",
+        "mwPictureMwIdPicture" => 54,
     ]);
 }catch (Exception $e){
     echo $e;
@@ -55,19 +58,18 @@ echo "</pre>";
 
 // test des manager :
 $managerInfo = new ManagerInfo($db);
-//var_dump($managerInfo);
+var_dump($managerInfo);
 $getAll = $managerInfo -> getAll();
 
-//var_dump($getAll);
+var_dump($getAll);
 
-//foreach($getAll as $event){
-//    echo "id : " . $event -> getMwIdInfo() ."<br>";
-//    echo "contenu : " . $event -> getMwContentInfo() . "<br>";  
-//    echo "date : " . $event -> getMwDateInfo() . "<br>";  
-//}
+foreach($getAll as $event){
+    echo "id : " . $event -> getMwIdInfo() ."<br>";
+    echo "contenu : " . $event -> getMwContentInfo() . "<br>";  
+    echo "date : " . $event -> getMwDateInfo() . "<br>";  
+}
 
-$insertInfo = $managerInfo -> insertInfo($dataP, $dataI);
-var_dump($insertInfo);
+
 
 $info = new MappingInfo ([
     "mwIdInfo" => 1,
@@ -78,11 +80,14 @@ $info = new MappingInfo ([
 
 $picture = new MappingPicture([
     "mwIdPicture" => 65,
-    "mwTitlePicture" => "retestUpdate",
+    "mwTitlePicture" => "yobladi",
     "mwUrlPicture" => "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
     "mwSizePicture" => 1,
     "mwPositionPicture" => 0
 ]);
+
+$insertInfo = $managerInfo -> insertInfo($picture, $info);
+var_dump($insertInfo);
 
 //$updateInfo = $managerInfo -> updateInfo($picture, $info);
 //var_dump($updateInfo);
