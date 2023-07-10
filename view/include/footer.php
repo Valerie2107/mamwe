@@ -15,3 +15,8 @@
     <script src="../public/js/js.js"></script>
 </body>
 </html>
+<?php
+
+use model\mappingClass\MappingUser;
+$jawad = new MappingUser([]);
+var_dump($jawad);

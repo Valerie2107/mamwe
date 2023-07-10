@@ -42,14 +42,20 @@ $allHome = $homeManager -> getAll();
 ##### 
 
 // quand on deconnect :
+$userManager = new ManagerUser($db);
+
+
 if(isset($_GET['deconnect'])){
-    // if(deconnect()){
-        //     header("location: ./");
-        // }       
+    $userManager->disconnect();         
 }
     
 //check varaible $POST pour connexion :
 if(isset($_POST['login'],$_POST['pwd'])){
+    $userMapping = new MappingUser([
+        "mwLoginUser" => $_POST['login'],
+        "mwPwdUser" => $_POST['pwd']
+    ]);
+    $connectUser = $userManager->connect($userMapping);
     header("Location: ./");         
 }  
 

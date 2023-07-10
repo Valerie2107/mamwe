@@ -34,6 +34,53 @@ class ManagerUser implements ManagerInterface
         return $pwd;
     }
     
+    public static function disconnect() : void
+    {
+        $_SESSION = [];
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params["path"],
+                $params["domain"],
+                $params["secure"],
+                $params["httponly"]
+            );
+        }
+        session_destroy();
+    }
+
+    public function connect(MappingUser $user) : bool
+    {
+        $query   = "SELECT mw_id_user, mw_login_user, mw_pwd_user
+                    FROM mw_user 
+                    WHERE mw_user.mw_login_user = :login";
+        $prepare = $this->db->prepare($query);
+        $prepare->bindValue(":login", $user->getMwLoginUser(), PDO::PARAM_STR);
+        $prepare->execute();
+        try {
+            $result = $prepare->fetch(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            die($e);
+        }
+        return $result && $this->userLogin($result, $user->getMwPwdUser());
+    }
+
+    private function userLogin($userInfo, $pwd) : bool
+    {
+        if (password_verify($pwd, $userInfo["mwPwdUser"])) {
+            $_SESSION["idSession"]      = session_id();
+            $_SESSION["idUser"]         = $userInfo["mwIdUser"];
+            $_SESSION["userLogin"]      = $userInfo["mwLoginUser"];
+            $result                     = true;
+        }
+        else {
+            $result = false;
+        }
+        return $result;
+    }
     
     public function getOneById($id){
         $sql = "SELECT * FROM mw_user WHERE mw_id_user = :id";
