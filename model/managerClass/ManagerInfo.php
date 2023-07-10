@@ -72,12 +72,12 @@ class ManagerInfo implements ManagerInterface
         $lastId = $this->db->lastInsertId();
 
 
-        $sql = "INSERT INTO `mw_info`(`mw_date_info`, `mw_content_info`, `mw_picture_mw_id_picture`) 
+        $sql = "INSERT INTO `mw_info`(`mw_content_info`, `mw_date_info`, `mw_picture_mw_id_picture`) 
         VALUES (:content, :date, :picture)";  
 
         $prepareInfo = $this->db->prepare($sql);
-        $prepareInfo->bindValue(':date', $dataI->getMwDateInfo(), PDO::PARAM_STR);
         $prepareInfo->bindValue(':content', $dataI->getMwContentInfo(), PDO::PARAM_STR);
+        $prepareInfo->bindValue(':date', $dataI->getMwDateInfo(), PDO::PARAM_STR);
         $prepareInfo->bindValue(':picture', $lastId, PDO::PARAM_INT);
         
         $prepareInfo->execute();

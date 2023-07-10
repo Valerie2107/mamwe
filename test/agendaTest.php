@@ -29,7 +29,7 @@ try {
 // test des mapping :
 try{
 $test1 = new MappingAgenda([
-    "mwDateAgenda" => "jolie",
+    "mwDateAgenda" => "2022-07-14",
     "mwContentAgenda" => "test2",
     "mwTitleAgenda" => "test2",
     "mwPictureMwIdPicture" => null,

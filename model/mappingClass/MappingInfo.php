@@ -2,10 +2,14 @@
 
 namespace model\mappingClass;
 
+use DateTime;
+use model\traitClass\DateTrait;
 use model\abstractClass\MappingAbstract;
 use Exception;
+
 class MappingInfo extends MappingAbstract
 {
+    use DateTrait;
 
     private  int $mwIdInfo;
     private  string $mwContentInfo;
@@ -60,12 +64,26 @@ class MappingInfo extends MappingAbstract
 
 
     // SET // 
-
-    public function setMwDateInfo(string $mwDateInfo): void
+    
+    /**
+     * @param string $mwDateAgenda
+     *
+     * @return self
+     * @throws Exception
+     */
+    public function setMwDateInfo(string $mwDateInfo): self
     {
-        $this->mwDateInfo = $mwDateInfo;
-    }
+        if (!$this->DateTrait($mwDateInfo, 'Y-m-d')) {
+            throw new Exception('Date incorrecte, format attendu : Y/m/d');
+        }
 
+        $now = new DateTime();
+
+ 
+        $this->mwDateInfo = $now->format('Y-m-d');
+
+        return $this;
+    }
 
        // GET de picture // 
        public function getMwPictureMwIdPicture(): ?int
