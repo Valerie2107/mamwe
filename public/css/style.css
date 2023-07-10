@@ -1,6 +1,6 @@
 /* 
 CSS générale pour tout ce qui sera commun à chaque page (ex: couleur, background, typo...) 
-On fera des CSS spécifique pour les éléments spécifiques (formaulaire et autre)
+On fera des CSS spécifiques pour les éléments spécifiques (formulaires et autres)
 */
 
 * {
@@ -9,6 +9,7 @@ On fera des CSS spécifique pour les éléments spécifiques (formaulaire et aut
     box-sizing: border-box;
 
 }
+
 
 
 nav a {
