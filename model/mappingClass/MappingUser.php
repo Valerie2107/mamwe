@@ -93,12 +93,12 @@ class MappingUser extends MappingAbstract
     {
 
         if(filter_var($mwMailUser, FILTER_VALIDATE_EMAIL)){
-            $this->mwMailUser = $mwMailUser;
-            return $this;     
+            $this -> mwMailUser = $mwMailUser;
         }else{
             echo "L'adresse e-mail n'est pas valide";
         }
-
+        
+        return $this;     
     }
 
 

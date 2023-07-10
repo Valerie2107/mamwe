@@ -33,14 +33,13 @@ use model\managerClass\ManagerUser;
 $sectionManager = new ManagerSection($db); 
 // applique la méthode qui contient la requete SQL qui récupére toutes les section
 $allSection = $sectionManager -> getAll();
+#####
 
-### OUI ###
-
-### on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
+### HOMEPAGE : on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
 // on stock le manager dans la variable:
 $homeManager = new ManagerHomepage($db);
 $allHome = $homeManager -> getAll();
-### 
+##### 
 
 // quand on deconnect :
 if(isset($_GET['deconnect'])){
@@ -54,7 +53,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
     header("Location: ./");         
 }  
 
-if(isset($_SESSION['uniqueId'])&& $_SESSION['uniqueId']==session_id()){    
+if(isset($_SESSION['uniqueId']) && $_SESSION['uniqueId']==session_id()){    
     require_once "../view/privateView/admin.php";
     if(isset($_POST['insertArticle'])){
         if( false /* verification des champs du formulaire ajout de sous section */){
@@ -155,7 +154,6 @@ else if(isset($_GET['p'])){
 
         if(isset($_POST['nameLO'], $_POST['mailLO'], $_POST['messageLO'])){
             // insertion dans le livre d'or
-            // insertion dans le livre d'or
             $newMessageLO = new MappingLivreDor([
                 "mwNameLivreDor" => $_POST['nameLO'],
                 "mwMailLivreDor" => $_POST['mailLO'],
@@ -165,6 +163,10 @@ else if(isset($_GET['p'])){
         }
         // appel de la vue:
         include_once "../view/publicView/livreDorView.php";
+    }
+
+    else if($_GET['p']==="connect"){
+        include_once "../view/publicView/connectView.php";
     }
 
     // nav privé

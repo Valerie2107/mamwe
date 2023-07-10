@@ -67,12 +67,12 @@ class ManagerUser implements ManagerInterface
 
 
     // j'ai fait un insertUser, on est pas sensé en avoir un, mais si jamais il est là :
-    // public function insertUser(string $login, string $mail, string $pwd){
+    // public function insertUser(MappingUser $data){
     //     $sql = "INSERT INTO `mw_user`(`mw_login_user`, `mw_mail_user`, `mw_pwd_user`) VALUES (:login, :mail, :pwd)";
     //     $prepare = $this->db->prepare($sql);
-    //     $prepare->bindParam(':login', $login, PDO::PARAM_STR);
-    //     $prepare->bindParam(':mail', $mail, PDO::PARAM_STR);
-    //     $prepare->bindParam(':pwd', $pwd, PDO::PARAM_STR);
+    //     $prepare->bindValue(':login', $data->getMwLoginUser(), PDO::PARAM_STR);
+    //     $prepare->bindValue(':mail', $data->getMwMailUser(), PDO::PARAM_STR);
+    //     $prepare->bindValue(':pwd', $this -> hashPwd($data -> getMwPwdUser()) , PDO::PARAM_STR);
     //     try {
     //         $prepare -> execute();
     //         return true;
