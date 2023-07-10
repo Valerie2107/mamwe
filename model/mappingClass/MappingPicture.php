@@ -18,7 +18,7 @@ class MappingPicture extends MappingAbstract{
     //  get-set mwIdPicture
     public function getMwIdPicture(){
 
-        return $this->mwIdPicture;
+       return $this->mwIdPicture;
 
     }
 
@@ -89,7 +89,7 @@ class MappingPicture extends MappingAbstract{
 
     public function getMwArticleMwIdArticle() 
     {
-        return $this->mwArticleMwIdArticle;
+       return $this->mwArticleMwIdArticle;
     }
 
     public function setMwArticleMwIdArticle(?int $mwArticleMwIdArticle):self
