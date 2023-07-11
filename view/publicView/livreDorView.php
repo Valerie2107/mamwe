@@ -6,6 +6,8 @@ $title = "Livre d'or";
 // HEAD + HEADER + NAVBAR
 include_once "../view/include/header.php";
 
+//var_dump($allLivreDor);
+
 ?>
 
 <!-- HTML -->
@@ -13,15 +15,23 @@ include_once "../view/include/header.php";
 
 <section class="container">
     <form name='livreDor' action='' method="POST">
-        <div class="champs"><label for="lastname">Nom</label><input type="text" name="lastname" placeholder="Indiquez votre nom" required></div>
-        <div class="champs"><label for="firstname">Prénom</label><input type="text" name="firstname" placeholder="Indiquez votre prénom" required></div>
-        <div class="champs"><label for="usermail">E-mail</label><input type='email' name="usermail" placeholder="Indiquez votre e-mail" required></div>
-        <div class="champs"><label for="avis">Votre avis</label><textarea maxlength="600" name="message" placeholder="Indiquez votre avis" required></textarea></div>
+        <div class="champs"><label for="nameLO">Nom</label><input type="text" name="lastname" placeholder="Indiquez votre nom" required></div>
+        <div class="champs"><label for="mailLO">E-mail</label><input type='email' name="usermail" placeholder="Indiquez votre e-mail" required></div>
+        <div class="champs"><label for="messageLO">Votre message</label><textarea maxlength="600" name="message" placeholder="Écrivez votre message" required></textarea></div>
         <div class="envoi"><input id="bouton" type="submit" value="Envoyer"></div>        
     </form>
 </section>
 
+<?php  foreach($allLivreDor as $lo): ?>
+    <p>  
+        <?= $lo ->getMwNameLivreDor(); ?>   <br>
+        <?= $lo ->getmwMessageLivreDor(); ?>   <br>
+        <?= $lo ->getmwDateLivreDor(); ?>
+</p>
 
+
+
+<?php  endforeach;  ?>
 
 <!-- FOOTER -->
 <?php

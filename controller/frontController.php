@@ -37,7 +37,7 @@ $allSection = $sectionManager -> getAll();
 ### OUI ###
 
 ### on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
-// on stock le manager dans la variable:
+// on stocke le manager dans la variable:
 $homeManager = new ManagerHomepage($db);
 $allHome = $homeManager -> getAll();
 ### 
@@ -159,9 +159,9 @@ else if(isset($_GET['p'])){
             $newMessageLO = new MappingLivreDor([
                 "mwNameLivreDor" => $_POST['nameLO'],
                 "mwMailLivreDor" => $_POST['mailLO'],
-                "mwMessageLivreDor" => $_POST['messageLO']
+                "mwMessageLivreDor" => $_POST['messageLO'],
+                "mwDateLivreDor" => $_POST['dateLO']
             ]);
-
         }
         // appel de la vue:
         include_once "../view/publicView/livreDorView.php";
