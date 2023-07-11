@@ -9,3 +9,7 @@ On fera des CSS spécifiques pour les éléments spécifiques (formulaires et au
     box-sizing: border-box;
 }
 
+
+.empty{      /*div vide pour faire des espaces */
+    height: 2em;   
+}
