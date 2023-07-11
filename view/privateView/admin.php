@@ -9,7 +9,15 @@ include_once "../view/include/header.php";
 ?>
 
 <!-- HTML -->
+
+<!-- nav bar de l'admin -->
+<?php include_once '../view/include/privateNav.php'; ?>
+
+<!-- titre -->
 <h1><?= $title ?></h1>
+
+<!-- le rest : -->
+
 
 
 <!-- FOOTER -->

@@ -1,0 +1,5 @@
+<?php
+
+#####
+// ON VA METTRE LES INFOS ET LA HOMEPAGES LA ICI
+#####
