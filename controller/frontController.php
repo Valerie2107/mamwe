@@ -60,80 +60,12 @@ if(isset($_POST['login'],$_POST['pwd'])){
     var_dump($connectUser);
 
     if($connectUser){
-        header("Location: ./");
+        include_once '../view/privateView/admin.php';
     }else{
         $erreur = "Nom d'utilisateur ou mot de passe incorrect ! "; 
     }
 }  
 #####
-
-### Si l'admin est connecté
-if(isset($_SESSION['idSession']) && $_SESSION['idSession']==session_id()){   
-
-    require_once "../view/privateView/admin.php";
-    
-    if(isset($_POST['insertArticle'])){
-        if( false /* verification des champs du formulaire ajout de sous section */){
-            // $insertSS = insertSS($db);
-
-        }
-    }    
-
-    if(isset($_POST['updateArticle'])){
-        if( false /* verification des champs du formulaire mise a jour de sous section */ ){
-            // $insertSS = insertSS($db);
-        }
-    } 
-
-    if(isset($_POST['insertRessource'])){
-        if( false /* verification des champs du formulaire ajout de ressource */ ){
-            // $insertSS = insertSS($db);
-        }
-    } 
-
-    if(isset($_POST['updateRessource'])){
-        if( false /* verification des champs du formulaire mise a jour des ressources */ ){
-            // $insertSS = insertSS($db);
-        }
-    } 
-
-    if(isset($_POST['updatePwd'])){
-        if( false /* verification des champs du formulaire mise a jour du mot de passe */ ){
-            // $insertSS = insertSS($db);
-        }
-    } 
-
-
-    if(isset($_GET['idRessource']) && ctype_digit($_GET['idRessource']) ){
-        include_once "../view/privateView/ressourcesEditView.php";
-    }
-
-    if(isset($_GET['idArticle']) && ctype_digit($_GET['idArticle'])){
-        include_once "../view/privateView/articleEditView.php";
-    }
-
-    if(isset($_GET['deleteRessources']) && ctype_digit(($_GET['deleteRessources']))){
-        // header("Location: ./?m=L'article dont l'id est $idRessource a été supprimé");
-    }
-
-    if(isset($_GET['deleteArticle']) && ctype_digit(($_GET['deleteArticle']))){
-        // header("Location: ./?m=L'article dont l'id est $idArticle a été supprimé");
-    }
-
-    if(isset($_GET['visibleLO']) && ctype_digit($_GET['visibleLO'])){
-        header("location: ./");
-    }
-
-    if(isset($_GET['deleteLO']) && ctype_digit($_GET['deleteLO'])){
-        header("location: ./");
-    }
-
-    if(isset($_GET['banLO']) && ctype_digit($_GET['benLO'])){
-        header("location: ./");          
-    }
-    
-    require_once "../view/privateView/admin.php";
-}
 
 
 else if(isset($_GET['p'])){
@@ -188,12 +120,89 @@ else if(isset($_GET['p'])){
         include_once "../view/publicView/connectView.php";
     }
 
+    // Suite du $_get si l'admin est connecté :
+    else if(isset($_SESSION['idSession']) && $_SESSION['idSession']==session_id()){
+        if($_GET['p']==="admin"){
+            include_once '../view/privateView/admin.php';
+        }
+        else if($_GET['p']==="agenda"){
+            include_once '../view/privateView/agendaCrud.php';
+        }
+
+        // les inserts
+        if(isset($_POST['insertArticle'])){
+            if( false /* verification des champs du formulaire ajout de sous section */){
+                // $insertSS = insertSS($db);
+
+            }
+        }    
+
+        if(isset($_POST['updateArticle'])){
+            if( false /* verification des champs du formulaire mise a jour de sous section */ ){
+                // $insertSS = insertSS($db);
+            }
+        } 
+
+        if(isset($_POST['insertRessource'])){
+            if( false /* verification des champs du formulaire ajout de ressource */ ){
+                // $insertSS = insertSS($db);
+            }
+        } 
+
+        if(isset($_POST['updateRessource'])){
+            if( false /* verification des champs du formulaire mise a jour des ressources */ ){
+                // $insertSS = insertSS($db);
+            }
+        } 
+
+        if(isset($_POST['updatePwd'])){
+            if( false /* verification des champs du formulaire mise a jour du mot de passe */ ){
+                // $insertSS = insertSS($db);
+            }
+        } 
+
+        // les updates
+        if(isset($_GET['idRessource']) && ctype_digit($_GET['idRessource']) ){
+            include_once "../view/privateView/ressourcesEditView.php";
+        }
+
+        if(isset($_GET['idArticle']) && ctype_digit($_GET['idArticle'])){
+            include_once "../view/privateView/articleEditView.php";
+        }
+
+        if(isset($_GET['deleteRessources']) && ctype_digit(($_GET['deleteRessources']))){
+            // header("Location: ./?m=L'article dont l'id est $idRessource a été supprimé");
+        }
+
+        if(isset($_GET['deleteArticle']) && ctype_digit(($_GET['deleteArticle']))){
+            // header("Location: ./?m=L'article dont l'id est $idArticle a été supprimé");
+        }
+
+        if(isset($_GET['visibleLO']) && ctype_digit($_GET['visibleLO'])){
+            header("location: ./");
+        }
+
+        if(isset($_GET['deleteLO']) && ctype_digit($_GET['deleteLO'])){
+            header("location: ./");
+        }
+
+        if(isset($_GET['banLO']) && ctype_digit($_GET['benLO'])){
+            header("location: ./");          
+        }
+        
+        // les deletes :
+
+    }
+
     else{
-        include_once "../view/publicView/homepage.php";
+
+        include_once "../view/404.php";
+        
     }
     
 }
 
+// affichage des sections :
 else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
     // on stock l'id de la section
     $idSect = (int) $_GET['sectionId'];
@@ -208,6 +217,7 @@ else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
     include_once "../view/publicView/sectionView.php";
 }
 
+// formulaire de contact :
 else if(isset($_POST['nameContact'], $_POST['mailContact'], $_POST['messageContact'])){
     // envois message / mailer
 }
