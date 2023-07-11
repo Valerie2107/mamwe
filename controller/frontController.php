@@ -33,91 +33,46 @@ use model\managerClass\ManagerUser;
 $sectionManager = new ManagerSection($db); 
 // applique la méthode qui contient la requete SQL qui récupére toutes les section
 $allSection = $sectionManager -> getAll();
+#####
+
 
 ### OUI ###
 
 ### on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
 // on stocke le manager dans la variable:
+
+### HOMEPAGE : on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
+// on stock le manager dans la variable:
+
 $homeManager = new ManagerHomepage($db);
 $allHome = $homeManager -> getAll();
-### 
+##### 
 
-// quand on deconnect :
+### instanciation de ManagerUser pour se connecter ou pas :
+$userManager = new ManagerUser($db);
+
+// deconnection de l'admin
 if(isset($_GET['deconnect'])){
-    // if(deconnect()){
-        //     header("location: ./");
-        // }       
+    $userManager->disconnect();         
+    header("Location: ./");
 }
     
-//check varaible $POST pour connexion :
+// connection à l'admin
 if(isset($_POST['login'],$_POST['pwd'])){
-    header("Location: ./");         
+    $userMapping = new MappingUser([
+        "mwLoginUser" => $_POST['login'],
+        "mwPwdUser" => $_POST['pwd']
+    ]);
+    $connectUser = $userManager->connect($userMapping);
+    var_dump($connectUser);
+
+    if($connectUser){
+        include_once '../view/privateView/admin.php';
+    }else{
+        $erreur = "Nom d'utilisateur ou mot de passe incorrect ! "; 
+    }
 }  
-
-if(isset($_SESSION['uniqueId'])&& $_SESSION['uniqueId']==session_id()){    
-    require_once "../view/privateView/admin.php";
-    if(isset($_POST['insertArticle'])){
-        if( false /* verification des champs du formulaire ajout de sous section */){
-            // $insertSS = insertSS($db);
-
-        }
-    }    
-
-    if(isset($_POST['updateArticle'])){
-        if( false /* verification des champs du formulaire mise a jour de sous section */ ){
-            // $insertSS = insertSS($db);
-        }
-    } 
-
-    if(isset($_POST['insertRessource'])){
-        if( false /* verification des champs du formulaire ajout de ressource */ ){
-            // $insertSS = insertSS($db);
-        }
-    } 
-
-    if(isset($_POST['updateRessource'])){
-        if( false /* verification des champs du formulaire mise a jour des ressources */ ){
-            // $insertSS = insertSS($db);
-        }
-    } 
-
-    if(isset($_POST['updatePwd'])){
-        if( false /* verification des champs du formulaire mise a jour du mot de passe */ ){
-            // $insertSS = insertSS($db);
-        }
-    } 
-
-
-    if(isset($_GET['idRessource']) && ctype_digit($_GET['idRessource']) ){
-        include_once "../view/privateView/ressourcesEditView.php";
-    }
-
-    if(isset($_GET['idArticle']) && ctype_digit($_GET['idArticle'])){
-        include_once "../view/privateView/articleEditView.php";
-    }
-
-    if(isset($_GET['deleteRessources']) && ctype_digit(($_GET['deleteRessources']))){
-        // header("Location: ./?m=L'article dont l'id est $idRessource a été supprimé");
-    }
-
-    if(isset($_GET['deleteArticle']) && ctype_digit(($_GET['deleteArticle']))){
-        // header("Location: ./?m=L'article dont l'id est $idArticle a été supprimé");
-    }
-
-    if(isset($_GET['visibleLO']) && ctype_digit($_GET['visibleLO'])){
-        header("location: ./");
-    }
-
-    if(isset($_GET['deleteLO']) && ctype_digit($_GET['deleteLO'])){
-        header("location: ./");
-    }
-
-    if(isset($_GET['banLO']) && ctype_digit($_GET['benLO'])){
-        header("location: ./");          
-    }
-    
-    require_once "../view/privateView/admin.php";
-}
+#####
 
 
 else if(isset($_GET['p'])){
@@ -153,8 +108,8 @@ else if(isset($_GET['p'])){
         // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
         $allLivreDor = $livreManager -> getAllVisible();
 
+        // insertion nouveau message dans le livre d'or :
         if(isset($_POST['nameLO'], $_POST['mailLO'], $_POST['messageLO'])){
-            // insertion dans le livre d'or
             // insertion dans le livre d'or
             $newMessageLO = new MappingLivreDor([
                 "mwNameLivreDor" => $_POST['nameLO'],
@@ -163,33 +118,98 @@ else if(isset($_GET['p'])){
                 "mwDateLivreDor" => $_POST['dateLO']
             ]);
         }
+        
         // appel de la vue:
         include_once "../view/publicView/livreDorView.php";
     }
 
-    // nav privé
-    else if($_GET['p'] === "formPwd"){
-        include_once "../view/privateView/formPassword.php";
+    else if($_GET['p']==="connect"){
+        include_once "../view/publicView/connectView.php";
     }
 
-    else if($_GET['p'] === "addRessource"){
-        include_once "../view/privateView/ressourcesInsertView.php";
-    }
+    // Suite du $_get si l'admin est connecté :
+    else if(isset($_SESSION['idSession']) && $_SESSION['idSession']==session_id()){
+        if($_GET['p']==="admin"){
+            include_once '../view/privateView/admin.php';
+        }
+        else if($_GET['p']==="agenda"){
+            include_once '../view/privateView/agendaCrud.php';
+        }
 
-    else if($_GET['p'] === "addArticle"){
-        include_once "../view/privateView/articleInsertView.php";;
-    }
+        // les inserts
+        if(isset($_POST['insertArticle'])){
+            if( false /* verification des champs du formulaire ajout de sous section */){
+                // $insertSS = insertSS($db);
 
-    else if($_GET['p'] === "admin"){
-        include_once "../view/privateView/admin.php";;
+            }
+        }    
+
+        if(isset($_POST['updateArticle'])){
+            if( false /* verification des champs du formulaire mise a jour de sous section */ ){
+                // $insertSS = insertSS($db);
+            }
+        } 
+
+        if(isset($_POST['insertRessource'])){
+            if( false /* verification des champs du formulaire ajout de ressource */ ){
+                // $insertSS = insertSS($db);
+            }
+        } 
+
+        if(isset($_POST['updateRessource'])){
+            if( false /* verification des champs du formulaire mise a jour des ressources */ ){
+                // $insertSS = insertSS($db);
+            }
+        } 
+
+        if(isset($_POST['updatePwd'])){
+            if( false /* verification des champs du formulaire mise a jour du mot de passe */ ){
+                // $insertSS = insertSS($db);
+            }
+        } 
+
+        // les updates
+        if(isset($_GET['idRessource']) && ctype_digit($_GET['idRessource']) ){
+            include_once "../view/privateView/ressourcesEditView.php";
+        }
+
+        if(isset($_GET['idArticle']) && ctype_digit($_GET['idArticle'])){
+            include_once "../view/privateView/articleEditView.php";
+        }
+
+        if(isset($_GET['deleteRessources']) && ctype_digit(($_GET['deleteRessources']))){
+            // header("Location: ./?m=L'article dont l'id est $idRessource a été supprimé");
+        }
+
+        if(isset($_GET['deleteArticle']) && ctype_digit(($_GET['deleteArticle']))){
+            // header("Location: ./?m=L'article dont l'id est $idArticle a été supprimé");
+        }
+
+        if(isset($_GET['visibleLO']) && ctype_digit($_GET['visibleLO'])){
+            header("location: ./");
+        }
+
+        if(isset($_GET['deleteLO']) && ctype_digit($_GET['deleteLO'])){
+            header("location: ./");
+        }
+
+        if(isset($_GET['banLO']) && ctype_digit($_GET['benLO'])){
+            header("location: ./");          
+        }
+        
+        // les deletes :
+
     }
 
     else{
-        include_once "../view/publicView/homepage.php";
+
+        include_once "../view/404.php";
+        
     }
     
 }
 
+// affichage des sections :
 else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
     // on stock l'id de la section
     $idSect = (int) $_GET['sectionId'];
@@ -204,15 +224,12 @@ else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
     include_once "../view/publicView/sectionView.php";
 }
 
-
-
+// formulaire de contact :
 else if(isset($_POST['nameContact'], $_POST['mailContact'], $_POST['messageContact'])){
     // envois message / mailer
 }
 
-
 else {
-
     include_once "../view/publicView/homepage.php";
 }
 
