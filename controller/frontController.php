@@ -57,7 +57,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
         "mwPwdUser" => $_POST['pwd']
     ]);
     $connectUser = $userManager->connect($userMapping);
-    var_dump($connectUser);
 
     if($connectUser){
         include_once '../view/privateView/admin.php';
@@ -128,6 +127,28 @@ else if(isset($_GET['p'])){
         else if($_GET['p']==="agenda"){
             include_once '../view/privateView/agendaCrud.php';
         }
+        else if($_GET['p']==="article"){
+            include_once '../view/privateView/articleCrud.php';
+        }
+        else if($_GET['p']==="info"){
+            include_once '../view/privateView/infoCrud.php';
+        }
+        else if($_GET['p']==="livredor"){
+            include_once '../view/privateView/livreDorCrud.php';
+        }
+        else if($_GET['p']==="patient"){
+            include_once '../view/privateView/patientCrud.php';
+        }
+        else if($_GET['p']==="ressource"){
+            include_once '../view/privateView/ressourceCrud.php';
+        }
+        else if($_GET['p']==="section"){
+            include_once '../view/privateView/sectionCrud.php';
+        }
+        else if($_GET['p']==="user"){
+            include_once '../view/privateView/userCrud.php';
+        }
+
 
         // les inserts
         if(isset($_POST['insertArticle'])){
