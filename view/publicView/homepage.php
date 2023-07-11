@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/homepage.css">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
-
-
-
 <?php
 
 // on peut mettre les titres des rubriques dans la variables $title qu'on utilise dans la balise <title>
@@ -24,14 +9,26 @@ include_once "../view/include/header.php";
 ?>
 
 <!-- HTML -->
-
 <h1><?= $title ?></h1>
 
-
+<!-- description de la madame : -->
 <div><img class="picturehome" src="<?= $allHome -> getPicture() ?>" alt=""></div>
 
 <div class="textehome">
 <?= $allHome -> getMwContentHomepage() ?></div>
+
+
+<div class="section-home">
+<?php  foreach($allSection as $section ): ?>
+    <div class="article-home">
+        <h2><?=$section -> getMwTitleSect();?></h2>
+        <div class="article-pic">
+            <img src="<?= $allHome -> getPicture() ?>" alt="">
+        </div>
+    </div>
+<?php endforeach ?>
+</div>
+
 
 <!-- FOOTER -->
 <?php

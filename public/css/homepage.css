@@ -8,3 +8,26 @@
     text-align: justify;
     margin: 0 200px;
 }
+
+.section-home{
+   width: 80%;
+   margin: auto;
+   background-color: red;
+   height: fit-content;
+}
+
+.article-home{
+    width: 100%;
+    height: fit-content;
+    background-color: green;
+    text-align: left;
+    padding: 1rem;
+}
+
+.article-home:nth-of-type(even){
+    text-align: right;
+}
+
+.article-home img{
+    width: 40%;
+}

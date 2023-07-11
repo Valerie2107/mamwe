@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/header.css">
+
+    <link rel="stylesheet" href="css/homepage.css">
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/homepage.css">
     <link rel="stylesheet" href="css/livredor.css">
@@ -14,6 +17,7 @@
             selector: '#mytextarea'
         });
     </script>
+
 
     <!-- $title est défini en haut de chaque page vue, on y met le nom de la catégory ou sous catégory pour qu'il saffiche dans l'onglet du navigateur -->
     <title>MAMWE - <?= $title ?></title> 
@@ -32,7 +36,7 @@
 <!-- Affichage de la barre de navigation pour le public -->
 <div class="public-nav">
     <div class="titre" ><img  src="asset/img/titre.png"></div>
-    <nav>  
+            <nav>  
                 <img class="logo" src="asset/img/logo1.png">
                 <a href="./">Accueil</a>
             
@@ -53,7 +57,7 @@
                 <a href="?p=livreDor">Livre D'or</a>
                 <?php if (!empty($_SESSION)) :?>
                 <button class="btn"><a href="?deconnect">deconnection</a></button>
-        
+                    <a href="?p=admin">Admin</a>
                 <?php endif;?>
             </nav>
     </div>

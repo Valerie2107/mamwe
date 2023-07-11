@@ -25,18 +25,30 @@ use model\managerClass\ManagerPicture;
 use model\managerClass\ManagerRessource;
 use model\managerClass\ManagerSection;
 use model\managerClass\ManagerUser;
+use DateTime as Date;
+
+### VARIABLE DATE :
+$currentDate = new Date();
+$currentDate = $currentDate->format("Y-d-m");
+#####
 
 
 ### RECUP LES SECTIONS POUR LA NAVBAR : 
-
 // on stock l'object dans la variable
 $sectionManager = new ManagerSection($db); 
 // applique la méthode qui contient la requete SQL qui récupére toutes les section
 $allSection = $sectionManager -> getAll();
 #####
 
+
+### OUI ###
+
+### on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
+// on stocke le manager dans la variable:
+
 ### HOMEPAGE : on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
 // on stock le manager dans la variable:
+
 $homeManager = new ManagerHomepage($db);
 $allHome = $homeManager -> getAll();
 ##### 
@@ -57,7 +69,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
         "mwPwdUser" => $_POST['pwd']
     ]);
     $connectUser = $userManager->connect($userMapping);
-    var_dump($connectUser);
 
     if($connectUser){
         include_once '../view/privateView/admin.php';
@@ -107,9 +118,9 @@ else if(isset($_GET['p'])){
             $newMessageLO = new MappingLivreDor([
                 "mwNameLivreDor" => $_POST['nameLO'],
                 "mwMailLivreDor" => $_POST['mailLO'],
-                "mwMessageLivreDor" => $_POST['messageLO']
+                "mwMessageLivreDor" => $_POST['messageLO'],
+                "mwDateLivreDor" => $_POST['dateLO']
             ]);
-
         }
         
         // appel de la vue:
@@ -128,40 +139,95 @@ else if(isset($_GET['p'])){
         else if($_GET['p']==="agenda"){
             include_once '../view/privateView/agendaCrud.php';
         }
+        else if($_GET['p']==="article"){
+            include_once '../view/privateView/articleCrud.php';
+        }
+        else if($_GET['p']==="info"){
+            include_once '../view/privateView/infoCrud.php';
+        }
+        else if($_GET['p']==="livredor"){
+            include_once '../view/privateView/livreDorCrud.php';
+        }
+        else if($_GET['p']==="patient"){
+            $patientManager = new ManagerPatient($db);
+            $allPatient = $patientManager->getAll();
+            include_once '../view/privateView/patientCrud.php';
+        }
+        else if($_GET['p']==="ressource"){
+            include_once '../view/privateView/ressourceCrud.php';
+        }
+        else if($_GET['p']==="section"){
+            include_once '../view/privateView/sectionCrud.php';
+        }
+        else if($_GET['p']==="user"){
+            $userManager->getAll();
+            include_once '../view/privateView/userCrud.php';
+        }
 
-        // les inserts
+        ### LES INSERTS :
+        // Agenda :
+        if(isset($_POST['contentAgenda']) && $_POST['titleAgenda'] && $_POST['dateAgenda'] && $_POST['titlePic'] && $_POST['urlPic'] && $_POST['sizePic'] && $_POST['positionPic']){
+            $agendaManager = new ManagerAgenda($db);
+
+            $agendaMapping = new MappingAgenda([
+                "mwDateAgenda" => $_POST['dateAgenda'],
+                "mwContentAgenda" => $_POST['contentAgenda'],
+                "mwTitleAgenda" => $_POST['titleAgenda'],
+            ]); 
+
+            $pictureMapping = new MappingPicture([
+                "mwTitlePicture" => $_POST['titlePic'],
+                "mwUrlPicture" => $_POST['urlPic'],
+                "mwSizePicture" => $_POST['sizePic'],
+                "mwPositionPicture" => $_POST['positionPic']
+            ]);
+
+            $insertAgenda = $agendaManager -> insertAgendaWithPict($pictureMapping, $agendaMapping);
+        }  
+
+        // Article : 
         if(isset($_POST['insertArticle'])){
             if( false /* verification des champs du formulaire ajout de sous section */){
                 // $insertSS = insertSS($db);
 
             }
         }    
-
-        if(isset($_POST['updateArticle'])){
-            if( false /* verification des champs du formulaire mise a jour de sous section */ ){
+        if(isset($_POST['insertInfo'])){
+            if( false /* verification des champs du formulaire ajout de sous section */){
                 // $insertSS = insertSS($db);
-            }
-        } 
 
+            }
+        }  
+        if(isset($_POST['livreDor'])){
+            if( false /* verification des champs du formulaire ajout de sous section */){
+                // $insertSS = insertSS($db);
+
+            }
+        }  
+        if(isset($_POST['patient'])){
+            if( false /* verification des champs du formulaire ajout de sous section */){
+                // $insertSS = insertSS($db);
+
+            }
+        }  
         if(isset($_POST['insertRessource'])){
             if( false /* verification des champs du formulaire ajout de ressource */ ){
                 // $insertSS = insertSS($db);
             }
         } 
-
-        if(isset($_POST['updateRessource'])){
-            if( false /* verification des champs du formulaire mise a jour des ressources */ ){
+        if(isset($_POST['insertSection'])){
+            if( false /* verification des champs du formulaire ajout de sous section */){
                 // $insertSS = insertSS($db);
-            }
-        } 
 
-        if(isset($_POST['updatePwd'])){
-            if( false /* verification des champs du formulaire mise a jour du mot de passe */ ){
-                // $insertSS = insertSS($db);
             }
-        } 
+        }  
+             
 
-        // les updates
+        // les updates :
+        if(isset($_GET['idAgenda']) && ctype_digit($_GET['idAgenda'])){
+            include_once "../view/privateView/articleEditView.php";
+        }
+
         if(isset($_GET['idRessource']) && ctype_digit($_GET['idRessource']) ){
             include_once "../view/privateView/ressourcesEditView.php";
         }
@@ -169,26 +235,31 @@ else if(isset($_GET['p'])){
         if(isset($_GET['idArticle']) && ctype_digit($_GET['idArticle'])){
             include_once "../view/privateView/articleEditView.php";
         }
-
+        
         if(isset($_GET['deleteRessources']) && ctype_digit(($_GET['deleteRessources']))){
             // header("Location: ./?m=L'article dont l'id est $idRessource a été supprimé");
         }
-
+        
         if(isset($_GET['deleteArticle']) && ctype_digit(($_GET['deleteArticle']))){
             // header("Location: ./?m=L'article dont l'id est $idArticle a été supprimé");
         }
-
+        
         if(isset($_GET['visibleLO']) && ctype_digit($_GET['visibleLO'])){
             header("location: ./");
         }
-
+        
         if(isset($_GET['deleteLO']) && ctype_digit($_GET['deleteLO'])){
             header("location: ./");
         }
-
+        
         if(isset($_GET['banLO']) && ctype_digit($_GET['benLO'])){
             header("location: ./");          
         }
+        if(isset($_POST['updatePwd'])){
+            if( false /* verification des champs du formulaire mise a jour du mot de passe */ ){
+                // $insertSS = insertSS($db);
+            }
+        } 
         
         // les deletes :
 

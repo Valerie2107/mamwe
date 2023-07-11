@@ -18,9 +18,18 @@ include_once "../view/include/header.php";
 
 <!-- le rest : -->
 
-
+<!-- Formulaire primitif pour tester le Controller, démerdez vous maintenant : -->
+<form action="" method="POST">
+    <input type="text" name="titleAgenda" placeholder="titre" ><br>
+    <input type="text" name="contentAgenda" placeholder="contenu"><br>
+    <input type="text" name="dateAgenda" placeholder="date"><br>
+    <input type="text" name="titlePic" placeholder="titre photo"><br>
+    <input type="text" name="urlPic" placeholder="url photo"><br>
+    <input type="text" name="sizePic" placeholder="taille"><br>
+    <input type="text" name="positionPic" placeholder="position">
+    <input type="submit" value="envoyer">
+</form>
 
 <!-- FOOTER -->
 <?php
-
 include_once "../view/include/footer.php";
