@@ -13,11 +13,13 @@ include_once "../view/include/header.php";
 <!-- HTML -->
 <h1><?= $title ?></h1>
 
+<div class="empty"></div>
+
 <section class="container">
     <form name='livreDor' action='' method="POST">
-        <div class="champs"><label for="nameLO">Nom</label><input type="text" name="lastname" placeholder="Indiquez votre nom" required></div>
-        <div class="champs"><label for="mailLO">E-mail</label><input type='email' name="usermail" placeholder="Indiquez votre e-mail" required></div>
-        <div class="champs"><label for="messageLO">Votre message</label><textarea maxlength="600" name="message" placeholder="Écrivez votre message" required></textarea></div>
+        <div class="champs"><label for="nameLO">Nom </label><input type="text" name="lastname" placeholder="Indiquez votre nom" required></div><br>
+        <div class="champs"><label for="mailLO">E-mail </label><input type='email' name="usermail" placeholder="Indiquez votre e-mail" required></div><br>
+        <div class="champs"><label for="messageLO">Votre message </label><textarea maxlength="600" name="message" placeholder="Écrivez votre message" required></textarea></div>
         <div class="envoi"><input id="bouton" type="submit" value="Envoyer"></div>        
     </form>
 </section>
@@ -25,10 +27,10 @@ include_once "../view/include/header.php";
 <div class="empty"></div>
 
 <?php  foreach($allLivreDor as $lo): ?>
-    <div>
+    <div class="">
         <p>  
-            <?= $lo ->getMwNameLivreDor(); ?>   <br>
             <?= $lo ->getmwMessageLivreDor(); ?>   <br>
+            <?= $lo ->getMwNameLivreDor(); ?>   <br>
             <?= $lo ->getmwDateLivreDor(); ?>
         </p>
         <br>
@@ -36,6 +38,8 @@ include_once "../view/include/header.php";
 
 
 <?php  endforeach;  ?>
+
+<div class="empty"></div>
 
 <!-- FOOTER -->
 <?php

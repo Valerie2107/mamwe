@@ -9,7 +9,18 @@ On fera des CSS spécifiques pour les éléments spécifiques (formulaires et au
     box-sizing: border-box;
 }
 
+html{
+    min-width: 100%;  /*pour que la page HTML fasse au moins la taille de l'écran entier*/
+}
 
-.empty{      /*div vide pour faire des espaces */
+body{
+    flex-grow: 1;   /*pour que le body recouvre toute la page HTML*/
+    padding: 0 1em;
+}
+
+
+
+
+.empty{      /*div vide pour faire des espaces entre différents blocs*/
     height: 2em;   
 }

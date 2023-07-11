@@ -7,7 +7,13 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/homepage.css">
-    
+    <link rel="stylesheet" href="css/livredor.css">
+    <script src="js/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
 
     <!-- $title est défini en haut de chaque page vue, on y met le nom de la catégory ou sous catégory pour qu'il saffiche dans l'onglet du navigateur -->
     <title>MAMWE - <?= $title ?></title> 
