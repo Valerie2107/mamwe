@@ -30,7 +30,7 @@
 <!-- Affichage de la barre de navigation pour le public -->
 <div class="public-nav">
     <div class="titre" ><img  src="asset/img/titre.png"></div>
-    <nav>  
+            <nav>  
                 <img class="logo" src="asset/img/logo1.png">
                 <a href="./">Accueil</a>
             
@@ -51,7 +51,7 @@
                 <a href="?p=livreDor">Livre D'or</a>
                 <?php if (!empty($_SESSION)) :?>
                 <button class="btn"><a href="?deconnect">deconnection</a></button>
-        
+                    <a href="?p=admin">Admin</a>
                 <?php endif;?>
             </nav>
     </div>

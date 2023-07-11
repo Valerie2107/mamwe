@@ -53,10 +53,7 @@ class MappingAgenda extends MappingAbstract
             throw new Exception('Date incorrecte, format attendu : Y/m/d');
         }
 
-        $now = new DateTime();
-
- 
-        $this->mwDateAgenda = 'modifié le : ' . $now->format('Y-m-d');
+        $this->mwDateAgenda = $mwDateAgenda;
 
         return $this;
     }
