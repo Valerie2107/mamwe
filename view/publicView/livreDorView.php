@@ -13,6 +13,7 @@ include_once "../view/include/header.php";
 <!-- HTML -->
 <h1><?= $title ?></h1>
 
+
 <section class="container">
     <form name='livreDor' action='' method="POST">
         <div class="champs"><label for="nameLO">Nom</label><input type="text" name="lastname" placeholder="Indiquez votre nom" required></div>
@@ -22,16 +23,25 @@ include_once "../view/include/header.php";
     </form>
 </section>
 
+
+<div class="empty"></div>
+
 <?php  foreach($allLivreDor as $lo): ?>
-    <p>  
-        <?= $lo ->getMwNameLivreDor(); ?>   <br>
-        <?= $lo ->getmwMessageLivreDor(); ?>   <br>
-        <?= $lo ->getmwDateLivreDor(); ?>
-</p>
+    <div class="">
+        <p>  
+            <?= $lo ->getmwMessageLivreDor(); ?>   <br>
+            <?= $lo ->getMwNameLivreDor(); ?>   <br>
+            <?= $lo ->getmwDateLivreDor(); ?>
+        </p>
+        <br>
+    </div>
 
 
 
 <?php  endforeach;  ?>
+
+<div class="empty"></div>
+
 
 <!-- FOOTER -->
 <?php
