@@ -1,7 +1,3 @@
-
-
-
-
 <?php
 
 // on peut mettre les titres des rubriques dans la variables $title qu'on utilise dans la balise <title>
@@ -13,29 +9,26 @@ include_once "../view/include/header.php";
 ?>
 
 <!-- HTML -->
-
 <h1><?= $title ?></h1>
 
-
+<!-- description de la madame : -->
 <div><img class="picturehome" src="<?= $allHome -> getPicture() ?>" alt=""></div>
 
 <div class="textehome">
-
 <?= $allHome -> getMwContentHomepage() ?></div>
 
 
-
-
-
-
-<div class="section">
+<div class="section-home">
 <?php  foreach($allSection as $section ): ?>
+    <div class="article-home">
+        <h2><?=$section -> getMwTitleSect();?></h2>
+        <div class="article-pic">
+            <img src="<?= $allHome -> getPicture() ?>" alt="">
+        </div>
+    </div>
+<?php endforeach ?>
+</div>
 
-<h2><?=$section -> getMwTitleSect();?></h2>
-
-<div><img class="picturehome" src="<?= $allHome -> getPicture() ?>" alt=""></div>
-
-<?php endforeach ?></div>
 
 <!-- FOOTER -->
 <?php
