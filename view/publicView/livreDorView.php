@@ -18,7 +18,7 @@ include_once "../view/include/header.php";
     <div class="empty"></div>
     <section class="container">
         <div></div>
-        <form name='livreDor' action='' method="POST">
+        <form class="livre" name='livreDor' action='' method="POST">
             <div class="field"><label for="nameLO">Nom </label><input type="text" name="name" placeholder="Indiquez votre nom" required></div>
             <div class="field"><label for="mailLO">E-mail </label><input type='email' name="usermail" placeholder="Indiquez votre e-mail" required></div>
             <div class="field"><label for="messageLO">Votre message </label><textarea minlength= "25" maxlength="500" name="message" placeholder="Écrivez votre message" required></textarea></div>

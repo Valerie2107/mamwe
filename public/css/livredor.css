@@ -1,14 +1,11 @@
 .intro{
     text-align: center;
 }
-.container{
-    
-}
 .field{
     display: flex;
     flex-direction: column;
 }
-form{
+.livre{
     line-height: 2.5em;
 }
 .lo{
