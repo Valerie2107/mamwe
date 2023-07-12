@@ -20,14 +20,14 @@ include_once "../view/include/header.php";
 
 <!-- Formulaire primitif pour tester le Controller, démerdez vous maintenant : -->
 <form action="" method="POST">
-    <input type="text" name="titleAgenda" placeholder="titre" ><br>
+    <input type="text" name="agenda-insert-title" placeholder="titre" ><br>
     <!-- y'a le #mytextarea pour relier à l'éditeur de text -->
-    <textarea name="contentAgenda" id="mytextarea" ></textarea>
-    <input type="text" name="dateAgenda" placeholder="date"><br>
-    <input type="text" name="titlePic" placeholder="titre photo"><br>
-    <input type="text" name="urlPic" placeholder="url photo"><br>
-    <input type="text" name="sizePic" placeholder="taille"><br>
-    <input type="text" name="positionPic" placeholder="position">
+    <textarea name="agenda-insert-content" id="mytextarea" ></textarea>
+    <input type="text" name="agenda-insert-date" placeholder="date"><br>
+    <input type="text" name="agenda-insert-pic-title" placeholder="titre photo"><br>
+    <input type="text" name="agenda-insert-pic-url" placeholder="url photo"><br>
+    <input type="text" name="agenda-insert-pic-size" placeholder="taille"><br>
+    <input type="text" name="agenda-insert-pic-position" placeholder="position">
     <input type="submit" value="envoyer">
 </form>
 

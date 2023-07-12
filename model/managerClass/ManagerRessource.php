@@ -184,7 +184,7 @@ class ManagerRessource implements ManagerInterface
 
         } else {
             // si non on récupère l'ID existant dans la variable:
-            $lastIdSub = $dataRess->getMwCategory();
+            $lastIdSub = $dataRess->getMwSubCategory();
         }
         
 
