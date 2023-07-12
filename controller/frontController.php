@@ -127,10 +127,11 @@ else if(isset($_GET['p'])){
                 "mwNameLivreDor" => $_POST['nameLO'],
                 "mwMailLivreDor" => $_POST['mailLO'],
                 "mwMessageLivreDor" => $_POST['messageLO'],
-                "mwDateLivreDor" => $_POST['dateLO']
             ]);
         }
         
+        $insertLO = $livreManager -> insertLivreDor($newMessageLO);
+
         // appel de la vue:
         include_once "../view/publicView/livreDorView.php";
     }
