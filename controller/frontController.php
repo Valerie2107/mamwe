@@ -28,25 +28,20 @@ use model\managerClass\ManagerSection;
 use model\managerClass\ManagerUser;
 use DateTime as Date;
 
+### VARIABLE DATE ############################
+$currentDate = new Date();
+$currentDate = $currentDate->format("Y-d-m");
+#############################################
 
 ############# INSTANCIATION DE MANAGERS ##################
 
-### VARIABLE DATE :
-$currentDate = new Date();
-$currentDate = $currentDate->format("Y-d-m");
-#####
-
-
 ### RECUP LES SECTIONS POUR LA NAVBAR : 
-// on stock l'object dans la variable
 $sectionManager = new ManagerSection($db); 
-// applique la méthode qui contient la requete SQL qui récupére toutes les section
 $allSection = $sectionManager -> getAll();
 #####
 
 
 ### HOMEPAGE : on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
-// on stock le manager dans la variable:
 $homeManager = new ManagerHomepage($db);
 $allHome = $homeManager -> getAll();
 ##### 
@@ -57,6 +52,24 @@ $userManager = new ManagerUser($db);
 
 ### instanciation du manager d'articles :
 $articleManager =  new ManagerArticle($db);
+
+### Livre d'or
+$livreManager = new ManagerLivreDor($db);
+
+### info :
+$infoManager = new ManagerInfo($db);
+
+### ressources : 
+$ressourceManager = new ManagerRessource($db);
+
+### patient :
+$patientManager = new ManagerPatient($db);
+
+### agenda :
+$agendaManager = new ManagerAgenda($db);
+
+### picture 
+$pictureManager = new ManagerPicture($db);
 
 ##########################################################
 
@@ -97,15 +110,11 @@ else if(isset($_GET['p'])){
 
     else if($_GET['p'] === "contact"){
         // on va afficher les infos dans la page contact alors on les appelle ici :
-        $infoManager = new ManagerInfo($db);
         $allInfo = $infoManager -> getAll();
-
         include_once "../view/publicView/contactView.php";
     }
 
     else if($_GET['p'] === "ressources"){
-        $ressourceManager = new ManagerRessource($db);
-
         // on recupère toutes les catégories:
         $getAllCateg = $ressourceManager -> getAllCateg();
 
@@ -115,8 +124,6 @@ else if(isset($_GET['p'])){
     }
 
     else if($_GET['p'] === "livreDor"){
-        
-        $livreManager = new ManagerLivreDor($db);
         // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
         $allLivreDor = $livreManager -> getAllVisible();
 
@@ -128,10 +135,8 @@ else if(isset($_GET['p'])){
                 "mwMailLivreDor" => $_POST['mailLO'],
                 "mwMessageLivreDor" => $_POST['messageLO'],
             ]);
+            $insertLO = $livreManager -> insertLivreDor($newMessageLO);
         }
-        
-        $insertLO = $livreManager -> insertLivreDor($newMessageLO);
-
         // appel de la vue:
         include_once "../view/publicView/livreDorView.php";
     }
@@ -158,7 +163,6 @@ else if(isset($_GET['p'])){
             include_once '../view/privateView/livreDorCrud.php';
         }
         else if($_GET['p']==="patient"){
-            $patientManager = new ManagerPatient($db);
             $allPatient = $patientManager->getAll();
             include_once '../view/privateView/patientCrud.php';
         }
@@ -176,8 +180,6 @@ else if(isset($_GET['p'])){
         ### LES INSERTS :
         // Agenda :
         if(isset($_POST['contentAgenda'], $_POST['titleAgenda'], $_POST['dateAgenda'], $_POST['titlePic'], $_POST['urlPic'], $_POST['sizePic'], $_POST['positionPic'])){
-            $agendaManager = new ManagerAgenda($db);
-
             $agendaMapping = new MappingAgenda([
                 "mwDateAgenda" => $_POST['dateAgenda'],
                 "mwContentAgenda" => $_POST['contentAgenda'],
@@ -196,14 +198,14 @@ else if(isset($_GET['p'])){
 
         // Article : 
         if(isset($_POST['mw_title_art'], $_POST['mw_content_art'], $_POST['mw_visible_art'], $_POST['mw_section_mw_id_section'])){        
-                $articleMapping = new MappingArticle([
+                $articleInsertMap = new MappingArticle([
                     "mwTitleArt" => $_POST['mw_title_art'],
                     "mwContentArt" => $_POST['mw_content_art'],
                     "mwVisibleArt" => $_POST['mw_visible_art'],
                     "mwSectionMwIdSection" => $_POST['mw_section_mw_id_section'],
                 ]);
             
-                $pictureArray = [];
+                $pictureInsertArray = [];
                 if (isset($_POST['mw_picture'])) {
                     foreach ($_POST['mw_picture'] as $pictureData) {
                         if (
@@ -217,37 +219,45 @@ else if(isset($_GET['p'])){
                                 'mwSizePicture' => $pictureData['size'],
                                 'mwPositionPicture' => $pictureData['position'],
                             ]);
-                            $pictureArray[] = $picture;
+                            $pictureInsertArray[] = $picture;
                         }
                     }
                 }
-        
-                $insertTestPost = $articleManager -> insertArticle($articleMapping, $pictureArray);
+                $insertArticle = $articleManager -> insertArticle($articleInsertMap, $pictureInsertArray);
 
-        }    
-        if(isset($_POST['insertInfo'])){
-            if( false /* verification des champs du formulaire ajout de sous section */){
-                // $insertSS = insertSS($db);
-
-            }
         }  
-        if(isset($_POST['livreDor'])){
-            if( false /* verification des champs du formulaire ajout de sous section */){
-                // $insertSS = insertSS($db);
 
-            }
+        // insert info:  
+        if(isset($_POST['info-insert-content'], $_POST['info-insert-pic-title'], $_POST['info-insert-pic-url'], $_POST['info-insert-pic-size'], $_POST['info-insert-pic-position'])){
+            $infoInsertPicMap = new MappingPicture([
+                'mwTitlePicture' => $_POST['info-insert-pic-title'],
+                'mwUrlPicture' => $_POST['info-insert-pic-url'],
+                'mwSizePicture' => $_POST['info-insert-pic-size'],
+                'mwPositionPicture' => $_POST['info-insert-pic-position'],
+            ]);
+            $infoInsertMap = new MappingInfo([
+                "mwContentInfo"=> $_POST['info-insert-content'],
+                "mwDateInfo" => $currentDate,
+            ]);
+            $insertInfo = $infoManager -> insertInfo($infoInsertPicMap, $infoInsertMap);
         }  
+
+        // insert patient :
         if(isset($_POST['patient'])){
             if( false /* verification des champs du formulaire ajout de sous section */){
                 // $insertSS = insertSS($db);
 
             }
         }  
+
+        // insert ressource :
         if(isset($_POST['insertRessource'])){
             if( false /* verification des champs du formulaire ajout de ressource */ ){
                 // $insertSS = insertSS($db);
             }
         } 
+
+        // insert section :
         if(isset($_POST['insertSection'])){
             if( false /* verification des champs du formulaire ajout de sous section */){
                 // $insertSS = insertSS($db);
