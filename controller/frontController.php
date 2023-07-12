@@ -229,16 +229,19 @@ else if(isset($_GET['p'])){
 
         // insert info:  
         if(isset($_POST['info-insert-content'], $_POST['info-insert-pic-title'], $_POST['info-insert-pic-url'], $_POST['info-insert-pic-size'], $_POST['info-insert-pic-position'])){
+
             $infoInsertPicMap = new MappingPicture([
                 'mwTitlePicture' => $_POST['info-insert-pic-title'],
                 'mwUrlPicture' => $_POST['info-insert-pic-url'],
                 'mwSizePicture' => $_POST['info-insert-pic-size'],
                 'mwPositionPicture' => $_POST['info-insert-pic-position'],
             ]);
+
             $infoInsertMap = new MappingInfo([
                 "mwContentInfo"=> $_POST['info-insert-content'],
                 "mwDateInfo" => $currentDate,
             ]);
+
             $insertInfo = $infoManager -> insertInfo($infoInsertPicMap, $infoInsertMap);
         }  
         
@@ -292,32 +295,25 @@ else if(isset($_GET['p'])){
             include_once "../view/privateView/articleEditView.php";
         }
         
-        if(isset($_GET['deleteRessources']) && ctype_digit(($_GET['deleteRessources']))){
-            // header("Location: ./?m=L'article dont l'id est $idRessource a été supprimé");
-        }
         
-        if(isset($_GET['deleteArticle']) && ctype_digit(($_GET['deleteArticle']))){
-            // header("Location: ./?m=L'article dont l'id est $idArticle a été supprimé");
-        }
-        
-        if(isset($_GET['visibleLO']) && ctype_digit($_GET['visibleLO'])){
-            header("location: ./");
-        }
-        
-        if(isset($_GET['deleteLO']) && ctype_digit($_GET['deleteLO'])){
-            header("location: ./");
-        }
-        
-        if(isset($_GET['banLO']) && ctype_digit($_GET['benLO'])){
-            header("location: ./");          
-        }
-        if(isset($_POST['updatePwd'])){
-            if( false /* verification des champs du formulaire mise a jour du mot de passe */ ){
-                // $insertSS = insertSS($db);
+        // les deletes (ça marche pas) :
+        if(isset($_GET['agenda-delete']) && ctype_digit($_GET['agenda-delete'])){
+            $agendaId = (int) $_GET['agenda-delete'];
+            var_dump($agendaId);
+
+            try {
+                $agendaDelete = $agendaManager->deleteAgenda($agendaId);
+            }catch(Exception $e){
+                $e -> getMessage();
             }
-        } 
-        
-        // les deletes :
+
+            if($agendaDelete){
+                $response = "Evenement effacé ! ";
+            }else{
+                $response = "Un problème est survenu, réessayez ! ";
+            }
+        }
+
 
     }
 
