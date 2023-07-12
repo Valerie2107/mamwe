@@ -12,6 +12,18 @@ include_once "../view/include/header.php";
 <main>
 <h1><?= $title ?></h1>
 
+<?php
+foreach ($articleBySection as $abs):  ?>
+
+<div>
+    <h2><?= $abs -> getmwTitleArt();?></h2>
+    <p><?= $abs -> getmwContentArt();?></p>
+    <div class="empty"></div>
+    <p><?= $abs -> getmwDateArt(); ?></p>
+    <div class="empty"></div>
+</div>
+
+<?php endforeach ?>
 
 </main>
 <!-- FOOTER -->
