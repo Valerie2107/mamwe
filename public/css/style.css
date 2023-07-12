@@ -21,6 +21,14 @@ body{
 
 
 
+h1{
+    text-align: center;
+}
+
+.empty{      /*div vide pour faire des espaces entre différents blocs*/
+    height: 2em;   
+}
+
 
 
 
@@ -28,16 +36,34 @@ body{
 /* .paragraphe img {
     float: left;
 
-}*/
 
-
-
-
-
-
-
-
-
-.empty{      /*div vide pour faire des espaces entre différents blocs*/
-    height: 2em;   
 }
+*/
+
+
+#btt {
+	color: #0c0c0cc5;
+	background-color: white;
+	font-style: italic;
+	font-weight: bold;
+	border: 2px solid #2e2e2e59;
+	padding: 1em 1em;
+	transition: background 0.3s ease-in-out;
+	border-radius: 25px;
+	display: none;
+	position: fixed; /* Fixed/sticky position */
+	bottom: 20px; 
+	right: 30px; 
+	z-index: 99;
+	outline: none; 
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
