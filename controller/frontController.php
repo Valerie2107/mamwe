@@ -336,7 +336,7 @@ else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
     // on fait le manager des articles
     $articleBySection = $articleManager -> getAllArticlesWithPictures($idSect);
     
-    var_dump($articleBySection);
+   // var_dump($articleBySection);
     include_once "../view/publicView/sectionView.php";
 }
 
