@@ -28,25 +28,20 @@ use model\managerClass\ManagerSection;
 use model\managerClass\ManagerUser;
 use DateTime as Date;
 
+### VARIABLE DATE ############################
+$currentDate = new Date();
+$currentDate = $currentDate->format("Y-d-m");
+#############################################
 
 ############# INSTANCIATION DE MANAGERS ##################
 
-### VARIABLE DATE :
-$currentDate = new Date();
-$currentDate = $currentDate->format("Y-d-m");
-#####
-
-
 ### RECUP LES SECTIONS POUR LA NAVBAR : 
-// on stock l'object dans la variable
 $sectionManager = new ManagerSection($db); 
-// applique la méthode qui contient la requete SQL qui récupére toutes les section
 $allSection = $sectionManager -> getAll();
 #####
 
 
 ### HOMEPAGE : on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
-// on stock le manager dans la variable:
 $homeManager = new ManagerHomepage($db);
 $allHome = $homeManager -> getAll();
 ##### 
@@ -57,6 +52,24 @@ $userManager = new ManagerUser($db);
 
 ### instanciation du manager d'articles :
 $articleManager =  new ManagerArticle($db);
+
+### Livre d'or
+$livreManager = new ManagerLivreDor($db);
+
+### info :
+$infoManager = new ManagerInfo($db);
+
+### ressources : 
+$ressourceManager = new ManagerRessource($db);
+
+### patient :
+$patientManager = new ManagerPatient($db);
+
+### agenda :
+$agendaManager = new ManagerAgenda($db);
+
+### picture 
+$pictureManager = new ManagerPicture($db);
 
 ##########################################################
 
@@ -97,15 +110,11 @@ else if(isset($_GET['p'])){
 
     else if($_GET['p'] === "contact"){
         // on va afficher les infos dans la page contact alors on les appelle ici :
-        $infoManager = new ManagerInfo($db);
         $allInfo = $infoManager -> getAll();
-
         include_once "../view/publicView/contactView.php";
     }
 
     else if($_GET['p'] === "ressources"){
-        $ressourceManager = new ManagerRessource($db);
-
         // on recupère toutes les catégories:
         $getAllCateg = $ressourceManager -> getAllCateg();
 
@@ -115,8 +124,6 @@ else if(isset($_GET['p'])){
     }
 
     else if($_GET['p'] === "livreDor"){
-        
-        $livreManager = new ManagerLivreDor($db);
         // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
         $allLivreDor = $livreManager -> getAllVisible();
 
@@ -158,7 +165,6 @@ else if(isset($_GET['p'])){
             include_once '../view/privateView/livreDorCrud.php';
         }
         else if($_GET['p']==="patient"){
-            $patientManager = new ManagerPatient($db);
             $allPatient = $patientManager->getAll();
             include_once '../view/privateView/patientCrud.php';
         }
@@ -176,8 +182,6 @@ else if(isset($_GET['p'])){
         ### LES INSERTS :
         // Agenda :
         if(isset($_POST['contentAgenda'], $_POST['titleAgenda'], $_POST['dateAgenda'], $_POST['titlePic'], $_POST['urlPic'], $_POST['sizePic'], $_POST['positionPic'])){
-            $agendaManager = new ManagerAgenda($db);
-
             $agendaMapping = new MappingAgenda([
                 "mwDateAgenda" => $_POST['dateAgenda'],
                 "mwContentAgenda" => $_POST['contentAgenda'],
