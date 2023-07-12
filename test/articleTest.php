@@ -25,7 +25,7 @@ try {
 
     $section_id = 1;  // à remplacer plus tard part un $_GET['section_id'] ! sécurité à faire
     $managerArt = new ManagerArticle($db);
-    $articles = $managerArt->getAllArticlesWithPictures($db, $section_id);
+    $articles = $managerArt->getAllArticlesWithPictures($section_id);
 
 
 foreach($articles as $item) {
@@ -116,63 +116,77 @@ if(is_null($item->getPicture())){
     </html>
 
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $db = new PDO(DB_TYPE.':host='.DB_HOST.';port='.DB_PORT.';dbname='.DB_NAME.';charset='.DB_CHARSET,DB_LOGIN,DB_PWD);
-    $manager = new \model\managerClass\ManagerArticle($db);
-    $article = new MappingArticle([
-        "mwTitleArt" => $_POST['mw_title_art'],
-        "mwContentArt" => $_POST['mw_content_art'],
-        "mwVisibleArt" => $_POST['mw_visible_art'],
-        "mwSectionMwIdSection" => $_POST['mw_section_mw_id_section'],
-    ]);
-
-    $pictures = [];
-    if (isset($_POST['mw_picture'])) {
-        foreach ($_POST['mw_picture'] as $pictureData) {
-            if (
-                isset($pictureData['title'], $pictureData['url'], $pictureData['size'], $pictureData['position']) &&
-                $pictureData['title'] !== '' &&
-                $pictureData['url'] !== ''
-            ) {
-                $picture = new MappingPicture([
-                    'mwTitlePicture' => $pictureData['title'],
-                    'mwUrlPicture' => $pictureData['url'],
-                    'mwSizePicture' => $pictureData['size'],
-                    'mwPositionPicture' => $pictureData['position'],
-                ]);
-                $pictures[] = $picture;
-            }
-        }
-    }
-
-    $insertPic = new MappingPicture([
-            "mwIdPicture" => "1",
-        "mwTitlePicture" => "test",
-        "mwUrlPicture" => "test",
-        "mwSizePicture" => "1",
-        "mwPositionPicture" => "1",
-    ]);
-
-    $insertedArticle = new MappingArticle([
-        "mwIdArticle" => "1",
-        "mwTitleArt" => "test",
-        "mwContentArt" => "test",
-        "mwVisibleArt" => "1",
-        "mwSectionMwIdSection" => "1",
-    ]);
 
     $articleTest = new ManagerArticle($db);
-    $pictureTest = new ManagerPicture($db);
 
-    $insertedArticle = $articleTest->insertArticle($insertedArticle, $insertPic);
-    $insertedArticle2 = $articleTest->insertArticle($insertedArticle);
+    // if(isset($_POST)){
+
+    //     $articleMap = new MappingArticle([
+    //         "mwTitleArt" => $_POST['mw_title_art'],
+    //         "mwContentArt" => $_POST['mw_content_art'],
+    //         "mwVisibleArt" => $_POST['mw_visible_art'],
+    //         "mwSectionMwIdSection" => $_POST['mw_section_mw_id_section'],
+    //     ]);
+    
+    //     $pictures = [];
+    //     if (isset($_POST['mw_picture'])) {
+    //         foreach ($_POST['mw_picture'] as $pictureData) {
+    //             if (
+    //                 isset($pictureData['title'], $pictureData['url'], $pictureData['size'], $pictureData['position']) &&
+    //                 $pictureData['title'] !== '' &&
+    //                 $pictureData['url'] !== ''
+    //             ) {
+    //                 $picture = new MappingPicture([
+    //                     'mwTitlePicture' => $pictureData['title'],
+    //                     'mwUrlPicture' => $pictureData['url'],
+    //                     'mwSizePicture' => $pictureData['size'],
+    //                     'mwPositionPicture' => $pictureData['position'],
+    //                 ]);
+    //                 $pictures[] = $picture;
+    //             }
+    //         }
+    //     }
+    // }
+
+    // $insertPic = [
+    //     new MappingPicture([
+    //         "mwTitlePicture" => "test insert art2",
+    //         "mwUrlPicture" => "test insert art2",
+    //         "mwSizePicture" => "1",
+    //         "mwPositionPicture" => "1",
+    //     ]),
+    //     new MappingPicture([
+    //         "mwTitlePicture" => "test insert art3",
+    //         "mwUrlPicture" => "test insert art3",
+    //         "mwSizePicture" => "1",
+    //         "mwPositionPicture" => "1",
+    //     ]),
+    //     new MappingPicture([
+    //         "mwTitlePicture" => "test insert art4",
+    //         "mwUrlPicture" => "test insert art4",
+    //         "mwSizePicture" => "1",
+    //         "mwPositionPicture" => "1",
+    //     ])
+    // ];
+
+    // $insertArticle = new MappingArticle([
+    //     "mwTitleArt" => "test insert2",
+    //     "mwContentArt" => "test insert2",
+    //     "mwVisibleArt" => "1",
+    //     "mwSectionMwIdSection" => "1",
+    // ]);
+
+    // ça marche :
+    // $articleInsert = $articleTest -> insertArticle($insertArticle, $insertPic);
+    // var_dump($articleInsert);
+
+
     //$articleUpdate = $articleTest -> updateArticleWithPic($insertPic, $insertedArticle);
     // $deleteSection = $sectionTest -> deleteSection(6);
 
-}
 
 
-var_dump($insertedArticle);
-var_dump($insertedArticle2);
+
+
 //var_dump($articleUpdate);
 

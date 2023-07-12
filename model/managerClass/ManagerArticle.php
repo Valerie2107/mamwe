@@ -50,34 +50,8 @@ class ManagerArticle  implements ManagerInterface
         return $articles;
     }
 
-    /*
-        public function getArticleById($db, $id){
-            $sql = "SELECT a.mw_id_article, a.mw_title_art, a.mw_content_art, a.mw_visible_art, a.mw_date_art, a.mw_section_mw_id_section, GROUP_CONCAT(s.mw_title_sect) as mw_title_sect, GROUP_CONCAT(s.mw_id_sect) as mw_id_sect FROM mw_article a JOIN mw_section s ON a.mw_section_mw_id_section = s.mw_id_sect WHERE a.mw_id_article = :id";
-            $prepare = $this->db->prepare($sql);
-            $prepare->bindValue(':id', $id, PDO::PARAM_INT);
-            $prepare->execute();
-            $result = $prepare->fetchAll();
-            $articles = [];
-            foreach ($result as $row){
-                $articles[] = new MappingArticle($row);
-            }
-            return $articles;
-        }
 
-        public function getPictureByArticleId($db, $id){
-            $sql = "SELECT p.mw_id_picture, p.mw_url_picture, p.mw_article_mw_id_article, a.mw_id_article FROM mw_picture p JOIN mw_article a ON p.mw_article_mw_id_article = a.mw_id_article WHERE p.mw_article_mw_id_article = :id";
-            $prepare = $this->db->prepare($sql);
-            $prepare->bindValue(':id', $id, PDO::PARAM_INT);
-            $prepare->execute();
-            $result = $prepare->fetchAll();
-            $pictures = [];
-            foreach ($result as $row){
-                $pictures[] = new MappingArticle($row);
-            }
-            return $pictures;
-        }
-    */
-    public function getAllArticlesWithPictures($section_id)
+    public function getAllArticlesWithPictures(int $section_id)
     {
         $sql = "SELECT a.*, GROUP_CONCAT(p.mw_id_picture, '|||' , p.mw_url_picture SEPARATOR '---') AS picture
             FROM mw_article a 
@@ -89,7 +63,7 @@ class ManagerArticle  implements ManagerInterface
         $prepare->bindValue(':section_id', $section_id, PDO::PARAM_INT);
         $prepare->execute();
 
-        $result = $prepare->fetchAll(PDO::FETCH_ASSOC);
+        $result = $prepare->fetchAll();
         $articles = [];
         foreach ($result as $row) {
             $articles[] = new MappingArticle($row);
@@ -101,6 +75,7 @@ class ManagerArticle  implements ManagerInterface
 
     public function insertArticle(MappingArticle $article, $pictures = null)
     {
+        $this->db->beginTransaction();
         // requête sql + prepare + bindValue + execute + etc
         $sql = "INSERT INTO mw_article (mw_title_art, mw_content_art, mw_visible_art, mw_section_mw_id_section) VALUES (:mw_title_art, :mw_content_art,  :mw_visible_art, :mw_section_mw_id_section)";
         $prepare = $this->db->prepare($sql);
@@ -108,14 +83,11 @@ class ManagerArticle  implements ManagerInterface
         $prepare->bindValue(':mw_content_art', $article->getMwContentArt(), PDO::PARAM_STR);
         $prepare->bindValue(':mw_visible_art', $article->getMwVisibleArt(), PDO::PARAM_INT);
         $prepare->bindValue(':mw_section_mw_id_section', $article->getMwSectionMwIdSection(), PDO::PARAM_INT);
+        $prepare->execute();
 
-        // transaction
-        $this->db->beginTransaction();
+        $lastArticleId = $this->db->lastInsertId();
 
-        try {
-            $prepare->execute();
-            $lastArticleId = $this->db->lastInsertId();
-            $article->setMwIdArticle($lastArticleId);
+
         if($pictures != null){
             // boucle sur les images
             foreach ($pictures as $picture) {
@@ -130,11 +102,13 @@ class ManagerArticle  implements ManagerInterface
                 $picPrepare->execute();
             }
         }
+        
+
+        try {
 
             // commit transaction
             $this->db->commit();
-
-            return $article;
+            return true;
 
         } catch (Exception $e) {
             $this->db->rollBack();
