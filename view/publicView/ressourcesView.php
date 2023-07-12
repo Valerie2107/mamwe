@@ -16,7 +16,7 @@ include_once "../view/include/header.php";
 foreach($getAllCateg as $categ){
 
     // on affiche le titre de la catég :
-    echo "<h1> categ : " . $categ -> getMwTitleCategory() . "<br><br>"; 
+    echo "<h2> categ : " . $categ -> getMwTitleCategory() . "<br><br>"; 
     // on récupère son ID :
     $categId = $categ->getMwIdCategory();
 

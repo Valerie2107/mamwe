@@ -29,8 +29,8 @@ include_once "../view/include/header.php";
 <?php  foreach($allLivreDor as $lo): ?>
     <div class="">
         <p>  
-            <?= $lo ->getmwMessageLivreDor(); ?>   <br>
-            <?= $lo ->getMwNameLivreDor(); ?>   <br>
+            <?= $lo ->getmwMessageLivreDor(); ?>    <br>
+            <?= $lo ->getMwNameLivreDor(); ?>       <br>
             <?= $lo ->getmwDateLivreDor(); ?>
         </p>
         <br>
