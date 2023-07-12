@@ -19,14 +19,35 @@
     width: 100%;
     height: fit-content;
     text-align: left;
-    padding: 2rem;
+    padding: 5rem;
     color: #F67829;
+    
 }
 
-.article-home:nth-of-type(even){
+.article-home:nth-of-type(odd) img {
+    float: left;
+    width: 40%;
+}
+
+.article-home:nth-of-type(even) img {
+    float: right;
+}
+
+.article-home:nth-of-type(even) {
     text-align: right;
 }
+
+
 
 .article-home img{
     width: 40%;
 }
+
+.h2{
+    margin: 10px;
+}
+
+.textehome1{
+    text-align: justify;
+}
+
