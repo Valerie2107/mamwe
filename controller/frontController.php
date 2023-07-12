@@ -179,21 +179,21 @@ else if(isset($_GET['p'])){
 
         ### LES INSERTS :
         // Agenda :
-        if(isset($_POST['contentAgenda'], $_POST['titleAgenda'], $_POST['dateAgenda'], $_POST['titlePic'], $_POST['urlPic'], $_POST['sizePic'], $_POST['positionPic'])){
-            $agendaMapping = new MappingAgenda([
-                "mwDateAgenda" => $_POST['dateAgenda'],
-                "mwContentAgenda" => $_POST['contentAgenda'],
-                "mwTitleAgenda" => $_POST['titleAgenda'],
+        if(isset($_POST['agenda-insert-date'],$_POST['agenda-insert-content'], $_POST['agenda-insert-title'], $_POST['agenda-insert-pic-title'], $_POST['agenda-insert-pic-url'], $_POST['agenda-insert-pic-size'], $_POST['agenda-insert-pic-position'])){
+            $agendaInsertMap = new MappingAgenda([
+                "mwDateAgenda" => $_POST['agenda-insert-date'],
+                "mwContentAgenda" => $_POST['agenda-insert-content'],
+                "mwTitleAgenda" =>  $_POST['agenda-insert-title'],
             ]); 
 
-            $pictureMapping = new MappingPicture([
-                "mwTitlePicture" => $_POST['titlePic'],
-                "mwUrlPicture" => $_POST['urlPic'],
-                "mwSizePicture" => $_POST['sizePic'],
-                "mwPositionPicture" => $_POST['positionPic']
+            $agendaInsertPicMap = new MappingPicture([
+                "mwTitlePicture" => $_POST['agenda-insert-pic-title'],
+                "mwUrlPicture" => $_POST['agenda-insert-pic-url'],
+                "mwSizePicture" => $_POST['agenda-insert-pic-size'],
+                "mwPositionPicture" => $_POST['agenda-insert-pic-position']
             ]);
 
-            $insertAgenda = $agendaManager -> insertAgendaWithPict($pictureMapping, $agendaMapping);
+            $insertAgenda = $agendaManager -> insertAgendaWithPict($agendaInsertPicMap, $agendaInsertMap);
         }  
 
         // Article : 
@@ -241,28 +241,41 @@ else if(isset($_GET['p'])){
             ]);
             $insertInfo = $infoManager -> insertInfo($infoInsertPicMap, $infoInsertMap);
         }  
-
+        
         // insert patient :
-        if(isset($_POST['patient'])){
-            if( false /* verification des champs du formulaire ajout de sous section */){
-                // $insertSS = insertSS($db);
-
-            }
+        if(isset($_POST['patient-insert-name'], $_POST['patient-insert-surname'], $_POST['patient-insert-birthdate'], $_POST['patient-insert-mail'], $_POST['patient-insert-phone'])){
+            $patientInsertMap = new MappingPatient([
+                "mwNamePatient" => $_POST['patient-insert-name'],
+                "mwSurnamePatient" => $_POST['patient-insert-surname'],
+                "mwBirthdatePatient" => $_POST['patient-insert-birthdate'],
+                "mwMailPatient" => $_POST['patient-insert-mail'],
+                "mwPhonePatient" => $_POST['patient-insert-phone'],
+            ]);
+            $insertPatient = $patientManager->insertPatient($patientInsertMap);
         }  
-
+        
         // insert ressource :
         if(isset($_POST['insertRessource'])){
-            if( false /* verification des champs du formulaire ajout de ressource */ ){
-                // $insertSS = insertSS($db);
-            }
+            // je le fais plus tard parce que c'est le plus dur
         } 
 
         // insert section :
-        if(isset($_POST['insertSection'])){
-            if( false /* verification des champs du formulaire ajout de sous section */){
-                // $insertSS = insertSS($db);
+        if(isset($_POST['section-insert-title'], $_POST['section-insert-content'], $_POST['section-insert-visible'], $_POST['section-insert-pic-title'], $_POST['section-insert-pic-url'], $_POST['section-insert-pic-size'], $_POST['section-insert-pic-position'])){
 
-            }
+            $sectionInsertPicMap = new MappingPicture([
+                'mwTitlePicture' => $_POST['section-insert-pic-title'],
+                'mwUrlPicture' => $_POST['section-insert-pic-url'],
+                'mwSizePicture' => $_POST['section-insert-pic-size'],
+                'mwPositionPicture' => $_POST['section-insert-pic-position'],
+            ]);
+
+            $sectionInsertMap = new MappingSection([
+                'mwTitleSect' => $_POST['section-insert-title'],
+                'mwContentSect' => $_POST['section-insert-content'],
+                'mwVisible' => $_POST['section-insert-visible'],
+            ]);
+
+            $insertSection = $sectionManager -> insertSectionWithPic($sectionInsertPicMap, $sectionInsertMap);
         }  
              
 
