@@ -9,6 +9,7 @@ include_once "../view/include/header.php";
 ?>
 
 <!-- HTML -->
+<main>
 <h1><?= $title ?></h1>
 
 <?php
@@ -43,8 +44,9 @@ foreach($getAllCateg as $categ){
         }
     }
 }
+?>
 
-
-
+</main>
+<?php
 // FOOTER
 include_once "../view/include/footer.php";

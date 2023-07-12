@@ -9,6 +9,7 @@ include_once "../view/include/header.php";
 ?>
 
 <!-- HTML -->
+<main>
 <h1><?= $title ?></h1>
 
 <!-- description de la madame : -->
@@ -34,7 +35,7 @@ include_once "../view/include/header.php";
 <?php endforeach ?>
 </div>
 
-
+</main>
 <!-- FOOTER -->
 <?php
 
