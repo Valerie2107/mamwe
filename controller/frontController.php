@@ -1,6 +1,7 @@
 <?php
 
-// appelle des use mapping :
+########### APPELLE DES DEPENDANCES ##########
+// appelle des mapping :
 use model\mappingClass\MappingAgenda;
 use model\mappingClass\MappingArticle;
 use model\mappingClass\MappingCategoryRessource;
@@ -14,7 +15,7 @@ use model\mappingClass\MappingSection;
 use model\mappingClass\MappingSubCategoryRessource;
 use model\mappingClass\MappingUser;
 
-// appelle des use manager :
+// appelle des manager :
 use model\managerClass\ManagerAgenda;
 use model\managerClass\ManagerArticle;
 use model\managerClass\ManagerHomepage;
@@ -26,6 +27,9 @@ use model\managerClass\ManagerRessource;
 use model\managerClass\ManagerSection;
 use model\managerClass\ManagerUser;
 use DateTime as Date;
+
+
+############# INSTANCIATION DE MANAGERS ##################
 
 ### VARIABLE DATE :
 $currentDate = new Date();
@@ -41,21 +45,23 @@ $allSection = $sectionManager -> getAll();
 #####
 
 
-### OUI ###
-
-### on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
-// on stocke le manager dans la variable:
-
 ### HOMEPAGE : on récup les variables pour l'accueil ici parce qu'on va en avoir besoin en plusieur endroit :
 // on stock le manager dans la variable:
-
 $homeManager = new ManagerHomepage($db);
 $allHome = $homeManager -> getAll();
 ##### 
 
+
 ### instanciation de ManagerUser pour se connecter ou pas :
 $userManager = new ManagerUser($db);
 
+### instanciation du manager d'articles :
+$articleManager =  new ManagerArticle($db);
+
+##########################################################
+
+
+#############CONNECION / DECONNEXION #####################
 // deconnection de l'admin
 if(isset($_GET['deconnect'])){
     $userManager->disconnect();         
@@ -76,9 +82,11 @@ if(isset($_POST['login'],$_POST['pwd'])){
         $erreur = "Nom d'utilisateur ou mot de passe incorrect ! "; 
     }
 }  
-#####
+#######################################################################
 
 
+
+####################### CONTROLLER FRONTAL #############################
 else if(isset($_GET['p'])){
 
     // navigation publique :
@@ -166,7 +174,7 @@ else if(isset($_GET['p'])){
 
         ### LES INSERTS :
         // Agenda :
-        if(isset($_POST['contentAgenda']) && $_POST['titleAgenda'] && $_POST['dateAgenda'] && $_POST['titlePic'] && $_POST['urlPic'] && $_POST['sizePic'] && $_POST['positionPic']){
+        if(isset($_POST['contentAgenda'], $_POST['titleAgenda'], $_POST['dateAgenda'], $_POST['titlePic'], $_POST['urlPic'], $_POST['sizePic'], $_POST['positionPic'])){
             $agendaManager = new ManagerAgenda($db);
 
             $agendaMapping = new MappingAgenda([
@@ -186,11 +194,35 @@ else if(isset($_GET['p'])){
         }  
 
         // Article : 
-        if(isset($_POST['insertArticle'])){
-            if( false /* verification des champs du formulaire ajout de sous section */){
-                // $insertSS = insertSS($db);
+        if(isset($_POST['mw_title_art'], $_POST['mw_content_art'], $_POST['mw_visible_art'], $_POST['mw_section_mw_id_section'])){        
+                $articleMapping = new MappingArticle([
+                    "mwTitleArt" => $_POST['mw_title_art'],
+                    "mwContentArt" => $_POST['mw_content_art'],
+                    "mwVisibleArt" => $_POST['mw_visible_art'],
+                    "mwSectionMwIdSection" => $_POST['mw_section_mw_id_section'],
+                ]);
+            
+                $pictureArray = [];
+                if (isset($_POST['mw_picture'])) {
+                    foreach ($_POST['mw_picture'] as $pictureData) {
+                        if (
+                            isset($pictureData['title'], $pictureData['url'], $pictureData['size'], $pictureData['position']) &&
+                            $pictureData['title'] !== '' &&
+                            $pictureData['url'] !== ''
+                        ) {
+                            $picture = new MappingPicture([
+                                'mwTitlePicture' => $pictureData['title'],
+                                'mwUrlPicture' => $pictureData['url'],
+                                'mwSizePicture' => $pictureData['size'],
+                                'mwPositionPicture' => $pictureData['position'],
+                            ]);
+                            $pictureArray[] = $picture;
+                        }
+                    }
+                }
+        
+                $insertTestPost = $articleManager -> insertArticle($articleMapping, $pictureArray);
 
-            }
         }    
         if(isset($_POST['insertInfo'])){
             if( false /* verification des champs du formulaire ajout de sous section */){
@@ -282,7 +314,6 @@ else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
     $sectionById = $sectionManager -> getOneById($idSect);
     
     // on fait le manager des articles
-    $articleManager =  new ManagerArticle($db);
     $articleBySection = $articleManager -> getAllArticlesWithPictures($idSect);
 
     include_once "../view/publicView/sectionView.php";
