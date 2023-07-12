@@ -12,16 +12,15 @@
 .section-home{
    width: 80%;
    margin: auto;
-   background-color: red;
    height: fit-content;
 }
 
 .article-home{
     width: 100%;
     height: fit-content;
-    background-color: green;
     text-align: left;
-    padding: 1rem;
+    padding: 2rem;
+    color: #F67829;
 }
 
 .article-home:nth-of-type(even){
