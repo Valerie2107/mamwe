@@ -102,7 +102,6 @@ class ManagerArticle  implements ManagerInterface
                 $picPrepare->execute();
             }
         }
-        
 
         try {
 

@@ -119,34 +119,37 @@ if(is_null($item->getPicture())){
 
     $articleTest = new ManagerArticle($db);
 
-    // if(isset($_POST)){
+    if(isset($_POST)){
 
-    //     $articleMap = new MappingArticle([
-    //         "mwTitleArt" => $_POST['mw_title_art'],
-    //         "mwContentArt" => $_POST['mw_content_art'],
-    //         "mwVisibleArt" => $_POST['mw_visible_art'],
-    //         "mwSectionMwIdSection" => $_POST['mw_section_mw_id_section'],
-    //     ]);
+        $articleMap = new MappingArticle([
+            "mwTitleArt" => $_POST['mw_title_art'],
+            "mwContentArt" => $_POST['mw_content_art'],
+            "mwVisibleArt" => $_POST['mw_visible_art'],
+            "mwSectionMwIdSection" => $_POST['mw_section_mw_id_section'],
+        ]);
     
-    //     $pictures = [];
-    //     if (isset($_POST['mw_picture'])) {
-    //         foreach ($_POST['mw_picture'] as $pictureData) {
-    //             if (
-    //                 isset($pictureData['title'], $pictureData['url'], $pictureData['size'], $pictureData['position']) &&
-    //                 $pictureData['title'] !== '' &&
-    //                 $pictureData['url'] !== ''
-    //             ) {
-    //                 $picture = new MappingPicture([
-    //                     'mwTitlePicture' => $pictureData['title'],
-    //                     'mwUrlPicture' => $pictureData['url'],
-    //                     'mwSizePicture' => $pictureData['size'],
-    //                     'mwPositionPicture' => $pictureData['position'],
-    //                 ]);
-    //                 $pictures[] = $picture;
-    //             }
-    //         }
-    //     }
-    // }
+        $pictures = [];
+        if (isset($_POST['mw_picture'])) {
+            foreach ($_POST['mw_picture'] as $pictureData) {
+                if (
+                    isset($pictureData['title'], $pictureData['url'], $pictureData['size'], $pictureData['position']) &&
+                    $pictureData['title'] !== '' &&
+                    $pictureData['url'] !== ''
+                ) {
+                    $picture = new MappingPicture([
+                        'mwTitlePicture' => $pictureData['title'],
+                        'mwUrlPicture' => $pictureData['url'],
+                        'mwSizePicture' => $pictureData['size'],
+                        'mwPositionPicture' => $pictureData['position'],
+                    ]);
+                    $pictures[] = $picture;
+                }
+            }
+        }
+
+        $insertTestPost = $articleTest -> insertArticle($articleMap, $pictures);
+    }
+    var_dump($insertTestPost);
 
     // $insertPic = [
     //     new MappingPicture([
