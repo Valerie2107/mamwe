@@ -135,10 +135,8 @@ else if(isset($_GET['p'])){
                 "mwMailLivreDor" => $_POST['mailLO'],
                 "mwMessageLivreDor" => $_POST['messageLO'],
             ]);
+            $insertLO = $livreManager -> insertLivreDor($newMessageLO);
         }
-        
-        $insertLO = $livreManager -> insertLivreDor($newMessageLO);
-
         // appel de la vue:
         include_once "../view/publicView/livreDorView.php";
     }
@@ -200,14 +198,14 @@ else if(isset($_GET['p'])){
 
         // Article : 
         if(isset($_POST['mw_title_art'], $_POST['mw_content_art'], $_POST['mw_visible_art'], $_POST['mw_section_mw_id_section'])){        
-                $articleMapping = new MappingArticle([
+                $articleInsertMap = new MappingArticle([
                     "mwTitleArt" => $_POST['mw_title_art'],
                     "mwContentArt" => $_POST['mw_content_art'],
                     "mwVisibleArt" => $_POST['mw_visible_art'],
                     "mwSectionMwIdSection" => $_POST['mw_section_mw_id_section'],
                 ]);
             
-                $pictureArray = [];
+                $pictureInsertArray = [];
                 if (isset($_POST['mw_picture'])) {
                     foreach ($_POST['mw_picture'] as $pictureData) {
                         if (
@@ -221,37 +219,45 @@ else if(isset($_GET['p'])){
                                 'mwSizePicture' => $pictureData['size'],
                                 'mwPositionPicture' => $pictureData['position'],
                             ]);
-                            $pictureArray[] = $picture;
+                            $pictureInsertArray[] = $picture;
                         }
                     }
                 }
-        
-                $insertTestPost = $articleManager -> insertArticle($articleMapping, $pictureArray);
+                $insertArticle = $articleManager -> insertArticle($articleInsertMap, $pictureInsertArray);
 
-        }    
-        if(isset($_POST['insertInfo'])){
-            if( false /* verification des champs du formulaire ajout de sous section */){
-                // $insertSS = insertSS($db);
-
-            }
         }  
-        if(isset($_POST['livreDor'])){
-            if( false /* verification des champs du formulaire ajout de sous section */){
-                // $insertSS = insertSS($db);
 
-            }
+        // insert info:  
+        if(isset($_POST['info-insert-content'], $_POST['info-insert-pic-title'], $_POST['info-insert-pic-url'], $_POST['info-insert-pic-size'], $_POST['info-insert-pic-position'])){
+            $infoInsertPicMap = new MappingPicture([
+                'mwTitlePicture' => $_POST['info-insert-pic-title'],
+                'mwUrlPicture' => $_POST['info-insert-pic-url'],
+                'mwSizePicture' => $_POST['info-insert-pic-size'],
+                'mwPositionPicture' => $_POST['info-insert-pic-position'],
+            ]);
+            $infoInsertMap = new MappingInfo([
+                "mwContentInfo"=> $_POST['info-insert-content'],
+                "mwDateInfo" => $currentDate,
+            ]);
+            $insertInfo = $infoManager -> insertInfo($infoInsertPicMap, $infoInsertMap);
         }  
+
+        // insert patient :
         if(isset($_POST['patient'])){
             if( false /* verification des champs du formulaire ajout de sous section */){
                 // $insertSS = insertSS($db);
 
             }
         }  
+
+        // insert ressource :
         if(isset($_POST['insertRessource'])){
             if( false /* verification des champs du formulaire ajout de ressource */ ){
                 // $insertSS = insertSS($db);
             }
         } 
+
+        // insert section :
         if(isset($_POST['insertSection'])){
             if( false /* verification des champs du formulaire ajout de sous section */){
                 // $insertSS = insertSS($db);

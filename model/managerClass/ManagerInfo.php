@@ -71,9 +71,6 @@ class ManagerInfo implements ManagerInterface
             echo $e->getMessage();
         }
 
-        
-        
-
         $lastId = $this->db->lastInsertId();
 
 
@@ -88,6 +85,7 @@ class ManagerInfo implements ManagerInterface
         try{
             $prepareInfo->execute();
             $this->db->commit();
+            return true;
         }catch(Exception $e){
             $this->db->rollBack();
             echo $e -> getMessage();
