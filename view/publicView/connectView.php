@@ -9,6 +9,7 @@ include_once "../view/include/header.php";
 ?>
 
 <!-- HTML -->
+<main>
 <h1><?= $title ?></h1>
 
 <?php if(isset($erreur)){
@@ -22,6 +23,7 @@ include_once "../view/include/header.php";
     <input type="submit" value="Connexion">
 </form>
 
+</main>
 <!-- FOOTER -->
 <?php
 

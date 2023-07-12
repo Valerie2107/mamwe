@@ -275,7 +275,7 @@ else if(isset($_GET['p'])){
 
 // affichage des sections :
 else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
-    // on stock l'id de la section
+    // on stocke l'id de la section
     $idSect = (int) $_GET['sectionId'];
 
     // on récup la section avec l'id pour afficher le titre
@@ -284,7 +284,8 @@ else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
     // on fait le manager des articles
     $articleManager =  new ManagerArticle($db);
     $articleBySection = $articleManager -> getAllArticlesWithPictures($idSect);
-
+    
+    var_dump($articleBySection);
     include_once "../view/publicView/sectionView.php";
 }
 

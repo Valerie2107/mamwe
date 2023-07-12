@@ -1,4 +1,19 @@
+.intro{
+    text-align: center;
+}
 .container{
     
-
+}
+.field{
+    display: flex;
+    flex-direction: column;
+}
+form{
+    line-height: 2.5em;
+}
+.lo{
+    border: solid 2px #04889a;
+    border-radius: 10px;
+    padding: 1em;
+    margin-bottom: 1em;
 }

@@ -13,18 +13,18 @@ On fera des CSS spécifiques pour les éléments spécifiques (formulaires et au
 html{
     min-width: 100%;  /*pour que la page HTML fasse au moins la taille de l'écran entier*/
 }
-
 body{
     flex-grow: 1;   /*pour que le body recouvre toute la page HTML*/
 }
-
+main{
+	padding: 1em;
+}
 
 
 
 h1{
     text-align: center;
 }
-
 .empty{      /*div vide pour faire des espaces entre différents blocs*/
     height: 2em;   
 }
