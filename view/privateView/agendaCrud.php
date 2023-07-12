@@ -18,6 +18,12 @@ include_once "../view/include/header.php";
 
 <!-- le rest : -->
 
+<!-- test du delete -->
+
+<?php 
+echo "lol";
+?>
+
 <!-- Formulaire primitif pour tester le Controller, démerdez vous maintenant : -->
 <form action="" method="POST">
     <input type="text" name="agenda-insert-title" placeholder="titre" ><br>
@@ -30,6 +36,7 @@ include_once "../view/include/header.php";
     <input type="text" name="agenda-insert-pic-position" placeholder="position">
     <input type="submit" value="envoyer">
 </form>
+
 
 <!-- FOOTER -->
 <?php

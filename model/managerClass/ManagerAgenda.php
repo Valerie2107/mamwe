@@ -97,14 +97,20 @@ class ManagerAgenda implements ManagerInterface
 
 
     public function deleteAgenda($id){
+
+        $this->db->beginTransaction();
+
         $sql = "DELETE FROM mw_agenda WHERE mw_id_agenda = :id";
         $prepare = $this -> db -> prepare($sql);
         $prepare->bindParam(':id', $id, PDO::PARAM_INT);
+        $prepare -> execute();    
+
 
         try{
-            $prepare -> execute();    
+            $this->db->commit();
             return true;   
         }catch(Exception $e){
+            $this->db->rollBack();
             $e->getMessage();
         }
     }
