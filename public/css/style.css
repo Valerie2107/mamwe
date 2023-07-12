@@ -28,16 +28,12 @@ body{
 /* .paragraphe img {
     float: left;
 
-}
+}*/
 
-html{
-    min-width: 100%;  /*pour que la page HTML fasse au moins la taille de l'écran entier*/
-}
 
-body{
-    flex-grow: 1;   /*pour que le body recouvre toute la page HTML*/
-    padding: 0 1em;
-}
+
+
+
 
 
 

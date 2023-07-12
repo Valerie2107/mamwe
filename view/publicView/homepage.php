@@ -23,7 +23,12 @@ include_once "../view/include/header.php";
     <div class="article-home">
         <h2><?=$section -> getMwTitleSect();?></h2>
         <div class="article-pic">
-            <img src="<?= $allHome -> getPicture() ?>" alt="">
+       <?php $picture = $section -> getPicture();
+        $pic = explode("|||", $picture);
+            
+        ?>
+         <img src="<?= $pic[1]  ?>"alt="2" width="300px"><br>
+         
         </div>
     </div>
 <?php endforeach ?>
