@@ -6,7 +6,7 @@
 
 .textehome{
     text-align: justify;
-    margin: 0 200px;
+    margin: 30px 350px
 }
 
 .section-home{
@@ -27,6 +27,7 @@
 .article-home:nth-of-type(odd) img {
     float: left;
     width: 40%;
+    
 }
 
 .article-home:nth-of-type(even) img {
@@ -47,7 +48,15 @@
     margin: 10px;
 }
 
-.textehome1{
+.textehome1:nth-of-type(odd){
     text-align: justify;
+    margin-left: 700px;
+    margin-top: -30px;
 }
 
+
+.textehome1:nth-of-type(even){
+    margin-right: 700px;
+    text-align: justify;
+        margin-top: -30px;
+}
