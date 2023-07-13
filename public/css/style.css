@@ -27,7 +27,7 @@ h1{
 	padding: .5em;
 }
 h2{
-	padding:1em 0;
+	padding: 0.5em 0;
 }
 .empty{      /*div vide pour faire des espaces entre différents blocs*/
     height: 2em;   
