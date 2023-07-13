@@ -17,14 +17,14 @@ include_once "../view/include/header.php";
     <p class="intro">N'hésitez pas à me laisser un petit message</p>
     <div class="empty"></div>
     <section class="container">
-        <div></div>
+       
         <form class="livre" name='livreDor' action='' method="POST">
-            <div class="field"><label for="nameLO">Nom </label><input type="text" name="nameLO" placeholder="Indiquez votre nom" required></div>
-            <div class="field"><label for="mailLO">E-mail </label><input type='email' name="mailLO" placeholder="Indiquez votre e-mail" required></div>
-            <div class="field"><label for="messageLO">Votre message </label><textarea minlength= "25" maxlength="500" name="messageLO" placeholder="Écrivez votre message" required></textarea></div>
-            <div class="envoi"><input id="bouton" type="submit" value="Envoyer"></div>        
+            <label class="alignRight" for="nameLO">Nom </label><input type="text" name="nameLO" placeholder="Indiquez votre nom" required>
+            <label class="alignRight" for="mailLO">E-mail </label><input type='email' name="mailLO" placeholder="Indiquez votre e-mail" required>
+            <label class="alignRight" for="messageLO">Votre message </label><textarea minlength= "25" maxlength="500" name="messageLO" placeholder="Écrivez votre message" required></textarea>
+            <div class="send"><input id="bouton" type="submit" value="Envoyer"></div>        
         </form>
-        <div></div>
+       
     </section>
     <div class="empty"></div>
 
