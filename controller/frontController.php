@@ -298,6 +298,7 @@ else if(isset($_GET['p'])){
         
         
         // les deletes  :
+        // agenda :
         if(isset($_GET['agenda-delete']) && ctype_digit($_GET['agenda-delete'])){
             $agendaId = (int) $_GET['agenda-delete']; 
             $agendaById = $agendaManager-> getOneById($agendaId);
@@ -316,6 +317,7 @@ else if(isset($_GET['p'])){
             
         }
 
+        // article : 
         if(isset($_GET['article-delete'])){
             $articleId = (int) $_GET['agenda-delete'];
 
