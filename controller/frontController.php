@@ -297,7 +297,7 @@ else if(isset($_GET['p'])){
         }
         
         
-        // les deletes (ça marche pas) :
+        // les deletes  :
         if(isset($_GET['agenda-delete']) && ctype_digit($_GET['agenda-delete'])){
             $agendaId = (int) $_GET['agenda-delete']; 
             $agendaById = $agendaManager-> getOneById($agendaId);
@@ -309,11 +309,16 @@ else if(isset($_GET['p'])){
             }
 
             if($agendaDelete){
-                $response = "Evenement effacé !";
+                $response = "Evenement : " . $agendaById -> getMwTitleAgenda() . " effacé !";
             }else{
                 $response = "Un problème est survenu, réessayez !";
             }
             
+        }
+
+        if(isset($_GET['article-delete'])){
+            $articleId = (int) $_GET['agenda-delete'];
+
         }
 
 
