@@ -20,15 +20,16 @@ main{
 	padding: 0 1em;
 }
 
-
-
+h3{
+	margin: 0.5em 0;
+	
+}
 h1{
     text-align: center;
 	padding: .5em;
+	color: #048b9a;
 }
-h2{
-	padding:1em 0;
-}
+
 .empty{      /*div vide pour faire des espaces entre différents blocs*/
     height: 2em;   
 }
