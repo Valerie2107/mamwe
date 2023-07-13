@@ -67,6 +67,7 @@ $patientManager = new ManagerPatient($db);
 
 ### agenda :
 $agendaManager = new ManagerAgenda($db);
+$allAgenda = $agendaManager->getAll();
 
 ### picture 
 $pictureManager = new ManagerPicture($db);
@@ -298,20 +299,21 @@ else if(isset($_GET['p'])){
         
         // les deletes (ça marche pas) :
         if(isset($_GET['agenda-delete']) && ctype_digit($_GET['agenda-delete'])){
-            $agendaId = (int) $_GET['agenda-delete'];
-            var_dump($agendaId);
-
+            $agendaId = (int) $_GET['agenda-delete']; 
+            $agendaById = $agendaManager-> getOneById($agendaId);
             try {
                 $agendaDelete = $agendaManager->deleteAgenda($agendaId);
+                $pictureDelete = $pictureManager->deletePicture($agendaById->getMwPictureMwIdPicture());
             }catch(Exception $e){
                 $e -> getMessage();
             }
 
             if($agendaDelete){
-                $response = "Evenement effacé ! ";
+                $response = "Evenement effacé !";
             }else{
-                $response = "Un problème est survenu, réessayez ! ";
+                $response = "Un problème est survenu, réessayez !";
             }
+            
         }
 
 
