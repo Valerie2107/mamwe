@@ -80,6 +80,7 @@ $pictureManager = new ManagerPicture($db);
 if(isset($_GET['deconnect'])){
     $userManager->disconnect();         
     header("Location: ./");
+    exit();
 }
     
 // connection à l'admin
@@ -101,82 +102,10 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
 
 ####################### CONTROLLER FRONTAL #############################
-else if(isset($_GET['p'])){
 
-    // navigation publique :
-    if($_GET['p'] === "home"){
-        // on a créé les variables en haut parce qu"on en a besoin à 3 endroits différents
-        include_once "../view/publicView/homepage.php";
-    }
 
-    else if($_GET['p'] === "contact"){
-        // on va afficher les infos dans la page contact alors on les appelle ici :
-        $allInfo = $infoManager -> getAll();
-        include_once "../view/publicView/contactView.php";
-    }
-
-    else if($_GET['p'] === "ressources"){
-        // on recupère toutes les catégories:
-        $getAllCateg = $ressourceManager -> getAllCateg();
-
-        // on récupère toutes les sous catégories :
-        $getAllSub = $ressourceManager -> getAllSubCateg();
-        include_once "../view/publicView/ressourcesView.php";
-    }
-
-    else if($_GET['p'] === "livreDor"){
-        // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
-        $allLivreDor = $livreManager -> getAllVisible();
-
-        // insertion nouveau message dans le livre d'or :
-        if(isset($_POST['nameLO'], $_POST['mailLO'], $_POST['messageLO'])){
-            // insertion dans le livre d'or
-            $newMessageLO = new MappingLivreDor([
-                "mwNameLivreDor" => $_POST['nameLO'],
-                "mwMailLivreDor" => $_POST['mailLO'],
-                "mwMessageLivreDor" => $_POST['messageLO'],
-            ]);
-            $insertLO = $livreManager -> insertLivreDor($newMessageLO);
-        }
-        // appel de la vue:
-        include_once "../view/publicView/livreDorView.php";
-    }
-
-    else if($_GET['p']==="connect"){
-        include_once "../view/publicView/connectView.php";
-    }
-
-    // Suite du $_get si l'admin est connecté :
+    // ets-ce qu'on est connecté :
     else if(isset($_SESSION['idSession']) && $_SESSION['idSession']==session_id()){
-        if($_GET['p']==="admin"){
-            include_once '../view/privateView/admin.php';
-        }
-        else if($_GET['p']==="agenda"){
-            include_once '../view/privateView/agendaCrud.php';
-        }
-        else if($_GET['p']==="article"){
-            include_once '../view/privateView/articleCrud.php';
-        }
-        else if($_GET['p']==="info"){
-            include_once '../view/privateView/infoCrud.php';
-        }
-        else if($_GET['p']==="livredor"){
-            include_once '../view/privateView/livreDorCrud.php';
-        }
-        else if($_GET['p']==="patient"){
-            $allPatient = $patientManager->getAll();
-            include_once '../view/privateView/patientCrud.php';
-        }
-        else if($_GET['p']==="ressource"){
-            include_once '../view/privateView/ressourceCrud.php';
-        }
-        else if($_GET['p']==="section"){
-            include_once '../view/privateView/sectionCrud.php';
-        }
-        else if($_GET['p']==="user"){
-            $userManager->getAll();
-            include_once '../view/privateView/userCrud.php';
-        }
 
         ### LES INSERTS :
         // Agenda :
@@ -195,6 +124,19 @@ else if(isset($_GET['p'])){
             ]);
 
             $insertAgenda = $agendaManager -> insertAgendaWithPict($agendaInsertPicMap, $agendaInsertMap);
+            if($insertAgenda){
+                $response = "Evenement enregistrer !";
+            }else{
+                $response = "Un problème est survenu, réssayez !";
+            }
+            ?>
+                <script>
+                    window.setTimeout(function() {
+                        window.location = './?p=agenda';
+                    }, 3000);
+                </script>
+            <?php
+
         }  
 
         // Article : 
@@ -225,6 +167,18 @@ else if(isset($_GET['p'])){
                     }
                 }
                 $insertArticle = $articleManager -> insertArticle($articleInsertMap, $pictureInsertArray);
+                if($insertArticle){
+                    $response = "article enregistrer !";
+                }else{
+                    $response = "Un problème est survenu, réssayez !";
+                }
+                ?>
+                    <script>
+                        window.setTimeout(function() {
+                            window.location = './?p=article';
+                        }, 3000);
+                    </script>
+                <?php
 
         }  
 
@@ -244,6 +198,18 @@ else if(isset($_GET['p'])){
             ]);
 
             $insertInfo = $infoManager -> insertInfo($infoInsertPicMap, $infoInsertMap);
+            if($insertInfo){
+                $response = "Nouvelle information enregistrer !";
+            }else{
+                $response = "Un problème est survenu, réssayez !";
+            }
+            ?>
+                <script>
+                    window.setTimeout(function() {
+                        window.location = './?p=info';
+                    }, 3000);
+                </script>
+            <?php
         }  
         
         // insert patient :
@@ -280,6 +246,18 @@ else if(isset($_GET['p'])){
             ]);
 
             $insertSection = $sectionManager -> insertSectionWithPic($sectionInsertPicMap, $sectionInsertMap);
+            if($insertSection){
+                $response = "Nouvelle section enregistrer !";
+            }else{
+                $response = "Un problème est survenu, réssayez !";
+            }
+            ?>
+                <script>
+                    window.setTimeout(function() {
+                        window.location = './?p=section';
+                    }, 3000);
+                </script>
+            <?php
         }  
              
 
@@ -310,22 +288,221 @@ else if(isset($_GET['p'])){
             }
 
             if($agendaDelete){
-                $response = "Evenement : " . $agendaById -> getMwTitleAgenda() . " effacé !";
+                $response = "Evenement : " . $agendaById -> getMwTitleAgenda() . " est effacé !";              
             }else{
                 $response = "Un problème est survenu, réessayez !";
             }
-            
+            ?>
+                <script>
+                    window.setTimeout(function() {
+                        window.location = './?p=agenda';
+                    }, 3000);
+                </script>
+            <?php
         }
+
 
         // article : 
         if(isset($_GET['article-delete'])){
-            $articleId = (int) $_GET['agenda-delete'];
+            $articleId = (int) $_GET['agenda-delete']; 
+            $articleById = $articleManager-> getOneById($articleId);
+            try {
+                $articleDelete = $articleManager->deleteArticle($articleId);
+                $pictureDelete = $pictureManager->deletePictureByArticleId($articleId);
+            }catch(Exception $e){
+                $e -> getMessage();
+            }
 
+            if($articleDelete){
+                $response = "Article : " . $agendaById -> getMwTitleAgenda() . " est effacé !";              
+            }else{
+                $response = "Un problème est survenu, réessayez !";
+            }
+            ?>
+                <script>
+                    window.setTimeout(function() {
+                        window.location = './?p=article';
+                    }, 3000);
+                </script>
+            <?php   
+        }
+
+        // info :
+        if(isset($_GET['info-delete'])){
+            $infoId = (int) $_GET['info-delete'];
+            $infoById = $infoManager -> getOneById($infoId);
+            try{
+                $infoDelete = $infoManager -> deleteInfo($infoId);
+                $pictureDelete = $pictureManager->deletePicture($infoById->getMwPictureMwIdPicture());
+            }catch(Exception $e){
+                $e -> getMessage();
+            }
+            
+            if($infoDelete){
+                $response = "Information : " . $infoById -> getMwIdInfo() . " est effacé !";              
+            }else{
+                $response = "Un problème est survenu, réessayez !";
+            }
+            ?>
+                <script>
+                    window.setTimeout(function() {
+                        window.location = './?p=info';
+                    }, 3000);
+                </script>
+            <?php 
+        }
+
+        // // pictures : A METTRE DANS UNE FONCTION ET METTRE PARTOUT
+        // if(isset($_GET['picture-delete'])){
+        //     $pictureId = (int) $_GET['picture-delete'];
+        //     $pictureById = $pictureManager-> getOneById($pictureId);
+        //     try{
+        //         $pictureDelete = $pictureManager->deletePicture($pictureId);
+        //     }catch(Exception $e){
+        //         $e -> getMessage();
+        //     }
+            
+        //     if($pictureDelete){
+        //         $response = "Photo intitulé : " . $pictureById->getMwTitlePicture() . " est effacé !";              
+        //     }else{
+        //         $response = "Un problème est survenu, réessayez !";
+        //     } 
+        // }
+        
+        // RESSOURCE :
+        if(isset($_GET['ressource-delete'])){
+
+            $ressourceId = (int) $_GET['ressource-delete'];
+            $ressourceById = $ressourceManager -> getOneById($ressourceId);
+            try{
+                $ressourceDelete = $ressourceManager -> deleteressource($ressourceId);
+                $pictureDelete = $pictureManager->deletePicture($ressourceById->getMwPictureMwIdPicture());
+            }catch(Exception $e){
+                $e -> getMessage();
+            }
+            
+            if($ressourceDelete){
+                $response = "Ressource intitulé : " . $ressourceById -> getMwTitleRessource() . " est effacé !";              
+            }else{
+                $response = "Un problème est survenu, réessayez !";
+            }
+            ?>
+                <script>
+                    window.setTimeout(function() {
+                        window.location = './?p=ressource';
+                    }, 3000);
+                </script>
+            <?php 
+        }
+
+        // CATEGORY : 
+        // -- METTRE LE BOUTON DANS LE CRUD DES RESSOURECES --
+        if(isset($_GET['category-delete'])){
+            $categoryId = (int) $_GET['category-delete'];
+            $categoryById = $ressourceManager-> getCategById($categoryId);
+            try{
+                $categoryDelete = $ressourceManager->deleteCategory($categoryId);
+                $pictureDelete = $pictureManager->deletePicture($ressourceById->getMwPictureMwIdPicture());
+            }catch(Exception $e){
+                $e -> getMessage();
+            }
+            
+            if($categoryDelete){
+                $response = "Ressource intitulé : " . $categoryById -> getMwTitleCategory() . " est effacé !";              
+            }else{
+                $response = "Un problème est survenu, réessayez !";
+            }
+            ?>
+                <script>
+                    window.setTimeout(function() {
+                        // PIS ON RETOURNE SUR LA PAGE DES RESSOURCES :
+                        window.location = './?p=ressource';
+                    }, 3000);
+                </script>
+            <?php 
         }
 
 
+        // routeur privée
+        if(isset($_GET['p'])){
+
+            if($_GET['p']==="admin"){
+                include_once '../view/privateView/admin.php';
+            }
+            else if($_GET['p']==="agenda"){
+                include_once '../view/privateView/agendaCrud.php';
+            }
+            else if($_GET['p']==="article"){
+                include_once '../view/privateView/articleCrud.php';
+            }
+            else if($_GET['p']==="info"){
+                include_once '../view/privateView/infoCrud.php';
+            }
+            else if($_GET['p']==="livredor"){
+                include_once '../view/privateView/livreDorCrud.php';
+            }
+            else if($_GET['p']==="patient"){
+                $allPatient = $patientManager->getAll();
+                include_once '../view/privateView/patientCrud.php';
+            }
+            else if($_GET['p']==="ressource"){
+                include_once '../view/privateView/ressourceCrud.php';
+            }
+            else if($_GET['p']==="section"){
+                include_once '../view/privateView/sectionCrud.php';
+            }
+            else if($_GET['p']==="user"){
+                $userManager->getAll();
+                include_once '../view/privateView/userCrud.php';
+            }
+        }
+
     }
 
+    // navigation publique :
+    else if(isset($_GET['p'])){
+
+        if($_GET['p'] === "home"){
+            // on a créé les variables en haut parce qu"on en a besoin à 3 endroits différents
+            include_once "../view/publicView/homepage.php";
+        }
+    
+        else if($_GET['p'] === "contact"){
+            // on va afficher les infos dans la page contact alors on les appelle ici :
+            $allInfo = $infoManager -> getAll();
+            include_once "../view/publicView/contactView.php";
+        }
+    
+        else if($_GET['p'] === "ressources"){
+            // on recupère toutes les catégories:
+            $getAllCateg = $ressourceManager -> getAllCateg();
+    
+            // on récupère toutes les sous catégories :
+            $getAllSub = $ressourceManager -> getAllSubCateg();
+            include_once "../view/publicView/ressourcesView.php";
+        }
+    
+        else if($_GET['p'] === "livreDor"){
+            // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
+            $allLivreDor = $livreManager -> getAllVisible();
+    
+            // insertion nouveau message dans le livre d'or :
+            if(isset($_POST['nameLO'], $_POST['mailLO'], $_POST['messageLO'])){
+                // insertion dans le livre d'or
+                $newMessageLO = new MappingLivreDor([
+                    "mwNameLivreDor" => $_POST['nameLO'],
+                    "mwMailLivreDor" => $_POST['mailLO'],
+                    "mwMessageLivreDor" => $_POST['messageLO'],
+                ]);
+                $insertLO = $livreManager -> insertLivreDor($newMessageLO);
+            }
+            // appel de la vue:
+            include_once "../view/publicView/livreDorView.php";
+        }
+    
+        else if($_GET['p']==="connect"){
+            include_once "../view/publicView/connectView.php";
+    }
     else{
 
         include_once "../view/404.php";

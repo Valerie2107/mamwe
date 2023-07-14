@@ -267,7 +267,20 @@ class ManagerRessource implements ManagerInterface
     }
 
     public function deleteRessource(int $id){
-        $sql = "DELETE FROM mw_Ressource WHERE mw_id_ressource = :id";
+        $sql = "DELETE FROM mw_ressource WHERE mw_id_ressource = :id";
+        $prepare = $this -> db -> prepare($sql);
+        $prepare->bindParam(':id', $id, PDO::PARAM_INT);
+
+        try{
+            $prepare -> execute();    
+            return true;   
+        }catch(Exception $e){
+            $e->getMessage();
+        }     
+    }
+
+    public function deleteCategory(int $id){
+        $sql = "DELETE FROM mw_category_ressource WHERE mw_id_category = :id";
         $prepare = $this -> db -> prepare($sql);
         $prepare->bindParam(':id', $id, PDO::PARAM_INT);
 
