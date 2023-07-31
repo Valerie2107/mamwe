@@ -16,8 +16,41 @@ include_once "../view/include/header.php";
 <!-- titre -->
 <h1><?= $title ?></h1>
 
-<!-- le reste : -->
 
+<!-- affichage des articles dans un tableau : -->
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Contenu</th>
+            <th>photo</th>
+            <th>visible</th>
+            <th>section</th>
+            <th>update</th>
+            <th>delete</th>
+        </tr>
+    </thead>
+    <tbody>
+            <?php foreach($allArticle as $article): ?>
+                <tr>
+                    <td><?= $article->getMwIdArticle() ?></td>
+                    <td><?= $article->getMwTitleArt() ?></td>
+                    <td><?= $article->getMwContentArt() ?></td>
+                    <td><?= $article->getPicture()?></td>
+                    <td><?= $article->getMwVisibleArt() ?></td>
+                    <td><?= $article->getMwSectionMwIdSection()?></td>
+                    <td><button>update</button></td>
+                    <td><button><a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $article->getMwTitleArt() ?>\' ?'); if(a){ document.location = '?p=article&article-delete=<?= $article->getMwIdArticle() ?>'; };" href="#">delete</a></button></td>
+
+                </tr>
+            <?php endforeach; ?>
+    </tbody>
+</table>
+
+<hr>
+
+<h3>Ajout d'articles : </h3>
 <form action="" method="POST" id="insert-article">
         <label for="mw_title_art">Title:</label><br>
         <input type="text" id="mw_title_art" name="mw_title_art"><br>

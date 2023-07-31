@@ -303,8 +303,8 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
 
         // article : 
-        if(isset($_GET['article-delete'])){
-            $articleId = (int) $_GET['agenda-delete']; 
+        if(isset($_GET['article-delete']) && ctype_digit($_GET['article-delete'])){
+            $articleId = (int) $_GET['article-delete']; 
             $articleById = $articleManager-> getOneById($articleId);
             try {
                 $articleDelete = $articleManager->deleteArticle($articleId);
@@ -314,7 +314,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             }
 
             if($articleDelete){
-                $response = "Article : " . $agendaById -> getMwTitleAgenda() . " est effacé !";              
+                $response = "Article : " . $articleById -> getMwTitleArt() . " est effacé !";              
             }else{
                 $response = "Un problème est survenu, réessayez !";
             }
@@ -352,7 +352,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             <?php 
         }
 
-        // // pictures : A METTRE DANS UNE FONCTION ET METTRE PARTOUT
+        // // pictures FAUT VOIR COMMENT ON RECUPERE L'ID : 
         // if(isset($_GET['picture-delete'])){
         //     $pictureId = (int) $_GET['picture-delete'];
         //     $pictureById = $pictureManager-> getOneById($pictureId);
@@ -423,7 +423,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
         }
 
 
-        // routeur privée
+        // navigation privée (en tant qu'admin) :
         if(isset($_GET['p'])){
 
             if($_GET['p']==="admin"){
@@ -433,6 +433,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 include_once '../view/privateView/agendaCrud.php';
             }
             else if($_GET['p']==="article"){
+                $allArticle = $articleManager->getAll();
                 include_once '../view/privateView/articleCrud.php';
             }
             else if($_GET['p']==="info"){
@@ -455,6 +456,68 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 $userManager->getAll();
                 include_once '../view/privateView/userCrud.php';
             }
+
+            // On permet de naviguer dans les pages publiques en étant connecté
+            else if($_GET['p'] === "home"){
+                // on a créé les variables en haut parce qu"on en a besoin à 3 endroits différents
+                include_once "../view/publicView/homepage.php";
+            }
+        
+            else if($_GET['p'] === "contact"){
+                // on va afficher les infos dans la page contact alors on les appelle ici :
+                $allInfo = $infoManager -> getAll();
+                include_once "../view/publicView/contactView.php";
+            }
+        
+            else if($_GET['p'] === "ressources"){
+                // on recupère toutes les catégories:
+                $getAllCateg = $ressourceManager -> getAllCateg();
+        
+                // on récupère toutes les sous catégories :
+                $getAllSub = $ressourceManager -> getAllSubCateg();
+                include_once "../view/publicView/ressourcesView.php";
+            }
+        
+            else if($_GET['p'] === "livreDor"){
+                // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
+                $allLivreDor = $livreManager -> getAllVisible();
+    
+                // appel de la vue:
+                include_once "../view/publicView/livreDorView.php";
+            }
+        
+            else if($_GET['p']==="connect"){
+                include_once "../view/publicView/connectView.php";
+            }
+            else{
+        
+                include_once "../view/404.php";
+                
+            }
+        }
+
+        // affichage des sections :
+        else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
+            // on stocke l'id de la section
+            $idSect = (int) $_GET['sectionId'];
+
+            // on récup la section avec l'id pour afficher le titre
+            $sectionById = $sectionManager -> getOneById($idSect);
+            
+            // on fait le manager des articles
+            $articleBySection = $articleManager -> getAllArticlesWithPictures($idSect);
+            
+        // var_dump($articleBySection);
+            include_once "../view/publicView/sectionView.php";
+        }
+
+        // formulaire de contact :
+        else if(isset($_POST['nameContact'], $_POST['mailContact'], $_POST['messageContact'])){
+            // envois message / mailer
+        }
+
+        else {
+            include_once "../view/publicView/homepage.php";
         }
 
     }
