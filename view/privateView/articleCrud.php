@@ -45,11 +45,15 @@ include_once "../view/include/header.php";
             <td><?= $article->getPicture()?></td>
             <td><?= $article->getMwVisibleArt() ?></td>
             <td><?= $article->getMwSectionMwIdSection()?></td>
-            <td><button>update</button></td>
             <td>
-            <button class="btn">
-                <a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $article->getMwTitleArt() ?>\' ?'); if(a){ document.location = '?p=article&article-delete=<?= $article->getMwIdArticle() ?>'; };" href="#">delete</a>
-            </button>
+                <button>
+                    <a href="?article-update=<?= $article->getMwIdArticle() ?>">update</a>
+                </button>
+            </td>
+            <td>
+                <button class="btn">
+                    <a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $article->getMwTitleArt() ?>\' ?'); if(a){ document.location = '?p=article&article-delete=<?= $article->getMwIdArticle() ?>'; };" href="#">delete</a>
+                </button>
             </td>
         </tr>
     <?php endforeach; ?>

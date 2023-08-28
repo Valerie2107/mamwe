@@ -262,18 +262,16 @@ if(isset($_POST['login'],$_POST['pwd'])){
              
 
         // les updates :
-        if(isset($_GET['idAgenda']) && ctype_digit($_GET['idAgenda'])){
-            include_once "../view/privateView/articleEditView.php";
+        if(isset($_GET['agenda-update']) && ctype_digit($_GET['agenda-update'])){
+            include_once "../view/privateView/agendaEditView.php";
         }
 
-        if(isset($_GET['idRessource']) && ctype_digit($_GET['idRessource']) ){
-            include_once "../view/privateView/ressourcesEditView.php";
+        if(isset($_GET['article-update']) && ctype_digit($_GET['article-update'])){
+            $articleId = (int) $_GET['article-update']; 
+            $articleById = $articleManager -> getOneById($articleId);
+            include_once "../view/privateView/editView/articleEdit.php";
         }
 
-        if(isset($_GET['idArticle']) && ctype_digit($_GET['idArticle'])){
-            include_once "../view/privateView/articleEditView.php";
-        }
-        
         
         // les deletes  :
         // agenda :
