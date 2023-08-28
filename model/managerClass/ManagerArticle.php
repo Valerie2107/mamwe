@@ -22,7 +22,10 @@ class ManagerArticle  implements ManagerInterface
     public function getOneById(int $id)
     {
         // requête sql + prepare + bindValue + execute + etc
-        $prepare = $this->db->prepare("SELECT * FROM mw_article WHERE mw_id_article = :id");
+        $prepare = $this->db->prepare("SELECT a.*, GROUP_CONCAT(p.mw_id_picture, '|||' , p.mw_url_picture SEPARATOR '---') AS picture
+        FROM mw_article a 
+        LEFT JOIN mw_picture p ON p.mw_article_mw_id_article = a.mw_id_article
+        WHERE a.mw_id_article = :id");
         $prepare->bindValue(':id', $id, PDO::PARAM_INT);
 
         // si on a un résultat, on hydrate un objet Article et on le retourne

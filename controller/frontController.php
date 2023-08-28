@@ -260,18 +260,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
             <?php
         }  
              
-
-        // les updates :
-        if(isset($_GET['agenda-update']) && ctype_digit($_GET['agenda-update'])){
-            include_once "../view/privateView/agendaEditView.php";
-        }
-
-        if(isset($_GET['article-update']) && ctype_digit($_GET['article-update'])){
-            $articleId = (int) $_GET['article-update']; 
-            $articleById = $articleManager -> getOneById($articleId);
-            include_once "../view/privateView/editView/articleEdit.php";
-        }
-
         
         // les deletes  :
         // agenda :
@@ -454,6 +442,18 @@ if(isset($_POST['login'],$_POST['pwd'])){
             else if($_GET['p']==="user"){
                 $userManager->getAll();
                 include_once '../view/privateView/userCrud.php';
+            }
+
+            ### LES UPDATE :
+            else if($_GET['p']==="article-update"){
+
+                if(isset($_GET['article-update']) && ctype_digit($_GET['article-update'])){
+                    $articleId = (int) $_GET['article-update']; 
+                    $articleById = $articleManager -> getOneById($articleId);
+                    
+                }
+
+                include_once '../view/privateView/editView/articleEdit.php';
             }
 
             // On permet de naviguer dans les pages publiques en étant connecté

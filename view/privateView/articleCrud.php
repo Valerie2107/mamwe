@@ -47,7 +47,7 @@ include_once "../view/include/header.php";
             <td><?= $article->getMwSectionMwIdSection()?></td>
             <td>
                 <button>
-                    <a href="?article-update=<?= $article->getMwIdArticle() ?>">update</a>
+                    <a href="?p=article-update&article-update=<?= $article->getMwIdArticle() ?>">update</a>
                 </button>
             </td>
             <td>
