@@ -132,7 +132,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             ?>
                 <script>
                     window.setTimeout(function() {
-                        window.location = './?p=agenda';
+                        window.location = './?p=agendaCrud';
                     }, 3000);
                 </script>
             <?php
@@ -295,7 +295,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             ?>
                 <script>
                     window.setTimeout(function() {
-                        window.location = './?p=agenda';
+                        window.location = './?p=agendaCrud';
                     }, 3000);
                 </script>
             <?php
@@ -429,7 +429,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             if($_GET['p']==="admin"){
                 include_once '../view/privateView/admin.php';
             }
-            else if($_GET['p']==="agenda"){
+            else if($_GET['p']==="agendaCrud"){
                 include_once '../view/privateView/agendaCrud.php';
             }
             else if($_GET['p']==="article"){
@@ -489,10 +489,13 @@ if(isset($_POST['login'],$_POST['pwd'])){
             else if($_GET['p']==="connect"){
                 include_once "../view/publicView/connectView.php";
             }
+
+            else if($_GET['p']==="agenda"){
+                include_once "../view/publicView/agendaView.php";
+            }
+
             else{
-        
-                include_once "../view/404.php";
-                
+                include_once "../view/404.php";   
             }
         }
 
@@ -544,7 +547,11 @@ if(isset($_POST['login'],$_POST['pwd'])){
             $getAllSub = $ressourceManager -> getAllSubCateg();
             include_once "../view/publicView/ressourcesView.php";
         }
-    
+
+        else if($_GET['p']==="agenda"){
+            include_once "../view/publicView/agendaView.php";
+        }
+        
         else if($_GET['p'] === "livreDor"){
             // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
             $allLivreDor = $livreManager -> getAllVisible();
