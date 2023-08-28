@@ -308,7 +308,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             $articleById = $articleManager-> getOneById($articleId);
             try {
                 $articleDelete = $articleManager->deleteArticle($articleId);
-                $pictureDelete = $pictureManager->deletePictureByArticleId($articleId);
+                // $pictureDelete = $pictureManager->deletePictureByArticleId($articleId);
             }catch(Exception $e){
                 $e -> getMessage();
             }
@@ -319,11 +319,11 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 $response = "Un problème est survenu, réessayez !";
             }
             ?>
-                <script>
+                <!-- <script>
                     window.setTimeout(function() {
                         window.location = './?p=article';
                     }, 3000);
-                </script>
+                </script> -->
             <?php   
         }
 

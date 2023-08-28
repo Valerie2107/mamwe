@@ -105,7 +105,6 @@ class ManagerAgenda implements ManagerInterface
         $prepare->bindParam(':id', $id, PDO::PARAM_INT);
         $prepare -> execute();    
 
-
         try{
             $this->db->commit();
             return true;   

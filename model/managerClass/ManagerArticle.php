@@ -120,16 +120,16 @@ class ManagerArticle  implements ManagerInterface
 
 
     public function deleteArticle($id){
+
         $sql = "DELETE FROM mw_article WHERE mw_id_article = :id";
         $prepare = $this->db->prepare($sql);
         $prepare->bindValue(':id', $id, PDO::PARAM_INT);
         $prepare->execute();
 
         try{
-            $this->db->commit();
+            $prepare->execute();
             return true;   
         }catch(Exception $e){
-            $this->db->rollBack();
             $e->getMessage();
         }
     }
