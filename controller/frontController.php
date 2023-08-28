@@ -307,25 +307,26 @@ if(isset($_POST['login'],$_POST['pwd'])){
             $articleId = (int) $_GET['article-delete']; 
             $articleById = $articleManager-> getOneById($articleId);
             try {
-                $articleDelete = $articleManager->deleteArticle($articleId);
-                // $pictureDelete = $pictureManager->deletePictureByArticleId($articleId);
+                $articleDelete = $articleManager->deletearticle($articleId);
+                $pictureDelete = $pictureManager->deletePicture($articleId);
             }catch(Exception $e){
                 $e -> getMessage();
             }
 
             if($articleDelete){
-                $response = "Article : " . $articleById -> getMwTitleArt() . " est effacé !";              
+                $response = "Evenement : " . $articleById -> getMwTitleArt() . " est effacé !";              
             }else{
                 $response = "Un problème est survenu, réessayez !";
             }
             ?>
-                <!-- <script>
+                <script>
                     window.setTimeout(function() {
                         window.location = './?p=article';
                     }, 3000);
-                </script> -->
-            <?php   
+                </script>
+            <?php
         }
+
 
         // info :
         if(isset($_GET['info-delete'])){
