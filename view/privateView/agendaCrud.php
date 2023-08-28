@@ -24,7 +24,7 @@ include_once "../view/include/header.php";
     <p><?= $agenda->getMwTitleAgenda(); ?></p>
     <p><?= $agenda->getMwContentAgenda(); ?></p>
     <p><?= $agenda->getMwDateAgenda(); ?></p>
-    <button class="btn"><a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $agenda->getMwTitleAgenda() ?>\' ?'); if(a){ document.location = '?p=agenda&agenda-delete=<?= $agenda->getMwIdAgenda() ?>'; };" href="#">delete</a></button>
+    <button class="btn"><a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $agenda->getMwTitleAgenda() ?>\' ?'); if(a){ document.location = '?p=agendaCrud&agenda-delete=<?= $agenda->getMwIdAgenda() ?>'; };" href="#">delete</a></button>
 <?php endforeach; ?>
 <?php
 if(isset($response)){
