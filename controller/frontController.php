@@ -300,7 +300,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             }
 
             if($articleDelete){
-                $response = "Evenement : " . $articleById -> getMwTitleArt() . " est effacé !";              
+                $response = "Article : " . $articleById -> getMwTitleArt() . " est effacé !";              
             }else{
                 $response = "Un problème est survenu, réessayez !";
             }
@@ -445,15 +445,62 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 include_once '../view/privateView/userCrud.php';
             }
 
-            ### LES UPDATE :
-            else if($_GET['p']==="article-update"){
 
+            ### LES UPDATE :
+            // AGENDA UPDATE
+            else if($_GET['p']==="agenda-update"){
+                if(isset($_GET['agenda-update']) && ctype_digit($_GET['agenda-update'])){
+                    $agendaId = (int) $_GET['agenda-update']; 
+                    $agendaById = $agendaManager -> getOneWithPic($agendaId);
+                    $pictureByAgendaId = $pictureManager -> getOneById($agendaById->getMwPictureMwIdPicture());
+                }
+
+                if(isset($_POST['mw_update_title_agenda'], $_POST['mw_update_date_agenda'], $_POST['mw_update_content_agenda'])){
+                    
+                    $pictureUpdateMap = new MappingPicture([
+                        'mwTitlePicture' => $_POST['mw_update_title_pic'],
+                        'mwUrlPicture' => $_POST['mw_update_url_pic'],
+                        'mwSizePicture' => $_POST['mw_update_size_pic'],
+                        'mwPositionPicture' => $_POST['mw_update_position_pic'],
+                        'mwIdPicture' =>  $pictureByAgendaId -> getMwIdPicture(),
+                    ]);
+
+                    $agendaUpdateMap = new MappingAgenda([
+                        'mwDateAgenda' => $_POST['mw_update_date_agenda'],
+                        'mwContentAgenda' => $_POST['mw_update_content_agenda'],
+                        'mwTitleAgenda' => $_POST['mw_update_title_agenda'], 
+                        'mwPictureMwIdPicture' => $pictureByAgendaId -> getMwIdPicture(),
+                        'mwIdAgenda' => $agendaId,
+                    ]);
+
+                    $updateAgenda = $agendaManager -> updateAgenda($pictureUpdateMap, $agendaUpdateMap);
+
+                    if($updateAgenda){
+                        $response = "Evénement mis à jour !";
+                    } else {
+                        $response = "Un problème est survenu, réssayez !";
+                    }
+
+                    ?>
+                    <script>
+                        window.setTimeout(function() {
+                            window.location = './?p=agendaCrud';
+                        }, 3000);
+                    </script>
+                    <?php
+                }
+                var_dump($pictureUpdateMap, $agendaUpdateMap);
+                include_once "../view/privateView/editView/agendaEdit.php";
+            }
+            
+            // ARTCILE UPDATE
+            else if($_GET['p']==="article-update"){
                 if(isset($_GET['article-update']) && ctype_digit($_GET['article-update'])){
                     $articleId = (int) $_GET['article-update']; 
                     $pictures = $pictureManager -> getAllByArticleId($articleId);
                     $articleById = $articleManager -> getOneById($articleId);
+                    
                 }
-
                 if(isset($_POST['mw_update_title_art'], $_POST['mw_update_content_art'], $_POST['mw_update_visible_art'], $_POST['mw_update_section_mw_update_id_section'])){        
                     $articleUpdateMap = new MappingArticle([
                         "mwTitleArt" => $_POST['mw_update_title_art'],
@@ -474,7 +521,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
                             'mwIdPicture'=> $picture -> getMwIdPicture()
                         ]);
                         $pictureUpdateArray[] = $pictureUpdateMap;  
-                        var_dump($pictureUpdateMap);                     
                     }
                     
                     $updateArticle = $articleManager -> updateArticleWithPic($articleUpdateMap, $pictureUpdateArray);
@@ -484,18 +530,18 @@ if(isset($_POST['login'],$_POST['pwd'])){
                         $response = "Un problème est survenu, réssayez !";
                     }
                     ?>
-                        <!-- <script>
+                        <script>
                             window.setTimeout(function() {
                                 window.location = './?p=article';
                             }, 3000);
-                        </script> -->
+                        </script>
                     <?php
 
                 }  
                 // var_dump($pictureUpdateArray);
                 include_once '../view/privateView/editView/articleEdit.php';
-
             }
+
 
             // On permet de naviguer dans les pages publiques en étant connecté
             else if($_GET['p'] === "home"){
@@ -612,36 +658,36 @@ if(isset($_POST['login'],$_POST['pwd'])){
     
         else if($_GET['p']==="connect"){
             include_once "../view/publicView/connectView.php";
-    }
-    else{
+        }
+        else{
 
-        include_once "../view/404.php";
+            include_once "../view/404.php";
+            
+        }
         
     }
-    
-}
 
-// affichage des sections :
-else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
-    // on stocke l'id de la section
-    $idSect = (int) $_GET['sectionId'];
+    // affichage des sections :
+    else if(isset($_GET['sectionId']) && ctype_digit($_GET['sectionId'])){
+        // on stocke l'id de la section
+        $idSect = (int) $_GET['sectionId'];
 
-    // on récup la section avec l'id pour afficher le titre
-    $sectionById = $sectionManager -> getOneById($idSect);
-    
-    // on fait le manager des articles
-    $articleBySection = $articleManager -> getAllArticlesWithPictures($idSect);
-    
-   // var_dump($articleBySection);
-    include_once "../view/publicView/sectionView.php";
-}
+        // on récup la section avec l'id pour afficher le titre
+        $sectionById = $sectionManager -> getOneById($idSect);
+        
+        // on fait le manager des articles
+        $articleBySection = $articleManager -> getAllArticlesWithPictures($idSect);
+        
+    // var_dump($articleBySection);
+        include_once "../view/publicView/sectionView.php";
+    }
 
-// formulaire de contact :
-else if(isset($_POST['nameContact'], $_POST['mailContact'], $_POST['messageContact'])){
-    // envois message / mailer
-}
+    // formulaire de contact :
+    else if(isset($_POST['nameContact'], $_POST['mailContact'], $_POST['messageContact'])){
+        // envois message / mailer
+    }
 
-else {
-    include_once "../view/publicView/homepage.php";
-}
+    else {
+        include_once "../view/publicView/homepage.php";
+    }
 

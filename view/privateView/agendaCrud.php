@@ -24,6 +24,9 @@ include_once "../view/include/header.php";
     <p><?= $agenda->getMwTitleAgenda(); ?></p>
     <p><?= $agenda->getMwContentAgenda(); ?></p>
     <p><?= $agenda->getMwDateAgenda(); ?></p>
+    <button>
+        <a href="?p=agenda-update&agenda-update=<?= $agenda-> getMwIdAgenda() ?>">Update</a>
+    </button>
     <button class="btn">
         <a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $agenda->getMwTitleAgenda() ?>\' ?'); if(a){ document.location = '?p=agendaCrud&agenda-delete=<?= $agenda->getMwIdAgenda() ?>'; };" href="#">delete</a>
     </button>
