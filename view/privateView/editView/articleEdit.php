@@ -33,17 +33,35 @@ include_once "../view/include/header.php";
         <option value="0">Non-visible</option>
     </select><br>
 
-    <label for="mw_update_picture_art">Photo:</label><br>
-    <input type="text" id="mw_update_picture_art" name="mw_update_picture_art" value="<?= $articleById->getPicture() ?>"><br>
     
     <label for="mw_update_section_mw_update_id_section">Section : </label><br>
     <input type="number" id="mw_update_section_mw_update_id_section" name="mw_update_section_mw_update_id_section" value="<?= $articleById ->getMwSectionMwIdSection() ?>"><br>
+    <hr>
     
+
+    <h3>Les  photos: </h3>
+    <?php
+    foreach($pictures as $picture) :
+    ?>
+    <label for="mw_update_pic_title_art">Titre:</label><br>
+    <input type="text" id="mw_update_pic_title_art" name="mw_update_pic_title_art[]" value="<?= $picture->getMwTitlePicture() ?>"><br>
+
+    <label for="mw_update_pic_url_art">URL:</label><br>
+    <input type="text" id="mw_update_pic_url_art" name="mw_update_pic_url_art[]" value="<?= $picture->getMwUrlPicture() ?>"><br>
+    <hr>
+
+    <!-- ajouter taille et position -->
+
+    <?php
+    endforeach;
+    var_dump($_POST['mw_update_pic_title_art']);
+    ?>
+
     <div id="add-picture-article">
         <!-- Picture fields will be added here -->
+        <button type="button" id="addPicture">Add Picture</button>
     </div><hr>
     
-    <button type="button" id="addPicture">Add Picture</button>
     <input type="submit" value="Submit">
      
 </form>

@@ -261,7 +261,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
         }  
              
         
-        // les deletes  :
+        ### LES DELETES :
         // agenda :
         if(isset($_GET['agenda-delete']) && ctype_digit($_GET['agenda-delete'])){
             $agendaId = (int) $_GET['agenda-delete']; 
@@ -382,6 +382,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             <?php 
         }
 
+
         // CATEGORY : 
         // -- METTRE LE BOUTON DANS LE CRUD DES RESSOURECES --
         if(isset($_GET['category-delete'])){
@@ -449,11 +450,53 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
                 if(isset($_GET['article-update']) && ctype_digit($_GET['article-update'])){
                     $articleId = (int) $_GET['article-update']; 
+                    $pictures = $pictureManager -> getAllByArticleId($articleId);
                     $articleById = $articleManager -> getOneById($articleId);
                     
                 }
-
                 include_once '../view/privateView/editView/articleEdit.php';
+                if(isset($_POST['mw_update_title_art'], $_POST['mw_update_content_art'], $_POST['mw_update_visible_art'], $_POST['mw_section_mw_id_section'])){        
+                    $articleUpdateMap = new MappingArticle([
+                        "mwTitleArt" => $_POST['mw_title_art'],
+                        "mwContentArt" => $_POST['mw_content_art'],
+                        "mwVisibleArt" => $_POST['mw_visible_art'],
+                        "mwSectionMwIdSection" => $_POST['mw_update_section_mw_update_id_section'],
+                        "MwIdArticle"=>$articleId
+                    ]);
+                
+                    $pictureUpdateArray = [];
+                    if (isset($_POST['mw_picture'])) {
+                        foreach ($_POST['mw_picture'] as $picture) {
+                            if (
+                                isset($picture['title'], $picture['url'], $picture['size'], $picture['position']) &&
+                                $picture['title'] !== '' &&
+                                $picture['url'] !== ''
+                            ) {
+                                $picture = new MappingPicture([
+                                    'mwTitlePicture' => $pictureData['title'],
+                                    'mwUrlPicture' => $pictureData['url'],
+                                    'mwSizePicture' => $pictureData['size'],
+                                    'mwPositionPicture' => $pictureData['position'],
+                                ]);
+                                $pictureUpdateArray[] = $picture;
+                            }
+                        }
+                    }
+                    $updateArticle = $articleManager -> updateArticleWithPic($articleUpdateMap, $pictureUpdateArray);
+                    if($updateArticle){
+                        $response = "article enregistrer !";
+                    } else {
+                        $response = "Un problème est survenu, réssayez !";
+                    }
+                    ?>
+                        <script>
+                            window.setTimeout(function() {
+                                window.location = './?p=article';
+                            }, 3000);
+                        </script>
+                    <?php
+
+                }  
             }
 
             // On permet de naviguer dans les pages publiques en étant connecté
