@@ -452,36 +452,31 @@ if(isset($_POST['login'],$_POST['pwd'])){
                     $articleId = (int) $_GET['article-update']; 
                     $pictures = $pictureManager -> getAllByArticleId($articleId);
                     $articleById = $articleManager -> getOneById($articleId);
-                    
                 }
-                include_once '../view/privateView/editView/articleEdit.php';
-                if(isset($_POST['mw_update_title_art'], $_POST['mw_update_content_art'], $_POST['mw_update_visible_art'], $_POST['mw_section_mw_id_section'])){        
+
+                if(isset($_POST['mw_update_title_art'], $_POST['mw_update_content_art'], $_POST['mw_update_visible_art'], $_POST['mw_update_section_mw_update_id_section'])){        
                     $articleUpdateMap = new MappingArticle([
-                        "mwTitleArt" => $_POST['mw_title_art'],
-                        "mwContentArt" => $_POST['mw_content_art'],
-                        "mwVisibleArt" => $_POST['mw_visible_art'],
+                        "mwTitleArt" => $_POST['mw_update_title_art'],
+                        "mwContentArt" => $_POST['mw_update_content_art'],
+                        "mwVisibleArt" => $_POST['mw_update_visible_art'],
                         "mwSectionMwIdSection" => $_POST['mw_update_section_mw_update_id_section'],
-                        "MwIdArticle"=>$articleId
+                        "MwIdArticle" => $articleId
                     ]);
                 
                     $pictureUpdateArray = [];
-                    if (isset($_POST['mw_picture'])) {
-                        foreach ($_POST['mw_picture'] as $picture) {
-                            if (
-                                isset($picture['title'], $picture['url'], $picture['size'], $picture['position']) &&
-                                $picture['title'] !== '' &&
-                                $picture['url'] !== ''
-                            ) {
-                                $picture = new MappingPicture([
-                                    'mwTitlePicture' => $pictureData['title'],
-                                    'mwUrlPicture' => $pictureData['url'],
-                                    'mwSizePicture' => $pictureData['size'],
-                                    'mwPositionPicture' => $pictureData['position'],
-                                ]);
-                                $pictureUpdateArray[] = $picture;
-                            }
-                        }
+                    foreach ($pictures as $key => $picture) {
+                        $pictureUpdateMap = new MappingPicture([
+                            'mwTitlePicture' => $_POST['mw_update_pic_title_art'][$key],
+                            'mwUrlPicture' => $_POST['mw_update_pic_url_art'][$key],
+                            'mwSizePicture' => 1,
+                            'mwPositionPicture' => 1,
+                            'mwArticleMwIdArticle'=> $articleId,
+                            'mwIdPicture'=> $picture -> getMwIdPicture()
+                        ]);
+                        $pictureUpdateArray[] = $pictureUpdateMap;  
+                        var_dump($pictureUpdateMap);                     
                     }
+                    
                     $updateArticle = $articleManager -> updateArticleWithPic($articleUpdateMap, $pictureUpdateArray);
                     if($updateArticle){
                         $response = "article enregistrer !";
@@ -489,14 +484,17 @@ if(isset($_POST['login'],$_POST['pwd'])){
                         $response = "Un problème est survenu, réssayez !";
                     }
                     ?>
-                        <script>
+                        <!-- <script>
                             window.setTimeout(function() {
                                 window.location = './?p=article';
                             }, 3000);
-                        </script>
+                        </script> -->
                     <?php
 
                 }  
+                // var_dump($pictureUpdateArray);
+                include_once '../view/privateView/editView/articleEdit.php';
+
             }
 
             // On permet de naviguer dans les pages publiques en étant connecté

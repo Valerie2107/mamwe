@@ -18,6 +18,10 @@ include_once "../view/include/header.php";
 
 <!-- le rest : -->
 
+<?php if(isset($response)) : ?>
+    <h3><?= $response ?></h3>
+<?php endif; ?>
+
 <form action="" method="POST">
     <label for="mw_update_title_art">Title:</label><br>
     <input type="text" id="mw_update_title_art" name="mw_update_title_art" value="<?= $articleById->getMwTitleArt() ?>"><br>
@@ -54,7 +58,6 @@ include_once "../view/include/header.php";
 
     <?php
     endforeach;
-    var_dump($_POST['mw_update_pic_title_art']);
     ?>
 
     <div id="add-picture-article">
