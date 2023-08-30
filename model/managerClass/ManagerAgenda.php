@@ -34,6 +34,23 @@ class ManagerAgenda implements ManagerInterface
         }
     }
 
+    public function getOneWithPic($id) {
+        $sql = "SELECT a.* , mw_picture.mw_url_picture AS picture
+        FROM mw_agenda a
+        LEFT JOIN mw_picture 
+        ON mw_picture.mw_id_picture = a.mw_picture_mw_id_picture
+        WHERE mw_id_agenda = :id";
+        $prepare = $this -> db -> prepare($sql);
+        $prepare->bindParam(':id', $id,PDO::PARAM_INT);
+        $prepare -> execute();
+        $result = $prepare -> fetch();
+        if($result){
+            return new MappingAgenda($result);
+        }else{
+            throw new Exception("cet événement $id n'existe pas" );
+        }
+    }
+
 
     public function getAll()
     {
@@ -104,7 +121,6 @@ class ManagerAgenda implements ManagerInterface
         $prepare = $this -> db -> prepare($sql);
         $prepare->bindParam(':id', $id, PDO::PARAM_INT);
         $prepare -> execute();    
-
 
         try{
             $this->db->commit();

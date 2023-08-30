@@ -50,6 +50,19 @@ class ManagerPicture implements ManagerInterface
         return $sections;
     } 
 
+    public function getAllByArticleId(int $id) {
+        $sql = "SELECT * FROM mw_picture WHERE mw_article_mw_id_article = :id";
+        $prepare = $this->db->prepare($sql);
+        $prepare -> bindValue(':id', $id, PDO::PARAM_INT);
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $sections = [];
+        foreach ($result as $row){
+            $sections[] = new MappingPicture($row);           
+        }
+        return $sections;
+    }
+
 
     public function insertPicture(MappingPicture $data){
         $sql = "INSERT INTO `mw_picture`(`mw_title_picture`, `mw_url_picture`, `mw_size_picture`, `mw_position_picture`, `mw_article_mw_id_article`) 
