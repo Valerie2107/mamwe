@@ -81,7 +81,7 @@ class ManagerSection implements ManagerInterface
         $prepareSect = $this->db->prepare($sqlSect);
         $prepareSect->bindValue(':titleSect', $dataS->getMwTitleSect(),PDO::PARAM_STR);
         $prepareSect->bindValue(':contentSect', $dataS->getMwContentSect(), PDO::PARAM_STR);
-        $prepareSect->bindValue(':visibleSect', $dataS->getMwVisible(), PDO::PARAM_INT);
+        $prepareSect->bindValue(':visibleSect', $dataS->getMwVisibleSect(), PDO::PARAM_INT);
         $prepareSect->bindValue(':pictureSect', $lastId, PDO::PARAM_INT);
         
         $prepareSect->execute();
@@ -135,7 +135,7 @@ class ManagerSection implements ManagerInterface
         $prepareSect->bindValue(':idSect', $dataS->getMwIdSect(), PDO::PARAM_INT);
         $prepareSect->bindValue(':titleSect', $dataS->getMwTitleSect(),PDO::PARAM_STR);
         $prepareSect->bindValue(':contentSect', $dataS->getMwContentSect(), PDO::PARAM_STR);
-        $prepareSect->bindValue(':visibleSect', $dataS->getMwVisible(), PDO::PARAM_INT);
+        $prepareSect->bindValue(':visibleSect', $dataS->getMwVisibleSect(), PDO::PARAM_INT);
         $prepareSect->bindValue(':idPic', $picId, PDO::PARAM_INT);
         
         $prepareSect->execute();

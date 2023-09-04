@@ -120,35 +120,36 @@ class ManagerArticle  implements ManagerInterface
 
 
     public function deleteArticle($id){
+
         $sql = "DELETE FROM mw_article WHERE mw_id_article = :id";
         $prepare = $this->db->prepare($sql);
         $prepare->bindValue(':id', $id, PDO::PARAM_INT);
         $prepare->execute();
 
         try{
-            $this->db->commit();
+            $prepare->execute();
             return true;   
         }catch(Exception $e){
-            $this->db->rollBack();
             $e->getMessage();
         }
     }
 
 
-    public function updateArticleWithPic(MappingArticle $article, MappingPicture $picture)
+    public function updateArticleWithPic(MappingArticle $article, array $pictures)
     {
+        
         $this->db->beginTransaction();
 
-        try {
-            $sql = "UPDATE mw_article SET mw_title_art = :title, mw_content_art = :content, mw_visible_art = :visible, mw_section_mw_id_section = :mw_section_mw_id_section WHERE mw_id_article = :id";
-            $prepare = $this->db->prepare($sql);
-            $prepare->bindValue(':title', $article->getMwTitleArt(), PDO::PARAM_STR);
-            $prepare->bindValue(':content', $article->getMwContentArt(), PDO::PARAM_STR);
-            $prepare->bindValue(':visible', $article->getMwVisibleArt(), PDO::PARAM_INT);
-            $prepare->bindValue(':mw_section_mw_id_section', $article->getMwSectionMwIdSection(), PDO::PARAM_INT);
-            $prepare->bindValue(':id', $article->getMwIdArticle(), PDO::PARAM_INT);
-            $prepare->execute();
-
+        $sql = "UPDATE mw_article SET mw_title_art = :title, mw_content_art = :content, mw_visible_art = :visible, mw_section_mw_id_section = :mw_section_mw_id_section WHERE mw_id_article = :id";
+        $prepare = $this->db->prepare($sql);
+        $prepare->bindValue(':title', $article->getMwTitleArt(), PDO::PARAM_STR);
+        $prepare->bindValue(':content', $article->getMwContentArt(), PDO::PARAM_STR);
+        $prepare->bindValue(':visible', $article->getMwVisibleArt(), PDO::PARAM_INT);
+        $prepare->bindValue(':mw_section_mw_id_section', $article->getMwSectionMwIdSection(), PDO::PARAM_INT);
+        $prepare->bindValue(':id', $article->getMwIdArticle(), PDO::PARAM_INT);
+        $prepare->execute();
+            
+        foreach($pictures as $picture) {
             $picsql = "UPDATE mw_picture SET mw_title_picture = :title, mw_url_picture = :url, mw_size_picture = :size, mw_position_picture = :position, mw_article_mw_id_article = :mw_article_mw_id_article WHERE mw_id_picture = :id";
             $picPrepare = $this->db->prepare($picsql);
             $picPrepare->bindValue(':title', $picture->getMwTitlePicture(), PDO::PARAM_STR);
@@ -158,9 +159,10 @@ class ManagerArticle  implements ManagerInterface
             $picPrepare->bindValue(':mw_article_mw_id_article', $article->getMwIdArticle(), PDO::PARAM_INT);
             $picPrepare->bindValue(':id', $picture->getMwIdPicture(), PDO::PARAM_INT);
             $picPrepare->execute();
-
+        }
+            
+        try {
             $this->db->commit();
-
             return $article;
         } catch (Exception $e) {
             $this->db->rollBack();

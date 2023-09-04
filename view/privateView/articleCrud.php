@@ -16,6 +16,11 @@ include_once "../view/include/header.php";
 <!-- titre -->
 <h1><?= $title ?></h1>
 
+<?php            
+    if(isset($response)){
+        echo $response;
+    }
+?>
 
 <!-- affichage des articles dans un tableau : -->
 <table>
@@ -32,19 +37,27 @@ include_once "../view/include/header.php";
         </tr>
     </thead>
     <tbody>
-            <?php foreach($allArticle as $article): ?>
-                <tr>
-                    <td><?= $article->getMwIdArticle() ?></td>
-                    <td><?= $article->getMwTitleArt() ?></td>
-                    <td><?= $article->getMwContentArt() ?></td>
-                    <td><?= $article->getPicture()?></td>
-                    <td><?= $article->getMwVisibleArt() ?></td>
-                    <td><?= $article->getMwSectionMwIdSection()?></td>
-                    <td><button>update</button></td>
-                    <td><button><a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $article->getMwTitleArt() ?>\' ?'); if(a){ document.location = '?p=article&article-delete=<?= $article->getMwIdArticle() ?>'; };" href="#">delete</a></button></td>
+    <?php foreach($allArticle as $article): ?>
+        <tr>
+            <td><?= $article->getMwIdArticle() ?></td>
+            <td><?= $article->getMwTitleArt() ?></td>
+            <td><?= $article->getMwContentArt() ?></td>
+            <td><?= $article->getPicture()?></td>
+            <td><?= $article->getMwVisibleArt() ?></td>
+            <td><?= $article->getMwSectionMwIdSection()?></td>
+            <td>
+                <button>
+                    <a href="?p=article-update&article-update=<?= $article->getMwIdArticle() ?>">update</a>
+                </button>
+            </td>
+            <td>
+                <button class="btn">
+                    <a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $article->getMwTitleArt() ?>\' ?'); if(a){ document.location = '?p=article&article-delete=<?= $article->getMwIdArticle() ?>'; };" href="#">delete</a>
+                </button>
+            </td>
+        </tr>
+    <?php endforeach; ?>
 
-                </tr>
-            <?php endforeach; ?>
     </tbody>
 </table>
 
