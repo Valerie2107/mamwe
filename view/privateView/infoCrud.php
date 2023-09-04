@@ -48,7 +48,7 @@ include_once "../view/include/header.php";
             </td>
             <td>
                 <button class="btn">
-                    <a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $info->getMwContentInfo() ?>\' ?'); if(a){ document.location = '?p=info&info-delete=<?= $info->getMwIdInfo() ?>'; };" href="#">delete</a>
+                    <a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $info->getMwIdInfo() ?>\' ?'); if(a){ document.location = '?p=info&info-delete=<?= $info->getMwIdInfo() ?>'; };" href="#">delete</a>
                 </button>
             </td>
         </tr>
@@ -56,6 +56,16 @@ include_once "../view/include/header.php";
     endif; ?>
     </tbody>
 </table>
+
+<form action="" method="POST">
+    <!-- y'a le #mytextarea pour relier à l'éditeur de text -->
+    <textarea name="info-insert-content" id="mytextarea" ></textarea>
+    <input type="text" name="info-insert-pic-title" placeholder="titre photo"><br>
+    <input type="text" name="info-insert-pic-url" placeholder="url photo"><br>
+    <input type="text" name="info-insert-pic-size" placeholder="taille"><br>
+    <input type="text" name="info-insert-pic-position" placeholder="position">
+    <input type="submit" value="envoyer">
+</form>
 
 
 <!-- FOOTER -->
