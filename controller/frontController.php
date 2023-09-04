@@ -220,7 +220,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
         // INSERT RESSOURCE :
         if(isset($_POST['ressource-insert-title'], $_POST['ressource-insert-content'], )){
-            var_dump($_POST);
             if(isset($_POST['ressource-insert-pic-title'])){
                 $pictureMap= new MappingPicture([
                     'mwTitlePicture' => $_POST['ressource-insert-pic-title'],
@@ -236,28 +235,32 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 $categMap = new MappingCategoryRessource([
                     'mwTitleCategory' => $_POST['ressource-new-categ']
                 ]);
+                $catAtttribut = 0;
             }else{
                 $categMap = null;
+                $catAtttribut = $_POST['ressource-insert-categ'];
             }
 
             if(!empty($_POST['ressource-new-subcateg'])){
                 $subCategMap = new MappingSubCategoryRessource([
                     'mwTitleSubCategory' => $_POST['ressource-new-subcateg']
                 ]);
+                $subAttribut = 0;
             }else{
                 $subCategMap = null;
+                $subAttribut = $_POST['ressource-insert-subcateg'];
             }
 
+            var_dump($_POST);
             $ressourceInsertMap = new MappingRessource([
                 'mwTitleRessource' => $_POST['ressource-insert-title'],
                 'mwContentRessource' => $_POST['ressource-insert-content'],
                 'mwUrlRessource' => $_POST['ressource-insert-url'],
                 'mwDateRessource' => $_POST['ressource-insert-date'],
-                'mwCategory' => $_POST['ressource-insert-categ'],
-                'mwSubCategory' => $_POST['ressource-insert-subcateg'],
+                'mwCategory' => $catAtttribut,
+                'mwSubCategory' => $subAttribut,
             ]);
 
-            var_dump($_POST);
             $insertRessource = $ressourceManager->insertRessource($pictureMap, $categMap, $subCategMap, $ressourceInsertMap);
             if($insertRessource){
                 $response = "Nouvelle ressource enregistrer !";

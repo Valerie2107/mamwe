@@ -151,7 +151,7 @@ class ManagerRessource implements ManagerInterface
 
 
         // On verifie si l'utilisateur a rentré une nouvelle catégorie: 
-        if(!empty($dataCateg)){
+        if(!is_null($dataCateg)){
             // si oui on insére la nouvelle catégori dans la db
             $sqlCateg = "INSERT INTO `mw_category_ressource`(`mw_title_category`) 
                         VALUES (:titleCateg)";
@@ -170,7 +170,7 @@ class ManagerRessource implements ManagerInterface
 
 
         // On verifie si l'utilisateur a rentré une nouvelle sous catégorie: 
-        if(!empty($dataSub)){
+        if(!is_null($dataSub)){
             // si oui on insére la nouvelle sous catégori dans la db
             $sqlSub = "INSERT INTO `mw_sub_category_ressource`(`mw_title_sub_category`) 
                         VALUES (:titleSub)";
@@ -181,6 +181,7 @@ class ManagerRessource implements ManagerInterface
 
             // on recupére son ID
             $lastIdSub = $this->db->lastInsertId();
+            var_dump($lastIdSub);
 
         } else {
             // si non on récupère l'ID existant dans la variable:
