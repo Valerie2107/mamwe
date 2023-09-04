@@ -215,21 +215,10 @@ if(isset($_POST['login'],$_POST['pwd'])){
             <?php
         }  
         
-        // insert patient :
-        if(isset($_POST['patient-insert-name'], $_POST['patient-insert-surname'], $_POST['patient-insert-birthdate'], $_POST['patient-insert-mail'], $_POST['patient-insert-phone'])){
-            $patientInsertMap = new MappingPatient([
-                "mwNamePatient" => $_POST['patient-insert-name'],
-                "mwSurnamePatient" => $_POST['patient-insert-surname'],
-                "mwBirthdatePatient" => $_POST['patient-insert-birthdate'],
-                "mwMailPatient" => $_POST['patient-insert-mail'],
-                "mwPhonePatient" => $_POST['patient-insert-phone'],
-            ]);
-            $insertPatient = $patientManager->insertPatient($patientInsertMap);
-        }  
-        
+
         // insert ressource :
         if(isset($_POST['insertRessource'])){
-            // je le fais plus tard parce que c'est le plus dur
+            
         } 
 
         // insert section :
@@ -437,7 +426,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 $allPatient = $patientManager->getAll();
                 include_once '../view/privateView/patientCrud.php';
             }
-            else if($_GET['p']==="ressource"){
+            else if($_GET['p']==="ressourceCrud"){
                 include_once '../view/privateView/ressourceCrud.php';
             }
             else if($_GET['p']==="section"){
