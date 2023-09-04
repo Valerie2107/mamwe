@@ -155,10 +155,11 @@ class MappingLivreDor extends MappingAbstract
         }
 
         // Crée un nouvel objet DateTime pour l'heure actuelle
-        $now = new DateTime();
+        /*$now = new DateTime();*/
 
         // Met à jour mwDateArt avec la date et l'heure actuelles, au format Y-m-d
-        $this -> mwDateLivreDor = $now->format('Y-m-d');
+        /*$this -> mwDateLivreDor = $now->format('Y-m-d');*/
+        $this -> mwDateLivreDor = $mwDateLivreDor;
 
         return $this;
     }

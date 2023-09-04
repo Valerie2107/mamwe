@@ -51,7 +51,7 @@ class ManagerLivreDor implements ManagerInterface
 
     public function getAllVisible()
     {
-        $sql = "SELECT * FROM mw_livredor WHERE mw_visible_livredor = 1";
+        $sql = "SELECT * FROM mw_livredor WHERE mw_visible_livredor = 1 ORDER BY mw_date_livredor DESC";
         $prepare = $this->db->prepare($sql);
         $prepare->execute();
         $result = $prepare->fetchAll();
@@ -64,17 +64,20 @@ class ManagerLivreDor implements ManagerInterface
 
     public function insertLivreDor(MappingLivreDor $data){
 
-        $sql = "INSERT INTO `mw_livredor`(`mw_name_livredor`, `mw_mail_livredor`, `mw_message_livredor`, `mw_date_livredor`) 
-        VALUES (:name, :mail, :message, :date)";  
+        /*$sql = "INSERT INTO `mw_livredor`(`mw_name_livredor`, `mw_mail_livredor`, `mw_message_livredor`, `mw_date_livredor`) 
+        VALUES (:name, :mail, :message, :date)"; */
+        
+        $sql = "INSERT INTO `mw_livredor`(`mw_name_livredor`, `mw_mail_livredor`, `mw_message_livredor`) 
+        VALUES (:name, :mail, :message)";
 
-        $date =  new DateTime();
-        $date = $date -> format("Y-d-m");
+        /*$date =  new DateTime();
+        $date = $date -> format("Y-d-m");*/
 
         $prepare = $this->db->prepare($sql);
         $prepare->bindValue(':name', $data->getMwNameLivreDor(), PDO::PARAM_STR);
         $prepare->bindValue(':mail', $data->getMwMailLivreDor(), PDO::PARAM_STR);
         $prepare->bindValue(':message', $data->getMwMessageLivreDor(), PDO::PARAM_STR);
-        $prepare->bindValue(':date', $date , PDO::PARAM_STR);
+        /*$prepare->bindValue(':date', $date , PDO::PARAM_STR);*/
         
         try{
             $prepare->execute();

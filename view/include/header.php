@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/homepage.css">
 
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/homepage.css">
+    <link rel="stylesheet" href="css/section.css">
     <link rel="stylesheet" href="css/livredor.css">    
     <script src="js/tinymce.js/tinymce/tinymce.min.js"></script>
         <script>
