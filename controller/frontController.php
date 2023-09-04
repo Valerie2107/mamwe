@@ -220,7 +220,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
         // INSERT RESSOURCE :
         if(isset($_POST['ressource-insert-title'], $_POST['ressource-insert-content'], )){
-            if(isset($_POST['ressource-insert-pic-title'])){
+            if(!empty($_POST['ressource-insert-pic-title'])){
                 $pictureMap= new MappingPicture([
                     'mwTitlePicture' => $_POST['ressource-insert-pic-title'],
                     'mwUrlPicture' => $_POST['ressource-insert-pic-url'],
@@ -268,11 +268,11 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 $response = "Un problème est survenu, réssayez !";
             }
             ?>
-                <!-- <script>
+                <script>
                     window.setTimeout(function() {
                         window.location = './?p=ressourceCrud';
                     }, 3000);
-                </script> -->
+                </script>
             <?php
         } 
 
