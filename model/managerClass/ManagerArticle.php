@@ -38,8 +38,10 @@ class ManagerArticle  implements ManagerInterface
 
     public function getAll()
     {
-        // requête sql + prepare + bindValue + execute + etc
-        $sql = "SELECT * FROM mw_article";
+        $sql = "SELECT a.mw_id_article, a.mw_title_art, SUBSTRING(a.mw_content_art, 1, 150) AS mw_content_art, a.mw_visible_art, a.mw_date_art, a.mw_date_art, a.mw_section_mw_id_section, GROUP_CONCAT(p.mw_id_picture, '|||' , p.mw_url_picture SEPARATOR '---') AS picture
+        FROM mw_article a 
+        LEFT JOIN mw_picture p ON p.mw_article_mw_id_article = a.mw_id_article
+        GROUP BY a.mw_id_article";
         $prepare = $this->db->prepare($sql);
         $prepare->execute();
         $result = $prepare->fetchAll();
@@ -117,14 +119,19 @@ class ManagerArticle  implements ManagerInterface
 
 
 
-    public function deleteArticle(MappingArticle $article, $id){
+    public function deleteArticle($id){
         $sql = "DELETE FROM mw_article WHERE mw_id_article = :id";
         $prepare = $this->db->prepare($sql);
         $prepare->bindValue(':id', $id, PDO::PARAM_INT);
         $prepare->execute();
 
-        $article->setMwIdArticle($this->db->lastInsertId());
-        return $article;
+        try{
+            $this->db->commit();
+            return true;   
+        }catch(Exception $e){
+            $this->db->rollBack();
+            $e->getMessage();
+        }
     }
 
 

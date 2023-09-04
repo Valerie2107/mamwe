@@ -1,5 +1,5 @@
 .picturehome{
-    width: 20%;
+    width: 15%;
     display : block ;
     margin :  auto ;  
 }
@@ -59,4 +59,9 @@
     margin-right: 700px;
     text-align: justify;
         margin-top: -30px;
+}
+
+
+main{
+    font-family: sans-serif;
 }

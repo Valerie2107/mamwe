@@ -19,10 +19,19 @@ include_once "../view/include/header.php";
 <!-- le rest : -->
 
 <!-- test du delete -->
-
-<?php 
-echo "lol";
+<?php foreach($allAgenda as $agenda): ?>
+    <h3><?= $agenda->getMwTitleAgenda(); ?></h3>
+    <p><?= $agenda->getMwTitleAgenda(); ?></p>
+    <p><?= $agenda->getMwContentAgenda(); ?></p>
+    <p><?= $agenda->getMwDateAgenda(); ?></p>
+    <button class="btn"><a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $agenda->getMwTitleAgenda() ?>\' ?'); if(a){ document.location = '?p=agendaCrud&agenda-delete=<?= $agenda->getMwIdAgenda() ?>'; };" href="#">delete</a></button>
+<?php endforeach; ?>
+<?php
+if(isset($response)){
+    echo $response;
+}
 ?>
+
 
 <!-- Formulaire primitif pour tester le Controller, démerdez vous maintenant : -->
 <form action="" method="POST">

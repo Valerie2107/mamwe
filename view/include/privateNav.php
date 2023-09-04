@@ -1,6 +1,6 @@
 <nav class="private-nav">
     <a href="?p=admin">Accueil Admin</a>
-    <a href="?p=agenda">Agenda</a>
+    <a href="?p=agendaCrud">Agenda</a>
     <a href="?p=article">Article</a>
     <a href="?p=info">Info / presentation</a>
     <a href="?p=livredor">Livre d'or</a>

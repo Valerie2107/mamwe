@@ -109,4 +109,18 @@ class ManagerPicture implements ManagerInterface
 
     }
 
+    public function deletePictureByArticleId($id){
+        $sql = "DELETE FROM `mw_picture` WHERE `mw_article_mw_id_article` = :id";
+        $prepare = $this -> db -> prepare($sql);
+        $prepare->bindParam(':id', $id, PDO::PARAM_INT);
+
+        try{
+            $prepare -> execute();    
+            return true;   
+        }catch(Exception $e){
+            $e->getMessage();
+        }
+
+    }
+
 }

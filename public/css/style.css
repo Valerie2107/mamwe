@@ -29,7 +29,13 @@ h1{
 	padding: .5em;
 	color: #048b9a;
 }
+<<<<<<< HEAD
 
+=======
+h2{
+	padding: 0.5em 0;
+}
+>>>>>>> 7950052db925d379aec11d2e70fea62262b6c85b
 .empty{      /*div vide pour faire des espaces entre différents blocs*/
     height: 2em;   
 }

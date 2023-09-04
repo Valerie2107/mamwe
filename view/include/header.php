@@ -52,6 +52,7 @@
                 endforeach;
                 ?> 
 
+                <a href="?p=agenda">Agenda</a>
                 <a href="?p=contact">Contact</a>
                 <a href="?p=ressources">Ressources</a>
                 <a href="?p=livreDor">Livre D'or</a>
