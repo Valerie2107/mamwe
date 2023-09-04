@@ -64,6 +64,8 @@ $allInfo = $infoManager->getAll();
 ### ressources : 
 $ressourceManager = new ManagerRessource($db);
 $allRessource = $ressourceManager->getAll();
+$allCategory = $ressourceManager->getAllCateg();
+$allSubCateg = $ressourceManager->getAllSubCateg();
 
 ### patient :
 $patientManager = new ManagerPatient($db);
@@ -217,8 +219,40 @@ if(isset($_POST['login'],$_POST['pwd'])){
         
 
         // insert ressource :
-        if(isset($_POST['insertRessource'])){
-            
+        if(isset($_POST['ressource-insert-title'], $_POST['ressource-insert-content'], )){
+            if(isset($_POST['ressource-insert-pic-title'])){
+                $pictureMap= new MappingPicture([]);
+            }else{
+                $pictureMap = null;
+            }
+
+            if(ctype_digit($_POST['ressource-insert-categ'])){
+                $categMap = new MappingCategoryRessource([]);
+            }else{
+                $categMap = null;
+            }
+
+            if(ctype_digit($_POST['ressource-insert-subcateg'])){
+                $subCategMap = new MappingSubCategoryRessource([]);
+            }else{
+                $subCategMap = null;
+            }
+
+            $ressourceInsertMap = new MappingRessource([]);
+
+            $insertRessource = $ressourceManager->insertRessource($pictureMap, $categMap, $subCategMap, $ressourceInsertMap);
+            if($insertRessource){
+                $response = "Nouvelle ressource enregistrer !";
+            }else{
+                $response = "Un problème est survenu, réssayez !";
+            }
+            ?>
+                <script>
+                    window.setTimeout(function() {
+                        window.location = './?p=ressourceCrud';
+                    }, 3000);
+                </script>
+            <?php
         } 
 
         // insert section :
@@ -331,22 +365,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
             <?php 
         }
 
-        // // pictures FAUT VOIR COMMENT ON RECUPERE L'ID : 
-        // if(isset($_GET['picture-delete'])){
-        //     $pictureId = (int) $_GET['picture-delete'];
-        //     $pictureById = $pictureManager-> getOneById($pictureId);
-        //     try{
-        //         $pictureDelete = $pictureManager->deletePicture($pictureId);
-        //     }catch(Exception $e){
-        //         $e -> getMessage();
-        //     }
-            
-        //     if($pictureDelete){
-        //         $response = "Photo intitulé : " . $pictureById->getMwTitlePicture() . " est effacé !";              
-        //     }else{
-        //         $response = "Un problème est survenu, réessayez !";
-        //     } 
-        // }
         
         // RESSOURCE :
         if(isset($_GET['ressource-delete'])){

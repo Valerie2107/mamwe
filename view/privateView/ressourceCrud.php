@@ -73,15 +73,37 @@ include_once "../view/include/header.php";
     </tbody>
 </table>
 
+
+<!-- Formulaire primitif pour tester le Controller, démerdez vous maintenant : -->
 <form action="" method="POST">
+    <input type="text" name="ressource-insert-title" placeholder="titre"><br>
     <!-- y'a le #mytextarea pour relier à l'éditeur de text -->
-    <textarea name="info-insert-content" id="mytextarea" ></textarea>
-    <input type="text" name="info-insert-pic-title" placeholder="titre photo"><br>
-    <input type="text" name="info-insert-pic-url" placeholder="url photo"><br>
-    <input type="text" name="info-insert-pic-size" placeholder="taille"><br>
-    <input type="text" name="info-insert-pic-position" placeholder="position">
+    <textarea name="ressource-insert-content" id="mytextarea" ></textarea>
+    <input type="text" name="ressource-insert-url" placeholder="Lien URL"><br>
+    <select name="ressource-insert-categ" id="ressource-insert-categ">
+        <?php foreach($allCategory as $category):?>
+            <option value="<?= $category->getMwIdCategory()?>">
+                <?= $category->getMwTitleCategory()?>
+            </option>
+        <?php endforeach; ?>
+        <option value="create">Nouvelle catégorie</option>
+    </select><br>
+    <select name="ressource-insert-subcateg" id="ressource-insert-subcateg">
+    <?php foreach($allSubCateg as $subCateg):?>
+            <option value="<?= $subCateg->getMwIdSubCategory() ?>">
+                <?= $subCateg->getMwTitleSubCategory() ?>
+            </option>
+        <?php endforeach; ?>
+        <option value="create">Nouvelle sous-catégorie</option>
+    </select><br>
+    <label>Photo</label><br>
+    <input type="text" name="ressource-insert-pic-title" placeholder="titre photo"><br>
+    <input type="text" name="ressource-insert-pic-url" placeholder="url photo"><br>
+    <input type="text" name="ressource-insert-pic-size" placeholder="taille"><br>
+    <input type="text" name="ressource-insert-pic-position" placeholder="position">
     <input type="submit" value="envoyer">
 </form>
+
 
 <!-- FOOTER -->
 <?php
