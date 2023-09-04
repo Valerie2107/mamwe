@@ -10,14 +10,30 @@ include_once "../view/include/header.php";
 
 <!-- HTML -->
 <main>
-<h1><?= $title ?></h1>
 
 <?php
+
 foreach ($articleBySection as $abs):  ?>
 
-<div>
-    <h2><?= $abs -> getmwTitleArt();?></h2>
-    <p><?= $abs -> getmwContentArt();?></p>
+<div><br>
+
+    <h2 class="sous-titre"><?= $abs -> getmwTitleArt();?></h2><br>
+    <p class="textsection"><?= $abs -> getmwContentArt();?></p>
+    <?php
+    $picture = $abs -> getPicture();
+     $pic = explode("|||", $picture);
+     
+
+     $img1 = explode('---',$pic[1]);
+     $img2 = explode('---',$pic[2]);
+     $img3 = explode('---',$pic[3]);
+
+     
+    ?>
+
+    <img src="<?= $img1[0]  ?>" alt="1" width="300px"><br>
+    <img src="<?= $img2[0]  ?>" alt="2" width="300px"><br>
+    <img src="<?= $img3[0]  ?>" alt="3" width="300px"><br>
     <div class="empty"></div>
     <p><?= $abs -> getmwDateArt(); ?></p>
     <div class="empty"></div>
