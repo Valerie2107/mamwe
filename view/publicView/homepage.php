@@ -11,7 +11,7 @@ include_once "../view/include/header.php";
 <!-- HTML -->
 <main>
 
-<h1><?= $title ?></h1>
+
 
 <!-- description de la madame : -->
 <div><img class="picturehome" src="<?= $allHome -> getPicture() ?>" alt=""></div>
@@ -30,7 +30,7 @@ include_once "../view/include/header.php";
             
         ?>
        
-         <img src="<?= $pic[1]  ?>"alt="2" width="300px"><br>
+         <img src="<?= $pic[1]  ?>" alt="2" width="300px"><br>
          
         </div>
        
