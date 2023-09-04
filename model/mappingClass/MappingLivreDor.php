@@ -120,7 +120,11 @@ class MappingLivreDor extends MappingAbstract
      */
     public function setMwMessageLivreDor(string $mwMessageLivreDor): self
     {
+<<<<<<< HEAD
+        if (strlen($mwMessageLivreDor) > 2500) throw new Exception("Le message est trop long");
+=======
         if (strlen($mwMessageLivreDor) > 5000) throw new Exception("Le message est trop long");
+>>>>>>> 7950052db925d379aec11d2e70fea62262b6c85b
         if (strlen($mwMessageLivreDor) < 25) throw new Exception("Le message est trop court");
         $this->mwMessageLivreDor = $mwMessageLivreDor;
 
