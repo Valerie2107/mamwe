@@ -10,6 +10,10 @@
     margin: 0 auto;
     line-height: 2.5em;
 }
+.border_livre{
+    border: solid 2px #04889a;
+    border-radius: 10px;
+}
 .lo{
     width: 70%;
     margin: 0 auto;
@@ -27,4 +31,7 @@
 }
 input, textarea{
     padding: 0.25em 0.5em;
+}
+#bouton_LO{
+    padding: 0.5em 1.5em;
 }
