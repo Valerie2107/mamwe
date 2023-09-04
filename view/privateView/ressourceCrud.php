@@ -18,7 +18,7 @@ include_once "../view/include/header.php";
 
 <!-- le rest : -->
 
-
+<?php var_dump($allRessource); ?>
 
 <!-- FOOTER -->
 <?php

@@ -55,12 +55,15 @@ $articleManager =  new ManagerArticle($db);
 
 ### Livre d'or
 $livreManager = new ManagerLivreDor($db);
+$allLivreDor = $livreManager->getAll();
 
 ### info :
 $infoManager = new ManagerInfo($db);
+$allInfo = $infoManager->getAll();
 
 ### ressources : 
 $ressourceManager = new ManagerRessource($db);
+$allRessource = $ressourceManager->getAll();
 
 ### patient :
 $patientManager = new ManagerPatient($db);
@@ -427,7 +430,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             else if($_GET['p']==="info"){
                 include_once '../view/privateView/infoCrud.php';
             }
-            else if($_GET['p']==="livredor"){
+            else if($_GET['p']==="livredorCrud"){
                 include_once '../view/privateView/livreDorCrud.php';
             }
             else if($_GET['p']==="patient"){
@@ -542,6 +545,17 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 include_once '../view/privateView/editView/articleEdit.php';
             }
 
+            else if($_GET['p']==="info-update"){
+                if(isset($_GET['info-update']) && ctype_digit($_GET['info-update'])){
+                    $infoId = (int) $_GET['info-update']; 
+                    $pictures = $pictureManager -> getAllByArticleId($infoId);
+                    $articleById = $articleManager -> getOneById($infoId);
+                    
+                }
+                include_once '../view/privateView/editView/infoEdit.php';
+            }
+
+
 
             // On permet de naviguer dans les pages publiques en étant connecté
             else if($_GET['p'] === "home"){
@@ -611,7 +625,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
     }
 
-    // navigation publique :
+    ## NAVIGATION PUBLIQUE :
     else if(isset($_GET['p'])){
 
         if($_GET['p'] === "home"){
@@ -660,9 +674,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             include_once "../view/publicView/connectView.php";
         }
         else{
-
             include_once "../view/404.php";
-            
         }
         
     }
