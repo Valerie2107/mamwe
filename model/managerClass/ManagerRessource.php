@@ -125,7 +125,7 @@ class ManagerRessource implements ManagerInterface
 
         $this->db->beginTransaction();
         
-        // on vérifie si y'a une photo insérée avec l'évenement :
+        // on vérifie si y'a une photo insérée avec la ressource :
         if(!empty($dataPic)){
 
             // si oui on insére la nouvelle photo dans la db

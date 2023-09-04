@@ -218,28 +218,46 @@ if(isset($_POST['login'],$_POST['pwd'])){
         }  
         
 
-        // insert ressource :
+        // INSERT RESSOURCE :
         if(isset($_POST['ressource-insert-title'], $_POST['ressource-insert-content'], )){
+            var_dump($_POST);
             if(isset($_POST['ressource-insert-pic-title'])){
-                $pictureMap= new MappingPicture([]);
+                $pictureMap= new MappingPicture([
+                    'mwTitlePicture' => $_POST['ressource-insert-pic-title'],
+                    'mwUrlPicture' => $_POST['ressource-insert-pic-url'],
+                    'mwSizePicture' => $_POST['ressource-insert-pic-size'],
+                    'mwPositionPicture' => $_POST['ressource-insert-pic-position'],
+                ]);
             }else{
                 $pictureMap = null;
             }
 
-            if(ctype_digit($_POST['ressource-insert-categ'])){
-                $categMap = new MappingCategoryRessource([]);
+            if(!empty($_POST['ressource-new-categ'])){
+                $categMap = new MappingCategoryRessource([
+                    'mwTitleCategory' => $_POST['ressource-new-categ']
+                ]);
             }else{
                 $categMap = null;
             }
 
-            if(ctype_digit($_POST['ressource-insert-subcateg'])){
-                $subCategMap = new MappingSubCategoryRessource([]);
+            if(!empty($_POST['ressource-new-subcateg'])){
+                $subCategMap = new MappingSubCategoryRessource([
+                    'mwTitleSubCategory' => $_POST['ressource-new-subcateg']
+                ]);
             }else{
                 $subCategMap = null;
             }
 
-            $ressourceInsertMap = new MappingRessource([]);
+            $ressourceInsertMap = new MappingRessource([
+                'mwTitleRessource' => $_POST['ressource-insert-title'],
+                'mwContentRessource' => $_POST['ressource-insert-content'],
+                'mwUrlRessource' => $_POST['ressource-insert-url'],
+                'mwDateRessource' => $_POST['ressource-insert-date'],
+                'mwCategory' => $_POST['ressource-insert-categ'],
+                'mwSubCategory' => $_POST['ressource-insert-subcateg'],
+            ]);
 
+            var_dump($_POST);
             $insertRessource = $ressourceManager->insertRessource($pictureMap, $categMap, $subCategMap, $ressourceInsertMap);
             if($insertRessource){
                 $response = "Nouvelle ressource enregistrer !";
@@ -247,11 +265,11 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 $response = "Un problème est survenu, réssayez !";
             }
             ?>
-                <script>
+                <!-- <script>
                     window.setTimeout(function() {
                         window.location = './?p=ressourceCrud';
                     }, 3000);
-                </script>
+                </script> -->
             <?php
         } 
 
@@ -386,7 +404,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             ?>
                 <script>
                     window.setTimeout(function() {
-                        window.location = './?p=ressource';
+                        window.location = './?p=ressourceCrud';
                     }, 3000);
                 </script>
             <?php 

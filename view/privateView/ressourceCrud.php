@@ -18,6 +18,51 @@ include_once "../view/include/header.php";
 
 <!-- le rest : -->
 
+<?php            
+    if(isset($response)){
+        echo $response;
+    }
+?>
+
+<!-- Formulaire primitif pour tester le Controller, démerdez vous maintenant : -->
+<form action="" method="POST">
+    <input type="text" name="ressource-insert-title" placeholder="titre"><br>
+    <!-- y'a le #mytextarea pour relier à l'éditeur de text -->
+    <textarea name="ressource-insert-content" id="mytextarea" ></textarea>
+    <input type="text" name="ressource-insert-url" placeholder="Lien URL"><br>
+    <input type="text" name="ressource-insert-date" placeholder="Date"><br>
+
+    <!-- Select pour les catégories existantes -->
+    <select name="ressource-insert-categ" id="ressource-insert-categ">
+        <option value="null"> - </option>
+        <?php foreach($allCategory as $category):?>
+            <option value="<?= $category->getMwIdCategory()?>">
+                <?= $category->getMwTitleCategory()?>
+            </option>
+        <?php endforeach; ?>
+        <option value="create">Nouvelle catégorie</option>
+    </select><br>
+
+    <!-- Select pour les sous catégories existantes -->
+    <select name="ressource-insert-subcateg" id="ressource-insert-subcateg">
+    <option value="null"> - </option>
+    <?php foreach($allSubCateg as $subCateg):?>
+            <option value="<?= $subCateg->getMwIdSubCategory() ?>">
+                <?= $subCateg->getMwTitleSubCategory() ?>
+            </option>
+        <?php endforeach; ?>
+        <option value="create">Nouvelle sous-catégorie</option>
+    </select><br>
+    <input type="text" name="ressource-new-categ" id="ressource-new-categ" placeholder="Nouvelle catégorie">
+    <input type="text" name="ressource-new-subcateg" id="ressource-new-subcateg" placeholder="Nouvelle sous-catégorie">
+    <label>Photo</label><br>
+    <input type="text" name="ressource-insert-pic-title" placeholder="titre photo"><br>
+    <input type="text" name="ressource-insert-pic-url" placeholder="url photo"><br>
+    <input type="text" name="ressource-insert-pic-size" placeholder="taille"><br>
+    <input type="text" name="ressource-insert-pic-position" placeholder="position">
+    <input type="submit" value="envoyer">
+</form>
+
 <table>
     <thead>
         <tr>
@@ -64,7 +109,7 @@ include_once "../view/include/header.php";
             </td>
             <td>
                 <button class="btn">
-                    <a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $ressource->getMwIdRessource() ?>\' ?'); if(a){ document.location = '?p=ressource&ressource-delete=<?= $ressource->getMwIdRessource() ?>'; };" href="#">delete</a>
+                    <a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $ressource->getMwIdRessource() ?>\' ?'); if(a){ document.location = '?p=ressourceCrud&ressource-delete=<?= $ressource->getMwIdRessource() ?>'; };" href="#">delete</a>
                 </button>
             </td>
         </tr>
@@ -74,35 +119,7 @@ include_once "../view/include/header.php";
 </table>
 
 
-<!-- Formulaire primitif pour tester le Controller, démerdez vous maintenant : -->
-<form action="" method="POST">
-    <input type="text" name="ressource-insert-title" placeholder="titre"><br>
-    <!-- y'a le #mytextarea pour relier à l'éditeur de text -->
-    <textarea name="ressource-insert-content" id="mytextarea" ></textarea>
-    <input type="text" name="ressource-insert-url" placeholder="Lien URL"><br>
-    <select name="ressource-insert-categ" id="ressource-insert-categ">
-        <?php foreach($allCategory as $category):?>
-            <option value="<?= $category->getMwIdCategory()?>">
-                <?= $category->getMwTitleCategory()?>
-            </option>
-        <?php endforeach; ?>
-        <option value="create">Nouvelle catégorie</option>
-    </select><br>
-    <select name="ressource-insert-subcateg" id="ressource-insert-subcateg">
-    <?php foreach($allSubCateg as $subCateg):?>
-            <option value="<?= $subCateg->getMwIdSubCategory() ?>">
-                <?= $subCateg->getMwTitleSubCategory() ?>
-            </option>
-        <?php endforeach; ?>
-        <option value="create">Nouvelle sous-catégorie</option>
-    </select><br>
-    <label>Photo</label><br>
-    <input type="text" name="ressource-insert-pic-title" placeholder="titre photo"><br>
-    <input type="text" name="ressource-insert-pic-url" placeholder="url photo"><br>
-    <input type="text" name="ressource-insert-pic-size" placeholder="taille"><br>
-    <input type="text" name="ressource-insert-pic-position" placeholder="position">
-    <input type="submit" value="envoyer">
-</form>
+
 
 
 <!-- FOOTER -->
