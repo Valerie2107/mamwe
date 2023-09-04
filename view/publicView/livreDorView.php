@@ -14,7 +14,7 @@ include_once "../view/include/header.php";
 <main>
     <h1><?= $title ?></h1>
     <div class="empty"></div>
-    <p class="intro">N'hésitez pas à me laisser un petit message</p>
+    <p class="intro">Laissez-moi un petit message</p>
     <div class="empty"></div>
     <section class="container">
        
@@ -28,12 +28,12 @@ include_once "../view/include/header.php";
     </section>
     <div class="empty"></div>
 
-    <?php  foreach($allLivreDor as $lo): ?>
+    <?php foreach($allLivreDor as $lo): ?>
         <div class="lo">
             <p>  
-                <?= $lo ->getmwMessageLivreDor(); ?>    <br>
+                <?= $lo ->getMwMessageLivreDor(); ?>    <br>
                 <?= $lo ->getMwNameLivreDor(); ?>       <br>
-                <?= $lo ->getmwDateLivreDor(); ?>
+                <?= $lo ->getMwDateLivreDor(); ?>
             </p>
             <br>
         </div>
