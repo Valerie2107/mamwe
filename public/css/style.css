@@ -48,7 +48,7 @@ h2{
 */
 
 
-#btt {
+#btt {    		/*bouton Back To Top */
 	color: #0c0c0cc5;
 	background-color: white;
 	font-style: italic;
@@ -65,12 +65,3 @@ h2{
 	outline: none; 
 	cursor: pointer;
 }
-
-
-
-
-
-
-
-
-
