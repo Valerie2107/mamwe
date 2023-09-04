@@ -318,7 +318,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
 
         // info :
-        if(isset($_GET['info-delete'])){
+        if(isset($_GET['info-delete']) && ctype_digit($_GET['info-delete'])){
             $infoId = (int) $_GET['info-delete'];
             $infoById = $infoManager -> getOneById($infoId);
             try{
@@ -492,7 +492,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
                     </script>
                     <?php
                 }
-                var_dump($pictureUpdateMap, $agendaUpdateMap);
                 include_once "../view/privateView/editView/agendaEdit.php";
             }
             
@@ -548,9 +547,42 @@ if(isset($_POST['login'],$_POST['pwd'])){
             else if($_GET['p']==="info-update"){
                 if(isset($_GET['info-update']) && ctype_digit($_GET['info-update'])){
                     $infoId = (int) $_GET['info-update']; 
-                    $pictures = $pictureManager -> getAllByArticleId($infoId);
-                    $articleById = $articleManager -> getOneById($infoId);
+                    $pictures = $pictureManager -> getOneById($infoId);
+                    $infoById = $infoManager->getOneById($infoId);
                     
+                }
+                if(isset($_POST['mw_update_date_info'], $_POST['mw_update_content_info'])){
+                    
+                    $pictureUpdateMap = new MappingPicture([
+                        'mwTitlePicture' => $_POST['mw_update_title_pic'],
+                        'mwUrlPicture' => $_POST['mw_update_url_pic'],
+                        'mwSizePicture' => $_POST['mw_update_size_pic'],
+                        'mwPositionPicture' => $_POST['mw_update_position_pic'],
+                        'mwIdPicture' =>  $pictures -> getMwIdPicture(),
+                    ]);
+
+                    $infoUpdateMap = new MappingInfo([
+                        'mwDateInfo' => $_POST['mw_update_date_info'],
+                        'mwContentInfo' => $_POST['mw_update_content_info'],
+                        'mwPictureMwIdPicture' => $pictures-> getMwIdPicture(),
+                        'mwIdInfo' => $infoId,
+                    ]);
+
+                    $updateInfo = $infoManager -> updateInfo($pictureUpdateMap, $infoUpdateMap);
+
+                    if($updateInfo){
+                        $response = "Information mis à jour !";
+                    } else {
+                        $response = "Un problème est survenu, réssayez !";
+                    }
+
+                    ?>
+                    <script>
+                        window.setTimeout(function() {
+                            window.location = './?p=info';
+                        }, 3000);
+                    </script>
+                    <?php
                 }
                 include_once '../view/privateView/editView/infoEdit.php';
             }
