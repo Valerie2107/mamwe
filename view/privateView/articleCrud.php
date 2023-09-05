@@ -65,28 +65,28 @@ include_once "../view/include/header.php";
 
 <h3>Ajout d'articles : </h3>
 <form action="" method="POST" id="insert-article">
-        <label for="mw_title_art">Title:</label><br>
-        <input type="text" id="mw_title_art" name="mw_title_art"><br>
+    <label for="mw_title_art">Title:</label><br>
+    <input type="text" id="mw_title_art" name="mw_title_art"><br>
 
-        <label for="mw_content_art">Content:</label><br>
-        <textarea id="mw_content_art" name="mw_content_art" ></textarea><br>
+    <label for="mw_content_art">Content:</label><br>
+    <textarea id="mw_content_art" name="mw_content_art" ></textarea><br>
 
-        <label for="mw_visible_art">Visible:</label><br>
-        <select id="mw_visible_art" name="mw_visible_art">
-            <option value="1">Visible</option>
-            <option value="0">Non-visible</option>
-        </select><br>
+    <label for="mw_visible_art">Visible:</label><br>
+    <select id="mw_visible_art" name="mw_visible_art">
+        <option value="1">Visible</option>
+        <option value="0">Non-visible</option>
+    </select><br>
 
-        <label for="mw_section_mw_id_section">Section : </label><br>
-        <input type="number" id="mw_section_mw_id_section" name="mw_section_mw_id_section"><br>
+    <label for="mw_section_mw_id_section">Section : </label><br>
+    <input type="number" id="mw_section_mw_id_section" name="mw_section_mw_id_section"><br>
 
-        <div id="add-picture-article">
-            <!-- Picture fields will be added here -->
-        </div><hr>
+    <div id="add-picture-article">
+        <!-- Picture fields will be added here -->
+    </div><hr>
 
-        <button type="button" id="addPicture">Add Picture</button>
-        <input type="submit" value="Submit">
-    </form>
+    <button type="button" id="addPicture">Add Picture</button>
+    <input type="submit" value="Submit">
+</form>
 
 
 <!-- FOOTER -->

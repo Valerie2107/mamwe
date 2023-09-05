@@ -105,9 +105,9 @@ class MappingRessource extends MappingAbstract {
     /**
      * Get the value of mwUrlRessource
      *
-     * @return string
+     * @return ?string
      */
-    public function getMwUrlRessource(): string
+    public function getMwUrlRessource() : ?string
     {
         return $this->mwUrlRessource;
     }
