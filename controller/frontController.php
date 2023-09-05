@@ -394,7 +394,9 @@ if(isset($_POST['login'],$_POST['pwd'])){
             $ressourceById = $ressourceManager -> getOneById($ressourceId);
             try{
                 $ressourceDelete = $ressourceManager -> deleteressource($ressourceId);
-                $pictureDelete = $pictureManager->deletePicture($ressourceById->getMwPictureMwIdPicture());
+                if(!empty($ressourceById->getMwPictureMwIdPicture())){
+                    $pictureDelete = $pictureManager->deletePicture($picId);
+                }
             }catch(Exception $e){
                 $e -> getMessage();
             }
