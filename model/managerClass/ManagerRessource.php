@@ -211,36 +211,41 @@ class ManagerRessource implements ManagerInterface
         }
     }
 
-    public function updateRessource(MappingPicture $dataP, MappingCategoryRessource $dataC, MappingSubCategoryRessource $dataS, MappingRessource $dataR){
+    public function updateRessource(MappingRessource $dataR, MappingPicture $dataP = null ){
 
         $this->db->beginTransaction();
         
         // update pic
-        $sqlPic = "UPDATE `mw_picture` 
-                    SET `mw_title_picture`= :titlePic ,`mw_url_picture`= :urlPic, `mw_size_picture`= :sizePic, `mw_position_picture`= :positionPic 
-                    WHERE `mw_id_picture`= :idPic";      
-        $preparePic = $this->db->prepare($sqlPic);
-        $preparePic->bindValue(':titlePic', $dataP->getMwTitlePicture(),PDO::PARAM_STR);
-        $preparePic->bindValue(':urlPic', $dataP->getMwUrlPicture(),PDO::PARAM_STR);
-        $preparePic->bindValue(':sizePic', $dataP->getMwSizePicture(), PDO::PARAM_INT);
-        $preparePic->bindValue(':positionPic', $dataP->getMwPositionPicture(), PDO::PARAM_INT);
-        $preparePic->bindValue(':idPic', $dataP->getMwIdPicture(), PDO::PARAM_INT);
-        $preparePic->execute();
+        if(!is_null($dataP)){
+            $sqlPic = "UPDATE `mw_picture` 
+                        SET `mw_title_picture`= :titlePic ,`mw_url_picture`= :urlPic, `mw_size_picture`= :sizePic, `mw_position_picture`= :positionPic 
+                        WHERE `mw_id_picture`= :idPic";      
+            $preparePic = $this->db->prepare($sqlPic);
+            $preparePic->bindValue(':titlePic', $dataP->getMwTitlePicture(),PDO::PARAM_STR);
+            $preparePic->bindValue(':urlPic', $dataP->getMwUrlPicture(),PDO::PARAM_STR);
+            $preparePic->bindValue(':sizePic', $dataP->getMwSizePicture(), PDO::PARAM_INT);
+            $preparePic->bindValue(':positionPic', $dataP->getMwPositionPicture(), PDO::PARAM_INT);
+            $preparePic->bindValue(':idPic', $dataP->getMwIdPicture(), PDO::PARAM_INT);
+            $preparePic->execute();
+
+            $picId = $dataP -> getMwIdPicture();
+        } 
+
 
         // update category :
-        $sqlCateg = "UPDATE `mw_category_ressource` 
-                    SET `mw_title_category`=:titleCateg WHERE `mw_id_category`= :idCateg";
-        $prepareCateg = $this->db->prepare($sqlCateg);
-        $prepareCateg->bindValue(':titleCateg', $dataC->getMwTitleCategory(), PDO::PARAM_STR);
-        $prepareCateg->bindValue(':idCateg', $dataC->getMwIdCategory(), PDO::PARAM_INT);
-        $prepareCateg->execute();
+        // $sqlCateg = "UPDATE `mw_category_ressource` 
+        //             SET `mw_title_category`=:titleCateg WHERE `mw_id_category`= :idCateg";
+        // $prepareCateg = $this->db->prepare($sqlCateg);
+        // $prepareCateg->bindValue(':titleCateg', $dataC->getMwTitleCategory(), PDO::PARAM_STR);
+        // $prepareCateg->bindValue(':idCateg', $dataC->getMwIdCategory(), PDO::PARAM_INT);
+        // $prepareCateg->execute();
         
-        // update subCategory :
-        $sqlSub = "UPDATE `mw_sub_category_ressource` SET `mw_title_sub_category`=:titleCateg WHERE `mw_id_sub_category`= :idCateg";
-        $prepareSub = $this->db->prepare($sqlSub);
-        $prepareSub->bindValue(':titleCateg', $dataS->getMwTitleSubCategory(), PDO::PARAM_STR);
-        $prepareSub->bindValue(':idCateg', $dataS->getMwIdSubCategory(), PDO::PARAM_INT);
-        $prepareSub->execute();
+        // // update subCategory :
+        // $sqlSub = "UPDATE `mw_sub_category_ressource` SET `mw_title_sub_category`=:titleCateg WHERE `mw_id_sub_category`= :idCateg";
+        // $prepareSub = $this->db->prepare($sqlSub);
+        // $prepareSub->bindValue(':titleCateg', $dataS->getMwTitleSubCategory(), PDO::PARAM_STR);
+        // $prepareSub->bindValue(':idCateg', $dataS->getMwIdSubCategory(), PDO::PARAM_INT);
+        // $prepareSub->execute();
 
         // update ressource : 
         $sqlress = "UPDATE `mw_ressource` 
@@ -251,9 +256,9 @@ class ManagerRessource implements ManagerInterface
         $prepareRess->bindValue(':contentRess', $dataR->getMwContentRessource(), PDO::PARAM_STR);
         $prepareRess->bindValue(':urlRess', $dataR->getMwUrlRessource(), PDO::PARAM_STR);
         $prepareRess->bindValue(':dateRess', $dataR->getMwDateRessource(), PDO::PARAM_STR);
-        $prepareRess->bindValue(':categRess', $dataC->getMwIdCategory(), PDO::PARAM_INT);
-        $prepareRess->bindValue(':subRess', $dataS->getMwIdSubCategory(), PDO::PARAM_INT);
-        $prepareRess->bindValue(':picRess', $dataP->getMwIdPicture(), PDO::PARAM_INT);
+        $prepareRess->bindValue(':categRess', $dataR->getMwCategory(), PDO::PARAM_INT);
+        $prepareRess->bindValue(':subRess', $dataR->getMwSubCategory(), PDO::PARAM_INT);
+        $prepareRess->bindValue(':picRess', $dataR -> getMwPictureMwIdPicture(), PDO::PARAM_INT); 
         $prepareRess->bindValue(':idRess', $dataR-> getMwIdRessource(), PDO::PARAM_INT);
         $prepareRess->execute();
 

@@ -574,11 +574,12 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 include_once '../view/privateView/editView/articleEdit.php';
             }
 
+            // INFO UPDATE
             else if($_GET['p']==="info-update"){
                 if(isset($_GET['info-update']) && ctype_digit($_GET['info-update'])){
                     $infoId = (int) $_GET['info-update']; 
-                    $pictures = $pictureManager -> getOneById($infoId);
                     $infoById = $infoManager->getOneById($infoId);
+                    $pictures = $pictureManager -> getOneById($infoById->getMwPictureMwIdPicture());
                     
                 }
                 if(isset($_POST['mw_update_date_info'], $_POST['mw_update_content_info'])){
@@ -617,6 +618,80 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 include_once '../view/privateView/editView/infoEdit.php';
             }
 
+            // UPDATE RESSOURCE 
+            else if($_GET['p'] == 'ressource-update'){
+                if(isset($_GET['ressource-update']) && ctype_digit($_GET['ressource-update'])){
+                    $ressourceId = (int) $_GET['ressource-update']; 
+                    $ressourceById = $ressourceManager->getOneById($ressourceId);
+                    if(!empty($ressourceById->getMwPictureMwIdPicture())){
+                        $pictureById = $pictureManager -> getOneById($ressourceById->getMwPictureMwIdPicture());
+                    }
+
+                    if(isset($_POST['mw_update_title_ressource'], $_POST['mw_update_content_ressource'],$_POST['mw_update_url_ressource'], $_POST['mw_update_date_ressource'])){
+                        if(!empty($pictureById)){
+                            $pictureUpdateMap = new MappingPicture([
+                                'mwTitlePicture' => $_POST['mw_update_title_pic'],
+                                'mwUrlPicture' => $_POST['mw_update_url_pic'],
+                                'mwSizePicture' => $_POST['mw_update_size_pic'],
+                                'mwPositionPicture' => $_POST['mw_update_position_pic'],
+                                'mwIdPicture' =>  $pictureById -> getMwIdPicture(),
+                            ]);
+                            $idPic = $pictureById -> getMwIdPicture();
+                        } else {
+                            $idPic = null;
+                            $pictureUpdateMap = null;
+
+                        }
+
+                        if(isset($_POST['mw_insert_title_pic'], $_POST['mw_insert_url_pic'], $_POST['mw_insert_size_pic'], $_POST['mw_insert_position_pic'])){
+                            $pictureInsertMap = new MappingPicture([
+                                'mwTitlePicture' => $_POST['mw_insert_title_pic'],
+                                'mwUrlPicture' => $_POST['mw_insert_url_pic'],
+                                'mwSizePicture' => $_POST['mw_insert_size_pic'],
+                                'mwPositionPicture' => $_POST['mw_insert_position_pic'],
+                                'mwArticleMwIdArticle' => null,
+                            ]);
+                            $pictureManager -> insertPicture($pictureInsertMap);
+                            $idPic = $db->lastInsertId();
+                        }    
+
+                        // $categoryUpdateMap = new MappingCategoryRessource([
+                             
+                        // ]);
+
+                        // $subUpdateMap = new MappingSubCategoryRessource([
+
+                        // ]);
+
+                        $ressourceUpdateMap = new MappingRessource([
+                            'mwTitleRessource' => $_POST['mw_update_title_ressource'],
+                            'mwContentRessource' => $_POST['mw_update_content_ressource'],
+                            'mwUrlRessource' => $_POST['mw_update_url_ressource'],
+                            'mwDateRessource' => $_POST['mw_update_date_ressource'],
+                            'mwCategory' => $_POST['mw_update_category_ressource'],
+                            'mwSubCategory' => $_POST['mw_update_sub_ressource'],
+                            'mwPictureMwIdPicture' => (is_null($idPic)) ? 0 : $idPic,
+                            'mwIdRessource' => $ressourceById->getMwIdRessource(),
+                        ]);
+
+                        $updateRessource = $ressourceManager -> updateRessource( $ressourceUpdateMap, $pictureUpdateMap);
+    
+                        if($updateRessource){
+                            $response = "Ressource mis à jour !";
+                        } else {
+                            $response = "Un problème est survenu, réssayez !";
+                        }
+                        ?>
+                        <!-- <script>
+                            window.setTimeout(function() {
+                                window.location = './?p=ressourceCrud';
+                            }, 3000);
+                        </script> -->
+                        <?php
+                    }
+                    include_once '../view/privateView/editView/ressourceEdit.php';
+                }
+            }
 
 
             // On permet de naviguer dans les pages publiques en étant connecté
