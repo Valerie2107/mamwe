@@ -55,12 +55,17 @@ $articleManager =  new ManagerArticle($db);
 
 ### Livre d'or
 $livreManager = new ManagerLivreDor($db);
+$allLivreDor = $livreManager->getAll();
 
 ### info :
 $infoManager = new ManagerInfo($db);
+$allInfo = $infoManager->getAll();
 
 ### ressources : 
 $ressourceManager = new ManagerRessource($db);
+$allRessource = $ressourceManager->getAll();
+$allCategory = $ressourceManager->getAllCateg();
+$allSubCateg = $ressourceManager->getAllSubCateg();
 
 ### patient :
 $patientManager = new ManagerPatient($db);
@@ -212,21 +217,63 @@ if(isset($_POST['login'],$_POST['pwd'])){
             <?php
         }  
         
-        // insert patient :
-        if(isset($_POST['patient-insert-name'], $_POST['patient-insert-surname'], $_POST['patient-insert-birthdate'], $_POST['patient-insert-mail'], $_POST['patient-insert-phone'])){
-            $patientInsertMap = new MappingPatient([
-                "mwNamePatient" => $_POST['patient-insert-name'],
-                "mwSurnamePatient" => $_POST['patient-insert-surname'],
-                "mwBirthdatePatient" => $_POST['patient-insert-birthdate'],
-                "mwMailPatient" => $_POST['patient-insert-mail'],
-                "mwPhonePatient" => $_POST['patient-insert-phone'],
+
+        // INSERT RESSOURCE :
+        if(isset($_POST['ressource-insert-title'], $_POST['ressource-insert-content'], )){
+            if(!empty($_POST['ressource-insert-pic-title'])){
+                $pictureMap= new MappingPicture([
+                    'mwTitlePicture' => $_POST['ressource-insert-pic-title'],
+                    'mwUrlPicture' => $_POST['ressource-insert-pic-url'],
+                    'mwSizePicture' => $_POST['ressource-insert-pic-size'],
+                    'mwPositionPicture' => $_POST['ressource-insert-pic-position'],
+                ]);
+            }else{
+                $pictureMap = null;
+            }
+
+            if(!empty($_POST['ressource-new-categ'])){
+                $categMap = new MappingCategoryRessource([
+                    'mwTitleCategory' => $_POST['ressource-new-categ']
+                ]);
+                $catAtttribut = 0;
+            }else{
+                $categMap = null;
+                $catAtttribut = $_POST['ressource-insert-categ'];
+            }
+
+            if(!empty($_POST['ressource-new-subcateg'])){
+                $subCategMap = new MappingSubCategoryRessource([
+                    'mwTitleSubCategory' => $_POST['ressource-new-subcateg']
+                ]);
+                $subAttribut = 0;
+            }else{
+                $subCategMap = null;
+                $subAttribut = $_POST['ressource-insert-subcateg'];
+            }
+
+            var_dump($_POST);
+            $ressourceInsertMap = new MappingRessource([
+                'mwTitleRessource' => $_POST['ressource-insert-title'],
+                'mwContentRessource' => $_POST['ressource-insert-content'],
+                'mwUrlRessource' => $_POST['ressource-insert-url'],
+                'mwDateRessource' => $_POST['ressource-insert-date'],
+                'mwCategory' => $catAtttribut,
+                'mwSubCategory' => $subAttribut,
             ]);
-            $insertPatient = $patientManager->insertPatient($patientInsertMap);
-        }  
-        
-        // insert ressource :
-        if(isset($_POST['insertRessource'])){
-            // je le fais plus tard parce que c'est le plus dur
+
+            $insertRessource = $ressourceManager->insertRessource($pictureMap, $categMap, $subCategMap, $ressourceInsertMap);
+            if($insertRessource){
+                $response = "Nouvelle ressource enregistrer !";
+            }else{
+                $response = "Un problème est survenu, réssayez !";
+            }
+            ?>
+                <script>
+                    window.setTimeout(function() {
+                        window.location = './?p=ressourceCrud';
+                    }, 3000);
+                </script>
+            <?php
         } 
 
         // insert section :
@@ -315,7 +362,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
 
         // info :
-        if(isset($_GET['info-delete'])){
+        if(isset($_GET['info-delete']) && ctype_digit($_GET['info-delete'])){
             $infoId = (int) $_GET['info-delete'];
             $infoById = $infoManager -> getOneById($infoId);
             try{
@@ -339,22 +386,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
             <?php 
         }
 
-        // // pictures FAUT VOIR COMMENT ON RECUPERE L'ID : 
-        // if(isset($_GET['picture-delete'])){
-        //     $pictureId = (int) $_GET['picture-delete'];
-        //     $pictureById = $pictureManager-> getOneById($pictureId);
-        //     try{
-        //         $pictureDelete = $pictureManager->deletePicture($pictureId);
-        //     }catch(Exception $e){
-        //         $e -> getMessage();
-        //     }
-            
-        //     if($pictureDelete){
-        //         $response = "Photo intitulé : " . $pictureById->getMwTitlePicture() . " est effacé !";              
-        //     }else{
-        //         $response = "Un problème est survenu, réessayez !";
-        //     } 
-        // }
         
         // RESSOURCE :
         if(isset($_GET['ressource-delete'])){
@@ -376,7 +407,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             ?>
                 <script>
                     window.setTimeout(function() {
-                        window.location = './?p=ressource';
+                        window.location = './?p=ressourceCrud';
                     }, 3000);
                 </script>
             <?php 
@@ -427,14 +458,14 @@ if(isset($_POST['login'],$_POST['pwd'])){
             else if($_GET['p']==="info"){
                 include_once '../view/privateView/infoCrud.php';
             }
-            else if($_GET['p']==="livredor"){
+            else if($_GET['p']==="livredorCrud"){
                 include_once '../view/privateView/livreDorCrud.php';
             }
             else if($_GET['p']==="patient"){
                 $allPatient = $patientManager->getAll();
                 include_once '../view/privateView/patientCrud.php';
             }
-            else if($_GET['p']==="ressource"){
+            else if($_GET['p']==="ressourceCrud"){
                 include_once '../view/privateView/ressourceCrud.php';
             }
             else if($_GET['p']==="section"){
@@ -489,7 +520,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
                     </script>
                     <?php
                 }
-                var_dump($pictureUpdateMap, $agendaUpdateMap);
                 include_once "../view/privateView/editView/agendaEdit.php";
             }
             
@@ -541,6 +571,50 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 // var_dump($pictureUpdateArray);
                 include_once '../view/privateView/editView/articleEdit.php';
             }
+
+            else if($_GET['p']==="info-update"){
+                if(isset($_GET['info-update']) && ctype_digit($_GET['info-update'])){
+                    $infoId = (int) $_GET['info-update']; 
+                    $pictures = $pictureManager -> getOneById($infoId);
+                    $infoById = $infoManager->getOneById($infoId);
+                    
+                }
+                if(isset($_POST['mw_update_date_info'], $_POST['mw_update_content_info'])){
+                    
+                    $pictureUpdateMap = new MappingPicture([
+                        'mwTitlePicture' => $_POST['mw_update_title_pic'],
+                        'mwUrlPicture' => $_POST['mw_update_url_pic'],
+                        'mwSizePicture' => $_POST['mw_update_size_pic'],
+                        'mwPositionPicture' => $_POST['mw_update_position_pic'],
+                        'mwIdPicture' =>  $pictures -> getMwIdPicture(),
+                    ]);
+
+                    $infoUpdateMap = new MappingInfo([
+                        'mwDateInfo' => $_POST['mw_update_date_info'],
+                        'mwContentInfo' => $_POST['mw_update_content_info'],
+                        'mwPictureMwIdPicture' => $pictures-> getMwIdPicture(),
+                        'mwIdInfo' => $infoId,
+                    ]);
+
+                    $updateInfo = $infoManager -> updateInfo($pictureUpdateMap, $infoUpdateMap);
+
+                    if($updateInfo){
+                        $response = "Information mis à jour !";
+                    } else {
+                        $response = "Un problème est survenu, réssayez !";
+                    }
+
+                    ?>
+                    <script>
+                        window.setTimeout(function() {
+                            window.location = './?p=info';
+                        }, 3000);
+                    </script>
+                    <?php
+                }
+                include_once '../view/privateView/editView/infoEdit.php';
+            }
+
 
 
             // On permet de naviguer dans les pages publiques en étant connecté
@@ -611,7 +685,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
     }
 
-    // navigation publique :
+    ## NAVIGATION PUBLIQUE :
     else if(isset($_GET['p'])){
 
         if($_GET['p'] === "home"){
@@ -660,9 +734,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             include_once "../view/publicView/connectView.php";
         }
         else{
-
             include_once "../view/404.php";
-            
         }
         
     }
