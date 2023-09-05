@@ -53,12 +53,13 @@ class ManagerArticle  implements ManagerInterface
     }
 
 
+
     public function getAllArticlesWithPictures(int $section_id)
     {
         $sql = "SELECT a.*, GROUP_CONCAT(p.mw_id_picture, '|||' , p.mw_url_picture SEPARATOR '---') AS picture
             FROM mw_article a 
             LEFT JOIN mw_picture p ON p.mw_article_mw_id_article = a.mw_id_article
-            WHERE a.mw_section_mw_id_section = :section_id
+            WHERE a.mw_section_mw_id_section = :section_id AND a.mw_visible_art = 1
             GROUP BY a.mw_id_article";
 
         $prepare = $this->db->prepare($sql);
