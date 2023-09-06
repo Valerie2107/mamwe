@@ -27,11 +27,11 @@ use model\managerClass\ManagerRessource;
 use model\managerClass\ManagerSection;
 use model\managerClass\ManagerUser;
 use DateTime as Date;
-
 ### VARIABLE DATE ############################
 $currentDate = new Date();
 $currentDate = $currentDate->format("Y-d-m");
 #############################################
+
 
 ############# INSTANCIATION DE MANAGERS ##################
 
@@ -760,6 +760,42 @@ if(isset($_POST['login'],$_POST['pwd'])){
                     }
                     include_once '../view/privateView/editView/ressourceEdit.php';
                 }
+            }
+
+            // HOMEPAGE UPDATE:
+            if(isset($_POST['mw_update_home'], $_POST['mw_update_pic_home'])){
+                $homeId = $allHome->getMwIdHomepage();
+                $pictureById = $pictureManager->getOneById($allHome->getMwPictureMwIdPicture());
+
+                $updatePicMap = new MappingPicture([
+                    'mwUrlPicture' => $_POST['mw_update_pic_home'],
+                    'mwSizePicture' => $pictureById->getMwSizePicture(),
+                    'mwPositionPicture' => $pictureById->getMwPositionPicture(),
+                    'mwIdPicture' =>$pictureById->getMwIdPicture(),
+                ]);
+
+                $updateHomeMap = new MappingHomepage([
+                    'mwContentHomepage' => $_POST['mw_update_home'],
+                    'mwDateHomepage' => $currentDate,
+                    'mwPictureMwIdPicture' => $pictureById->getMwIdPicture(),
+                    'mwIdHomepage' => $homeId,
+                ]);
+
+                $updateHome = $homeManager->updateHomepage($updatePicMap, $updateHomeMap);
+
+                if($updateHome){
+                    $response = "presentation mise à jour ";
+                }else{
+                    $response = "Un problèmes est survenu réessayez !";
+                }
+
+                ?>
+                    <script>
+                        window.setTimeout(function() {
+                            window.location = './?p=user';
+                        }, 3000);
+                    </script>
+                <?php
             }
 
 
