@@ -5,7 +5,7 @@ $title = "Livre D'or";
 
 // HEAD + HEADER + NAVBAR
 include_once "../view/include/header.php";
-
+// var_dump($allLivreDor);
 ?>
 
 <!-- HTML -->
@@ -16,9 +16,37 @@ include_once "../view/include/header.php";
 <!-- titre -->
 <h1><?= $title ?></h1>
 
+<!-- Message erreur ou validation des actions : -->
+<?php if (isset($response)): ?>
+    <h4><?= $response ?></h4>
+<?php endif; ?> 
+
 <!-- le rest : -->
 
-<?php var_dump($allLivreDor); ?>
+<?php if(!empty($allLivreDor)) :?>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom et/ou présnom </th>
+                <th>E-mail</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>Effacer</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach($allLivreDor as $message): ?>
+            <tr>
+                <td><?= $message->getMwNameLivreDor() ?></td>
+                <td><?= $message->getMwMailLivreDor() ?></td>
+                <td><?= $message->getMwMessageLivreDor() ?></td>
+                <td><?= $message->getMwDateLivreDor() ?></td>
+                <td><button><a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $message -> getMwNameLivreDor() ?>\' ?'); if(a){ document.location = '?p=livredorCrud&message-delete=<?= $message -> getMwIdLivreDor() ?>'; };" href="#">Effacer</a></button></td>
+            </tr>
+        <?php endforeach; ?> 
+        </tbody>
+    </table>
+<?php endif; ?>
 
 <!-- FOOTER -->
 <?php

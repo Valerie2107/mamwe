@@ -14,6 +14,9 @@ include_once "../view/include/header.php";
 <main>
     <h1><?= $title ?></h1>
     <div class="empty"></div>
+    <?php if(isset($response)):?>
+        <h4><?= $response; ?></h4>
+    <?php endif ?>
     <p class="intro">Laissez-moi un petit message</p>
     <div class="empty"></div>
     <section class="container">

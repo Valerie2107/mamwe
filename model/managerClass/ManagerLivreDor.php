@@ -62,6 +62,19 @@ class ManagerLivreDor implements ManagerInterface
         return $livre;
     } 
 
+    public function getNewMassage()
+    {
+        $sql = "SELECT * FROM mw_livredor WHERE mw_visible_livredor = 0 ORDER BY mw_date_livredor DESC";
+        $prepare = $this->db->prepare($sql);
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $livre = [];
+        foreach ($result as $row){
+            $livre[] = new MappingLivreDor($row);               
+        }
+        return $livre;
+    } 
+
     public function insertLivreDor(MappingLivreDor $data){
 
         /*$sql = "INSERT INTO `mw_livredor`(`mw_name_livredor`, `mw_mail_livredor`, `mw_message_livredor`, `mw_date_livredor`) 
@@ -88,7 +101,8 @@ class ManagerLivreDor implements ManagerInterface
     }
 
 
-    public function deleteLivreDor($id){
+    public function deleteLivreDor($id)
+    {
         $sql = "DELETE FROM mw_livredor WHERE mw_id_livredor = :id";
         $prepare = $this -> db -> prepare($sql);
         $prepare->bindParam(':id', $id, PDO::PARAM_INT);
@@ -98,6 +112,23 @@ class ManagerLivreDor implements ManagerInterface
             return true;   
         }catch(Exception $e){
             $e->getMessage();
+        }
+    }
+
+    public function validerLivreDor(int $id) 
+    {
+        $sql = "UPDATE `mw_livredor` 
+                SET `mw_visible_livredor`= 1
+                WHERE `mw_id_livredor`= :id";
+
+        $prepare = $this->db->prepare($sql);
+        $prepare->bindValue(':id', $id, PDO::PARAM_INT);
+
+        try{
+            $prepare -> execute();
+            return true;
+        } catch( Exception $e) {
+            $e -> getMessage();
         }
     }
 

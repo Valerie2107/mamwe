@@ -56,6 +56,8 @@ $articleManager =  new ManagerArticle($db);
 ### Livre d'or
 $livreManager = new ManagerLivreDor($db);
 $allLivreDor = $livreManager->getAll();
+$newMessage = $livreManager-> getNewMassage();
+
 
 ### info :
 $infoManager = new ManagerInfo($db);
@@ -335,7 +337,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
         }
 
 
-        // article : 
+        // DELETE ARTICLE : 
         if(isset($_GET['article-delete']) && ctype_digit($_GET['article-delete'])){
             $articleId = (int) $_GET['article-delete']; 
             $articleById = $articleManager-> getOneById($articleId);
@@ -361,7 +363,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
         }
 
 
-        // info :
+        // DELETE INFO :
         if(isset($_GET['info-delete']) && ctype_digit($_GET['info-delete'])){
             $infoId = (int) $_GET['info-delete'];
             $infoById = $infoManager -> getOneById($infoId);
@@ -387,7 +389,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
         }
 
         
-        // RESSOURCE :
+        // DELETE RESSOURCE :
         if(isset($_GET['ressource-delete'])){
 
             $ressourceId = (int) $_GET['ressource-delete'];
@@ -395,7 +397,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             try{
                 $ressourceDelete = $ressourceManager -> deleteressource($ressourceId);
                 if(!empty($ressourceById->getMwPictureMwIdPicture())){
-                    $pictureDelete = $pictureManager->deletePicture($picId);
+                    $pictureDelete = $pictureManager->deletePicture($ressourceById->getMwPictureMwIdPicture());
                 }
             }catch(Exception $e){
                 $e -> getMessage();
@@ -443,6 +445,61 @@ if(isset($_POST['login'],$_POST['pwd'])){
             <?php 
         }
 
+        // DELETE LIVRE D'OR:
+        if(isset($_GET['message-delete'])){
+            $messageId = (int)$_GET['message-delete'];
+            $messageById = $livreManager->getOneById($messageId);
+            try{
+                $messageDelete = $livreManager->deleteLivreDor($messageId);
+            }catch(Exception $e){
+                $e -> getMessage();
+            }
+
+            if($messageDelete){
+                $response = "Message effacé ! ";
+            } else {
+                $response = "Un problème est survenue réessayer";
+            }
+            if($_GET['p']=="admin"){
+                ?>
+                    <script>
+                        window.setTimeout(function() {
+                            // PIS ON RETOURNE SUR LA PAGE DES RESSOURCES :
+                            window.location = `./?p=admin`;
+                        }, 2000);
+                    </script>
+                <?php 
+            } else if ($_GET['p'] == "livredorCrud"){
+                ?>
+                    <script>
+                        window.setTimeout(function() {
+                            // PIS ON RETOURNE SUR LA PAGE DES RESSOURCES :
+                            window.location = `./?p=livredorCrud`;
+                        }, 2000);
+                    </script>
+                <?php 
+            }
+        }
+
+        // VALIDATION DES MESSAGES DU LIVRE D'OR:
+        if(isset($_GET['valider']) && ctype_digit($_GET['valider'])){
+            $messageId = (int)$_GET['valider'];
+            $messageById = $livreManager ->getOneById($messageId);
+            $messageValide = $livreManager -> validerLivreDor($messageId);
+            if($messageValide){
+                $response = "Message validé et affiché publiquement";
+            } else {
+                $response = "Un problèmes est survenue, réessayez";
+            }
+
+            ?>
+                <script>
+                    window.setTimeout(function() {
+                        window.location = './?p=admin';
+                    }, 3000);
+                </script>
+            <?php
+        }
 
         // navigation privée (en tant qu'admin) :
         if(isset($_GET['p'])){
@@ -662,7 +719,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
                             $ressourceManager -> insertCategory($categoryInsertMap);
                             $idCateg = $db->lastInsertId();
                         } else {
-                            $idcateg = $_POST['mw_update_category_ressource'];
+                            $idCateg = $_POST['mw_update_category_ressource'];
                         }
 
                         if(!empty($_POST['mw_insert_sub'])){
@@ -694,11 +751,11 @@ if(isset($_POST['login'],$_POST['pwd'])){
                             $response = "Un problème est survenu, réssayez !";
                         }
                         ?>
-                        <!-- <script>
+                        <script>
                             window.setTimeout(function() {
                                 window.location = './?p=ressourceCrud';
                             }, 3000);
-                        </script> -->
+                        </script>
                         <?php
                     }
                     include_once '../view/privateView/editView/ressourceEdit.php';
@@ -804,7 +861,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
         else if($_GET['p'] === "livreDor"){
             // appel de la méthode pour récup les messages du livre d'or avec visible=1 :
             $allLivreDor = $livreManager -> getAllVisible();
-    
             // insertion nouveau message dans le livre d'or :
             if(isset($_POST['nameLO'], $_POST['mailLO'], $_POST['messageLO'])){
                 // insertion dans le livre d'or
@@ -814,6 +870,19 @@ if(isset($_POST['login'],$_POST['pwd'])){
                     "mwMessageLivreDor" => $_POST['messageLO'],
                 ]);
                 $insertLO = $livreManager -> insertLivreDor($newMessageLO);
+                if($insertLO){
+                    $response = "Message envoyé- l'administrateur du site doit maintenant le valider !";
+                } else {
+                    $response = "Un problème est survenu, réssayez !";
+                }
+
+                ?>
+                <script>
+                    window.setTimeout(function() {
+                        window.location = './?p=livreDor';
+                    }, 3000);
+                </script>
+                <?php
             }
             // appel de la vue:
             include_once "../view/publicView/livreDorView.php";
