@@ -10,6 +10,7 @@ include_once "../view/include/header.php";
 
 <!-- HTML -->
 <main>
+<figure class="circle"></figure>
 
 <?php
 
@@ -19,7 +20,10 @@ foreach ($articleBySection as $abs):  ?>
 
     <h2 class="sous-titre"><?= $abs -> getmwTitleArt();?></h2><br>
     <p class="textsection"><?= $abs -> getmwContentArt();?></p>
+    <div class="picture1">
+    
    <?php
+   
 $picture = $abs->getPicture();
 
 if ($picture !== null) {
@@ -49,7 +53,7 @@ if ($picture !== null) {
     echo 'Aucune image disponible<br>';
 }
 ?>
-
+</div>
     <div class="empty"></div>
     <p><?= $abs -> getmwDateArt(); ?></p>
     <div class="empty"></div>
@@ -62,3 +66,5 @@ if ($picture !== null) {
 <?php
 
 include_once "../view/include/footer.php";
+
+

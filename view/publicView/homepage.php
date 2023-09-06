@@ -10,7 +10,7 @@ include_once "../view/include/header.php";
 
 <!-- HTML -->
 <main>
-
+<figure class="circle1"></figure>
 
 
 <!-- description de la madame : -->
