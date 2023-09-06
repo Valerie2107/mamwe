@@ -6,7 +6,8 @@
 
 .textehome{
     text-align: justify;
-    margin: 30px 350px
+    margin: 30px 350px;
+    font-family: serif;
 }
 
 .section-home{
@@ -20,7 +21,9 @@
     height: fit-content;
     text-align: left;
     padding: 5rem;
-    color: #F67829;
+    color: #ef9628;
+    
+   
     
 }
 
@@ -52,6 +55,7 @@
     text-align: justify;
     margin-left: 700px;
     margin-top: -30px;
+    font-family: serif;
 }
 
 
@@ -59,9 +63,22 @@
     margin-right: 700px;
     text-align: justify;
         margin-top: -30px;
+        font-family: serif;
 }
 
 
 main{
     font-family: sans-serif;
+}
+
+.circle1{
+    display: block;
+    background:  #c9eaec;
+    border-radius: 50%;
+    width: 110vw;
+    height: 115vw;
+    position: absolute;
+    z-index: -2;
+    right: 70%;
+   
 }
