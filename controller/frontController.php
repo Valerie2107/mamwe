@@ -655,21 +655,33 @@ if(isset($_POST['login'],$_POST['pwd'])){
                             $idPic = $db->lastInsertId();
                         }    
 
-                        // $categoryUpdateMap = new MappingCategoryRessource([
-                             
-                        // ]);
+                        if(!empty($_POST['mw_insert_category'])){
+                            $categoryInsertMap = new MappingCategoryRessource([
+                                'mwTitleCategory' => $_POST['mw_insert_category'],
+                            ]);
+                            $ressourceManager -> insertCategory($categoryInsertMap);
+                            $idCateg = $db->lastInsertId();
+                        } else {
+                            $idcateg = $_POST['mw_update_category_ressource'];
+                        }
 
-                        // $subUpdateMap = new MappingSubCategoryRessource([
-
-                        // ]);
+                        if(!empty($_POST['mw_insert_sub'])){
+                            $subInsertMap = new MappingSubCategoryRessource([
+                                'mwTitleSubCategory' => $_POST['mw_insert_sub'],
+                            ]);
+                            $ressourceManager -> insertSub($subInsertMap);
+                            $idSub = $db-> lastInsertId();
+                        } else {
+                            $idSub = $_POST['mw_update_sub_ressource'];
+                        }
 
                         $ressourceUpdateMap = new MappingRessource([
                             'mwTitleRessource' => $_POST['mw_update_title_ressource'],
                             'mwContentRessource' => $_POST['mw_update_content_ressource'],
                             'mwUrlRessource' => $_POST['mw_update_url_ressource'],
                             'mwDateRessource' => $_POST['mw_update_date_ressource'],
-                            'mwCategory' => $_POST['mw_update_category_ressource'],
-                            'mwSubCategory' => $_POST['mw_update_sub_ressource'],
+                            'mwCategory' => $idCateg,
+                            'mwSubCategory' => $idSub,
                             'mwPictureMwIdPicture' => (is_null($idPic)) ? 0 : $idPic,
                             'mwIdRessource' => $ressourceById->getMwIdRessource(),
                         ]);
@@ -832,7 +844,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
     }
 
     // formulaire de contact :
-    else if(isset($_POST['nameContact'], $_POST['mailContact'], $_POST['messageContact'])){
+    else if(isset($_POST['name_contact'], $_POST['mail_contact'], $_POST['message_contact'])){
         // envois message / mailer
     }
 

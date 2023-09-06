@@ -61,6 +61,15 @@ include_once "../view/include/header.php";
             </option>
         <?php endforeach; ?>
     </select><br>
+
+    <!-- CREER UNE NOUVELLE CATEGORIE -->
+    <label for="mw_insert_category">Nouvelle catégorie</label><br>
+    <input type="text" id="mw_insert_category" name="mw_insert_category" placeholder="nom de la nouvelle catégorie"><br>
+
+    <label for="mw_insert_sub">Nouvelle sous catégorie</label><br>
+    <input type="text" id="mw_insert_sub" name="mw_insert_sub" placeholder="nom de la nouvelle sous catégorie"><br>
+
+
         <!-- on vérifie si y'a une photo et on peut l'éditer -->
         <?php if(isset($pictureById)) : ?>
             <h4>Photo : </h4>
