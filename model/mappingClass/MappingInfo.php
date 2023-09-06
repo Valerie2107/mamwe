@@ -14,7 +14,7 @@ class MappingInfo extends MappingAbstract
     private  int $mwIdInfo;
     private  string $mwContentInfo;
     private  string $mwDateInfo;
-    private  ?string $mwPictureMwIdPicture;
+    private  ?int $mwPictureMwIdPicture;
 
     public function __construct(array $tab)
     {

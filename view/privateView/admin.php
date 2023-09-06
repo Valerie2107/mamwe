@@ -24,9 +24,7 @@ include_once "../view/include/header.php";
 
 
 <?php if(isset($newMessage)) : ?>
-
-        <h3>Vous avez <?= count($newMessage) ?> nouveau(x) message(s) dans le livre d'or</h3>
-
+    <h3>Vous avez <?= count($newMessage) ?> nouveau(x) message(s) dans le livre d'or</h3>
     <?php if(!empty($newMessage)): ?>
         <table>
             <thead>
