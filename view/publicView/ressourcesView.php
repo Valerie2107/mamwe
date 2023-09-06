@@ -11,7 +11,11 @@ include_once "../view/include/header.php";
 <!-- HTML -->
 <main>
 <h1><?= $title ?></h1>
-
+    <div>
+        <p>Vous retrouverez ici une mine d'informations sur tous les thèmes qui touchent à la naissance de la préconception à la puériculture en passant par la parentalité.</p>
+    </div>
+    <div class="empty"></div>
+    
 <?php
 // on boucle sur les catégories :
 foreach($getAllCateg as $categ){
