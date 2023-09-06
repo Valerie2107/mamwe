@@ -395,7 +395,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             try{
                 $ressourceDelete = $ressourceManager -> deleteressource($ressourceId);
                 if(!empty($ressourceById->getMwPictureMwIdPicture())){
-                    $pictureDelete = $pictureManager->deletePicture($picId);
+                    $pictureDelete = $pictureManager->deletePicture($ressourceById->getMwPictureMwIdPicture());
                 }
             }catch(Exception $e){
                 $e -> getMessage();
@@ -662,7 +662,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
                             $ressourceManager -> insertCategory($categoryInsertMap);
                             $idCateg = $db->lastInsertId();
                         } else {
-                            $idcateg = $_POST['mw_update_category_ressource'];
+                            $idCateg = $_POST['mw_update_category_ressource'];
                         }
 
                         if(!empty($_POST['mw_insert_sub'])){
@@ -694,11 +694,11 @@ if(isset($_POST['login'],$_POST['pwd'])){
                             $response = "Un problème est survenu, réssayez !";
                         }
                         ?>
-                        <!-- <script>
+                        <script>
                             window.setTimeout(function() {
                                 window.location = './?p=ressourceCrud';
                             }, 3000);
-                        </script> -->
+                        </script>
                         <?php
                     }
                     include_once '../view/privateView/editView/ressourceEdit.php';
