@@ -40,7 +40,6 @@ include_once "../view/include/header.php";
                 <?= $category->getMwTitleCategory()?>
             </option>
         <?php endforeach; ?>
-        <option value="create">Nouvelle catégorie</option>
     </select><br>
 
     <!-- Select pour les sous catégories existantes -->
@@ -51,7 +50,6 @@ include_once "../view/include/header.php";
                 <?= $subCateg->getMwTitleSubCategory() ?>
             </option>
         <?php endforeach; ?>
-        <option value="create">Nouvelle sous-catégorie</option>
     </select><br>
     <input type="text" name="ressource-new-categ" id="ressource-new-categ" placeholder="Nouvelle catégorie">
     <input type="text" name="ressource-new-subcateg" id="ressource-new-subcateg" placeholder="Nouvelle sous-catégorie">
