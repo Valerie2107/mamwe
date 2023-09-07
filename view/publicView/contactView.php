@@ -4,6 +4,7 @@ $title = "Contact";
 
 // HEAD + HEADER + NAVBAR
 include_once "../view/include/header.php";
+                var_dump($_POST, $mailer);
 
 ?>
 
@@ -12,7 +13,7 @@ include_once "../view/include/header.php";
     <h1><?= $title ?></h1>
 
     <!-- Formulaire de contact -->
-    <form class="formu" method="post" action="contactView.php"> 
+    <form class="formu" method="post" action=""> 
         <label for="name_contact">Nom :</label><br>
         <input type="text" name="name_contact" required><br><br>
 

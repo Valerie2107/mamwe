@@ -895,9 +895,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
         }
 
         // formulaire de contact :
-        else if(isset($_POST['nameContact'], $_POST['mailContact'], $_POST['messageContact'])){
-            // envois message / mailer
-        }
+        
 
         else {
             include_once "../view/publicView/homepage.php";
@@ -914,7 +912,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
         }
     
         else if($_GET['p'] === "contact"){
-            // on va afficher les infos dans la page contact alors on les appelle ici :
             include_once "../view/publicView/contactView.php";
         }
     
@@ -986,8 +983,8 @@ if(isset($_POST['login'],$_POST['pwd'])){
     }
 
     // formulaire de contact :
-    else if(isset($_POST['name_contact'], $_POST['mail_contact'], $_POST['object_contact'], $_POST['message_contact'])){
-        $mailer = sendMail();  
+    else if(isset($_POST['name_contact'], $_POST['mail_contact'], $_POST['message_contact'])){
+        
     }
 
     else {

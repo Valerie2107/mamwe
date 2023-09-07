@@ -1,6 +1,5 @@
 {
     "require": {
-        "tinymce/tinymce": "^6.5",
-        "symfony/mailer": "^6.3"
-    }
+        "tinymce/tinymce": "^6.5"
+        }
 }
