@@ -54,24 +54,28 @@ class ManagerInfo implements ManagerInterface
     }  
 
 
-    public function insertInfo(MappingPicture $dataP, MappingInfo $dataI){
+    public function insertInfo(MappingPicture $dataP = null, MappingInfo $dataI){
 
         $this->db->beginTransaction();
 
-        $sqlPic = "INSERT INTO `mw_picture`(`mw_title_picture`, `mw_url_picture`, `mw_size_picture`, `mw_position_picture`) VALUES (:titlePic,:urlPic,:sizePic,:positionPic)";      
-        $preparePic = $this->db->prepare($sqlPic);
-        $preparePic->bindValue(':titlePic', $dataP->getMwTitlePicture(),PDO::PARAM_STR);
-        $preparePic->bindValue(':urlPic', $dataP->getMwUrlPicture(),PDO::PARAM_STR);
-        $preparePic->bindValue(':sizePic', $dataP->getMwSizePicture(), PDO::PARAM_INT);
-        $preparePic->bindValue(':positionPic',$dataP->getMwPositionPicture(), PDO::PARAM_INT);
-
-        try{
-            $preparePic->execute();
-        }catch(Exception $e){
-            echo $e->getMessage();
+        if(!is_null($dataP)){
+            $sqlPic = "INSERT INTO `mw_picture`(`mw_title_picture`, `mw_url_picture`, `mw_size_picture`, `mw_position_picture`) VALUES (:titlePic,:urlPic,:sizePic,:positionPic)";      
+            $preparePic = $this->db->prepare($sqlPic);
+            $preparePic->bindValue(':titlePic', $dataP->getMwTitlePicture(),PDO::PARAM_STR);
+            $preparePic->bindValue(':urlPic', $dataP->getMwUrlPicture(),PDO::PARAM_STR);
+            $preparePic->bindValue(':sizePic', $dataP->getMwSizePicture(), PDO::PARAM_INT);
+            $preparePic->bindValue(':positionPic',$dataP->getMwPositionPicture(), PDO::PARAM_INT);
+    
+            try{
+                $preparePic->execute();
+            }catch(Exception $e){
+                echo $e->getMessage();
+            }
+            $lastId = $this->db->lastInsertId();
+        } else {
+            $lastId = null;
         }
 
-        $lastId = $this->db->lastInsertId();
 
         $sql = "INSERT INTO `mw_info`(`mw_content_info`, `mw_date_info`, `mw_picture_mw_id_picture`) 
         VALUES (:content, :date, :picture)";  

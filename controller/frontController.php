@@ -27,11 +27,11 @@ use model\managerClass\ManagerRessource;
 use model\managerClass\ManagerSection;
 use model\managerClass\ManagerUser;
 use DateTime as Date;
-
 ### VARIABLE DATE ############################
 $currentDate = new Date();
 $currentDate = $currentDate->format("Y-d-m");
 #############################################
+
 
 ############# INSTANCIATION DE MANAGERS ##################
 
@@ -111,7 +111,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
 ####################### CONTROLLER FRONTAL #############################
 
 
-    // ets-ce qu'on est connecté :
+    // est-ce qu'on est connecté :
     else if(isset($_SESSION['idSession']) && $_SESSION['idSession']==session_id()){
 
         ### LES INSERTS :
@@ -189,15 +189,18 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
         }  
 
-        // insert info:  
-        if(isset($_POST['info-insert-content'], $_POST['info-insert-pic-title'], $_POST['info-insert-pic-url'], $_POST['info-insert-pic-size'], $_POST['info-insert-pic-position'])){
-
-            $infoInsertPicMap = new MappingPicture([
-                'mwTitlePicture' => $_POST['info-insert-pic-title'],
-                'mwUrlPicture' => $_POST['info-insert-pic-url'],
-                'mwSizePicture' => $_POST['info-insert-pic-size'],
-                'mwPositionPicture' => $_POST['info-insert-pic-position'],
-            ]);
+        // INSERT INFO:  
+        if(isset($_POST['info-insert-content'])){
+            if(!empty($_POST['info-insert-pic-title'])){
+                $infoInsertPicMap = new MappingPicture([
+                    'mwTitlePicture' => $_POST['info-insert-pic-title'],
+                    'mwUrlPicture' => $_POST['info-insert-pic-url'],
+                    'mwSizePicture' => $_POST['info-insert-pic-size'],
+                    'mwPositionPicture' => $_POST['info-insert-pic-position'],
+                ]);
+            } else {
+                $infoInsertPicMap = null;
+            }
 
             $infoInsertMap = new MappingInfo([
                 "mwContentInfo"=> $_POST['info-insert-content'],
@@ -278,7 +281,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             <?php
         } 
 
-        // insert section :
+        // INSERT SECTION :
         if(isset($_POST['section-insert-title'], $_POST['section-insert-content'], $_POST['section-insert-visible'], $_POST['section-insert-pic-title'], $_POST['section-insert-pic-url'], $_POST['section-insert-pic-size'], $_POST['section-insert-pic-position'])){
 
             $sectionInsertPicMap = new MappingPicture([
@@ -311,7 +314,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
              
         
         ### LES DELETES :
-        // agenda :
+        // DELETE AGENDA :
         if(isset($_GET['agenda-delete']) && ctype_digit($_GET['agenda-delete'])){
             $agendaId = (int) $_GET['agenda-delete']; 
             $agendaById = $agendaManager-> getOneById($agendaId);
@@ -369,7 +372,9 @@ if(isset($_POST['login'],$_POST['pwd'])){
             $infoById = $infoManager -> getOneById($infoId);
             try{
                 $infoDelete = $infoManager -> deleteInfo($infoId);
-                $pictureDelete = $pictureManager->deletePicture($infoById->getMwPictureMwIdPicture());
+                if(!empty($infoById->getMwPictureMwIdPicture())){
+                    $pictureDelete = $pictureManager->deletePicture($infoById->getMwPictureMwIdPicture());
+                }
             }catch(Exception $e){
                 $e -> getMessage();
             }
@@ -762,6 +767,42 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 }
             }
 
+            // HOMEPAGE UPDATE:
+            if(isset($_POST['mw_update_home'], $_POST['mw_update_pic_home'])){
+                $homeId = $allHome->getMwIdHomepage();
+                $pictureById = $pictureManager->getOneById($allHome->getMwPictureMwIdPicture());
+
+                $updatePicMap = new MappingPicture([
+                    'mwUrlPicture' => $_POST['mw_update_pic_home'],
+                    'mwSizePicture' => $pictureById->getMwSizePicture(),
+                    'mwPositionPicture' => $pictureById->getMwPositionPicture(),
+                    'mwIdPicture' =>$pictureById->getMwIdPicture(),
+                ]);
+
+                $updateHomeMap = new MappingHomepage([
+                    'mwContentHomepage' => $_POST['mw_update_home'],
+                    'mwDateHomepage' => $currentDate,
+                    'mwPictureMwIdPicture' => $pictureById->getMwIdPicture(),
+                    'mwIdHomepage' => $homeId,
+                ]);
+
+                $updateHome = $homeManager->updateHomepage($updatePicMap, $updateHomeMap);
+
+                if($updateHome){
+                    $response = "presentation mise à jour ";
+                }else{
+                    $response = "Un problèmes est survenu réessayez !";
+                }
+
+                ?>
+                    <script>
+                        window.setTimeout(function() {
+                            window.location = './?p=user';
+                        }, 3000);
+                    </script>
+                <?php
+            }
+
 
             // On permet de naviguer dans les pages publiques en étant connecté
             else if($_GET['p'] === "home"){
@@ -771,7 +812,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
         
             else if($_GET['p'] === "contact"){
                 // on va afficher les infos dans la page contact alors on les appelle ici :
-                $allInfo = $infoManager -> getAll();
                 include_once "../view/publicView/contactView.php";
             }
         
@@ -841,7 +881,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
     
         else if($_GET['p'] === "contact"){
             // on va afficher les infos dans la page contact alors on les appelle ici :
-            $allInfo = $infoManager -> getAll();
             include_once "../view/publicView/contactView.php";
         }
     
