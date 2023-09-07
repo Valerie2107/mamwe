@@ -23,6 +23,12 @@
     padding: 3%;
     gap: 30px;
    
+   
+}
+.picture1 img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
 }
 
 
@@ -37,9 +43,36 @@
     z-index: -2;
     left: 70%;
     top: -1%;
-    overflow-x:hidden;
+
    }
 
    body{
     overflow-x:hidden;
+   }
+
+   .circle1 {
+    display: block;
+    background:  #c9eaec;
+    border-radius: 50%;
+    width: 40vw;
+    height: 40vw;
+    position: absolute;
+    z-index: -2;
+    right: 70%;
+    top: 30%;
+   
+   }
+
+   
+.circle1 {
+    display: block;
+    background:  #c9eaec;
+    border-radius: 50%;
+    width: 50vw;
+    height: 50vw;
+    position: absolute;
+    z-index: -2;
+    right:  70%;
+    top: 90%;
+
    }
