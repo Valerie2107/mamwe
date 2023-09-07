@@ -40,7 +40,7 @@ include_once "../view/include/header.php";
                 <td><?= $message->getMwNameLivreDor() ?></td>
                 <td><?= $message->getMwMailLivreDor() ?></td>
                 <td><?= $message->getMwMessageLivreDor() ?></td>
-                <td><?= $message->getMwDateLivreDor() ?></td>
+                <td><?= date('d/m/Y', strtotime($message->getMwDateLivreDor())) ?></td>
                 <td><button><a onclick="void(0);let a=confirm('Voulez-vous vraiment supprimer \'<?= $message -> getMwNameLivreDor() ?>\' ?'); if(a){ document.location = '?p=livredorCrud&message-delete=<?= $message -> getMwIdLivreDor() ?>'; };" href="#">Effacer</a></button></td>
             </tr>
         <?php endforeach; ?> 

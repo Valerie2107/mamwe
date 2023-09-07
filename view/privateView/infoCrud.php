@@ -39,7 +39,7 @@ include_once "../view/include/header.php";
         <tr>
             <td><?= $info->getMwIdInfo() ?></td>
             <td><?= $info->getMwContentInfo() ?></td>
-            <td><?= $info->getMwDateInfo() ?></td>
+            <td><?= date('d/m/Y', strtotime($info->getMwDateInfo())) ?></td>
             <td><?= $info->getMwPictureMwIdPicture() ?></td>
             <td>
                 <button>
@@ -59,11 +59,23 @@ include_once "../view/include/header.php";
 
 <form action="" method="POST">
     <!-- y'a le #mytextarea pour relier à l'éditeur de text -->
-    <textarea name="info-insert-content" id="mytextarea" ></textarea>
-    <input type="text" name="info-insert-pic-title" placeholder="titre photo"><br>
-    <input type="text" name="info-insert-pic-url" placeholder="url photo"><br>
-    <input type="text" name="info-insert-pic-size" placeholder="taille"><br>
-    <input type="text" name="info-insert-pic-position" placeholder="position">
+    <label for="info-insert-content">Information : </label>
+    <textarea name="info-insert-content" id="mytextarea" ></textarea><br>
+
+    <h4>Photo : </h4>
+
+    <label for="info-insert-pic-title">Titre de la photo : </label>
+    <input type="text" name="info-insert-pic-title"><br>
+
+    <label for="info-insert-pic-url">URL de la photo : </label>
+    <input type="text" name="info-insert-pic-url"><br>
+
+    <label for="info-insert-pic-size">Taille : </label>
+    <input type="text" name="info-insert-pic-size"><br>
+
+    <label for="info-insert-pic-position">Position : </label>
+    <input type="text" name="info-insert-pic-position"><br>
+
     <input type="submit" value="envoyer">
 </form>
 

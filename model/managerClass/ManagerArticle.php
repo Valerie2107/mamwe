@@ -120,7 +120,8 @@ class ManagerArticle  implements ManagerInterface
 
 
 
-    public function deleteArticle($id){
+    public function deleteArticle($id)
+    {
 
         $sql = "DELETE FROM mw_article WHERE mw_id_article = :id";
         $prepare = $this->db->prepare($sql);
@@ -136,7 +137,7 @@ class ManagerArticle  implements ManagerInterface
     }
 
 
-    public function updateArticleWithPic(MappingArticle $article, array $pictures)
+    public function updateArticleWithPic(MappingArticle $article, array $pictures) 
     {
         
         $this->db->beginTransaction();
@@ -170,4 +171,32 @@ class ManagerArticle  implements ManagerInterface
             throw $e;
         }
     }
+
+    public function articleVisible(int $id) : bool | string
+    {
+        $sql = "UPDATE mw_article SET mw_visible_art = 1 WHERE mw_id_article = :id";
+        $prepare = $this->db->prepare($sql);
+        $prepare -> bindValue(':id', $id, PDO::PARAM_STR);
+        try{
+            $prepare -> execute();
+            return true;
+        } catch (Exception $e) {
+            $e -> getMessage();
+        }
+    }
+
+
+    public function articleHidden(int $id) : bool | string
+    {
+        $sql = "UPDATE mw_article SET mw_visible_art = 0 WHERE mw_id_article = :id";
+        $prepare = $this->db->prepare($sql);
+        $prepare -> bindValue(':id', $id, PDO::PARAM_STR);
+        try{
+            $prepare -> execute();
+            return true;
+        } catch (Exception $e) {
+            $e -> getMessage();
+        }
+    }
+    
 }

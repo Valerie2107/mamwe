@@ -75,6 +75,8 @@ $patientManager = new ManagerPatient($db);
 ### agenda :
 $agendaManager = new ManagerAgenda($db);
 $allAgenda = $agendaManager->getAll();
+$futurAgenda = $agendaManager->getFutureAgenda();
+$pastAgenda =$agendaManager->getPastAgenda();
 
 ### picture 
 $pictureManager = new ManagerPicture($db);
@@ -256,7 +258,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 $subAttribut = $_POST['ressource-insert-subcateg'];
             }
 
-            var_dump($_POST);
             $ressourceInsertMap = new MappingRessource([
                 'mwTitleRessource' => $_POST['ressource-insert-title'],
                 'mwContentRessource' => $_POST['ressource-insert-content'],
@@ -486,6 +487,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             }
         }
 
+        ### UPDATE DANS LA PAGE DIRECTEMENT : 
         // VALIDATION DES MESSAGES DU LIVRE D'OR:
         if(isset($_GET['valider']) && ctype_digit($_GET['valider'])){
             $messageId = (int)$_GET['valider'];
@@ -542,6 +544,38 @@ if(isset($_POST['login'],$_POST['pwd'])){
             <?php
         }
 
+        // ARTICLE VISIBLE OU CACHE:
+        if(isset($_GET['visible']) || isset($_GET['hidden'])){
+            if(isset($_GET['visible']) &&  ctype_digit($_GET['visible'])){
+                $articleId = (int) $_GET['visible'];
+                $articleById = $articleManager -> getOneById($articleId);
+                $makeVisibleArticleHidden = $articleManager -> articleHidden($articleId);
+                if($makeVisibleArticleHidden){
+                    $response = "Article : <em>" . $articleById -> getMwTitleArt() . "</em> est désormais caché";
+                } else {
+                    $response = "Un problème est survenu";
+                }
+            }
+    
+            if(isset($_GET['hidden']) &&  ctype_digit($_GET['hidden'])){
+                $articleId = (int) $_GET['hidden'];
+                $articleById = $articleManager -> getOneById($articleId);
+                $makeHiddenArticleVisible = $articleManager -> articleVisible($articleId);
+                if($makeHiddenArticleVisible){
+                    $response = "Article : <em>" . $articleById -> getMwTitleArt() . "</em> est désormais visible";
+                } else {
+                    $response = "Un problème est survenu";
+                }
+            }
+            ?>
+                <script>
+                    window.setTimeout(function() {
+                        window.location = './?p=article';
+                    }, 3000);
+                </script>
+            <?php
+        }
+
         // navigation privée (en tant qu'admin) :
         if(isset($_GET['p'])){
 
@@ -577,7 +611,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
             }
 
 
-            ### LES UPDATE :
+            ### LES UPDATE DANS UNE NOUVELLE PAGE :
             // AGENDA UPDATE
             else if($_GET['p']==="agenda-update"){
                 if(isset($_GET['agenda-update']) && ctype_digit($_GET['agenda-update'])){
@@ -952,8 +986,8 @@ if(isset($_POST['login'],$_POST['pwd'])){
     }
 
     // formulaire de contact :
-    else if(isset($_POST['name_contact'], $_POST['mail_contact'], $_POST['message_contact'])){
-        // envois message / mailer
+    else if(isset($_POST['name_contact'], $_POST['mail_contact'], $_POST['object_contact'], $_POST['message_contact'])){
+        $mailer = sendMail();  
     }
 
     else {
