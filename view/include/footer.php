@@ -2,9 +2,9 @@
 
     <!-- si on est connecté -->
 
-    <?php if(empty($_SESSION)) : ?>
-        <button class="btn"><a href="?p=connect">CONNECT</a></button>
-    <?php endif; ?>
+    <?php if(empty($_SESSION) && $title !== "Connection" ) : ?>
+        <button class="btn"><a href="?p=connect"><i class="fa-solid fa-screwdriver-wrench"></i></a></button>
+    <?php endif;  ?>
     <button onclick="backToTop()" id="btt" title="Back to top">Top</button> 
     
     <!-- JS -->
