@@ -27,7 +27,7 @@ include_once "../view/include/header.php";
 
 <form action="" method="POST">
     <label for="mw_update_date_info">Date:</label><br>
-    <input type="text" id="mw_update_date_info" name="mw_update_date_info" value="<?= $infoById -> getMwDateInfo() ?>"><br>
+    <input type="text" id="mw_update_date_info" name="mw_update_date_info" value="<?= date('d/m/Y', strtotime($infoById -> getMwDateInfo())) ?>"><br>
     
     <label for="mw_update_content_info">Contenu:</label><br>
     <textarea name="mw_update_content_info" id="mw_update_content_info">

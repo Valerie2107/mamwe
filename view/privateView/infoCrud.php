@@ -39,7 +39,7 @@ include_once "../view/include/header.php";
         <tr>
             <td><?= $info->getMwIdInfo() ?></td>
             <td><?= $info->getMwContentInfo() ?></td>
-            <td><?= $info->getMwDateInfo() ?></td>
+            <td><?= date('d/m/Y', strtotime($info->getMwDateInfo())) ?></td>
             <td><?= $info->getMwPictureMwIdPicture() ?></td>
             <td>
                 <button>

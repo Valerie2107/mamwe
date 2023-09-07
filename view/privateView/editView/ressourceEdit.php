@@ -38,7 +38,7 @@ include_once "../view/include/header.php";
     <input type="text" id="mw_update_url_ressource" name="mw_update_url_ressource" value="<?= $ressourceById -> getMwUrlRessource() ?>"><br>
 
     <label for="mw_update_date_ressource">Date:</label><br>
-    <input type="text" id="mw_update_date_ressource" name="mw_update_date_ressource" value="<?= $ressourceById -> getMwDateRessource() ?>"><br>
+    <input type="text" id="mw_update_date_ressource" name="mw_update_date_ressource" value="<?= date('d/m/Y', strtotime($ressourceById -> getMwDateRessource())) ?>"><br>
 
     <label for="mw_update_category_ressource">Catégories : </label><br>
     <!-- Select pour les catégories existantes -->

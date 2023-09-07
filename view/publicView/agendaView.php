@@ -18,6 +18,7 @@ foreach($allAgenda as $agenda):
 
 <h2><?= $agenda-> getMwTitleAgenda() ?></h2>
 <p><?= $agenda -> getMwContentAgenda() ?></p>
+<p><?= date('d/m/Y', strtotime($agenda-> getMwDateAgenda())) ?></p>
 <img src="<?= $agenda -> getPicture() ?>" alt="">
 
 <?php

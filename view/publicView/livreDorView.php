@@ -36,9 +36,9 @@ include_once "../view/include/header.php";
     <?php foreach($allLivreDor as $lo): ?>
         <div class="lo">
             <p>  
-                <?= $lo ->getMwMessageLivreDor(); ?>    <br>
-                <?= $lo ->getMwNameLivreDor(); ?>       <br>
-                <?= $lo ->getMwDateLivreDor(); ?>
+                <?= $lo -> getMwMessageLivreDor(); ?>    <br>
+                <?= $lo -> getMwNameLivreDor(); ?>       <br>
+                <?= date('d/m/Y', strtotime($lo -> getMwDateLivreDor())); ?>
             </p>
             <br>
         </div>

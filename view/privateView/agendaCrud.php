@@ -38,7 +38,7 @@ if(isset($response)){
             <tr>
                 <td><?= $agenda->getMwTitleAgenda(); ?></td>
                 <td><?= $agenda->getMwContentAgenda(); ?></td>
-                <td><?= $agenda->getMwDateAgenda(); ?></td>
+                <td><?= date('d/m/Y', strtotime($agenda->getMwDateAgenda())); ?></td>
                 <td>
                     <button>
                         <a href="?p=agenda-update&agenda-update=<?= $agenda-> getMwIdAgenda() ?>">Update</a>
