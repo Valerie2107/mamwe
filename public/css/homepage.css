@@ -1,13 +1,15 @@
 .picturehome{
     width: 15%;
     display : block ;
-    margin :  auto ;  
+    margin :  auto ;
+      
 }
 
 .textehome{
-    text-align: justify;
     margin: 30px 350px;
-    font-family: serif;
+    font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
+    color: #048b9a;
+    
 }
 
 .section-home{
@@ -22,6 +24,7 @@
     text-align: left;
     padding: 5rem;
     color: #ef9628;
+    
     
    
     
@@ -45,31 +48,36 @@
 
 .article-home img{
     width: 40%;
+    border-radius: 30px;
+    box-shadow: 1px 5px 5px  #ef9628;
 }
 
 .h2{
     margin: 10px;
+    font-size: 2.5rem;
 }
 
 .textehome1:nth-of-type(odd){
-    text-align: justify;
+    
     margin-left: 700px;
     margin-top: -30px;
-    font-family: serif;
+    font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
+    font-size: 1rem;
+    color: #048b9a;
 }
 
 
 .textehome1:nth-of-type(even){
     margin-right: 700px;
-    text-align: justify;
-        margin-top: -30px;
-        font-family: serif;
+   
+        margin-top: -20px;
+        font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
+        font-size: 1rem;
+        color: #048b9a;
 }
 
 
-main{
-    font-family: sans-serif;
-}
+
 
 .circle1{
     display: block;
@@ -81,4 +89,8 @@ main{
     z-index: -2;
     right: 70%;
    
+}
+
+.loremtext{
+    color: #ef9628; ;
 }

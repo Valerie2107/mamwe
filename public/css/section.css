@@ -12,6 +12,8 @@
     margin-right: 20%;
    text-align: justify;
    font-family: serif;
+   font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
+    color: #048b9a;
   
 }
 
@@ -35,4 +37,9 @@
     z-index: -2;
     left: 70%;
     top: -1%;
+    overflow-x:hidden;
+   }
+
+   body{
+    overflow-x:hidden;
    }
