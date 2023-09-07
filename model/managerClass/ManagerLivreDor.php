@@ -82,10 +82,6 @@ class ManagerLivreDor implements ManagerInterface
         
         $sql = "INSERT INTO `mw_livredor`(`mw_name_livredor`, `mw_mail_livredor`, `mw_message_livredor`) 
         VALUES (:name, :mail, :message)";
-
-        /*$date =  new DateTime();
-        $date = $date -> format("Y-d-m");*/
-
         $prepare = $this->db->prepare($sql);
         $prepare->bindValue(':name', $data->getMwNameLivreDor(), PDO::PARAM_STR);
         $prepare->bindValue(':mail', $data->getMwMailLivreDor(), PDO::PARAM_STR);

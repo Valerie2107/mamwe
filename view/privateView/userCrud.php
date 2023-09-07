@@ -25,8 +25,8 @@ include_once "../view/include/header.php";
 
 
 <form action="" method="POST">
-    <label for="mw_update_home">Title : </label><br>
-    <textarea name="mw_update_home" id="mw_update_home"><?= $allHome -> getMwContentHomepage() ?></textarea><br>
+    <label for="mw_update_home">Texte de présentation : </label><br>
+    <textarea name="mw_update_home" id="mytextarea" ><?= $allHome -> getMwContentHomepage() ?></textarea><br>
 
     <label for="mw_update_pic_home">Photo : </label><br>
     <input type="text" id="mw_update_pic_home" name="mw_update_pic_home" value="<?= $allHome -> getPicture() ?>"><br>
