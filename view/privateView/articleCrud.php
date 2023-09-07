@@ -30,21 +30,24 @@ include_once "../view/include/header.php";
             <th>Nom</th>
             <th>Contenu</th>
             <th>photo</th>
-            <th>visible</th>
             <th>section</th>
+            <th>visible</th>
             <th>update</th>
             <th>delete</th>
         </tr>
     </thead>
     <tbody>
-    <?php foreach($allArticle as $article): ?>
+    <?php foreach($allArticle as $article): 
+        $visible = $article->getMwVisibleArt(); 
+        $idArticle = $article->getMwIdArticle(); 
+    ?>
         <tr>
-            <td><?= $article->getMwIdArticle() ?></td>
+            <td><?= $idArticle ?></td>
             <td><?= $article->getMwTitleArt() ?></td>
             <td><?= $article->getMwContentArt() ?></td>
             <td><?= $article->getPicture()?></td>
-            <td><?= $article->getMwVisibleArt() ?></td>
             <td><?= $article->getMwSectionMwIdSection()?></td>
+            <td><?php if($visible === 1) : ?><a href="?p=article&visible=<?= $idArticle; ?>"><button>VISIBLE</button></a><?php else : ?><a href="?p=article&hidden=<?= $idArticle; ?>"><button>CACHE</button></a><?php endif; ?></td>
             <td>
                 <button>
                     <a href="?p=article-update&article-update=<?= $article->getMwIdArticle() ?>">update</a>
