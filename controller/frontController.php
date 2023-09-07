@@ -75,6 +75,8 @@ $patientManager = new ManagerPatient($db);
 ### agenda :
 $agendaManager = new ManagerAgenda($db);
 $allAgenda = $agendaManager->getAll();
+$futurAgenda = $agendaManager->getFutureAgenda();
+$pastAgenda =$agendaManager->getPastAgenda();
 
 ### picture 
 $pictureManager = new ManagerPicture($db);

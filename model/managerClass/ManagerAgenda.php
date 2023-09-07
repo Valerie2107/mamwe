@@ -75,6 +75,42 @@ class ManagerAgenda implements ManagerInterface
         return $date;
     }  
 
+    public function getPastAgenda(){
+        $sql = "SELECT a.* , mw_picture.mw_url_picture AS picture
+        FROM mw_agenda a
+        LEFT JOIN mw_picture ON mw_picture.mw_id_picture = a.mw_picture_mw_id_picture
+        WHERE mw_date_agenda < CAST(CURRENT_TIMESTAMP as DATE)
+        ORDER BY a.mw_date_agenda DESC";
+        $prepare = $this->db->prepare($sql);
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $date = [];
+        foreach ($result as $row){
+            // on crée un objet Theuser que l'on ajoute dans le tableau
+           $date[] = new MappingAgenda($row);    
+           // on retourne le tableau           
+       }
+       return $date;
+    }
+
+    public function getFutureAgenda(){
+        $sql = "SELECT a.* , mw_picture.mw_url_picture AS picture
+        FROM mw_agenda a
+        LEFT JOIN mw_picture ON mw_picture.mw_id_picture = a.mw_picture_mw_id_picture
+        WHERE mw_date_agenda > CAST(CURRENT_TIMESTAMP as DATE)
+        ORDER BY a.mw_date_agenda ASC";
+        $prepare = $this->db->prepare($sql);
+        $prepare->execute();
+        $result = $prepare->fetchAll();
+        $date = [];
+        foreach ($result as $row){
+            // on crée un objet Theuser que l'on ajoute dans le tableau
+           $date[] = new MappingAgenda($row);    
+           // on retourne le tableau           
+       }
+       return $date;
+    }
+
 
     public function insertAgendaWithPict(MappingPicture $dataP, MappingAgenda $dataA){
 

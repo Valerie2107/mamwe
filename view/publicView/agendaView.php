@@ -10,20 +10,37 @@ include_once "../view/include/header.php";
 
 <!-- HTML -->
 <main>
-<h1><?= $title ?></h1>
+    <h1><?= $title ?></h1>
 
-<?php
-foreach($allAgenda as $agenda):
-?>
+    <h2>Evenement à venir : </h2>
+    <?php
+    foreach($futurAgenda as $futur):
+    ?>
 
-<h2><?= $agenda-> getMwTitleAgenda() ?></h2>
-<p><?= $agenda -> getMwContentAgenda() ?></p>
-<p><?= date('d/m/Y', strtotime($agenda-> getMwDateAgenda())) ?></p>
-<img src="<?= $agenda -> getPicture() ?>" alt="">
+    <h2><?= $futur-> getMwTitleAgenda() ?></h2>
+    <p><?= $futur -> getMwContentAgenda() ?></p>
+    <p><?= date('d/m/Y', strtotime($futur-> getMwDateAgenda())) ?></p>
+    <img src="<?= $futur -> getPicture() ?>" alt="" width="300px">
+        <hr>
+    <?php
+    endforeach;
+    ?>
 
-<?php
-endforeach;
-?>
+
+    <h2>Evenements passés : </h2>
+    <?php
+    foreach($pastAgenda as $past):
+    ?>
+
+    <h2><?= $past-> getMwTitleAgenda() ?></h2>
+    <p><?= $past -> getMwContentAgenda() ?></p>
+    <p><?= date('d/m/Y', strtotime($past-> getMwDateAgenda())) ?></p>
+    <img src="<?= $past -> getPicture() ?>" alt="" width="300px">
+        <hr>
+    <?php
+    endforeach;
+    ?>
+
 </main>
 <?php
 // FOOTER

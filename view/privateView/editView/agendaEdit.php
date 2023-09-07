@@ -30,7 +30,7 @@ include_once "../view/include/header.php";
     <input type="text" id="mw_update_title_agenda" name="mw_update_title_agenda" value="<?= $agendaById -> getMwTitleAgenda() ?>"><br>
 
     <label for="mw_update_date_agenda">Date:</label><br>
-    <input type="text" id="mw_update_date_agenda" name="mw_update_date_agenda" value="<?= date('d/m/Y', strtotime($agendaById -> getMwDateAgenda())) ?>"><br>
+    <input type="date" id="mw_update_date_agenda" name="mw_update_date_agenda" value="<?= $agendaById -> getMwDateAgenda() ?>"><br>
     
     <label for="mw_update_content_agenda">Contenu:</label><br>
     <textarea name="mw_update_content_agenda" id="mw_update_content_agenda">
