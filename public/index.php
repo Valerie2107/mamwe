@@ -6,10 +6,9 @@ session_start();
 
 // require de la config:
 require_once "../config.php";
+require_once "../model/managerMailer.php";
 
-
-// require_once "../vendor/autoload.php"; -> Appel des dépendances qui gèrent les mails
-
+require_once "../vendor/autoload.php"; 
 
 // Autoload des classes (/model/) :
 spl_autoload_register(function ($class) {

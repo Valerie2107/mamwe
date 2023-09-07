@@ -986,8 +986,8 @@ if(isset($_POST['login'],$_POST['pwd'])){
     }
 
     // formulaire de contact :
-    else if(isset($_POST['name_contact'], $_POST['mail_contact'], $_POST['message_contact'])){
-        // envois message / mailer
+    else if(isset($_POST['name_contact'], $_POST['mail_contact'], $_POST['object_contact'], $_POST['message_contact'])){
+        $mailer = sendMail();  
     }
 
     else {
