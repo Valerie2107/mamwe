@@ -1,0 +1,19 @@
+.h2_ressources{
+    color: #048b9a
+}
+.h3_ressources{
+    color: #ef9628
+}
+
+.ressources_livres{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.contenu_ressources{
+    font-style: italic;
+}
+
+.img_ressources{
+    height: 250px;
+}
