@@ -1,7 +1,18 @@
+.h2_ressources{
+    color: #048b9a
+}
+.h3_ressources{
+    color: #ef9628
+}
+
 .grid_ressources{
-    
+
+}
+
+.contenu_ressources{
+    font-style: italic;
 }
 
 .img_ressources{
-    font-style: italic;
+    height: 200px;
 }
