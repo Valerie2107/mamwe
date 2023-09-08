@@ -4,8 +4,7 @@ $title = "Contact";
 
 // HEAD + HEADER + NAVBAR
 include_once "../view/include/header.php";
-                var_dump($_POST, $mailer);
-
+var_dump($mailSent);
 ?>
 
 <!-- HTML -->

@@ -1,5 +1,5 @@
 {
     "require": {
-        "tinymce/tinymce": "^6.5"
-        }
+        "phpmailer/phpmailer": "^6.8"
+    }
 }

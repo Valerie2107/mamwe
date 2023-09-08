@@ -91,7 +91,11 @@ if(isset($_GET['deconnect'])){
     header("Location: ./");
     exit();
 }
-    
+
+if(isset($_POST['name_contact'], $_POST['mail_contact'], $_POST['message_contact'])){
+    $mailSent = sendMail($_POST['name_contact'], $_POST['mail_contact'], $_POST['message_contact']);
+}
+
 // connection à l'admin
 if(isset($_POST['login'],$_POST['pwd'])){
     $userMapping = new MappingUser([
@@ -983,9 +987,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
     }
 
     // formulaire de contact :
-    else if(isset($_POST['name_contact'], $_POST['mail_contact'], $_POST['message_contact'])){
-        
-    }
+    
 
     else {
         include_once "../view/publicView/homepage.php";
