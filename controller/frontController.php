@@ -97,10 +97,6 @@ if(isset($_POST['name_contact'], $_POST['mail_contact'], $_POST['message_contact
     // METTRE LE MAILSENT DANS LA REPONSE DE LA VUE
 }
 
-if(isset($_POST['submitPic'])){
-    $picUpload = uploadPic();
-}
-
 // connection à l'admin
 if(isset($_POST['login'],$_POST['pwd'])){
     $userMapping = new MappingUser([
@@ -124,10 +120,15 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
     // est-ce qu'on est connecté :
     else if(isset($_SESSION['idSession']) && $_SESSION['idSession']==session_id()){
-        
+
+        // Si un photo est uploadée: 
+        if(isset($_POST['submitPic'])){
+            $uploadResponse = uploadPic();
+        }
 
         ### LES INSERTS :
         // Agenda :
+
         if(isset($_POST['agenda-insert-date'],$_POST['agenda-insert-content'], $_POST['agenda-insert-title'], $_POST['agenda-insert-pic-title'], $_POST['agenda-insert-pic-url'], $_POST['agenda-insert-pic-size'], $_POST['agenda-insert-pic-position'])){
             $agendaInsertMap = new MappingAgenda([
                 "mwDateAgenda" => $_POST['agenda-insert-date'],
@@ -137,7 +138,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
             $agendaInsertPicMap = new MappingPicture([
                 "mwTitlePicture" => $_POST['agenda-insert-pic-title'],
-                "mwUrlPicture" => $picUrl,
+                "mwUrlPicture" => $_POST['agenda-insert-pic-url'],
                 "mwSizePicture" => $_POST['agenda-insert-pic-size'],
                 "mwPositionPicture" => $_POST['agenda-insert-pic-position']
             ]);

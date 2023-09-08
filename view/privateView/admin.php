@@ -29,7 +29,7 @@ include_once "../view/include/header.php";
         <table>
             <thead>
                 <tr>
-                    <th>Nom et/ou présnom </th>
+                    <th>Nom et/ou prénom </th>
                     <th>E-mail</th>
                     <th>Message</th>
                     <th>Date</th>

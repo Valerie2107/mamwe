@@ -19,10 +19,20 @@ include_once "../view/include/header.php";
 
 <!-- le rest : -->
 
-<?php if(isset($response)) : ?>
-    <h3><?= $response ?></h3>
-<?php endif; ?>
-
+<div>
+    <?php if(isset($response)) : ?>
+        <h4><?= $response ?></h4>
+    <?php endif; ?>
+    
+    <?php if(isset($uploadResponse)) : 
+            if(is_array($uploadResponse)) :     
+                $picUrl = $uploadResponse[1] ?>
+                <h4><?= $uploadResponse[0] ?></h4>
+            <?php else: ?>
+                <h4><?= $uploadResponse ?></h4>
+            <?php endif; ?>
+    <?php endif; ?>
+</div>
 
 
 <form action="" method="POST">
@@ -38,8 +48,12 @@ include_once "../view/include/header.php";
     <label for="mw_update_title_pic">Photo titre:</label><br>
     <input type="text" id="mw_update_title_pic" name="mw_update_title_pic" value="<?= $pictures-> getMwTitlePicture() ?>"><br>
 
-    <label for="mw_update_url_pic">Photo url:</label><br>
+    <label for="mw_update_url_pic">URL de la photo : </label>
+<?php if(isset($picUrl)) :?>
+    <input type="text" id="mw_update_url_pic" name="mw_update_url_pic" value="<?= $picUrl ?>"><br>
+<?php else : ?>
     <input type="text" id="mw_update_url_pic" name="mw_update_url_pic" value="<?= $pictures-> getMwUrlPicture() ?>"><br>
+<?php endif; ?>
     
     <label for="mw_update_size_pic">Photo taille:</label><br>
     <input type="text" id="mw_update_size_pic" name="mw_update_size_pic" value="<?= $pictures-> getMwSizePicture() ?>"><br>
