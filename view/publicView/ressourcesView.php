@@ -23,7 +23,7 @@ include_once "../view/include/header.php";
                 foreach($getAllCateg as $categ){
 
                     // on affiche le titre de la catég :
-                    echo "<h2 class='h2_ressources'> categ : " . $categ -> getMwTitleCategory() . "<br><br>"; 
+                    echo "<h2 class='h2_ressources'> categ : " . $categ -> getMwTitleCategory() . "<br>"; 
                     // on récupère son ID :
                     $categId = $categ->getMwIdCategory();
             ?>
@@ -42,7 +42,7 @@ include_once "../view/include/header.php";
                         // on verifie getAllByAll est pas vide :
                         if(!empty($getAllByAll)){
                             // on affiche le titre de la sous categ, on l'a mis dans le if comme ça le titre de la sous categ ne s'affiche que s'il y a un article dedans :
-                            echo "<h3 class='h3_ressources'> sous category : " . $sub-> getMwTitleSubCategory() . "</h3><br><br>";
+                            echo "<h3 class='h3_ressources'> sous category : " . $sub-> getMwTitleSubCategory() . "</h3><br>";
                             // on boucle sur les ressources :
                 ?>
             </div>
@@ -58,12 +58,14 @@ include_once "../view/include/header.php";
                                 echo "<p  class='contenu_ressources'>" . $all -> getMwContentRessource() . "<p>"; 
                                 if (!empty($all->getMwPictureMwIdPicture())){
                             ?>
-                              <img src="<?= $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() ?>" class="img_ressources"><br> 
+                              <!-- on recupère les images dans une balise html-->  
+                              <img src="<?= $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() ?>" class="img_ressources">
                                     <?php
-                                  //  echo "<p>" . $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() . "<p>"; 
                                     }
-                                    echo "<a target=_blank href=>" . $all -> getMwUrlRessource() . "<a><div class='empty'></div>"; 
-                                    
+                                    ?>
+                                    <!-- récupération des url vers les différents sites des ressources  -->
+                                    <a target='_blank' href="<?= $all -> getMwUrlRessource()?>"><img src="asset/icon/basket.svg" height="25px"><a><div class='empty'></div> 
+                            <?php        
                             }
                         }
                 }
