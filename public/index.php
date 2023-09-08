@@ -6,8 +6,7 @@ session_start();
 
 // require de la config:
 require_once "../config.php";
-require_once "../model/managerMailer.php";
-
+require_once "../model/mailer.php";
 require_once "../vendor/autoload.php"; 
 
 // Autoload des classes (/model/) :

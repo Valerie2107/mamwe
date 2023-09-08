@@ -17,7 +17,8 @@ include_once "../view/include/header.php";
     
 
     <!-- Formulaire de contact -->
-    <form class="formu" method="post" action="contactView.php"> 
+
+    <form class="formu" method="post" action=""> 
         <label class="soustitre" for="name_contact">Nom </label><br><br>
         <input type="text" name="name_contact" required><br><br><br>
 
