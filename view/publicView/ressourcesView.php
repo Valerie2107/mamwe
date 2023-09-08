@@ -46,7 +46,7 @@ include_once "../view/include/header.php";
                             // on boucle sur les ressources :
                 ?>
             </div>
-                <div class="grid_ressources">
+                <div class="grid_ressources_livres">
                     <?php
                         foreach($getAllByAll as $all){
                             if(!empty($all)){
@@ -59,13 +59,23 @@ include_once "../view/include/header.php";
                                 if (!empty($all->getMwPictureMwIdPicture())){
                             ?>
                               <!-- on recupère les images dans une balise html-->  
-                              <img src="<?= $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() ?>" class="img_ressources">
+                              <img src="<?= $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() ?>" class="img_ressources"><br>
                                     <?php
+                                  
                                     }
-                                    ?>
-                                    <!-- récupération des url vers les différents sites des ressources  -->
-                                    <a target='_blank' href="<?= $all -> getMwUrlRessource()?>"><img src="asset/icon/basket.svg" height="25px"><a><div class='empty'></div> 
-                            <?php        
+                                    
+                                    if ($all->getMwSubCategory()==1){
+                                        ?>
+                                        <div class="grid_ressources_livres"><br>
+                                        <a target='_blank' href="<?= $all -> getMwUrlRessource()?>"><img src="asset/icon/basket.svg" height="25px"><a>
+                                        </div>
+                                    <?php
+
+                                    }else{
+
+                                    // récupération des url vers les différents sites des ressources
+                                    echo "<a target='_blank' href='". $all -> getMwUrlRessource() ."'>" . $all -> getMwUrlRessource() . "<a><div class='empty'></div>"; 
+                                    }
                             }
                         }
                 }
