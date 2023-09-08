@@ -94,6 +94,7 @@ if(isset($_GET['deconnect'])){
 
 if(isset($_POST['name_contact'], $_POST['mail_contact'], $_POST['message_contact'])){
     $mailSent = sendMail($_POST['name_contact'], $_POST['mail_contact'], $_POST['message_contact']);
+    // METTRE LE MAILSENT DANS LA REPONSE DE LA VUE
 }
 
 // connection à l'admin
