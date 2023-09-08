@@ -34,4 +34,5 @@ input, textarea{
 }
 #bouton_LO{
     padding: 0.5em 1.5em;
+    cursor: pointer;
 }

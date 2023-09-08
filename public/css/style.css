@@ -7,7 +7,6 @@ On fera des CSS spécifiques pour les éléments spécifiques (formulaires et au
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
 
 html{
@@ -22,7 +21,6 @@ main{
 
 h3{
 	margin: 0.5em 0;
-	
 }
 h1{
     text-align: center;
@@ -38,17 +36,11 @@ h2{
     height: 2em;   
 }
 
-
-
-
 /* tour de magie pour jawad : */
 /* .paragraphe img {
     float: left;
-
-
 }
 */
-
 
 #btt {    		/*bouton Back To Top */
 	color: #0c0c0cc5;
@@ -66,7 +58,5 @@ h2{
 	z-index: 99;
 	outline: none; 
 	cursor: pointer;
-
-
 }
 
