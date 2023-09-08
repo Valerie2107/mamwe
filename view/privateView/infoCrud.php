@@ -17,10 +17,21 @@ include_once "../view/include/header.php";
 <h1><?= $title ?></h1>
 
 <!-- le rest : -->
+<div>
+    <?php if(isset($response)) : ?>
+        <h4><?= $response ?></h4>
+    <?php endif; ?>
+    
+    <?php if(isset($uploadResponse)) : 
+            if(is_array($uploadResponse)) :     
+                $picUrl = $uploadResponse[1] ?>
+                <h4><?= $uploadResponse[0] ?></h4>
+            <?php else: ?>
+                <h4><?= $uploadResponse ?></h4>
+            <?php endif; ?>
+    <?php endif; ?>
+</div>
 
-<?php if(isset($response)) : ?>
-    <h3><?= $response ?></h3>
-<?php endif; ?>
 
 <table>
     <thead>
@@ -57,6 +68,14 @@ include_once "../view/include/header.php";
     </tbody>
 </table>
 
+<h3>Upload Photo : </h3>
+<form action="" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submitPic">
+</form>
+
+<h3>Ajout d'information : </h3>
 <form action="" method="POST">
     <!-- y'a le #mytextarea pour relier à l'éditeur de text -->
     <label for="info-insert-content">Information : </label>
@@ -68,7 +87,11 @@ include_once "../view/include/header.php";
     <input type="text" name="info-insert-pic-title"><br>
 
     <label for="info-insert-pic-url">URL de la photo : </label>
+<?php if(isset($picUrl)) :?>
+    <input type="text" name="info-insert-pic-url" value="<?= $picUrl ?>"><br>
+<?php else : ?>
     <input type="text" name="info-insert-pic-url"><br>
+<?php endif; ?>
 
     <label for="info-insert-pic-size">Taille : </label>
     <input type="text" name="info-insert-pic-size"><br>

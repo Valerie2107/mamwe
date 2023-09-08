@@ -17,12 +17,27 @@ include_once "../view/include/header.php";
 <h1><?= $title ?></h1>
 
 <!-- le rest : -->
+<div>
+    <?php if(isset($response)) : ?>
+        <h4><?= $response ?></h4>
+    <?php endif; ?>
+    
+    <?php if(isset($uploadResponse)) : 
+            if(is_array($uploadResponse)) :     
+                $picUrl = $uploadResponse[1] ?>
+                <h4><?= $uploadResponse[0] ?></h4>
+            <?php else: ?>
+                <h4><?= $uploadResponse ?></h4>
+            <?php endif; ?>
+    <?php endif; ?>
+</div>
 
-<?php            
-    if(isset($response)){
-        echo $response;
-    }
-?>
+<h3>Upload Photo : </h3>
+<form action="" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submitPic">
+</form>
 
 <!-- Formulaire primitif pour tester le Controller, démerdez vous maintenant : -->
 <form action="" method="POST">
@@ -53,9 +68,16 @@ include_once "../view/include/header.php";
     </select><br>
     <input type="text" name="ressource-new-categ" id="ressource-new-categ" placeholder="Nouvelle catégorie">
     <input type="text" name="ressource-new-subcateg" id="ressource-new-subcateg" placeholder="Nouvelle sous-catégorie">
-    <label>Photo</label><br>
+
+    <h4>Photo : </h4>
     <input type="text" name="ressource-insert-pic-title" placeholder="titre photo"><br>
-    <input type="text" name="ressource-insert-pic-url" placeholder="url photo"><br>
+    <?php if(isset($picUrl)) :?>
+        <label for="ressource-insert-pic-url">URL de la photo : </label>
+        <input type="text" name="ressource-insert-pic-url" value="<?= $picUrl ?>"><br>
+    <?php else : ?>
+        <label for="ressource-insert-pic-url">URL de la photo : </label>
+        <input type="text" name="ressource-insert-pic-url"><br>
+    <?php endif; ?>
     <input type="text" name="ressource-insert-pic-size" placeholder="taille"><br>
     <input type="text" name="ressource-insert-pic-position" placeholder="position">
     <input type="submit" value="envoyer">
