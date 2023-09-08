@@ -1,6 +1,77 @@
 .formu{
-    background-color: aqua;
-    text-align: center;
+    WIDTH: 850PX;
+    HEIGHT: 503PX;
     margin-left: 500px;
-    margin-right: 500px;
+    margin-top: 100px;
+    background-color: #dfdfdf;
+    box-shadow: 10px 10px 10px  black;;
+    font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
+    border-radius: 5%;
 }
+.soustitre{
+    color: #ef9628;
+    padding: 60px;
+    font-weight: bold;
+    position: relative;
+    top: 50px;
+ 
+}
+
+.photocontact{
+
+    position: absolute;
+    margin-left: 990px;
+    margin-top: 100px;
+    width: 360px;
+    height: 503px;
+    border-radius: 0% 5% 5% 0%;
+}
+
+input, textarea {
+    position: relative;
+    top: 9px;
+    margin-left: 200px;
+    border: solid 2px #04889a;
+    border-radius: 10px;
+}
+
+.submit {
+    margin-bottom: 20px;
+    background: #cccac7;
+    text-transform: uppercase;
+    display: block;
+    width: 260px;
+    height: 36px;
+     border-radius: 30px; 
+     color: #048b9a;
+     font-weight: bold;
+    font-size: 15px;
+    margin-left: 150px;
+    margin-top: -15px;
+}
+
+.circle20 {
+    display: block;
+    background: #c9eaec;
+    border-radius: 50%;
+    width: 70vw;
+    height: 40vw;
+    position: absolute;
+    z-index: -2;
+    top: -1%;
+    right: 81%;
+   }
+
+   .circle21 {
+    display: block;
+    background: #c9eaec;
+    border-radius: 50%;
+    width: 70vw;
+    height: 40vw;
+    position: absolute;
+    z-index: -2;
+    top: -1%;
+    left: 81%;
+   }
+
+  
