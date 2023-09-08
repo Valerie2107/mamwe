@@ -11,13 +11,10 @@ include_once "../view/include/header.php";
 <!-- HTML -->
 <main>
     <h1><?= $title ?></h1>
-    <div>
         <p>Vous retrouverez ici une mine d'informations sur tous les thèmes qui touchent à la naissance de la préconception à la puériculture en passant par la parentalité.</p>
-    </div>
-    <div class="empty"></div>
+        <div class="empty"></div>
     <div>
-        <div>
-            <?php
+        <?php
             // on boucle sur les catégories :
 
                 foreach($getAllCateg as $categ){
@@ -26,7 +23,7 @@ include_once "../view/include/header.php";
                     echo "<h2 class='h2_ressources'> categ : " . $categ -> getMwTitleCategory() . "<br>"; 
                     // on récupère son ID :
                     $categId = $categ->getMwIdCategory();
-            ?>
+        ?>
         </div>
             <div>
                 <?php
@@ -46,7 +43,7 @@ include_once "../view/include/header.php";
                             // on boucle sur les ressources :
                 ?>
             </div>
-                <div class="grid_ressources_livres">
+                <div>
                     <?php
                         foreach($getAllByAll as $all){
                             if(!empty($all)){
@@ -59,16 +56,18 @@ include_once "../view/include/header.php";
                                 if (!empty($all->getMwPictureMwIdPicture())){
                             ?>
                               <!-- on recupère les images dans une balise html-->  
-                              <img src="<?= $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() ?>" class="img_ressources"><br>
+                                <img src="<?= $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() ?>" class="img_ressources"><br>
+                            <?php
+                            
+                            }
+                            ?>
+                                <div>
                                     <?php
-                                  
-                                    }
-                                    
                                     if ($all->getMwSubCategory()==1){
                                         ?>
-                                        <div class="grid_ressources_livres"><br>
+                                        
                                         <a target='_blank' href="<?= $all -> getMwUrlRessource()?>"><img src="asset/icon/basket.svg" height="25px"><a>
-                                        </div>
+                                </div>
                                     <?php
 
                                     }else{
@@ -82,7 +81,7 @@ include_once "../view/include/header.php";
             }
         }
         ?>
-                            </div>
+                                </div>
                 </div>
     </div>
 
