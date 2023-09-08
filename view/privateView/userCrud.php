@@ -22,7 +22,11 @@ include_once "../view/include/header.php";
     <h3><?= $response ?></h3>
 <?php endif; ?>
 
-
+<form action="" method="POST" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submitPic">
+</form>
 
 <form action="" method="POST">
     <label for="mw_update_home">Texte de présentation : </label><br>

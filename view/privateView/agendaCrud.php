@@ -56,22 +56,28 @@ if(isset($response)){
 
 
 <!-- Formulaire primitif pour tester le Controller, démerdez vous maintenant : -->
+
+
+
 <form action="" method="POST">
     <label for="agenda-insert-title">Titre : </label>
     <input type="text" name="agenda-insert-title"><br>
     <!-- y'a le #mytextarea pour relier à l'éditeur de text -->
     <label for="agenda-insert-content">Description de l'évenement : </label>
     <textarea name="agenda-insert-content" id="mytextarea"></textarea>
-
+    
     <label for="agenda-insert-date">Date :</label>
     <input type="date" name="agenda-insert-date" ><br>
-
+    
     <h4>Photo : </h4>
     <label for="agenda-insert-pic-title">Titre de la photo : </label>
     <input type="text" name="agenda-insert-pic-title"><br>
-
+    
     <label for="agenda-insert-pic-url">Url de la photo : </label>
     <input type="text" name="agenda-insert-pic-url"><br>
+    
+    <label for="">Select image to upload : </label>
+    <input type="file" name="fileToUpload" id="fileToUpload">
 
     <label for="agenda-insert-pic-size">Taille :</label>
     <input type="text" name="agenda-insert-pic-size"><br>
