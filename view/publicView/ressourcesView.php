@@ -1,13 +1,9 @@
 <?php
-
 // on peut mettre les titres des rubriques dans la variables $title qu'on utilise dans la balise <title>
 $title = "Liens et ressources";
-
 // HEAD + HEADER + NAVBAR
 include_once "../view/include/header.php";
-
 ?>
-
 <!-- HTML -->
 <main>
     <h1><?= $title ?></h1>
@@ -22,7 +18,6 @@ include_once "../view/include/header.php";
                     // on récupère son ID :
                     $categId = $categ->getMwIdCategory();
         ?>
-    
         <section>
             <?php
             // on boucle sur la sous categ:$                
@@ -39,7 +34,6 @@ include_once "../view/include/header.php";
                         echo "<h3 class='h3_ressources'> sous category : " . $sub-> getMwTitleSubCategory() . "</h3><br>";
                         // on boucle sur les ressources :
             ?>
-        
             <article>
                 <?php
                     foreach($getAllByAll as $all){
@@ -54,8 +48,7 @@ include_once "../view/include/header.php";
                         ?>
                             <!-- on recupère les images dans une balise html-->  
                             <img src="<?= $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() ?>" class="img_ressources"><br>
-                        <?php
-                        
+                        <?php      
                         }
                         ?>
                         </div>
@@ -63,13 +56,9 @@ include_once "../view/include/header.php";
                                 <?php
                                 if ($all->getMwSubCategory()==1){
                                     ?>
-                                    
                                     <a target='_blank' href="<?= $all -> getMwUrlRessource()?>"><img src="asset/icon/basket.svg" height="25px"></a>
-                            
                                 <?php
-
                                 }else{
-
                                 // récupération des url vers les différents sites des ressources
                                 echo "<a target='_blank' href='". $all -> getMwUrlRessource() ."'>" . $all -> getMwUrlRessource() . "</a></div><div class='empty'></div>"; 
                                 }
@@ -89,9 +78,6 @@ include_once "../view/include/header.php";
     }
     ?>
     </div>
-                            
-                        
-
 </main>
 <?php
 // FOOTER
