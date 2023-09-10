@@ -18,12 +18,12 @@ include_once "../view/include/header.php";
             // on boucle sur les catégories :
                 foreach($getAllCateg as $categ){
                     // on affiche le titre de la catég :
-                    echo "<h2 class='h2_ressources'> categ : " . $categ -> getMwTitleCategory() . "<br>"; 
+                    echo "<h2 class='h2_ressources'> categ : " . $categ -> getMwTitleCategory() . "</h2><br>"; 
                     // on récupère son ID :
                     $categId = $categ->getMwIdCategory();
         ?>
-    </div>
-        <div>
+    
+        <section>
             <?php
             // on boucle sur la sous categ:$                
                 foreach($getAllSub as $sub){
@@ -39,48 +39,58 @@ include_once "../view/include/header.php";
                         echo "<h3 class='h3_ressources'> sous category : " . $sub-> getMwTitleSubCategory() . "</h3><br>";
                         // on boucle sur les ressources :
             ?>
-        </div>
-        <div>
-            <?php
-                foreach($getAllByAll as $all){
-                    if(!empty($all)){
-                        // on affiche les ressources:
-                        echo "<p><strong>contenu : " . $all -> getMwTitleRessource() . "</strong><p>"; 
-            ?>
-                    <div>
-                    <?php
-                        echo "<p  class='contenu_ressources'>" . $all -> getMwContentRessource() . "<p>"; 
-                        if (!empty($all->getMwPictureMwIdPicture())){
-                    ?>
-                        <!-- on recupère les images dans une balise html-->  
-                        <img src="<?= $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() ?>" class="img_ressources"><br>
-                    <?php
-                    
-                    }
-                    ?>
+        
+            <article>
+                <?php
+                    foreach($getAllByAll as $all){
+                        if(!empty($all)){
+                            // on affiche les ressources:
+                            echo "<p><strong>contenu : " . $all -> getMwTitleRessource() . "</strong></p>"; 
+                ?>
                         <div>
-                            <?php
-                            if ($all->getMwSubCategory()==1){
+                        <?php
+                            echo "<p  class='contenu_ressources'>" . $all -> getMwContentRessource() . "</p>"; 
+                            if (!empty($all->getMwPictureMwIdPicture())){
+                        ?>
+                            <!-- on recupère les images dans une balise html-->  
+                            <img src="<?= $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() ?>" class="img_ressources"><br>
+                        <?php
+                        
+                        }
+                        ?>
+                        </div>
+                            <div>
+                                <?php
+                                if ($all->getMwSubCategory()==1){
+                                    ?>
+                                    
+                                    <a target='_blank' href="<?= $all -> getMwUrlRessource()?>"><img src="asset/icon/basket.svg" height="25px"></a>
+                            
+                                <?php
+
+                                }else{
+
+                                // récupération des url vers les différents sites des ressources
+                                echo "<a target='_blank' href='". $all -> getMwUrlRessource() ."'>" . $all -> getMwUrlRessource() . "</a></div><div class='empty'></div>"; 
+                                }
                                 ?>
-                                
-                                <a target='_blank' href="<?= $all -> getMwUrlRessource()?>"><img src="asset/icon/basket.svg" height="25px"><a>
-                        </div>
-                            <?php
-
-                            }else{
-
-                            // récupération des url vers les différents sites des ressources
-                            echo "<a target='_blank' href='". $all -> getMwUrlRessource() ."'>" . $all -> getMwUrlRessource() . "<a><div class='empty'></div>"; 
-                            }
+                                </div>
+                                <?php
+                        }
                     }
-                }
+                    ?>
+                    </article>
+                    <?php
+            }
         }
+        ?>
+        </section>
+        <?php
     }
-}
-?>
-                        </div>
-        </div>
+    ?>
     </div>
+                            
+                        
 
 </main>
 <?php
