@@ -14,7 +14,7 @@ include_once "../view/include/header.php";
             // on boucle sur les catégories :
                 foreach($getAllCateg as $categ){
                     // on affiche le titre de la catég :
-                    echo "<h2 class='h2_ressources'> categ : " . $categ -> getMwTitleCategory() . "</h2><br>"; 
+                    echo "<h2 class='h2_ressources'> categ : " . $categ -> getMwTitleCategory() . "</h2>"; 
                     // on récupère son ID :
                     $categId = $categ->getMwIdCategory();
         ?>
@@ -24,19 +24,32 @@ include_once "../view/include/header.php";
                 foreach($getAllSub as $sub){
                     // on recupère l'ID:
                     $subId = $sub -> getMwIdSubCategory();
-                    
                     // On recupère toutes les ressources avec les ID des categ et sous categ en même temps :
                     $getAllByAll = $ressourceManager -> getAllbyAll($categId, $subId);
-
                     // on verifie getAllByAll est pas vide :
                     if(!empty($getAllByAll)){
                         // on affiche le titre de la sous categ, on l'a mis dans le if comme ça le titre de la sous categ ne s'affiche que s'il y a un article dedans :
-                        echo "<h3 class='h3_ressources'> sous category : " . $sub-> getMwTitleSubCategory() . "</h3><br>";
+                        echo "<h3 class='h3_ressources'> sous category : " . $sub-> getMwTitleSubCategory() . "</h3>";
                         // on boucle sur les ressources :
             ?>
             <article>
                 <?php
+               /*    
+               !!!!!!!!!! AIDE DE pIERRE sANDRON POUR PARVENIR A METTRE DANSS UN GRID UNISQUEMENT QUAND $all->getMwSubCategory()==1
+               foreach($getAllByAll as $all){
+                        if($all->getMwSubCategory()==1){
+                            ?>
+                            <div class="ressources_livres">
+
+                            </div>
+                            <?php
+                        }else{
+
+                        }
+                    }*/
                     foreach($getAllByAll as $all){
+                        
+
                         if(!empty($all)){
                             // on affiche les ressources:
                             echo "<p><strong>contenu : " . $all -> getMwTitleRessource() . "</strong></p>"; 
@@ -47,7 +60,7 @@ include_once "../view/include/header.php";
                             if (!empty($all->getMwPictureMwIdPicture())){
                         ?>
                             <!-- on recupère les images dans une balise html-->  
-                            <img src="<?= $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() ?>" class="img_ressources"><br>
+                            <img src="<?= $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() ?>" class="img_ressources">
                         <?php      
                         }
                         ?>
@@ -62,8 +75,10 @@ include_once "../view/include/header.php";
                                 // récupération des url vers les différents sites des ressources
                                 echo "<a target='_blank' href='". $all -> getMwUrlRessource() ."'>" . $all -> getMwUrlRessource() . "</a></div><div class='empty'></div>"; 
                                 }
-                                ?>
-                                </div>
+                               ?>
+                            </div>
+                            
+                           
                                 <?php
                         }
                     }
