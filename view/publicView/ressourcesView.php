@@ -35,7 +35,7 @@ include_once "../view/include/header.php";
             <article>
                 <?php
                /*    
-               !!!!!!!!!! AIDE DE pIERRE sANDRON POUR PARVENIR A METTRE DANSS UN GRID UNISQUEMENT QUAND $all->getMwSubCategory()==1
+               !!!!!!!!!! AIDE DE PIERRE SANDRON POUR PARVENIR A METTRE DANS UN GRID UNIQUEMENT QUAND $all->getMwSubCategory()==1
                foreach($getAllByAll as $all){
                         if($all->getMwSubCategory()==1){
                             ?>
