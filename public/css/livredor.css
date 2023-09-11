@@ -9,10 +9,13 @@
     min-width: 200px;
     margin: 0 auto;
     line-height: 2.5em;
+    color: #ef9628;
+    font-weight: bold;
 }
 .border_livre{
     border: solid 2px #04889a;
     border-radius: 10px;
+    padding: 0.25em 0.5em;
 }
 .lo{
     width: 70%;
@@ -28,9 +31,6 @@
 .send{
     grid-column: span 2;
     text-align: center;
-}
-input, textarea{
-    padding: 0.25em 0.5em;
 }
 #bouton_LO{
     padding: 0.5em 1.5em;

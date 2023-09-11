@@ -25,6 +25,7 @@
     border-radius: 0% 5% 5% 0%;
 }
 
+/*   -------------- mis en commentaire car input et text area ne sont pas des class et affectent tous es inputs/text areas du site
 input, textarea {
     position: relative;
     top: 9px;
@@ -32,7 +33,7 @@ input, textarea {
     border: solid 2px #04889a;
     border-radius: 10px;
 }
-
+*/
 .submit {
     margin-bottom: 20px;
     background: #cccac7;
