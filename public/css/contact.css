@@ -14,11 +14,9 @@
     font-weight: bold;
     position: relative;
     top: 50px;
- 
 }
 
 .photocontact{
-
     position: absolute;
     margin-left: 990px;
     margin-top: 100px;
@@ -48,6 +46,7 @@ input, textarea {
     font-size: 15px;
     margin-left: 150px;
     margin-top: -15px;
+    cursor: pointer;
 }
 
 .circle20 {
@@ -60,18 +59,18 @@ input, textarea {
     z-index: -2;
     top: -1%;
     right: 81%;
-   }
+}
 
-   .circle21 {
-    display: block;
-    background: #c9eaec;
-    border-radius: 50%;
-    width: 70vw;
-    height: 40vw;
-    position: absolute;
-    z-index: -2;
-    top: -1%;
-    left: 81%;
-   }
+.circle21 {
+display: block;
+background: #c9eaec;
+border-radius: 50%;
+width: 70vw;
+height: 40vw;
+position: absolute;
+z-index: -2;
+top: -1%;
+left: 81%;
+}
 
   

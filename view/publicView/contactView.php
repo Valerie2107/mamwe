@@ -25,10 +25,8 @@ include_once "../view/include/header.php";
         <label class="soustitre" for="mail_contact">E-mail </label><br><br>
         <input type="email" name="mail_contact" required><br><br><br>
 
-
         <label class="soustitre" for="objet">Objet </label><br><br>
         <input type="text" id="objet_contact" required><br><br><br>
-
 
         <label class="soustitre" for="message_contact">Message </label><br><br>
         <textarea name="message_contact" rows="5" required></textarea><br><br><br>

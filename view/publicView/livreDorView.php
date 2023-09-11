@@ -24,8 +24,11 @@ include_once "../view/include/header.php";
         <form class="livre" name='livreDor' action='' method="POST">
 
             <label class="alignRight" for="nameLO">Vos nom et prénom </label><input class=border_livre type="text" name="nameLO" placeholder="Indiquez votre nom" required>
+
             <label class="alignRight" for="mailLO">Votre adresse e-mail </label><input class=border_livre type='email' name="mailLO" placeholder="Indiquez votre e-mail" required>
+
             <label class="alignRight" for="messageLO">Votre message </label><textarea class=border_livre minlength= "25" maxlength="5000" name="messageLO" placeholder="Écrivez votre message - 25 caractères minimum" required></textarea>
+            
             <div class="send"><input class=border_livre id="bouton_LO" type="submit" value="Envoyer"></div>        
 
         </form>
