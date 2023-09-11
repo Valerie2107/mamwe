@@ -36,7 +36,8 @@ include_once "../view/include/header.php";
     </section>
     <div class="empty"></div>
 
-    <?php foreach($allLivreDor as $lo): ?>
+    <?php 
+        foreach($allLivreDor as $lo): ?>
         <div class="lo">
             <p>  
                 <?= $lo -> getMwMessageLivreDor(); ?>    <br>
@@ -45,9 +46,6 @@ include_once "../view/include/header.php";
             </p>
             <br>
         </div>
-
-
-
     <?php  endforeach;  ?>
 
     <div class="empty"></div>

@@ -75,10 +75,8 @@ include_once "../view/include/header.php";
                                 // récupération des url vers les différents sites des ressources
                                 echo "<a target='_blank' href='". $all -> getMwUrlRessource() ."'>" . $all -> getMwUrlRessource() . "</a></div><div class='empty'></div>"; 
                                 }
-                               ?>
+                                ?>
                             </div>
-                            
-                           
                                 <?php
                         }
                     }
