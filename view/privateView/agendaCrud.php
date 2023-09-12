@@ -80,31 +80,31 @@ include_once "../view/include/header.php";
 
 <form action="" method="POST">
     <label for="agenda-insert-title">Titre : </label>
-    <input type="text" name="agenda-insert-title"><br>
+    <input required type="text" name="agenda-insert-title"><br>
     <!-- y'a le #mytextarea pour relier à l'éditeur de text -->
     <label for="agenda-insert-content">Description de l'évenement : </label>
     <textarea name="agenda-insert-content" id="mytextarea"></textarea>
     
     <label for="agenda-insert-date">Date :</label>
-    <input type="date" name="agenda-insert-date"><br>
+    <input required type="date" name="agenda-insert-date"><br>
     
     <h4>Photo : </h4>
     <label for="agenda-insert-pic-title">Titre de la photo : </label>
-    <input type="text" name="agenda-insert-pic-title"><br>
+    <input required type="text" name="agenda-insert-pic-title"><br>
     
 <?php if(isset($picUrl)) :?>
     <label for="agenda-insert-pic-url">Url de la photo : </label>
-    <input type="text" name="agenda-insert-pic-url" value="<?= $picUrl ?>"><br>
+    <input required type="text" name="agenda-insert-pic-url" value="<?= $picUrl ?>"><br>
 <?php else : ?>
     <label for="agenda-insert-pic-url">Url de la photo : </label>
-    <input type="text" name="agenda-insert-pic-url"><br>
+    <input required type="text" name="agenda-insert-pic-url"><br>
 <?php endif; ?>
 
     <label for="agenda-insert-pic-size">Taille :</label>
-    <input type="text" name="agenda-insert-pic-size"><br>
+    <input required type="text" name="agenda-insert-pic-size"><br>
 
     <label for="agenda-insert-pic-position">Position : </label>
-    <input type="text" name="agenda-insert-pic-position">
+    <input required type="text" name="agenda-insert-pic-position">
 
     <input type="submit" value="envoyer">
 </form>

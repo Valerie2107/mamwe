@@ -20,7 +20,7 @@ function uploadPic(){
     
     // Check if file already exists
     if (file_exists($target_file)) {
-        echo "Un fichier sous ce nom existe déjà";
+        return "Un fichier sous ce nom existe déjà";
         $uploadOk = 0;
     }
     
