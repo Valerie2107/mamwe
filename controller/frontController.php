@@ -331,14 +331,15 @@ if(isset($_POST['login'],$_POST['pwd'])){
             $agendaId = (int) $_GET['agenda-delete']; 
             $agendaById = $agendaManager-> getOneById($agendaId);
             try {
-                $agendaDelete = $agendaManager->deleteAgenda($agendaId);
                 $pictureDelete = $pictureManager->deletePicture($agendaById->getMwPictureMwIdPicture());
+                $agendaDelete = $agendaManager->deleteAgenda($agendaId);
             }catch(Exception $e){
                 $e -> getMessage();
             }
 
             if($agendaDelete){
-                $response = "Evenement : " . $agendaById -> getMwTitleAgenda() . " est effacé !";              
+                $response = "Evenement : " . $agendaById -> getMwTitleAgenda() . " est effacé !";         
+                echo $pictureDelete;     
             }else{
                 $response = "Un problème est survenu, réessayez !";
             }

@@ -45,7 +45,7 @@ include_once "../view/include/header.php";
     <!-- y'a le #mytextarea pour relier à l'éditeur de text -->
     <textarea name="ressource-insert-content" id="mytextarea" ></textarea>
     <input type="text" name="ressource-insert-url" placeholder="Lien URL"><br>
-    <input type="text" name="ressource-insert-date" placeholder="Date"><br>
+    <input type="date" name="ressource-insert-date" placeholder="Date"><br>
 
     <!-- Select pour les catégories existantes -->
     <select name="ressource-insert-categ" id="ressource-insert-categ">

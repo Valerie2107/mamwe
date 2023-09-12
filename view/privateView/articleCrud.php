@@ -40,12 +40,21 @@ include_once "../view/include/header.php";
     <?php foreach($allArticle as $article): 
         $visible = $article->getMwVisibleArt(); 
         $idArticle = $article->getMwIdArticle(); 
-    ?>
+        $pictures = $pictureManager -> getAllByArticleId($idArticle);
+        ?>
         <tr>
             <td><?= $idArticle ?></td>
             <td><?= $article->getMwTitleArt() ?></td>
             <td><?= $article->getMwContentArt() ?></td>
-            <td><?= $article->getPicture()?></td>
+            <td>
+                <ul>
+                    <?php foreach($pictures as $picture): ?>
+                        <li>
+                        <?= $picture -> getMwTitlePicture() ; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </td>
             <td><?= $article->getMwSectionMwIdSection()?></td>
             <td><?php if($visible === 1) : ?><a href="?p=article&visible=<?= $idArticle; ?>"><button>VISIBLE</button></a><?php else : ?><a href="?p=article&hidden=<?= $idArticle; ?>"><button>CACHE</button></a><?php endif; ?></td>
             <td>
@@ -59,7 +68,7 @@ include_once "../view/include/header.php";
                 </button>
             </td>
         </tr>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
 
     </tbody>
 </table>

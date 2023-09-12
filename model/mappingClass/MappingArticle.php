@@ -160,11 +160,8 @@ class MappingArticle extends MappingAbstract
             throw new Exception('Date incorrecte, format attendu : Y/m/d');
         }
 
-        // Crée un nouvel objet DateTime pour l'heure actuelle
-        $now = new DateTime();
 
-        // Met à jour mwDateArt avec la date et l'heure actuelles, au format Y-m-d
-        $this->mwDateArt = 'modifié le : ' . $now->format('Y-m-d');
+        $this->mwDateArt = $mwDateArt;
 
         return $this;
     }
