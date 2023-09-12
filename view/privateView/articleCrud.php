@@ -40,24 +40,20 @@ include_once "../view/include/header.php";
     <?php foreach($allArticle as $article): 
         $visible = $article->getMwVisibleArt(); 
         $idArticle = $article->getMwIdArticle(); 
-       
+        $pictures = $pictureManager -> getAllByArticleId($idArticle);
         ?>
         <tr>
             <td><?= $idArticle ?></td>
             <td><?= $article->getMwTitleArt() ?></td>
             <td><?= $article->getMwContentArt() ?></td>
-            <td  style="border: solid black 1px; margin-bottom: 5px;">
-                <?php if(!is_null($article->getPicture())): 
-                    $pictures = explode('|||', $article->getPicture()); 
-                        foreach($pictures as $picture) : 
-                            $picUrl = explode('---', $picture);
-                                foreach($picUrl as $url): ?>
-                                    <?= $url ?>
-                        <?php endforeach; 
-                        endforeach; 
-                    else : ?>
-                        Vide
-                <?php endif; ?>
+            <td>
+                <ul>
+                    <?php foreach($pictures as $picture): ?>
+                        <li>
+                        <?= $picture -> getMwTitlePicture() ; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
             </td>
             <td><?= $article->getMwSectionMwIdSection()?></td>
             <td><?php if($visible === 1) : ?><a href="?p=article&visible=<?= $idArticle; ?>"><button>VISIBLE</button></a><?php else : ?><a href="?p=article&hidden=<?= $idArticle; ?>"><button>CACHE</button></a><?php endif; ?></td>
