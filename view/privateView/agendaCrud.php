@@ -86,7 +86,7 @@ include_once "../view/include/header.php";
     <textarea name="agenda-insert-content" id="mytextarea"></textarea>
     
     <label for="agenda-insert-date">Date :</label>
-    <input type="date" name="agenda-insert-date" ><br>
+    <input type="date" name="agenda-insert-date"><br>
     
     <h4>Photo : </h4>
     <label for="agenda-insert-pic-title">Titre de la photo : </label>
