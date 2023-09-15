@@ -1,10 +1,9 @@
 .formu{
-    WIDTH: 850PX;
+    WIDTH: 875PX;
     HEIGHT: 503PX;
     margin-left: 500px;
     margin-top: 100px;
-    background-color: #dfdfdf;
-    box-shadow: 10px 10px 10px  black;;
+    border: solid #ef9628  1px;
     font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
     border-radius: 5%;
 }
@@ -19,60 +18,42 @@
 
 .photocontact{
     position: absolute;
-    margin-left: 990px;
+    margin-left: 950px;
     margin-top: 100px;
-    width: 360px;
+    width: 430px;
     height: 503px;
     border-radius: 0% 5% 5% 0%;
 }
 
-.formu input{
+.formu input {
     position: relative;
-    top: 9px;
-    margin-left: 200px;
-    border: solid 2px #04889a;
-    border-radius: 10px;
+    top: 60px;
+    margin-left: 100px;
+    border: solid 1px #04889a;
+    border-radius: 20px;
+    height: 40px;
+    width: 250px;
 }
 
 
 .submit {
     margin-bottom: 20px;
-    background: #cccac7;
+    background: #04889a;
     text-transform: uppercase;
     display: block;
     width: 260px;
     height: 36px;
-     border-radius: 30px; 
-     color: #048b9a;
-     font-weight: bold;
+    border-radius: 30px; 
+    color: #ffffff;
+    font-weight: bold;
     font-size: 15px;
-    margin-left: 150px;
-    margin-top: -15px;
+    margin-left: 100px;
+    margin-top: 70px;
     cursor: pointer;
 }
 
-.circle20 {
-    display: block;
-    background: #c9eaec;
-    border-radius: 50%;
-    width: 70vw;
-    height: 40vw;
-    position: absolute;
-    z-index: -2;
-    top: -1%;
-    right: 81%;
-}
-
-.circle21 {
-display: block;
-background: #c9eaec;
-border-radius: 50%;
-width: 70vw;
-height: 40vw;
-position: absolute;
-z-index: -2;
-top: -1%;
-left: 81%;
+::placeholder{
+    color: #ef9628;
 }
 
   
