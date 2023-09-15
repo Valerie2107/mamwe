@@ -1,19 +1,18 @@
 .h2_ressources{
-    color: #048b9a
+    color: #048b9a;
 }
 .h3_ressources{
-    color: #ef9628
+    color: #ef9628;
+    text-decoration: underline;
 }
-
 .ressources{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    gap: 10px;   
 }
-
 .contenu_ressources{
     font-style: italic;
 }
-
 .img_ressources{
     height: 250px;
 } 

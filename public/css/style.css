@@ -40,24 +40,63 @@ h1{
 	padding: .5em;
 	color: #048b9a;
 }
-
 h2{
 	padding: 0.5em 0;
 	font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
 }
-
 .empty{      /*div vide pour faire des espaces entre différents blocs*/
     height: 2em;   
 }
 
-/* tour de magie pour jawad : */
-/* .paragraphe img {
-    float: left;
+/* CSS pour le menu déroulant */
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
-*/
 
-#btt {    		/*bouton Back To Top */
-	color: #5c2727c5;
+
+/* Style pour le bouton du menu déroulant */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/*---------------------- Style pour les liens du menu déroulant ----------*/
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+/* Changement de couleur au survol du lien */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+/* Afficher le menu déroulant au survol */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/* Style pour le menu déroulant lorsque la souris ne survole plus */
+.dropdown:hover .dropbtn {
+    background-color: #45a049;
+}
+
+
+/*---------------------bouton Back To Top ----------------------------*/
+#btt {    		
+	color: #0c0c0cc5;
+
 	background-color: white;
 	font-style: italic;
 	font-weight: bold;
