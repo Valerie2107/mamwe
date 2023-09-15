@@ -8,7 +8,6 @@ use model\mappingClass\MappingCategoryRessource;
 use model\mappingClass\MappingHomepage;
 use model\mappingClass\MappingInfo;
 use model\mappingClass\MappingLivreDor;
-use model\mappingClass\MappingPatient;
 use model\mappingClass\MappingPicture;
 use model\mappingClass\MappingRessource;
 use model\mappingClass\MappingSection;

@@ -1,0 +1,89 @@
+.container-crud {
+    width: 90%;
+    min-height: 50vh;
+    margin: auto;
+    font-family: sans-serif;
+}
+
+.container-crud h3 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #048b9a;
+    padding: 5rem 0 3rem;
+    font-size: 2rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.container-crud h4 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #048b9a;
+    padding: 2rem;
+    font-size: 1.5rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.container-crud button {
+    border: none;
+    background-color: white;
+    color: #048b9a;
+    padding: 0.2rem 0.5rem;
+    text-transform: uppercase;
+    border-radius: 5px;
+}
+
+.container-crud a {
+    color: inherit;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.container-crud button:hover {
+    cursor: pointer;
+    background-color: #048b9a;
+    color: whitesmoke;
+    transition: 0.5s;
+}
+
+.crud-table th, .crud-table td  {
+    background-color: rgb(235, 235, 235);
+    padding: 3px;
+}
+
+.crud-pic-list {
+    margin-left: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.crud-section {
+    text-align: center;
+}
+
+.crud-form input, .crud-form label {
+    display: block;
+    width: fit-content;
+    padding: 0.2rem;
+    margin: 0;
+}
+
+.crud-form textarea {
+    margin: 0;
+    padding: 0;
+}
+
+.crud-form input, .crud-form select {
+    margin-bottom: 2rem;
+}
+
+.crud-form, .crud-table {
+    border: 3px #048b9a solid;
+    border-radius: 10px;
+}
+
+.crud-form {
+    padding: 1rem;
+}
+
+#addPicture {
+    margin-bottom: 1rem;
+}
