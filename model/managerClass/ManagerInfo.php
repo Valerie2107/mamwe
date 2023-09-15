@@ -75,12 +75,11 @@ class ManagerInfo implements ManagerInterface
         }
 
 
-        $sql = "INSERT INTO `mw_info`(`mw_content_info`, `mw_date_info`, `mw_picture_mw_id_picture`) 
-        VALUES (:content, :date, :picture)";  
+        $sql = "INSERT INTO `mw_info`(`mw_content_info`, `mw_picture_mw_id_picture`) 
+        VALUES (:content, :picture)";  
 
         $prepareInfo = $this->db->prepare($sql);
         $prepareInfo->bindValue(':content', $dataI->getMwContentInfo(), PDO::PARAM_STR);
-        $prepareInfo->bindValue(':date', $dataI->getMwDateInfo(), PDO::PARAM_STR);
         $prepareInfo->bindValue(':picture', $lastId, PDO::PARAM_INT);
         $prepareInfo->execute();
         
@@ -124,11 +123,10 @@ class ManagerInfo implements ManagerInterface
 
 
         $sql = "UPDATE `mw_info` 
-                SET `mw_content_info`= :content, `mw_date_info`= :date, `mw_picture_mw_id_picture`= :picture
+                SET `mw_content_info`= :content, `mw_picture_mw_id_picture`= :picture
                 WHERE `mw_id_info`= :id";      
         $prepare = $this->db->prepare($sql);
         $prepare->bindValue(':content', $dataI -> getMwContentInfo(), PDO::PARAM_STR);
-        $prepare->bindValue(':date', $dataI -> getMwDateInfo(), PDO::PARAM_STR);
         $prepare->bindValue(':picture', $dataI -> getMwPictureMwIdPicture(), PDO::PARAM_INT);
         $prepare->bindValue(':id', $dataI -> getMwIdInfo(), PDO::PARAM_INT);
 

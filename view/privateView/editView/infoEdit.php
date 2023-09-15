@@ -42,23 +42,23 @@ include_once "../view/include/header.php";
 
         <h4>Mise à jour de l'adresse : </h4>
         <form class="general-form" action="" method="POST">
-            <label for="mw_update_content_info">Contenu:</label><br>
-            <textarea name="mw_update_content_info" id="mytextarea">
+        <label for="mw_update_content_info">Adress : </label><br>
+            <textarea name="mw_update_content_info" id="mytextarea" >
                 <?= $infoById->getMwContentInfo() ?>
             </textarea><br>
         
             <h4>Photo : </h4>
-            <label for="mw_update_title_pic">Photo titre:</label><br>
-            <input type="text" id="mw_update_title_pic" name="mw_update_title_pic" value="<?= $pictures-> getMwTitlePicture() ?>"><br>
+                <label for="mw_update_title_pic">Photo titre:</label><br>
+                <input type="text" id="mw_update_title_pic" name="mw_update_title_pic" value="<?= $pictures-> getMwTitlePicture() ?>"><br>
+
+                <label for="mw_update_url_pic">URL de la photo : </label>
+            <?php if(isset($picUrl)) :?>
+                <input type="text" id="mw_update_url_pic" name="mw_update_url_pic" value="<?= $picUrl ?>"><br>
+            <?php else : ?>
+                <input type="text" id="mw_update_url_pic" name="mw_update_url_pic" value="<?= $pictures-> getMwUrlPicture() ?>"><br>
+            <?php endif; ?>
         
-            <label for="mw_update_url_pic">URL de la photo : </label>
-        <?php if(isset($picUrl)) :?>
-            <input type="text" id="mw_update_url_pic" name="mw_update_url_pic" value="<?= $picUrl ?>"><br>
-        <?php else : ?>
-            <input type="text" id="mw_update_url_pic" name="mw_update_url_pic" value="<?= $pictures-> getMwUrlPicture() ?>"><br>
-        <?php endif; ?>
-        
-            <button>Enregistrer</button>    
+            <button type="submit">Enregistrer</button>    
         </form> 
     </div>
 </div>

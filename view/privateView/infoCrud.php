@@ -39,7 +39,6 @@ include_once "../view/include/header.php";
             <tr>
                 <th>Id</th>
                 <th>Contenu</th>
-                <th>Date</th>
                 <th>Photo</th>
                 <th>update</th>
                 <th>delete</th>
@@ -51,7 +50,6 @@ include_once "../view/include/header.php";
             <tr>
                 <td><?= $info->getMwIdInfo() ?></td>
                 <td><?= $info->getMwContentInfo() ?></td>
-                <td><?= date('d/m/Y', strtotime($info->getMwDateInfo())) ?></td>
                 <td><?= $info->getMwPictureMwIdPicture() ?></td>
                 <td>
                     <button>

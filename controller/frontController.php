@@ -207,7 +207,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
             $infoInsertMap = new MappingInfo([
                 "mwContentInfo"=> $_POST['info-insert-content'],
-                "mwDateInfo" => $currentDate,
             ]);
 
             $insertInfo = $infoManager -> insertInfo($infoInsertPicMap, $infoInsertMap);
@@ -715,7 +714,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
                     ]);
 
                     $infoUpdateMap = new MappingInfo([
-                        'mwDateInfo' => $currentDate,
                         'mwContentInfo' => $_POST['mw_update_content_info'],
                         'mwPictureMwIdPicture' => $pictures-> getMwIdPicture(),
                         'mwIdInfo' => $infoId,
