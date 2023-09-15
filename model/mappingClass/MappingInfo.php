@@ -13,7 +13,7 @@ class MappingInfo extends MappingAbstract
 
     private  int $mwIdInfo;
     private  string $mwContentInfo;
-    private  string $mwDateInfo;
+    // private  string $mwDateInfo;
     private  ?int $mwPictureMwIdPicture;
 
     public function __construct(array $tab)
@@ -57,33 +57,33 @@ class MappingInfo extends MappingAbstract
 
           // GET de date // 
 
-    public function getMwDateInfo(): string
-    {
-        return $this->mwDateInfo;
-    }
+    // public function getMwDateInfo(): string
+    // {
+    //     return $this->mwDateInfo;
+    // }
 
 
-    // SET // 
+    // // SET // 
     
-    /**
-     * @param string $mwDateAgenda
-     *
-     * @return self
-     * @throws Exception
-     */
-    public function setMwDateInfo(string $mwDateInfo): self
-    {
-        if (!$this->DateTrait($mwDateInfo, 'Y-m-d')) {
-            throw new Exception('Date incorrecte, format attendu : Y/m/d');
-        }
+    // /**
+    //  * @param string $mwDateAgenda
+    //  *
+    //  * @return self
+    //  * @throws Exception
+    //  */
+    // public function setMwDateInfo(string $mwDateInfo): self
+    // {
+    //     if (!$this->DateTrait($mwDateInfo, 'Y-m-d')) {
+    //         throw new Exception('Date incorrecte, format attendu : Y/m/d');
+    //     }
 
-        $now = new DateTime();
+    //     $now = new DateTime();
 
  
-        $this->mwDateInfo = $now->format('Y-m-d');
+    //     $this->mwDateInfo = $now->format('Y-m-d');
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
        // GET de picture // 
        public function getMwPictureMwIdPicture(): ?int

@@ -45,6 +45,10 @@
     transition: 0.5s;
 }
 
+.crud-table {
+    margin-bottom: 2rem;
+}
+
 .crud-table th, .crud-table td  {
     background-color: rgb(235, 235, 235);
     padding: 3px;
@@ -57,6 +61,10 @@
 
 .crud-section {
     text-align: center;
+}
+
+.separate-pic-form {
+    margin: 5px;
 }
 
 .crud-form input, .crud-form label {
@@ -72,12 +80,20 @@
 }
 
 .crud-form input, .crud-form select {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .crud-form, .crud-table {
     border: 3px #048b9a solid;
     border-radius: 10px;
+}
+
+.photo-form input{
+    margin-bottom: 1;
+}
+
+.photo-form {
+    margin-bottom: 1rem;
 }
 
 .crud-form {

@@ -65,13 +65,11 @@ class ManagerPicture implements ManagerInterface
 
 
     public function insertPicture(MappingPicture $data){
-        $sql = "INSERT INTO `mw_picture`(`mw_title_picture`, `mw_url_picture`, `mw_size_picture`, `mw_position_picture`, `mw_article_mw_id_article`) 
+        $sql = "INSERT INTO `mw_picture`(`mw_title_picture`, `mw_url_picture`, `mw_article_mw_id_article`) 
                     VALUES (:title, :url, :size, :position, :articleId)";      
         $prepare = $this->db->prepare($sql);
         $prepare->bindValue(':title', $data->getMwTitlePicture(), PDO::PARAM_STR);
         $prepare->bindValue(':url', $data->getMwUrlPicture(), PDO::PARAM_STR);
-        $prepare->bindValue(':size', $data->getMwSizePicture(), PDO::PARAM_INT);
-        $prepare->bindValue(':position', $data->getMwPositionPicture(), PDO::PARAM_INT);
         $prepare->bindValue(':articleId', $data->getMwArticleMwIdArticle(), PDO::PARAM_INT);
 
         
@@ -88,13 +86,11 @@ class ManagerPicture implements ManagerInterface
 
     public function updatePicture(MappingPicture $data){
         $sql = "UPDATE `mw_picture` 
-                SET `mw_title_picture`= :title, `mw_url_picture`= :url, `mw_size_picture`= :size, `mw_position_picture`= :position, `mw_article_mw_id_article`= :articleId 
+                SET `mw_title_picture`= :title, `mw_url_picture`= :url, `mw_article_mw_id_article`= :articleId 
                 WHERE `mw_id_picture`=:id";      
         $prepare = $this->db->prepare($sql);
         $prepare->bindValue(':title', $data->getMwTitlePicture(), PDO::PARAM_STR);
         $prepare->bindValue(':url', $data->getMwUrlPicture(), PDO::PARAM_STR);
-        $prepare->bindValue(':size', $data->getMwSizePicture(), PDO::PARAM_INT);
-        $prepare->bindValue(':position', $data->getMwPositionPicture(), PDO::PARAM_INT);
         $prepare->bindValue(':articleId', $data->getMwArticleMwIdArticle(), PDO::PARAM_INT);
         $prepare->bindValue(':id',$data->getMwIdPicture(), PDO::PARAM_INT);
 

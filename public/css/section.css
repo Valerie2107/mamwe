@@ -1,6 +1,5 @@
 .sous-titre{
     text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 180%;
     color: #ef9628;
 }
@@ -11,8 +10,6 @@
     margin-left: 20%;
     margin-right: 20%;
    text-align: justify;
-   font-family: serif;
-   font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
     color: #048b9a;
   
 }

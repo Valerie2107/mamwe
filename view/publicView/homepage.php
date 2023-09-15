@@ -36,12 +36,13 @@ include_once "../view/include/header.php";
        
     </div>
     
-    <p class="textehome1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt voluptas delectus in iure obcaecati provident libero numquam reiciendis officia perferendis fugiat cumque omnis corporis quidem eum maxime repudiandae commodi natus assumenda, molestias, facere rem consequatur! Delectus ipsum adipisci laborum soluta, quas vel consequatur corrupti ab ducimus eos dignissimos voluptate iure vero repellat dicta blanditiis impedit! Omnis temporibus fugit necessitatibus consequuntur vero dolorum, dolore sapiente architecto odit consectetur deleniti officia, reprehenderit eius culpa delectus soluta? Praesentium veniam itaque quasi voluptates aliquam ad! Unde eum tenetur impedit consequuntur assumenda eligendi, labore pariatur voluptas nesciunt ex delectus magnam quae aperiam minus fugiat! Eligendi cumque, quia ea deserunt vero quos illo vitae possimus iure totam ratione dolorem sapiente sint architecto magni eius blanditiis commodi soluta laborum repudiandae odio officia odit. Sapiente quia adipisci nam sed alias ad maxime atque eligendi similique? Eaque harum at neque? Atque neque quam nisi dolorum, voluptatibus alias animi tempore illum sapiente! Harum id praesentium omnis sequi quae distinctio laborum tempore </p>
+    <p class="textehome1 text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt voluptas delectus in iure obcaecati provident libero numquam reiciendis officia perferendis fugiat cumque omnis corporis quidem eum maxime repudiandae commodi natus assumenda, molestias, facere rem consequatur! Delectus ipsum adipisci laborum soluta, quas vel consequatur corrupti ab ducimus eos dignissimos voluptate iure vero repellat dicta blanditiis impedit! Omnis temporibus fugit necessitatibus consequuntur vero dolorum, dolore sapiente architecto odit consectetur deleniti officia, reprehenderit eius culpa delectus soluta? Praesentium veniam itaque quasi voluptates aliquam ad! Unde eum tenetur impedit consequuntur assumenda eligendi, labore pariatur voluptas nesciunt ex delectus magnam quae aperiam minus fugiat! Eligendi cumque, quia ea deserunt vero quos illo vitae possimus iure totam ratione dolorem sapiente sint architecto magni eius blanditiis commodi soluta laborum repudiandae odio officia odit. Sapiente quia adipisci nam sed alias ad maxime atque eligendi similique? Eaque harum at neque? Atque neque quam nisi dolorum, voluptatibus alias animi tempore illum sapiente! Harum id praesentium omnis sequi quae distinctio laborum tempore </p>
 <?php endforeach ?> 
 
 </div>
 
 </main>
+<script src="./js/homepage.js"></script>
 <!-- FOOTER -->
 <?php
 

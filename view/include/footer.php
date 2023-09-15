@@ -1,5 +1,16 @@
     <!-- pour se connecter, on fera un truc discret dès que ça marche -->
-
+    <style>
+    footer {
+  text-align: center;
+  padding: 3px;
+  background-color: DarkSalmon;
+  color: white;
+}
+</style>
+    <footer>
+  <p>Author: Hege Refsnes<br>
+  <a href="mailto:hege@example.com">hege@example.com</a></p>
+</footer>
     <!-- si on est connecté -->
 
     <?php if(empty($_SESSION) && $title !== "Connection" ) : ?>

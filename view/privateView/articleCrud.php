@@ -20,7 +20,7 @@ include_once "../view/include/header.php";
     <div class="response">
         <?php            
             if(isset($response)){
-                echo $response;
+                echo "<p>$response</p>";
             }
         ?>
     </div>

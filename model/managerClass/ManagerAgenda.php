@@ -116,12 +116,11 @@ class ManagerAgenda implements ManagerInterface
 
         $this->db->beginTransaction();
 
-        $sqlPic = "INSERT INTO `mw_picture`(`mw_title_picture`, `mw_url_picture`, `mw_size_picture`, `mw_position_picture`) VALUES (:titlePic,:urlPic,:sizePic,:positionPic)";      
+        $sqlPic = "INSERT INTO `mw_picture`(`mw_title_picture`, `mw_url_picture`) VALUES (:titlePic,:urlPic)";      
         $preparePic = $this->db->prepare($sqlPic);
         $preparePic->bindValue(':titlePic', $dataP->getMwTitlePicture(),PDO::PARAM_STR);
         $preparePic->bindValue(':urlPic', $dataP->getMwUrlPicture(),PDO::PARAM_STR);
-        $preparePic->bindValue(':sizePic', $dataP->getMwSizePicture(), PDO::PARAM_INT);
-        $preparePic->bindValue(':positionPic',$dataP->getMwPositionPicture(), PDO::PARAM_INT);
+
 
         
         $preparePic->execute();
@@ -173,13 +172,12 @@ class ManagerAgenda implements ManagerInterface
         $this->db->beginTransaction();
         
         $sqlPic = "UPDATE `mw_picture` 
-                    SET `mw_title_picture`= :titlePic ,`mw_url_picture`= :urlPic, `mw_size_picture`= :sizePic, `mw_position_picture`= :positionPic 
+                    SET `mw_title_picture`= :titlePic ,`mw_url_picture`= :urlPic
                     WHERE `mw_id_picture`= :idPic";      
         $preparePic = $this->db->prepare($sqlPic);
         $preparePic->bindValue(':titlePic', $dataP->getMwTitlePicture(),PDO::PARAM_STR);
         $preparePic->bindValue(':urlPic', $dataP->getMwUrlPicture(),PDO::PARAM_STR);
-        $preparePic->bindValue(':sizePic', $dataP->getMwSizePicture(), PDO::PARAM_INT);
-        $preparePic->bindValue(':positionPic', $dataP->getMwPositionPicture(), PDO::PARAM_INT);
+
         $preparePic->bindValue(':idPic', $dataP->getMwIdPicture(), PDO::PARAM_INT);
 
         $preparePic->execute();

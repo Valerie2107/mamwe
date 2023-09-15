@@ -8,17 +8,15 @@ include_once "../view/include/header.php";
 
 ?>
 
-<!-- HTML -->
-
 <!-- nav bar de l'admin -->
 <?php include_once '../view/include/privateNav.php'; ?>
 
-<!-- titre -->
 
 <div class="container-crud">
+
     <h3><?= $title ?></h3>
-    <div class="response">
     
+    <div class="response">
     <?php
         if(isset($response)){
             echo "<h4>$response</h4>";
@@ -27,9 +25,9 @@ include_once "../view/include/header.php";
         if(isset($uploadResponse)){
             if(is_array($uploadResponse)){
                 $picUrl = $uploadResponse[1];
-                echo "<h4>$uploadResponse[0]</h4>";
+                echo "<p>$uploadResponse[0]</p>";
             } else {
-                echo "<h4>$uploadResponse</h4>";
+                echo "<p>$uploadResponse</p>";
             }
         }
     ?>
@@ -70,44 +68,43 @@ include_once "../view/include/header.php";
     
     
     <!-- Formulaire primitif pour tester le Controller, démerdez vous maintenant : -->  
-    <h4>Upload de nouvelles photo : </h4>
-    <form class="crud-form pic-form" action="" method="post" enctype="multipart/form-data">
-        Select image to upload:
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload Image" name="submitPic">
-    </form>
-    
-    <h4 >Ajout d'évenement : </h4>
-    <form class="crud-form" action="" method="POST">
-        <label for="agenda-insert-title">Titre : </label>
-        <input required type="text" name="agenda-insert-title"><br>
-        <!-- y'a le #mytextarea pour relier à l'éditeur de text -->
-        <label for="agenda-insert-content">Description de l'évenement : </label>
-        <textarea name="agenda-insert-content" id="mytextarea"></textarea>
-        
-        <label for="agenda-insert-date">Date :</label>
-        <input required type="date" name="agenda-insert-date"><br>
-        
-        <h4>Photo : </h4>
-        <label for="agenda-insert-pic-title">Titre de la photo : </label>
-        <input required type="text" name="agenda-insert-pic-title"><br>
-        
-    <?php if(isset($picUrl)) :?>
-        <label for="agenda-insert-pic-url">Url de la photo : </label>
-        <input required type="text" name="agenda-insert-pic-url" value="<?= $picUrl ?>"><br>
-    <?php else : ?>
-        <label for="agenda-insert-pic-url">Url de la photo : </label>
-        <input required type="text" name="agenda-insert-pic-url"><br>
-    <?php endif; ?>
-    
-        <label for="agenda-insert-pic-size">Taille :</label>
-        <input required type="text" name="agenda-insert-pic-size"><br>
-    
-        <label for="agenda-insert-pic-position">Position : </label>
-        <input required type="text" name="agenda-insert-pic-position">
-    
-        <input type="submit" value="envoyer">
-    </form>
+    <div class="crud-form">
+        <h4>Upload de nouvelles photo : </h4>
+        <form class="pic-form" action="" method="post" enctype="multipart/form-data">
+            Selectionnez une photo :
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <button type="submit" name="submitPic">Upload image</button>
+        </form>
+
+        <hr class="separate-pic-form">
+
+        <h4>Ajout d'évenement : </h4>
+        <form class="general-form" action="" method="POST">
+            <label for="agenda-insert-title">Titre : </label>
+            <input required type="text" name="agenda-insert-title"><br>
+            <!-- y'a le #mytextarea pour relier à l'éditeur de text -->
+            <label for="agenda-insert-content">Description de l'évenement : </label>
+            <textarea name="agenda-insert-content" id="mytextarea"></textarea>
+            
+            <label for="agenda-insert-date">Date :</label>
+            <input required type="date" name="agenda-insert-date"><br>
+            
+            <h4>Photo : </h4>
+            <div class="photo-form">
+                <label for="agenda-insert-pic-title">Titre de la photo : </label>
+                <input required type="text" name="agenda-insert-pic-title"><br>
+                
+            <?php if(isset($picUrl)) :?>
+                <label for="agenda-insert-pic-url">Url de la photo : </label>
+                <input required type="text" name="agenda-insert-pic-url" value="<?= $picUrl ?>"><br>
+            <?php else : ?>
+                <label for="agenda-insert-pic-url">Url de la photo : </label>
+                <input required type="text" name="agenda-insert-pic-url"><br>
+            <?php endif; ?>
+            </div>
+            <button>Enregistrer</button>
+        </form>
+    </div>
 </div>
 
 

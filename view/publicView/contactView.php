@@ -13,25 +13,25 @@ include_once "../view/include/header.php";
 <figure class="circle21"></figure>
 
     <h1><?= $title ?></h1>
-    <img class="photocontact" src="asset/img/pexel.jpg">
+    <img class="photocontact" src="asset/img/logo2.png">
     
 
     <!-- Formulaire de contact -->
 
     <form class="formu" method="post" action=""> 
-        <label class="soustitre" for="name_contact">Nom </label><br><br>
-        <input type="text" name="name_contact" required><br><br><br>
+        <label class="soustitre" for="name_contact"> </label><br><br>
+        <input  type="text" placeholder="Nom" name="name_contact" required>
 
-        <label class="soustitre" for="mail_contact">E-mail </label><br><br>
-        <input type="email" name="mail_contact" required><br><br><br>
+        <label class="soustitre" for="mail_contact"> </label><br><br>
+        <input type="email" placeholder="E-mail" name="mail_contact" required>
 
-        <label class="soustitre" for="objet">Objet </label><br><br>
-        <input type="text" id="objet_contact" required><br><br><br>
+        <label class="soustitre" for="objet"> </label><br><br>
+        <input type="text" placeholder="Objet" id="objet_contact" required>
 
-        <label class="soustitre" for="message_contact">Message </label><br><br>
-        <input name="message_contact" rows="5" required></input><br><br><br>
+        <label class="soustitre" for="message_contact"> </label><br><br>
+        <input name="message_contact" placeholder="Message" rows="5" required></input><br>
 
-        <button  type="button" class="submit">Envoyer</button>
+        <br><br><br><button  type="button" class="submit">Envoyer</button>
     </form>
     
 </main>

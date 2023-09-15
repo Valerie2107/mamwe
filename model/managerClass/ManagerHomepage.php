@@ -40,12 +40,10 @@ class ManagerHomepage implements ManagerInterface
 
         // update pic
         $sqlPic = "UPDATE `mw_picture` 
-                SET `mw_url_picture`= :urlPic, `mw_size_picture`= :sizePic, `mw_position_picture`= :positionPic 
+                SET `mw_url_picture`= :urlPic 
                 WHERE `mw_id_picture`= :idPic";      
         $preparePic = $this->db->prepare($sqlPic);
         $preparePic->bindValue(':urlPic', $dataP->getMwUrlPicture(),PDO::PARAM_STR);
-        $preparePic->bindValue(':sizePic', $dataP->getMwSizePicture(), PDO::PARAM_INT);
-        $preparePic->bindValue(':positionPic', $dataP->getMwPositionPicture(), PDO::PARAM_INT);
         $preparePic->bindValue(':idPic', $dataP->getMwIdPicture(), PDO::PARAM_INT);
         $preparePic->execute();
 
