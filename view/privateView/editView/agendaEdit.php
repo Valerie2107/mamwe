@@ -45,7 +45,7 @@ include_once "../view/include/header.php";
         <hr class="separate-pic-form">
 
         <h4>Mise à jour d'un évenement : </h4>
-        <form class="general-form"  action="" method="POST">
+        <form class="general-form" action="" method="POST">
             <label for="mw_update_title_agenda">Title:</label><br>
             <input type="text" id="mw_update_title_agenda" name="mw_update_title_agenda" value="<?= $agendaById -> getMwTitleAgenda() ?>"><br>
         
