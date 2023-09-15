@@ -3,19 +3,15 @@
 $title = "Liens et ressources";
 // HEAD + HEADER + NAVBAR
 include_once "../view/include/header.php";
-
- 
-
 // DECLARATION DE FUNCTIONS 
 function displayTitle($title, $heading){
 	echo '<' . $heading . ' class="' . $heading . '_ressources"> ' . $title . '</' . $heading . '>';
 }
 ?>
-
 <!-- HTML -->
 <main>
     <h1><?= $title ?></h1>
-        <p class="intro"><!--class intro voir css LO-->
+        <p class="intro"><!--class intro voir css Livre d'Or-->
                 Vous retrouverez ici une mine d'informations sur tous les thèmes qui touchent à la naissance de la préconception à la puériculture en passant par la parentalité.
         </p>
 	<div class="empty"></div>
@@ -46,11 +42,8 @@ function displayTitle($title, $heading){
                         echo '
                     <article class="ressources">';
                     }else{
-                        echo '
-                    <article>';
-                    }
-                    
-
+                        echo '<article>';
+                    }                   
                     foreach($getAllByAll as $all){
                         if(!empty($all)){
                             echo '<div class="oneBlocOfData">';
@@ -74,13 +67,11 @@ function displayTitle($title, $heading){
                             echo '</div>';
                             // === END ONE BLOC OF DATA ===============================================================
                             echo '<div class="empty"></div>';
-                            echo '</div>'; // end of div.oneBlocOfData
-                            
+                            echo '</div>'; // end of div.oneBlocOfData                    
                         } // end if(!empty($all))
                     } // end foreach($getAllByAll as $all)
                     echo '</article>'; // end of article.ressources
-                    echo '<div class="empty"></div>';
-                    echo '<div class="empty"></div>';
+                    echo '<div class="empty"></div>';                
                 } // end If !empty(getAllByAll)
             } // end foreach($getAllSub as $sub)
         // Fin de la section avant de passer à la catégorie suivante
@@ -88,7 +79,6 @@ function displayTitle($title, $heading){
     } // end foreach($getAllCateg as $categ)
     ?>
 </main>
-
 <?php
 // FOOTER
 include_once "../view/include/footer.php";

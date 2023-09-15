@@ -11,6 +11,7 @@ On fera des CSS spécifiques pour les éléments spécifiques (formulaires et au
 
 html{
     min-width: 100%;  /*pour que la page HTML fasse au moins la taille de l'écran entier*/
+	font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
 }
 body{
     flex-grow: 1;   /*pour que le body recouvre toute la page HTML*/
