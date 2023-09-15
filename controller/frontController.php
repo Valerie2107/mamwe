@@ -705,7 +705,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
                     $pictures = $pictureManager -> getOneById($infoById->getMwPictureMwIdPicture());
                     
                 }
-                if(isset($_POST['mw_update_date_info'], $_POST['mw_update_content_info'])){
+                if($_POST['mw_update_content_info']){
                     
                     $pictureUpdateMap = new MappingPicture([
                         'mwTitlePicture' => $_POST['mw_update_title_pic'],

@@ -40,9 +40,11 @@ include_once "../view/include/header.php";
             <button type="submit" name="submitPic">Upload image</button>
         </form>
 
+        <hr class="separate-pic-form">
+
         <h4>Mise à jour de l'adresse : </h4>
         <form class="general-form" action="" method="POST">
-        <label for="mw_update_content_info">Adress : </label><br>
+        <label for="mw_update_content_info">Adresse : </label><br>
             <textarea name="mw_update_content_info" id="mytextarea" >
                 <?= $infoById->getMwContentInfo() ?>
             </textarea><br>
