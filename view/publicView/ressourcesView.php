@@ -25,9 +25,8 @@ function displayTitle($title, $heading){
         foreach($getAllCateg as $categ){
             // Début de la section pour une catégorie trouvée
             echo '<section>';
-            // on affiche le titre de la catég :
-            // echo "<h2 class='h2_ressources'> categ : " . $categ -> getMwTitleCategory() . "</h2><br>"; 
-            displayTitle('categ : ' . $categ -> getMwTitleCategory(), "h2");
+            // on affiche le titre de la catég : 
+            displayTitle(' ' . $categ -> getMwTitleCategory(), "h2");
             // on récupère son ID :
             $categId = $categ->getMwIdCategory();
 
@@ -41,8 +40,7 @@ function displayTitle($title, $heading){
                 // on verifie getAllByAll est non vide :
                 if(!empty($getAllByAll)){
                     // on affiche le titre de la sous categ, on l'a mis dans le if comme ça le titre de la sous categ ne s'affiche que s'il y a un article dedans :
-                    // echo "<h3 class='h3_ressources'> sous category : " . $sub-> getMwTitleSubCategory() . "</h3><br>";
-                    displayTitle('sous category : ' . $sub -> getMwTitleSubCategory(), "h3");
+                    displayTitle(' ' . $sub -> getMwTitleSubCategory(), "h3");
                     // on boucle sur les ressources :
                     if ($subId==1){
                         echo '
@@ -58,7 +56,7 @@ function displayTitle($title, $heading){
                             echo '<div class="oneBlocOfData">';
                             // === ONE BLOC OF DATA ===============================================================
                             // on affiche les ressources:
-                            echo "<p><strong>contenu : " . $all -> getMwTitleRessource() . "</strong></p>"; 
+                            echo "<p><strong> " . $all -> getMwTitleRessource() . "</strong></p>"; 
                             echo "<p  class='contenu_ressources'>" . $all -> getMwContentRessource() . "</p>";
                             // S'il y a une image
                             if (!empty($all->getMwPictureMwIdPicture())){
