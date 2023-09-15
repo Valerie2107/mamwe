@@ -11,12 +11,25 @@ On fera des CSS spécifiques pour les éléments spécifiques (formulaires et au
 
 html{
     min-width: 100%;  /*pour que la page HTML fasse au moins la taille de l'écran entier*/
+	display: flex;
+    flex-direction: column;
 }
 body{
+	font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
     flex-grow: 1;   /*pour que le body recouvre toute la page HTML*/
 }
 main{
 	padding: 0 1em;
+	flex-grow: 1;
+
+}
+
+footer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0 auto;
 }
 
 h3{
@@ -30,6 +43,7 @@ h1{
 
 h2{
 	padding: 0.5em 0;
+	font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
 }
 
 .empty{      /*div vide pour faire des espaces entre différents blocs*/
