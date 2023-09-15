@@ -8,7 +8,6 @@ use model\mappingClass\MappingCategoryRessource;
 use model\mappingClass\MappingHomepage;
 use model\mappingClass\MappingInfo;
 use model\mappingClass\MappingLivreDor;
-use model\mappingClass\MappingPatient;
 use model\mappingClass\MappingPicture;
 use model\mappingClass\MappingRessource;
 use model\mappingClass\MappingSection;
@@ -331,14 +330,15 @@ if(isset($_POST['login'],$_POST['pwd'])){
             $agendaId = (int) $_GET['agenda-delete']; 
             $agendaById = $agendaManager-> getOneById($agendaId);
             try {
-                $agendaDelete = $agendaManager->deleteAgenda($agendaId);
                 $pictureDelete = $pictureManager->deletePicture($agendaById->getMwPictureMwIdPicture());
+                $agendaDelete = $agendaManager->deleteAgenda($agendaId);
             }catch(Exception $e){
                 $e -> getMessage();
             }
 
             if($agendaDelete){
-                $response = "Evenement : " . $agendaById -> getMwTitleAgenda() . " est effacé !";              
+                $response = "Evenement : " . $agendaById -> getMwTitleAgenda() . " est effacé !";         
+                echo $pictureDelete;     
             }else{
                 $response = "Un problème est survenu, réessayez !";
             }
