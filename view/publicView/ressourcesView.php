@@ -3,97 +3,82 @@
 $title = "Liens et ressources";
 // HEAD + HEADER + NAVBAR
 include_once "../view/include/header.php";
+
+ 
+
+// DECLARATION DE FUNCTIONS 
+function displayTitle($title, $heading){
+	echo '<' . $heading . ' class="' . $heading . '_ressources"> ' . $title . '</' . $heading . '>';
+}
 ?>
+
 <!-- HTML -->
 <main>
     <h1><?= $title ?></h1>
-        <p class="intro"><!--class intro voir css LO-->Vous retrouverez ici une mine d'informations sur tous les thèmes qui touchent à la naissance de la préconception à la puériculture en passant par la parentalité.</p>
-        <div class="empty"></div>
-    <div>
-        <?php
-            // on boucle sur les catégories :
-                foreach($getAllCateg as $categ){
-                    // on affiche le titre de la catég :
-                    echo "<h2 class='h2_ressources'> categ : " . $categ -> getMwTitleCategory() . "</h2>"; 
-                    // on récupère son ID :
-                    $categId = $categ->getMwIdCategory();
-        ?>
-        <section>
-            <?php
+        <p class="intro"><!--class intro voir css LO-->
+                Vous retrouverez ici une mine d'informations sur tous les thèmes qui touchent à la naissance de la préconception à la puériculture en passant par la parentalité.
+        </p>
+	<div class="empty"></div>
+
+    <?php
+        // on boucle sur les catégories : Chaque catégorie aura sa propre section
+        foreach($getAllCateg as $categ){
+            // Début de la section pour une catégorie trouvée
+            echo '<section>';
+            // on affiche le titre de la catég :
+            // echo "<h2 class='h2_ressources'> categ : " . $categ -> getMwTitleCategory() . "</h2><br>"; 
+            displayTitle('categ : ' . $categ -> getMwTitleCategory(), "h2");
+            // on récupère son ID :
+            $categId = $categ->getMwIdCategory();
+
+            // Ici, nous sommes dans la section, après le titre.
             // on boucle sur la sous categ:$                
-                foreach($getAllSub as $sub){
-                    // on recupère l'ID:
-                    $subId = $sub -> getMwIdSubCategory();
-                    // On recupère toutes les ressources avec les ID des categ et sous categ en même temps :
-                    $getAllByAll = $ressourceManager -> getAllbyAll($categId, $subId);
-                    // on verifie getAllByAll est pas vide :
-                    if(!empty($getAllByAll)){
-                        // on affiche le titre de la sous categ, on l'a mis dans le if comme ça le titre de la sous categ ne s'affiche que s'il y a un article dedans :
-                        echo "<h3 class='h3_ressources'> sous category : " . $sub-> getMwTitleSubCategory() . "</h3>";
-                        // on boucle sur les ressources :
-            ?>
-            <article>
-                <?php
-               /*    
-               !!!!!!!!!! AIDE DE pIERRE sANDRON POUR PARVENIR A METTRE DANSS UN GRID UNISQUEMENT QUAND $all->getMwSubCategory()==1
-               foreach($getAllByAll as $all){
-                        if($all->getMwSubCategory()==1){
-                            ?>
-                            <div class="ressources_livres">
-
-                            </div>
-                            <?php
-                        }else{
-
-                        }
-                    }*/
+            foreach($getAllSub as $sub){
+                // on recupère l'ID:
+                $subId = $sub -> getMwIdSubCategory();
+                // On recupère toutes les ressources avec les ID des categ et sous categ en même temps :
+                $getAllByAll = $ressourceManager -> getAllbyAll($categId, $subId);
+                // on verifie getAllByAll est non vide :
+                if(!empty($getAllByAll)){
+                    // on affiche le titre de la sous categ, on l'a mis dans le if comme ça le titre de la sous categ ne s'affiche que s'il y a un article dedans :
+                    // echo "<h3 class='h3_ressources'> sous category : " . $sub-> getMwTitleSubCategory() . "</h3><br>";
+                    displayTitle('sous category : ' . $sub -> getMwTitleSubCategory(), "h3");
+                    // on boucle sur les ressources :
+                    echo '<article class="ressources">';
                     foreach($getAllByAll as $all){
-                        
-
                         if(!empty($all)){
+                            echo '<div class="oneBlocOfData">';
+                            // === ONE BLOC OF DATA ===============================================================
                             // on affiche les ressources:
                             echo "<p><strong>contenu : " . $all -> getMwTitleRessource() . "</strong></p>"; 
-                ?>
-                        <div>
-                        <?php
-                            echo "<p  class='contenu_ressources'>" . $all -> getMwContentRessource() . "</p>"; 
+                            echo "<p  class='contenu_ressources'>" . $all -> getMwContentRessource() . "</p>";
+                            // S'il y a une image
                             if (!empty($all->getMwPictureMwIdPicture())){
-                        ?>
-                            <!-- on recupère les images dans une balise html-->  
-                            <img src="<?= $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture() ?>" class="img_ressources">
-                        <?php      
-                        }
-                        ?>
-                        </div>
-                            <div>
-                                <?php
-                                if ($all->getMwSubCategory()==1){
-                                    ?>
-                                    <a target='_blank' href="<?= $all -> getMwUrlRessource()?>"><img src="asset/icon/basket.svg" height="25px"></a>
-                                <?php
-                                }else{
-                                // récupération des url vers les différents sites des ressources
-                                echo "<a target='_blank' href='". $all -> getMwUrlRessource() ."'>" . $all -> getMwUrlRessource() . "</a></div><div class='empty'></div>"; 
-                                }
-                               ?>
-                            </div>
-                            
-                           
-                                <?php
-                        }
-                    }
-                    ?>
-                    </article>
-                    <?php
-            }
-        }
-        ?>
-        </section>
-        <?php
-    }
+                                // on trouve le chemin de l'image puis on l'insert dans le html
+                                $imgPath =  $pictureManager -> getOneById($all -> getMwPictureMwIdPicture()) ->getMwUrlPicture();
+                                echo '<img src="' . $imgPath . '" class="img_ressources">';				
+                            }
+                            // Insertion d'une DIV contenant un unique lien (avec ou sans icone)
+                            echo '<div>';
+                            if ($all->getMwSubCategory()==1){
+                                echo '<a target="_blank" href=" ' . $all -> getMwUrlRessource(). ' "><img src="asset/icon/basket.svg" height="25px"></a>';
+                            }else{
+                                echo '<a target="_blank" href="' . $all -> getMwUrlRessource() . '">' . $all -> getMwUrlRessource() . '</a>'; 
+                            }
+                            echo '</div>';
+                            // === END ONE BLOC OF DATA ===============================================================
+                            echo '</div>'; // end of div.oneBlocOfData
+                        } // end if(!empty($all))
+                    } // end foreach($getAllByAll as $all)
+                    echo '</article>'; // end of article.ressources
+                } // end If !empty(getAllByAll)
+            } // end foreach($getAllSub as $sub)
+        // Fin de la section avant de passer à la catégorie suivante
+            echo '</section>';
+    } // end foreach($getAllCateg as $categ)
     ?>
-    </div>
 </main>
+
 <?php
 // FOOTER
 include_once "../view/include/footer.php";

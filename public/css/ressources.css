@@ -5,7 +5,7 @@
     color: #ef9628
 }
 
-.ressources_livres{
+.ressources{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
@@ -16,4 +16,4 @@
 
 .img_ressources{
     height: 250px;
-}
+} 
