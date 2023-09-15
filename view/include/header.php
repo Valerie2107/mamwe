@@ -53,10 +53,17 @@
                 <?php
                 endforeach;
                 ?> 
-
                 <a href="?p=agenda">Agenda</a>
                 <a href="?p=contact">Contact</a>
                 <a href="?p=ressources">Ressources</a>
+                <select name="ressource-categ" id="ressource-categ" onchange="document.location = `#${this.value}`">
+                        <option value="null"> - </option>
+                        <?php foreach($allCategory as $category):?>
+                            <option value="<?=$category->getMwTitleCategory()?>">
+                                <?=$category->getMwTitleCategory()?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 <a href="?p=livreDor">Livre D'or</a>
                 <?php if (!empty($_SESSION)) :?>
                 <button class="btn"><a href="?deconnect">deconnection</a></button>

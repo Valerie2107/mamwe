@@ -5,7 +5,7 @@ $title = "Liens et ressources";
 include_once "../view/include/header.php";
 // DECLARATION DE FUNCTIONS 
 function displayTitle($title, $heading){
-	echo '<' . $heading . ' class="' . $heading . '_ressources"> ' . $title . '</' . $heading . '>';
+	echo '<' . $heading . ' id="' . $title . '"' . ' class="' . $heading . '_ressources">' . $title . '</' . $heading . '>';
 }
 ?>
 <!-- HTML -->
@@ -17,15 +17,14 @@ function displayTitle($title, $heading){
 	<div class="empty"></div>
 
     <?php
-        // on boucle sur les catégories : Chaque catégorie aura sa propre section
+        // on boucle sur les catégories
         foreach($getAllCateg as $categ){
             // Début de la section pour une catégorie trouvée
             echo '<section>';
             // on affiche le titre de la catég : 
-            displayTitle(' ' . $categ -> getMwTitleCategory(), "h2");
+            displayTitle($categ -> getMwTitleCategory(), "h2");
             // on récupère son ID :
             $categId = $categ->getMwIdCategory();
-
             // Ici, nous sommes dans la section, après le titre.
             // on boucle sur la sous categ:$                
             foreach($getAllSub as $sub){
@@ -36,11 +35,10 @@ function displayTitle($title, $heading){
                 // on verifie getAllByAll est non vide :
                 if(!empty($getAllByAll)){
                     // on affiche le titre de la sous categ, on l'a mis dans le if comme ça le titre de la sous categ ne s'affiche que s'il y a un article dedans :
-                    displayTitle(' ' . $sub -> getMwTitleSubCategory(), "h3");
+                    displayTitle($sub -> getMwTitleSubCategory(), "h3");
                     // on boucle sur les ressources :
                     if ($subId==1){
-                        echo '
-                    <article class="ressources">';
+                        echo '<article class="ressources">';
                     }else{
                         echo '<article>';
                     }                   
@@ -82,3 +80,4 @@ function displayTitle($title, $heading){
 <?php
 // FOOTER
 include_once "../view/include/footer.php";
+?>
