@@ -44,7 +44,7 @@ function displayTitle($title, $heading){
                     // echo "<h3 class='h3_ressources'> sous category : " . $sub-> getMwTitleSubCategory() . "</h3><br>";
                     displayTitle('sous category : ' . $sub -> getMwTitleSubCategory(), "h3");
                     // on boucle sur les ressources :
-                    echo '<div class="ressources">';
+                    echo '<article class="ressources">';
                     foreach($getAllByAll as $all){
                         if(!empty($all)){
                             echo '<div class="oneBlocOfData">';
@@ -70,7 +70,7 @@ function displayTitle($title, $heading){
                             echo '</div>'; // end of div.oneBlocOfData
                         } // end if(!empty($all))
                     } // end foreach($getAllByAll as $all)
-                    echo '</div>'; // end of div.ressources
+                    echo '</article>'; // end of article.ressources
                 } // end If !empty(getAllByAll)
             } // end foreach($getAllSub as $sub)
         // Fin de la section avant de passer à la catégorie suivante
