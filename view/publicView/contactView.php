@@ -9,8 +9,6 @@ include_once "../view/include/header.php";
 
 <!-- HTML -->
 <main>
-<figure class="circle20"></figure>
-<figure class="circle21"></figure>
 
     <h1><?= $title ?></h1>
     <img class="photocontact" src="asset/img/logo2.png">

@@ -8,18 +8,15 @@ nav a {
     background: #048b9abd;
     border-radius: 0% 50%;
 }
-
 .img{
     width: 100%;
     height: auto;
 }
-
 .public-nav{
     background-image: url(../asset/img/bannieretest.png);
     width: 100%;
     height: 400px;
-    background-repeat: no-repeat;
-   
+    background-repeat: no-repeat; 
 }
 .titre{
     text-align: center;
@@ -29,9 +26,8 @@ nav {
     display: flex;
     align-items: center;
 }
-
-/* .logo{
-    display: flex;
-    justify-content: left;
-    align-items: left;
-} */
+/*
+.hidden {
+    display: none;
+}
+*/

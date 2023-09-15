@@ -10,6 +10,7 @@ include_once "../view/include/header.php";
 
 <!-- HTML -->
 <main>
+<figure class="circle"></figure>
 <h1><?= $title ?></h1>
 
 <?php if(isset($erreur)){

@@ -3,33 +3,23 @@
     font-size: 180%;
     color: #ef9628;
 }
-
-
-
 .textsection{
     margin-left: 20%;
     margin-right: 20%;
    text-align: justify;
     color: #048b9a;
-  
 }
-
 .picture1{
     display: flex;
     justify-content: center;
     padding: 3%;
     gap: 30px;
-   
-   
 }
 .picture1 img{
     width: 300px;
     height: 300px;
     object-fit: cover;
 }
-
-
-
 .circle {
     display: block;
     background:  #c9eaec;
@@ -40,36 +30,4 @@
     z-index: -2;
     left: 70%;
     top: -1%;
-
-   }
-
-   body{
-    overflow-x:hidden;
-   }
-
-   .circle1 {
-    display: block;
-    background:  #c9eaec;
-    border-radius: 50%;
-    width: 40vw;
-    height: 40vw;
-    position: absolute;
-    z-index: -2;
-    right: 70%;
-    top: 30%;
-   
-   }
-
-   
-.circle1 {
-    display: block;
-    background:  #c9eaec;
-    border-radius: 50%;
-    width: 110vw;
-    height: 115vw;
-    position: absolute;
-    z-index: -2;
-    right:  70%;
-    top: 90%;
-
    }

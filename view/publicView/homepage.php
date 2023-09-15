@@ -10,8 +10,7 @@ include_once "../view/include/header.php";
 
 <!-- HTML -->
 <main>
-<figure class="circle1"></figure>
-
+<figure class="circle"></figure>
 
 <!-- description de la madame : -->
 <div><img class="picturehome" src="<?= $allHome -> getPicture() ?>" alt=""></div>
