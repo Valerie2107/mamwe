@@ -95,12 +95,10 @@ class ManagerArticle  implements ManagerInterface
             // boucle sur les images
             foreach ($pictures as $picture) {
                 // requête sql + prepare + bindValue + execute pour insert des photos
-                $picsql = "INSERT INTO mw_picture (mw_title_picture, mw_url_picture, mw_size_picture, mw_position_picture, mw_article_mw_id_article) VALUES (:mw_title_picture, :mw_url_picture, :mw_size_picture, :mw_position_picture, :mw_article_mw_id_article)";
+                $picsql = "INSERT INTO mw_picture (mw_title_picture, mw_url_picture, mw_article_mw_id_article) VALUES (:mw_title_picture, :mw_url_picture, :mw_article_mw_id_article)";
                 $picPrepare = $this->db->prepare($picsql);
                 $picPrepare->bindValue(':mw_title_picture', $picture->getMwTitlePicture(), PDO::PARAM_STR);
                 $picPrepare->bindValue(':mw_url_picture', $picture->getMwUrlPicture(), PDO::PARAM_STR);
-                $picPrepare->bindValue(':mw_size_picture', $picture->getMwSizePicture(), PDO::PARAM_INT);
-                $picPrepare->bindValue(':mw_position_picture', $picture->getMwPositionPicture(), PDO::PARAM_INT);
                 $picPrepare->bindValue(':mw_article_mw_id_article', $lastArticleId, PDO::PARAM_INT);
                 $picPrepare->execute();
             }
@@ -152,12 +150,10 @@ class ManagerArticle  implements ManagerInterface
         $prepare->execute();
             
         foreach($pictures as $picture) {
-            $picsql = "UPDATE mw_picture SET mw_title_picture = :title, mw_url_picture = :url, mw_size_picture = :size, mw_position_picture = :position, mw_article_mw_id_article = :mw_article_mw_id_article WHERE mw_id_picture = :id";
+            $picsql = "UPDATE mw_picture SET mw_title_picture = :title, mw_url_picture = :url, mw_article_mw_id_article = :mw_article_mw_id_article WHERE mw_id_picture = :id";
             $picPrepare = $this->db->prepare($picsql);
             $picPrepare->bindValue(':title', $picture->getMwTitlePicture(), PDO::PARAM_STR);
             $picPrepare->bindValue(':url', $picture->getMwUrlPicture(), PDO::PARAM_STR);
-            $picPrepare->bindValue(':size', $picture->getMwSizePicture(), PDO::PARAM_INT);
-            $picPrepare->bindValue(':position', $picture->getMwPositionPicture(), PDO::PARAM_INT);
             $picPrepare->bindValue(':mw_article_mw_id_article', $article->getMwIdArticle(), PDO::PARAM_INT);
             $picPrepare->bindValue(':id', $picture->getMwIdPicture(), PDO::PARAM_INT);
             $picPrepare->execute();

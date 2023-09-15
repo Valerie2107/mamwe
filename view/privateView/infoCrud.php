@@ -97,12 +97,6 @@ include_once "../view/include/header.php";
             <?php else : ?>
                 <input type="text" name="info-insert-pic-url"><br>
             <?php endif; ?>
-            
-                <label for="info-insert-pic-size">Taille : </label>
-                <input type="text" name="info-insert-pic-size"><br>
-            
-                <label for="info-insert-pic-position">Position : </label>
-                <input type="text" name="info-insert-pic-position"><br>
             </div>
                 
             <button>Enregistrer</button>

@@ -20,7 +20,6 @@ use model\managerClass\ManagerArticle;
 use model\managerClass\ManagerHomepage;
 use model\managerClass\ManagerInfo;
 use model\managerClass\ManagerLivreDor;
-use model\managerClass\ManagerPatient;
 use model\managerClass\ManagerPicture;
 use model\managerClass\ManagerRessource;
 use model\managerClass\ManagerSection;
@@ -28,7 +27,7 @@ use model\managerClass\ManagerUser;
 use DateTime as Date;
 ### VARIABLE DATE ############################
 $currentDate = new Date();
-$currentDate = $currentDate->format("Y-d-m");
+$currentDate = $currentDate->format("Y-m-d");
 #############################################
 
 
@@ -68,8 +67,6 @@ $allRessource = $ressourceManager->getAll();
 $allCategory = $ressourceManager->getAllCateg();
 $allSubCateg = $ressourceManager->getAllSubCateg();
 
-### patient :
-$patientManager = new ManagerPatient($db);
 
 ### agenda :
 $agendaManager = new ManagerAgenda($db);
@@ -128,7 +125,7 @@ if(isset($_POST['login'],$_POST['pwd'])){
         ### LES INSERTS :
         // Agenda :
 
-        if(isset($_POST['agenda-insert-date'],$_POST['agenda-insert-content'], $_POST['agenda-insert-title'], $_POST['agenda-insert-pic-title'], $_POST['agenda-insert-pic-url'], $_POST['agenda-insert-pic-size'], $_POST['agenda-insert-pic-position'])){
+        if(isset($_POST['agenda-insert-date'],$_POST['agenda-insert-content'], $_POST['agenda-insert-title'], $_POST['agenda-insert-pic-title'], $_POST['agenda-insert-pic-url'])){
             $agendaInsertMap = new MappingAgenda([
                 "mwDateAgenda" => $_POST['agenda-insert-date'],
                 "mwContentAgenda" => $_POST['agenda-insert-content'],
@@ -138,8 +135,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
             $agendaInsertPicMap = new MappingPicture([
                 "mwTitlePicture" => $_POST['agenda-insert-pic-title'],
                 "mwUrlPicture" => $_POST['agenda-insert-pic-url'],
-                "mwSizePicture" => $_POST['agenda-insert-pic-size'],
-                "mwPositionPicture" => $_POST['agenda-insert-pic-position']
             ]);
 
             $insertAgenda = $agendaManager -> insertAgendaWithPict($agendaInsertPicMap, $agendaInsertMap);
@@ -171,15 +166,13 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 if (isset($_POST['mw_picture'])) {
                     foreach ($_POST['mw_picture'] as $pictureData) {
                         if (
-                            isset($pictureData['title'], $pictureData['url'], $pictureData['size'], $pictureData['position']) &&
+                            isset($pictureData['title'], $pictureData['url']) &&
                             $pictureData['title'] !== '' &&
                             $pictureData['url'] !== ''
                         ) {
                             $picture = new MappingPicture([
                                 'mwTitlePicture' => $pictureData['title'],
-                                'mwUrlPicture' => $pictureData['url'],
-                                'mwSizePicture' => $pictureData['size'],
-                                'mwPositionPicture' => $pictureData['position'],
+                                'mwUrlPicture' => $pictureData['url']
                             ]);
                             $pictureInsertArray[] = $picture;
                         }
@@ -207,8 +200,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 $infoInsertPicMap = new MappingPicture([
                     'mwTitlePicture' => $_POST['info-insert-pic-title'],
                     'mwUrlPicture' => $_POST['info-insert-pic-url'],
-                    'mwSizePicture' => $_POST['info-insert-pic-size'],
-                    'mwPositionPicture' => $_POST['info-insert-pic-position'],
                 ]);
             } else {
                 $infoInsertPicMap = null;
@@ -241,8 +232,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
                 $pictureMap= new MappingPicture([
                     'mwTitlePicture' => $_POST['ressource-insert-pic-title'],
                     'mwUrlPicture' => $_POST['ressource-insert-pic-url'],
-                    'mwSizePicture' => $_POST['ressource-insert-pic-size'],
-                    'mwPositionPicture' => $_POST['ressource-insert-pic-position'],
                 ]);
             }else{
                 $pictureMap = null;
@@ -293,13 +282,11 @@ if(isset($_POST['login'],$_POST['pwd'])){
         } 
 
         // INSERT SECTION :
-        if(isset($_POST['section-insert-title'], $_POST['section-insert-content'], $_POST['section-insert-visible'], $_POST['section-insert-pic-title'], $_POST['section-insert-pic-url'], $_POST['section-insert-pic-size'], $_POST['section-insert-pic-position'])){
+        if(isset($_POST['section-insert-title'], $_POST['section-insert-content'], $_POST['section-insert-visible'], $_POST['section-insert-pic-title'], $_POST['section-insert-pic-url'])){
 
             $sectionInsertPicMap = new MappingPicture([
                 'mwTitlePicture' => $_POST['section-insert-pic-title'],
                 'mwUrlPicture' => $_POST['section-insert-pic-url'],
-                'mwSizePicture' => $_POST['section-insert-pic-size'],
-                'mwPositionPicture' => $_POST['section-insert-pic-position'],
             ]);
 
             $sectionInsertMap = new MappingSection([
@@ -526,8 +513,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
             $updatePicMap = new MappingPicture([
                 'mwUrlPicture' => $_POST['mw_update_pic_home'],
-                'mwSizePicture' => $pictureById->getMwSizePicture(),
-                'mwPositionPicture' => $pictureById->getMwPositionPicture(),
                 'mwIdPicture' =>$pictureById->getMwIdPicture(),
             ]);
 
@@ -636,8 +621,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
                     $pictureUpdateMap = new MappingPicture([
                         'mwTitlePicture' => $_POST['mw_update_title_pic'],
                         'mwUrlPicture' => $_POST['mw_update_url_pic'],
-                        'mwSizePicture' => $_POST['mw_update_size_pic'],
-                        'mwPositionPicture' => $_POST['mw_update_position_pic'],
                         'mwIdPicture' =>  $pictureByAgendaId -> getMwIdPicture(),
                     ]);
 
@@ -690,8 +673,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
                         $pictureUpdateMap = new MappingPicture([
                             'mwTitlePicture' => $_POST['mw_update_pic_title_art'][$key],
                             'mwUrlPicture' => $_POST['mw_update_pic_url_art'][$key],
-                            'mwSizePicture' => 1,
-                            'mwPositionPicture' => 1,
                             'mwArticleMwIdArticle'=> $articleId,
                             'mwIdPicture'=> $picture -> getMwIdPicture()
                         ]);
@@ -730,13 +711,11 @@ if(isset($_POST['login'],$_POST['pwd'])){
                     $pictureUpdateMap = new MappingPicture([
                         'mwTitlePicture' => $_POST['mw_update_title_pic'],
                         'mwUrlPicture' => $_POST['mw_update_url_pic'],
-                        'mwSizePicture' => $_POST['mw_update_size_pic'],
-                        'mwPositionPicture' => $_POST['mw_update_position_pic'],
                         'mwIdPicture' =>  $pictures -> getMwIdPicture(),
                     ]);
 
                     $infoUpdateMap = new MappingInfo([
-                        'mwDateInfo' => $_POST['mw_update_date_info'],
+                        'mwDateInfo' => $currentDate,
                         'mwContentInfo' => $_POST['mw_update_content_info'],
                         'mwPictureMwIdPicture' => $pictures-> getMwIdPicture(),
                         'mwIdInfo' => $infoId,
@@ -775,8 +754,6 @@ if(isset($_POST['login'],$_POST['pwd'])){
                             $pictureUpdateMap = new MappingPicture([
                                 'mwTitlePicture' => $_POST['mw_update_title_pic'],
                                 'mwUrlPicture' => $_POST['mw_update_url_pic'],
-                                'mwSizePicture' => $_POST['mw_update_size_pic'],
-                                'mwPositionPicture' => $_POST['mw_update_position_pic'],
                                 'mwIdPicture' =>  $pictureById -> getMwIdPicture(),
                             ]);
                             $idPic = $pictureById -> getMwIdPicture();
@@ -786,12 +763,10 @@ if(isset($_POST['login'],$_POST['pwd'])){
 
                         }
 
-                        if(isset($_POST['mw_insert_title_pic'], $_POST['mw_insert_url_pic'], $_POST['mw_insert_size_pic'], $_POST['mw_insert_position_pic'])){
+                        if(isset($_POST['mw_insert_title_pic'], $_POST['mw_insert_url_pic'])){
                             $pictureInsertMap = new MappingPicture([
                                 'mwTitlePicture' => $_POST['mw_insert_title_pic'],
                                 'mwUrlPicture' => $_POST['mw_insert_url_pic'],
-                                'mwSizePicture' => $_POST['mw_insert_size_pic'],
-                                'mwPositionPicture' => $_POST['mw_insert_position_pic'],
                                 'mwArticleMwIdArticle' => null,
                             ]);
                             $pictureManager -> insertPicture($pictureInsertMap);

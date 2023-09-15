@@ -82,8 +82,6 @@ include_once "../view/include/header.php";
                     <label for="ressource-insert-pic-url">URL de la photo : </label>
                     <input type="text" name="ressource-insert-pic-url"><br>
                 <?php endif; ?>
-                <input type="text" name="ressource-insert-pic-size" placeholder="taille"><br>
-                <input type="text" name="ressource-insert-pic-position" placeholder="position">
             </div>
             <button>Enregistrer</button>
         </form>

@@ -101,18 +101,11 @@ include_once "../view/include/header.php";
                 <label for="agenda-insert-pic-url">Url de la photo : </label>
                 <input required type="text" name="agenda-insert-pic-url"><br>
             <?php endif; ?>
-            
-                <label for="agenda-insert-pic-size">Taille :</label>
-                <input required type="text" name="agenda-insert-pic-size"><br>
-            
-                <label for="agenda-insert-pic-position">Position : </label>
-                <input required type="text" name="agenda-insert-pic-position">
             </div>
-        
             <button>Enregistrer</button>
         </form>
     </div>
-    </div>
+</div>
 
 
 <!-- FOOTER -->
