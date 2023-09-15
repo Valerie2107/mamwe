@@ -29,10 +29,11 @@ include_once "../view/include/header.php";
         <input type="text" id="objet_contact" required><br><br><br>
 
         <label class="soustitre" for="message_contact">Message </label><br><br>
-        <textarea name="message_contact" rows="5" required></textarea><br><br><br>
+        <input name="message_contact" rows="5" required></input><br><br><br>
 
         <button  type="button" class="submit">Envoyer</button>
     </form>
+    
 </main>
 <!-- FOOTER -->
 <?php
