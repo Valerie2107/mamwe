@@ -45,7 +45,16 @@
                 foreach($allSection as $section) :  
                 ?>
                 <!-- VERIFIER DB pour les noms -->
-                <a class="menu" href="?sectionId=<?= $section -> getMwIdSect() ?>"><?= $section -> getMwTitleSect() ;?></a>
+                <div class="menu_ressouces">
+                    <a class="menu" href="?sectionId=<?= $section -> getMwIdSect() ?>"><?= $section -> getMwTitleSect() ;?></a>
+             <!--       <menu id="ressource-select">
+                        <?php foreach($articleBySection as $abs):?>
+                                <li> <a href="#<?=$abs->getmwTitleArt()?>">
+                                    <?=$abs->getmwTitleArt()?></a>
+                                </li>
+                        <?php endforeach; ?>
+                    </menu>  -->
+                </div>
                 <?php
                 endforeach;
                 ?> 
