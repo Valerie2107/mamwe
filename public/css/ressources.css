@@ -16,3 +16,24 @@
 .img_ressources{
     height: 250px;
 } 
+.menu_ressource{
+    position: absolute;
+}
+.menu_ressouces:hover #ressource-select{
+    visibility: visible;
+}
+#ressource-select a{ 
+    color: #ef9628;
+    text-decoration: none;
+}
+#ressource-select{
+    visibility: hidden;
+    position: absolute;
+    padding-top: 0.25em;
+    padding-left: 0.25em; 
+    background: #048b9abd;
+}
+#ressource-select li{
+   list-style: none; 
+   line-height: 1.5em;
+}

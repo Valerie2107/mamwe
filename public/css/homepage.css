@@ -1,15 +1,12 @@
 .picturehome{
     width: 15%;
     display : block ;
-    margin :  auto ;
-      
+    margin :  auto ;      
 }
-
 .textehome{
     margin: 30px 350px;
     font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
-    color: #048b9a;
-    
+    color: #048b9a;   
 }
 
 .section-home{
@@ -23,17 +20,12 @@
     height: fit-content;
     text-align: left;
     padding: 5rem;
-    color: #ef9628;
-    
-    
-   
-    
+    color: #ef9628;    
 }
 
 .article-home:nth-of-type(odd) img {
     float: left;
-    width: 40%;
-    
+    width: 40%;  
 }
 
 .article-home:nth-of-type(even) img {
@@ -43,42 +35,29 @@
 .article-home:nth-of-type(even) {
     text-align: right;
 }
-
-
-
 .article-home img{
     width: 40%;
     border-radius: 30px;
     box-shadow: 1px 5px 5px  #ef9628;
 }
-
 .h2{
     margin: 10px;
     font-size: 2.5rem;
 }
-
-.textehome1:nth-of-type(odd){
-    
+.textehome1:nth-of-type(odd){   
     margin-left: 700px;
     margin-top: -30px;
     font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
     font-size: 1rem;
     color: #048b9a;
 }
-
-
 .textehome1:nth-of-type(even){
     margin-right: 700px;
-   
-        margin-top: -20px;
-        font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
-        font-size: 1rem;
-        color: #048b9a;
+    margin-top: -20px;
+    font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
+    font-size: 1rem;
+    color: #048b9a;
 }
-
-
-
-
 .circle1{
     display: block;
     background:  #c9eaec;
@@ -88,7 +67,6 @@
     position: absolute;
     z-index: -2;
     right: 70%;
-   
 }
 
 .loremtext{

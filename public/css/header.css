@@ -1,9 +1,10 @@
-nav a {
+/*pour le sous-menu ressources", voir la page de css ressources  */
+
+nav>a, .menu_ressouces>a {
     text-decoration: none;
     color: #ffffff;
     font-size: 20px;
     font-weight: bold;
-    margin-right: 70px; 
     padding: 20px;
     background: #048b9abd;
     border-radius: 0% 50%;
@@ -25,9 +26,6 @@ nav a {
 nav {
     display: flex;
     align-items: center;
+    justify-content: space-around;
 }
-/*
-.hidden {
-    display: none;
-}
-*/
+

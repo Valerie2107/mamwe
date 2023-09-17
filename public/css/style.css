@@ -10,32 +10,22 @@ On fera des CSS spécifiques pour les éléments spécifiques (formulaires et au
 }
 
 html{
-    min-width: 100%;  /*pour que la page HTML fasse au moins la taille de l'écran entier*/
+    min-height: 100%;  /*pour que la page HTML fasse au moins la taille de l'écran entier*/
 	display: flex;
     flex-direction: column;
 }
 body{
 	font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
+	display: flex;
+	flex-direction: column;
     flex-grow: 1;   /*pour que le body recouvre toute la page HTML*/
     overflow-x:hidden;
 }
 main{
 	padding: 0 1em;
 	flex-grow: 1;
-
 }
 
-footer{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 0 auto;
-}
-
-h3{
-	margin: 0.5em 0;
-}
 h1{
     text-align: center;
 	padding: .5em;
@@ -45,11 +35,28 @@ h2{
 	padding: 0.5em 0;
 	font-family: "Roboto Condensed",Georgia,Times,"Times New Roman",serif;
 }
+h3{
+	margin: 0.5em 0;
+}
 .empty{      /*div vide pour faire des espaces entre différents blocs*/
     height: 2em;   
 }
 
+footer{
+    width: 100%;
+    display: flex;
+	position: relative;
+    flex-direction: row;
+    justify-content: space-around;
+	margin-top: 1em;
+}
 
+/*------------------pour le bouton de connexion admin-----------------*/
+.btn{
+	left: 0;
+	bottom: 0;
+	position: absolute;
+}
 
 /*---------------------bouton Back To Top ----------------------------*/
 #btt {    		

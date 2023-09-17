@@ -55,7 +55,6 @@ if ($picture !== null) {
 ?>
 
 </div>
-
     <div class="empty"></div>
     <p><?= $abs -> getmwDateArt(); ?></p>
     <div class="empty"></div>
